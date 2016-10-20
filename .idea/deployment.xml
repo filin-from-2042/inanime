@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="PublishConfigData" serverName="inanime.ru-template" promptOnLocalOverwrite="false">
+    <serverData>
+      <paths name="el-test">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/elektrik-1/elektrika-test.ru/docs" local="$PROJECT_DIR$/about" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="el-test2">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/elektrik-1/elektrika-test.ru/errordocs" local="$PROJECT_DIR$/news" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="inanime.ru">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$" web="/" />
+          </mappings>
+        </serverdata>
+      </paths>
+      <paths name="inanime.ru-template">
+        <serverdata>
+          <mappings>
+            <mapping deploy="/" local="$PROJECT_DIR$/bitrix/templates/inanime_new" web="/" />
+          </mappings>
+          <excludedPaths>
+            <excludedPath path="/backup" />
+            <excludedPath path="/cache" />
+            <excludedPath path="/activities" />
+            <excludedPath path="/admin" />
+            <excludedPath path="/catalog_export" />
+            <excludedPath path="/components" />
+            <excludedPath path="/css" />
+            <excludedPath path="/fonts" />
+            <excludedPath path="/gadgets" />
+            <excludedPath path="/html_pages" />
+            <excludedPath path="/image_uploader" />
+            <excludedPath path="/images" />
+            <excludedPath path="/js" />
+            <excludedPath path="/managed_cache" />
+          </excludedPaths>
+        </serverdata>
+      </paths>
+    </serverData>
+  </component>
+</project>
+

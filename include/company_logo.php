@@ -1,0 +1,1 @@
+<img src="/upload/anime_maket_3 копия.jpg">
