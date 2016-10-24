@@ -1,0 +1,32 @@
+<?
+$aMenuLinks = Array(
+	Array(
+		"Доставка", 
+		"//dostavka.php", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Оплата", 
+		"//oplata.php", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"Контакты", 
+		"//kontakty.php", 
+		Array(), 
+		Array(), 
+		"" 
+	),
+	Array(
+		"По аниме", 
+		"/catalog/po-taytlam/?brands=Y", 
+		Array(), 
+		Array("BRANDS"=>"Y"), 
+		"" 
+	)
+);
+?>
