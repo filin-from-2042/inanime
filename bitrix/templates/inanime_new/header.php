@@ -1,147 +1,335 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMPLATE_ID."/header.php");
-CJSCore::Init(array("fx"));
-$curPage = $APPLICATION->GetCurPage(true);
-$theme = COption::GetOptionString("main", "wizard_eshop_bootstrap_theme_id", "blue", SITE_ID);
 ?>
 <!DOCTYPE html>
-<html xml:lang="<?=LANGUAGE_ID?>" lang="<?=LANGUAGE_ID?>">
+<html>
 <head>
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
-	<link rel="shortcut icon" type="image/x-icon" href="<?=SITE_DIR?>favicon.ico" />
-	<?$APPLICATION->ShowHead();?>
-	<?
-	$APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH."/colors.css", true);
-	$APPLICATION->SetAdditionalCSS("/bitrix/css/main/bootstrap.css");
-	$APPLICATION->SetAdditionalCSS("/bitrix/css/main/font-awesome.css");
-	?>
-	<title><?$APPLICATION->ShowTitle()?></title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="user-scalable=no, initial-scale=1.0, maximum-scale=1.0, width=device-width">
+    <link rel="shortcut icon" type="image/x-icon" href="<?=SITE_DIR?>favicon.ico" />
+
+    <?
+    $APPLICATION->ShowHead();
+    $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/css/bootstrap.min.css');
+    $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/css/font-awesome.min.css');
+    $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles.css');
+    $APPLICATION->SetAdditionalCSS('http://fonts.googleapis.com/css?family=Oswald:400,300');
+    ?>
+    <?$APPLICATION->AddHeadScript("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js");?>
+    <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/bootstrap.min.js");?>
+    <title><?$APPLICATION->ShowTitle()?></title>
 </head>
-<body class="bx-background-image bx-theme-<?=$theme?>" <?=$APPLICATION->ShowProperty("backgroundImage")?>>
+<body>
 <div id="panel"><?$APPLICATION->ShowPanel();?></div>
-<?$APPLICATION->IncludeComponent("bitrix:eshop.banner", "", array());?>
-<div class="bx-wrapper" id="bx_eshop_wrap">
-	<header class="bx-header">
-		<div class="bx-header-section container">
-			<div class="row">
-				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-					<div class="bx-logo">
-						<a class="bx-logo-block hidden-xs" href="<?=SITE_DIR?>">
-							<?$APPLICATION->IncludeComponent("bitrix:main.include", "", array("AREA_FILE_SHOW" => "file", "PATH" => SITE_DIR."include/company_logo.php"), false);?>
-						</a>
-						<a class="bx-logo-block hidden-lg hidden-md hidden-sm text-center" href="<?=SITE_DIR?>">
-							<?$APPLICATION->IncludeComponent("bitrix:main.include", "", array("AREA_FILE_SHOW" => "file", "PATH" => SITE_DIR."include/company_logo_mobile.php"), false);?>
-						</a>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12">
-					<div class="bx-inc-orginfo">
-						<div>
-							<span class="bx-inc-orginfo-phone"><i class="fa fa-phone"></i> <?$APPLICATION->IncludeComponent("bitrix:main.include", "", array("AREA_FILE_SHOW" => "file", "PATH" => SITE_DIR."include/telephone.php"), false);?></span>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-3 hidden-sm hidden-xs">
-					<div class="bx-worktime">
-						<div class="bx-worktime-prop">
-							<?$APPLICATION->IncludeComponent("bitrix:main.include", "", array("AREA_FILE_SHOW" => "file", "PATH" => SITE_DIR."include/schedule.php"), false);?>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-3 col-sm-4 col-xs-12 hidden-xs">
-					<?$APPLICATION->IncludeComponent("bitrix:sale.basket.basket.line", "", array(
-							"PATH_TO_BASKET" => SITE_DIR."personal/cart/",
-							"PATH_TO_PERSONAL" => SITE_DIR."personal/",
-							"SHOW_PERSONAL_LINK" => "N",
-							"SHOW_NUM_PRODUCTS" => "Y",
-							"SHOW_TOTAL_PRICE" => "Y",
-							"SHOW_PRODUCTS" => "N",
-							"POSITION_FIXED" =>"N",
-							"SHOW_AUTHOR" => "Y",
-							"PATH_TO_REGISTER" => SITE_DIR."login/",
-							"PATH_TO_PROFILE" => SITE_DIR."personal/"
-						),
-						false,
-						array()
-					);?>
-				</div>
-			</div>
-			<div class="row">
-				<div class="col-md-12 hidden-xs">
-					<?$APPLICATION->IncludeComponent("bitrix:menu", "catalog_horizontal1", Array(
-	"ROOT_MENU_TYPE" => "left",	// Тип меню для первого уровня
-		"MENU_CACHE_TYPE" => "A",	// Тип кеширования
-		"MENU_CACHE_TIME" => "36000000",	// Время кеширования (сек.)
-		"MENU_CACHE_USE_GROUPS" => "Y",	// Учитывать права доступа
-		"MENU_THEME" => "site",	// Тема меню
-		"CACHE_SELECTED_ITEMS" => "N",
-		"MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
-		"MAX_LEVEL" => "3",	// Уровень вложенности меню
-		"CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
-		"USE_EXT" => "Y",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
-		"DELAY" => "N",	// Откладывать выполнение шаблона меню
-		"ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
-		"COMPONENT_TEMPLATE" => "catalog_horizontal"
-	),
-	false
-);?>
-				</div>
-			</div>
-			<?if ($curPage != SITE_DIR."index.php"):?>
-			<div class="row">
-				<div class="col-lg-12">
-					<?$APPLICATION->IncludeComponent("bitrix:search.title", "visual", array(
-							"NUM_CATEGORIES" => "1",
-							"TOP_COUNT" => "5",
-							"CHECK_DATES" => "N",
-							"SHOW_OTHERS" => "N",
-							"PAGE" => SITE_DIR."catalog/",
-							"CATEGORY_0_TITLE" => GetMessage("SEARCH_GOODS") ,
-							"CATEGORY_0" => array(
-								0 => "iblock_catalog",
-							),
-							"CATEGORY_0_iblock_catalog" => array(
-								0 => "all",
-							),
-							"CATEGORY_OTHERS_TITLE" => GetMessage("SEARCH_OTHER"),
-							"SHOW_INPUT" => "Y",
-							"INPUT_ID" => "title-search-input",
-							"CONTAINER_ID" => "search",
-							"PRICE_CODE" => array(
-								0 => "BASE",
-							),
-							"SHOW_PREVIEW" => "Y",
-							"PREVIEW_WIDTH" => "75",
-							"PREVIEW_HEIGHT" => "75",
-							"CONVERT_CURRENCY" => "Y"
-						),
-						false
-					);?>
-				</div>
-			</div>
-			<?endif?>
+<header>
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-9 col-md-7 col-lg-7">
+                <a href="/" class="logo-link">
+                    <img src="<?=SITE_TEMPLATE_PATH."/images/logo.png"?>" class="img-responsive " alt="Inanime.ru">
+                </a>
+            </div>
+            <!-- desktop -->
+            <div class="hidden-xs hidden-sm col-md-10 col-lg-11 container">
+                <!-- contacts -->
+                <div class="row">
+                    <div class="col-md-17 col-lg-17">
+                        <span class="contacts"><span>(495) 832-93-29,</span><span>(8442) 234-53-63</span></span>
+                    </div>
+                    <div class="col-md-7 col-lg-7">
+                        <div class="social-container">
+                            <a href="http://www.facebook.com" class="social-link facebook"></a>
+                            <a href="http://www.twitter.com" class="social-link twitter"></a>
+                            <a href="http://vimeo.com" class="social-link vimeo"></a>
+                        </div>
+                    </div>
+                </div>
+                <!-- search -->
+                <div class="row search-row">
+                    <div class="col-md-6 col-lg-6">
+                        <button type="button" class="btn btn-default ia-btn text-btn yellow-btn">Город</button>
+                    </div>
+                    <div class="col-md-18 col-lg-18">
+                        <form action="/catalog/">
+                            <div class="search-input-container">
+                                <input type="text" name="q" value="" placeholder="Поиск по каталогу" class="form-control search-input"/>
+                                <i class="fa fa-search" aria-hidden="true"></i>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="hidden-xs hidden-sm col-md-7 col-lg-6 container user-controls-container">
+                <div class="row">
+                    <button type="button" class="btn btn-default ia-btn text-btn yellow-btn">Регистрация</button>
+                    <button type="button" class="btn btn-default ia-btn text-btn blue-btn">Личный кабинет</button>
+                </div>
+                <div class="row">
+                    <div class="content-container cart-container">
+                        <a class="btn btn-default ia-btn yellow-btn image-btn" href="#" role="button"><span class="icon cart-icon"></span></a>
+                        <div class="text-container">
+                                <span>
+                                    <span>2 товара</span><i class="fa fa-long-arrow-right" aria-hidden="true"></i><span class="yellow-text">5.130 &#8381;</span>
+                                </span>
+                        </div>
+                        <a class="btn btn-default ia-btn blue-btn image-btn" href="#" role="button"><span class="icon favorite-icon"></span></a>
+                    </div>
+                </div>
+            </div>
+            <!-- tablet -->
+            <div class="container hidden-xs col-sm-15 hidden-md hidden-lg">
+                <div class="row contacts-container">
+                    <div class="col-sm-24">
+                        <span class="contacts"><span>(495) 832-93-29,</span><span>(8442) 234-53-63</span></span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-sm-11 container buttons-container">
+                        <div class="row account-buttons-container">
+                            <div class="col-sm-12">
+                                <button type="button" class="btn btn-default ia-btn text-btn yellow-btn">Регистрация</button>
+                            </div>
+                            <div class="col-sm-12">
+                                <button type="button" class="btn btn-default ia-btn text-btn blue-btn">Личный кабинет</button>
+                            </div>
+                        </div>
+                        <div class="row search-button-container">
+                            <div class="col-sm-12">
+                                <button type="button" class="btn btn-default ia-btn text-btn yellow-btn"><i class="fa fa-map-marker" aria-hidden="true"></i> Город <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                            </div>
+                            <div class="col-sm-12">
+                                <div class="search-input-container">
+                                    <input type="text" name="q" value="" placeholder="Поиск" class="form-control search-input"/>
+                                    <i class="fa fa-search" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-sm-13">
+                        <div class="content-container cart-container">
+                            <a class="btn btn-default ia-btn yellow-btn image-btn" href="#" role="button"><span class="icon cart-icon"></span></a>
+                            <div class="text-container">
+                                <span>
+                                    <span>2 товара</span><i class="fa fa-long-arrow-right" aria-hidden="true"></i><span class="yellow-text">5.130 &#8381;</span>
+                                </span>
+                            </div>
+                            <a class="btn btn-default ia-btn blue-btn image-btn" href="#" role="button"><span class="icon favorite-icon"></span></a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- mobile -->
+            <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+                <a class="btn btn-default ia-btn yellow-btn image-btn" href="#" role="button"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" class="img-commerce"></a>
+                <a class="btn btn-default ia-btn blue-btn image-btn" href="#" role="button"><img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" class="img-favorite"></span></a>
 
-			<?if ($curPage != SITE_DIR."index.php"):?>
-			<div class="row">
-				<div class="col-lg-12" id="navigation">
-					<?$APPLICATION->IncludeComponent("bitrix:breadcrumb", "", array(
-							"START_FROM" => "0",
-							"PATH" => "",
-							"SITE_ID" => "-"
-						),
-						false,
-						Array('HIDE_ICONS' => 'Y')
-					);?>
-				</div>
-			</div>
-			<h1 class="bx-title dbg_title" id="pagetitle"><?=$APPLICATION->ShowTitle(false);?></h1>
-			<?endif?>
-		</div>
-	</header>
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#top-navigation-bar" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+            </div>
 
-	<div class="workarea">
-		<div class="container bx-content-seection">
-			<div class="row">
-			<?$needSidebar = preg_match("~^".SITE_DIR."(catalog|personal\/cart|personal\/order)/~", $curPage);?>
-				<div class="bx-content <?=($needSidebar ? "col-xs-12" : "col-md-9 col-sm-8")?>">
+        </div>
+    </div>
+</header>
+<nav class="navigation mobile-collapsed" id="top-navigation-bar">
+    <div class="container">
+        <!-- general menu -->
+        <ul class="first-level">
+            <li class="dropdown">
+                <i class="fa fa-bars visible-sm" aria-hidden="true" data-toggle="dropdown"></i>
+                <a href="#" >Категории</a>
+                <i class="fa fa-bars hidden-sm hidden-xs" aria-hidden="true" data-toggle="dropdown"></i>
+                <ul class="second-level dropdown-menu">
+                    <li class="dropdown">
+                        <a href="#" ><i class="fa fa-male" aria-hidden="true"></i>Аксессуары</a>
+                        <div class="third-level-container">
+                            <ul>
+                                <li><a href="#">Черный</a></li>
+                                <li><a href="#">Белый-серый</a></li>
+                                <li><a href="#">Белый-желтый-рыжий</a></li>
+                                <li><a href="#">Синий-голубой-фолетовый</a></li>
+                                <li><a href="#">Бирюзовый</a></li>
+                                <li><a href="#">Зеленый</a></li>
+                                <li><a href="#">Красный-розовый</a></li>
+                                <li><a href="#">Коричневый-каштан</a></li>
+                                <li><a href="#">Разноцветный</a></li>
+                                <li><a href="#">Пряди волос</a></li>
+                            </ul>
+                            <div class="third-level-container">
+                                <ul>
+                                    <li><a href="#">Черный</a></li>
+                                    <li><a href="#">Белый-серый</a></li>
+                                    <li><a href="#">Белый-желтый-рыжий</a></li>
+                                    <li><a href="#">Синий-голубой-фолетовый</a></li>
+                                    <li><a href="#">Бирюзовый</a></li>
+                                    <li><a href="#">Зеленый</a></li>
+                                    <li><a href="#">Красный-розовый</a></li>
+                                    <li><a href="#">Коричневый-каштан</a></li>
+                                    <li><a href="#">Разноцветный</a></li>
+                                    <li><a href="#">Пряди волос</a></li>
+                                </ul>
+                                <div class="third-level-container">
+                                    <ul>
+                                        <li><a href="#">Черный</a></li>
+                                        <li><a href="#">Белый-серый</a></li>
+                                        <li><a href="#">Белый-желтый-рыжий</a></li>
+                                        <li><a href="#">Синий-голубой-фолетовый</a></li>
+                                        <li><a href="#">Бирюзовый</a></li>
+                                        <li><a href="#">Зеленый</a></li>
+                                        <li><a href="#">Красный-розовый</a></li>
+                                        <li><a href="#">Коричневый-каштан</a></li>
+                                        <li><a href="#">Разноцветный</a></li>
+                                        <li><a href="#">Пряди волос</a></li>
+                                    </ul>
+                                    <div class="third-level-container last">
+                                        <ul>
+                                            <li><a href="#">Черный</a></li>
+                                            <li><a href="#">Белый-серый</a></li>
+                                            <li><a href="#">Белый-желтый-рыжий</a></li>
+                                            <li><a href="#">Синий-голубой-фолетовый</a></li>
+                                            <li><a href="#">Бирюзовый</a></li>
+                                            <li><a href="#">Зеленый</a></li>
+                                            <li><a href="#">Красный-розовый</a></li>
+                                            <li><a href="#">Коричневый-каштан</a></li>
+                                            <li><a href="#">Разноцветный</a></li>
+                                            <li><a href="#">Пряди волос</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Аниме фигурки</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Парики и краски</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Еда и напитки</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Значки</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Катаны, кунаи, сюрикены</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Кигуруми</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Коврики для мышек</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Косплей</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Кошельки и пеналы</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <i class="fa fa-bars visible-sm" aria-hidden="true"></i>
+                <a href="#" class="dropdown">По фильмам, играм</a>
+                <i class="fa fa-bars hidden-sm hidden-xs" aria-hidden="true"></i>
+                <ul class="second-level dropdown-menu">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown"><i class="fa fa-male" aria-hidden="true"></i>Аксессуары</a>
+                        <div class="third-level-container">
+                            <ul>
+                                <li><a href="#">Черный</a></li>
+                                <li><a href="#">Белый-серый</a></li>
+                                <li><a href="#">Белый-желтый-рыжий</a></li>
+                                <li><a href="#">Синий-голубой-фолетовый</a></li>
+                                <li><a href="#">Бирюзовый</a></li>
+                                <li><a href="#">Зеленый</a></li>
+                                <li><a href="#">Красный-розовый</a></li>
+                                <li><a href="#">Коричневый-каштан</a></li>
+                                <li><a href="#">Разноцветный</a></li>
+                                <li><a href="#">Пряди волос</a></li>
+                            </ul>
+                            <div class="third-level-container">
+                                <ul>
+                                    <li><a href="#">Черный</a></li>
+                                    <li><a href="#">Белый-серый</a></li>
+                                    <li><a href="#">Белый-желтый-рыжий</a></li>
+                                    <li><a href="#">Синий-голубой-фолетовый</a></li>
+                                    <li><a href="#">Бирюзовый</a></li>
+                                    <li><a href="#">Зеленый</a></li>
+                                    <li><a href="#">Красный-розовый</a></li>
+                                    <li><a href="#">Коричневый-каштан</a></li>
+                                    <li><a href="#">Разноцветный</a></li>
+                                    <li><a href="#">Пряди волос</a></li>
+                                </ul>
+                                <div class="third-level-container">
+                                    <ul>
+                                        <li><a href="#">Черный</a></li>
+                                        <li><a href="#">Белый-серый</a></li>
+                                        <li><a href="#">Белый-желтый-рыжий</a></li>
+                                        <li><a href="#">Синий-голубой-фолетовый</a></li>
+                                        <li><a href="#">Бирюзовый</a></li>
+                                        <li><a href="#">Зеленый</a></li>
+                                        <li><a href="#">Красный-розовый</a></li>
+                                        <li><a href="#">Коричневый-каштан</a></li>
+                                        <li><a href="#">Разноцветный</a></li>
+                                        <li><a href="#">Пряди волос</a></li>
+                                    </ul>
+                                    <div class="third-level-container last">
+                                        <ul>
+                                            <li><a href="#">Черный</a></li>
+                                            <li><a href="#">Белый-серый</a></li>
+                                            <li><a href="#">Белый-желтый-рыжий</a></li>
+                                            <li><a href="#">Синий-голубой-фолетовый</a></li>
+                                            <li><a href="#">Бирюзовый</a></li>
+                                            <li><a href="#">Зеленый</a></li>
+                                            <li><a href="#">Красный-розовый</a></li>
+                                            <li><a href="#">Коричневый-каштан</a></li>
+                                            <li><a href="#">Разноцветный</a></li>
+                                            <li><a href="#">Пряди волос</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Аниме фигурки</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Парики и краски</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Еда и напитки</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Значки</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Катаны, кунаи, сюрикены</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Кигуруми</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Коврики для мышек</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Косплей</a></li>
+                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Кошельки и пеналы</a></li>
+                </ul>
+            </li>
+            <li><a href="#">Доставка</a></li>
+            <li><a href="#">Оплата</a></li>
+            <li><a href="#">Контакты</a></li>
+            <li><a href="#">Статьи</a></li>
+            <li><a href="#">Обзоры</a></li>
+            <li><a href="#">О компании</a></li>
+        </ul>
+        <div class="container visible-xs">
+            <div class="row contacts-container">
+                <div class="col-xs-24">
+                    <div class="contacts">
+                        <div>(495) 832-93-29</div>
+                        <div>(8442) 234-53-63</div>
+                    </div>
+                </div>
+            </div>
+            <div class="row location-container">
+                <div class="col-xs-12">
+                    <span class="geo-title">Мой город:</span>
+                </div>
+                <div class="col-xs-12">
+                    <button type="button" class="btn btn-default ia-btn text-btn yellow-btn"><i class="fa fa-map-marker" aria-hidden="true"></i> Город <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                </div>
+            </div>
+            <div class="row user-buttons-container">
+                <div class="col-xs-12 registration-container">
+                    <button type="button" class="btn btn-default ia-btn text-btn yellow-btn">Регистрация</button>
+                </div>
+                <div class="col-xs-12 profile">
+                    <button type="button" class="btn btn-default ia-btn text-btn blue-btn">Личный кабинет</button>
+                </div>
+            </div>
+            <div class="row search-container">
+                <div class="col-xs-24">
+                    <div class="search-input-container">
+                        <input type="text" name="q" value="" placeholder="Поиск" class="form-control search-input"/>
+                        <i class="fa fa-search" aria-hidden="true"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</nav>
+<div class="workarea">
