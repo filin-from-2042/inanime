@@ -26,7 +26,11 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
         <div class="row">
             <div class="col-xs-12 col-sm-9 col-md-7 col-lg-7">
                 <a href="/" class="logo-link">
-                    <img src="<?=SITE_TEMPLATE_PATH."/images/logo.png"?>" class="img-responsive " alt="Inanime.ru">
+                    <?$APPLICATION->IncludeFile(
+                        $APPLICATION->GetTemplatePath("include_areas/company_logo.php"),
+                        Array(),
+                        Array("MODE"=>"html")
+                    );?>
                 </a>
             </div>
             <!-- desktop -->
@@ -34,7 +38,12 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                 <!-- contacts -->
                 <div class="row">
                     <div class="col-md-17 col-lg-17">
-                        <span class="contacts"><span>(495) 832-93-29,</span><span>(8442) 234-53-63</span></span>
+                        <?$APPLICATION->IncludeFile(
+                            $APPLICATION->GetTemplatePath("include_areas/contacts.php"),
+                            Array(),
+                            Array("MODE"=>"html")
+                        );?>
+
                     </div>
                     <div class="col-md-7 col-lg-7">
                         <div class="social-container">
@@ -50,12 +59,20 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                         <button type="button" class="btn btn-default ia-btn text-btn yellow-btn">Город</button>
                     </div>
                     <div class="col-md-18 col-lg-18">
-                        <form action="/catalog/">
-                            <div class="search-input-container">
-                                <input type="text" name="q" value="" placeholder="Поиск по каталогу" class="form-control search-input"/>
-                                <i class="fa fa-search" aria-hidden="true"></i>
-                            </div>
-                        </form>
+
+                        <?$APPLICATION->IncludeComponent(
+                            "bitrix:search.form",
+                            "flat1",
+                            array(
+                                "PAGE" => "/search/",
+                                "COMPONENT_TEMPLATE" => "flat1",
+                                "USE_SUGGEST" => "Y",
+                                "COMPOSITE_FRAME_MODE" => "A",
+                                "COMPOSITE_FRAME_TYPE" => "AUTO"
+                            ),
+                            false
+                        );?>
+
                     </div>
                 </div>
             </div>
