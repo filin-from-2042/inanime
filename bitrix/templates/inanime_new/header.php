@@ -83,13 +83,13 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                 </div>
                 <div class="row">
                     <div class="content-container cart-container">
-                        <a class="btn btn-default ia-btn yellow-btn image-btn" href="#" role="button"><span class="icon cart-icon"></span></a>
+                        <a class="btn btn-default ia-btn yellow-btn image-btn" href="/personal/cart" role="button"><span class="icon cart-icon"></span></a>
                         <div class="text-container">
                                 <span>
                                     <span>2 товара</span><i class="fa fa-long-arrow-right" aria-hidden="true"></i><span class="yellow-text">5.130 &#8381;</span>
                                 </span>
                         </div>
-                        <a class="btn btn-default ia-btn blue-btn image-btn" href="#" role="button"><span class="icon favorite-icon"></span></a>
+                        <a class="btn btn-default ia-btn blue-btn image-btn" href="/personal/cart" role="button"><span class="icon favorite-icon"></span></a>
                     </div>
                 </div>
             </div>
@@ -151,202 +151,24 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
         </div>
     </div>
 </header>
-<nav class="navigation mobile-collapsed" id="top-navigation-bar">
-    <div class="container">
-        <!-- general menu -->
-        <ul class="first-level">
-            <li class="dropdown">
-                <i class="fa fa-bars visible-sm" aria-hidden="true" data-toggle="dropdown"></i>
-                <a href="#" >Категории</a>
-                <i class="fa fa-bars hidden-sm hidden-xs" aria-hidden="true" data-toggle="dropdown"></i>
-                <ul class="second-level dropdown-menu">
-                    <li class="dropdown">
-                        <a href="#" ><i class="fa fa-male" aria-hidden="true"></i>Аксессуары</a>
-                        <div class="third-level-container">
-                            <ul>
-                                <li><a href="#">Черный</a></li>
-                                <li><a href="#">Белый-серый</a></li>
-                                <li><a href="#">Белый-желтый-рыжий</a></li>
-                                <li><a href="#">Синий-голубой-фолетовый</a></li>
-                                <li><a href="#">Бирюзовый</a></li>
-                                <li><a href="#">Зеленый</a></li>
-                                <li><a href="#">Красный-розовый</a></li>
-                                <li><a href="#">Коричневый-каштан</a></li>
-                                <li><a href="#">Разноцветный</a></li>
-                                <li><a href="#">Пряди волос</a></li>
-                            </ul>
-                            <div class="third-level-container">
-                                <ul>
-                                    <li><a href="#">Черный</a></li>
-                                    <li><a href="#">Белый-серый</a></li>
-                                    <li><a href="#">Белый-желтый-рыжий</a></li>
-                                    <li><a href="#">Синий-голубой-фолетовый</a></li>
-                                    <li><a href="#">Бирюзовый</a></li>
-                                    <li><a href="#">Зеленый</a></li>
-                                    <li><a href="#">Красный-розовый</a></li>
-                                    <li><a href="#">Коричневый-каштан</a></li>
-                                    <li><a href="#">Разноцветный</a></li>
-                                    <li><a href="#">Пряди волос</a></li>
-                                </ul>
-                                <div class="third-level-container">
-                                    <ul>
-                                        <li><a href="#">Черный</a></li>
-                                        <li><a href="#">Белый-серый</a></li>
-                                        <li><a href="#">Белый-желтый-рыжий</a></li>
-                                        <li><a href="#">Синий-голубой-фолетовый</a></li>
-                                        <li><a href="#">Бирюзовый</a></li>
-                                        <li><a href="#">Зеленый</a></li>
-                                        <li><a href="#">Красный-розовый</a></li>
-                                        <li><a href="#">Коричневый-каштан</a></li>
-                                        <li><a href="#">Разноцветный</a></li>
-                                        <li><a href="#">Пряди волос</a></li>
-                                    </ul>
-                                    <div class="third-level-container last">
-                                        <ul>
-                                            <li><a href="#">Черный</a></li>
-                                            <li><a href="#">Белый-серый</a></li>
-                                            <li><a href="#">Белый-желтый-рыжий</a></li>
-                                            <li><a href="#">Синий-голубой-фолетовый</a></li>
-                                            <li><a href="#">Бирюзовый</a></li>
-                                            <li><a href="#">Зеленый</a></li>
-                                            <li><a href="#">Красный-розовый</a></li>
-                                            <li><a href="#">Коричневый-каштан</a></li>
-                                            <li><a href="#">Разноцветный</a></li>
-                                            <li><a href="#">Пряди волос</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Аниме фигурки</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Парики и краски</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Еда и напитки</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Значки</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Катаны, кунаи, сюрикены</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Кигуруми</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Коврики для мышек</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Косплей</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Кошельки и пеналы</a></li>
-                </ul>
-            </li>
-            <li class="dropdown">
-                <i class="fa fa-bars visible-sm" aria-hidden="true"></i>
-                <a href="#" class="dropdown">По фильмам, играм</a>
-                <i class="fa fa-bars hidden-sm hidden-xs" aria-hidden="true"></i>
-                <ul class="second-level dropdown-menu">
-                    <li class="dropdown">
-                        <a href="#" class="dropdown"><i class="fa fa-male" aria-hidden="true"></i>Аксессуары</a>
-                        <div class="third-level-container">
-                            <ul>
-                                <li><a href="#">Черный</a></li>
-                                <li><a href="#">Белый-серый</a></li>
-                                <li><a href="#">Белый-желтый-рыжий</a></li>
-                                <li><a href="#">Синий-голубой-фолетовый</a></li>
-                                <li><a href="#">Бирюзовый</a></li>
-                                <li><a href="#">Зеленый</a></li>
-                                <li><a href="#">Красный-розовый</a></li>
-                                <li><a href="#">Коричневый-каштан</a></li>
-                                <li><a href="#">Разноцветный</a></li>
-                                <li><a href="#">Пряди волос</a></li>
-                            </ul>
-                            <div class="third-level-container">
-                                <ul>
-                                    <li><a href="#">Черный</a></li>
-                                    <li><a href="#">Белый-серый</a></li>
-                                    <li><a href="#">Белый-желтый-рыжий</a></li>
-                                    <li><a href="#">Синий-голубой-фолетовый</a></li>
-                                    <li><a href="#">Бирюзовый</a></li>
-                                    <li><a href="#">Зеленый</a></li>
-                                    <li><a href="#">Красный-розовый</a></li>
-                                    <li><a href="#">Коричневый-каштан</a></li>
-                                    <li><a href="#">Разноцветный</a></li>
-                                    <li><a href="#">Пряди волос</a></li>
-                                </ul>
-                                <div class="third-level-container">
-                                    <ul>
-                                        <li><a href="#">Черный</a></li>
-                                        <li><a href="#">Белый-серый</a></li>
-                                        <li><a href="#">Белый-желтый-рыжий</a></li>
-                                        <li><a href="#">Синий-голубой-фолетовый</a></li>
-                                        <li><a href="#">Бирюзовый</a></li>
-                                        <li><a href="#">Зеленый</a></li>
-                                        <li><a href="#">Красный-розовый</a></li>
-                                        <li><a href="#">Коричневый-каштан</a></li>
-                                        <li><a href="#">Разноцветный</a></li>
-                                        <li><a href="#">Пряди волос</a></li>
-                                    </ul>
-                                    <div class="third-level-container last">
-                                        <ul>
-                                            <li><a href="#">Черный</a></li>
-                                            <li><a href="#">Белый-серый</a></li>
-                                            <li><a href="#">Белый-желтый-рыжий</a></li>
-                                            <li><a href="#">Синий-голубой-фолетовый</a></li>
-                                            <li><a href="#">Бирюзовый</a></li>
-                                            <li><a href="#">Зеленый</a></li>
-                                            <li><a href="#">Красный-розовый</a></li>
-                                            <li><a href="#">Коричневый-каштан</a></li>
-                                            <li><a href="#">Разноцветный</a></li>
-                                            <li><a href="#">Пряди волос</a></li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Аниме фигурки</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Парики и краски</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Еда и напитки</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Значки</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Катаны, кунаи, сюрикены</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Кигуруми</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Коврики для мышек</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Косплей</a></li>
-                    <li><a href="#"><i class="fa fa-female" aria-hidden="true"></i>Кошельки и пеналы</a></li>
-                </ul>
-            </li>
-            <li><a href="#">Доставка</a></li>
-            <li><a href="#">Оплата</a></li>
-            <li><a href="#">Контакты</a></li>
-            <li><a href="#">Статьи</a></li>
-            <li><a href="#">Обзоры</a></li>
-            <li><a href="#">О компании</a></li>
-        </ul>
-        <div class="container visible-xs">
-            <div class="row contacts-container">
-                <div class="col-xs-24">
-                    <div class="contacts">
-                        <div>(495) 832-93-29</div>
-                        <div>(8442) 234-53-63</div>
-                    </div>
-                </div>
-            </div>
-            <div class="row location-container">
-                <div class="col-xs-12">
-                    <span class="geo-title">Мой город:</span>
-                </div>
-                <div class="col-xs-12">
-                    <button type="button" class="btn btn-default ia-btn text-btn yellow-btn"><i class="fa fa-map-marker" aria-hidden="true"></i> Город <i class="fa fa-caret-down" aria-hidden="true"></i></button>
-                </div>
-            </div>
-            <div class="row user-buttons-container">
-                <div class="col-xs-12 registration-container">
-                    <button type="button" class="btn btn-default ia-btn text-btn yellow-btn">Регистрация</button>
-                </div>
-                <div class="col-xs-12 profile">
-                    <button type="button" class="btn btn-default ia-btn text-btn blue-btn">Личный кабинет</button>
-                </div>
-            </div>
-            <div class="row search-container">
-                <div class="col-xs-24">
-                    <div class="search-input-container">
-                        <input type="text" name="q" value="" placeholder="Поиск" class="form-control search-input"/>
-                        <i class="fa fa-search" aria-hidden="true"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <?$APPLICATION->IncludeComponent("bitrix:menu", "horizontal_multilevel1", Array(
+	"ROOT_MENU_TYPE" => "left",	// Тип меню для первого уровня
+		"MENU_CACHE_TYPE" => "A",	// Тип кеширования
+		"MENU_CACHE_TIME" => "36000000",	// Время кеширования (сек.)
+		"MENU_CACHE_USE_GROUPS" => "Y",	// Учитывать права доступа
+		"MENU_THEME" => "site",
+		"CACHE_SELECTED_ITEMS" => "N",
+		"MENU_CACHE_GET_VARS" => "",	// Значимые переменные запроса
+		"MAX_LEVEL" => "3",	// Уровень вложенности меню
+		"CHILD_MENU_TYPE" => "left",	// Тип меню для остальных уровней
+		"USE_EXT" => "Y",	// Подключать файлы с именами вида .тип_меню.menu_ext.php
+		"DELAY" => "N",	// Откладывать выполнение шаблона меню
+		"ALLOW_MULTI_SELECT" => "N",	// Разрешить несколько активных пунктов одновременно
+		"COMPONENT_TEMPLATE" => "horizontal_multilevel",
+		"COMPOSITE_FRAME_MODE" => "A",	// Голосование шаблона компонента по умолчанию
+		"COMPOSITE_FRAME_TYPE" => "AUTO",	// Содержимое компонента
+	),
+	false
+);?>
 
-    </div>
-</nav>
 <div class="workarea">
