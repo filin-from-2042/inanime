@@ -151,7 +151,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
         </div>
     </div>
 </header>
-    <?$APPLICATION->IncludeComponent("bitrix:menu", "horizontal_multilevel1", Array(
+    <?$APPLICATION->IncludeComponent("inanime:menu", "horizontal_multilevel1", Array(
 	"ROOT_MENU_TYPE" => "left",	// Тип меню для первого уровня
 		"MENU_CACHE_TYPE" => "A",	// Тип кеширования
 		"MENU_CACHE_TIME" => "36000000",	// Время кеширования (сек.)

@@ -2,7 +2,6 @@
 
 <?if (!empty($arResult)):?>
 
-
     <nav class="navigation mobile-collapsed" id="top-navigation-bar">
         <div class="container">
             <!-- general menu -->
@@ -42,7 +41,11 @@
 
                 <?// второй уровень меню?>
                 <?if($arItem["DEPTH_LEVEL"]=='2'):?>
-
+                    <?
+                    $arFileData = null;
+                    if($arItem["PARAMS"]["UF_MENU_ICON"])
+                        $arFileData = CFile::GetFileArray($arItem["PARAMS"]["UF_MENU_ICON"]);
+                    ?>
                     <?if($previousLevel=='3'):?>
                         </ul>
                         <?=str_repeat("</div>", $columnsCount);?>
@@ -52,12 +55,13 @@
                     <?endif?>
 
                     <?if($arItem["IS_PARENT"]):?>
-                        <li class="dropdown"><a href="<?=$arItem["LINK"]?>" ><i class="fa fa-male" aria-hidden="true"></i><?=$arItem["TEXT"]?></a>
+                        <li class="dropdown"><a href="<?=$arItem["LINK"]?>" >
+                                <?if($arFileData && $arFileData["SRC"]):?><img src="<?=$arFileData["SRC"]?>"><?endif?><?=$arItem["TEXT"]?></a>
                         <div class="third-level-container">
                             <ul>
                         <?$columnsCount=1?>
                     <?else:?>
-                        <li><a href="<?=$arItem["LINK"]?>"><i class="fa fa-female" aria-hidden="true"></i><?=$arItem["TEXT"]?></a></li>
+                        <li><?CFile::ShowImage($arItem["PARAMS"]["UF_MENU_ICON"], 20, 20, '', true)?><a href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?></a></li>
                     <?endif?>
                 <?endif?>
 
