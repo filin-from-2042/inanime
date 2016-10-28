@@ -97,7 +97,11 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
             <div class="container hidden-xs col-sm-15 hidden-md hidden-lg">
                 <div class="row contacts-container">
                     <div class="col-sm-24">
-                        <span class="contacts"><span>(495) 832-93-29,</span><span>(8442) 234-53-63</span></span>
+                        <?$APPLICATION->IncludeFile(
+                            $APPLICATION->GetTemplatePath("include_areas/contacts.php"),
+                            Array(),
+                            Array("MODE"=>"html")
+                        );?>
                     </div>
                 </div>
                 <div class="row">
@@ -115,10 +119,20 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                                 <button type="button" class="btn btn-default ia-btn text-btn yellow-btn"><i class="fa fa-map-marker" aria-hidden="true"></i> Город <i class="fa fa-caret-down" aria-hidden="true"></i></button>
                             </div>
                             <div class="col-sm-12">
-                                <div class="search-input-container">
-                                    <input type="text" name="q" value="" placeholder="Поиск" class="form-control search-input"/>
-                                    <i class="fa fa-search" aria-hidden="true"></i>
-                                </div>
+
+                                <?$APPLICATION->IncludeComponent(
+                                    "bitrix:search.form",
+                                    "flat1",
+                                    array(
+                                        "PAGE" => "/search/",
+                                        "COMPONENT_TEMPLATE" => "flat1",
+                                        "USE_SUGGEST" => "Y",
+                                        "COMPOSITE_FRAME_MODE" => "A",
+                                        "COMPOSITE_FRAME_TYPE" => "AUTO"
+                                    ),
+                                    false
+                                );?>
+
                             </div>
                         </div>
                     </div>
