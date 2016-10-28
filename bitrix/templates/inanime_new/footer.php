@@ -1,33 +1,65 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
         </div>
-
         <footer>
             <div class="container gray-text general-container">
                 <div class="row">
                     <div class="hidden-xs hidden-sm col-md-6 col-lg-6 container about">
                         <div class="row">
-                            <img src="<?=SITE_TEMPLATE_PATH."/images/logo-footer.png"?>" class="img-responsive " alt="Inanime.ru">
+                            <?$APPLICATION->IncludeFile(
+                                $APPLICATION->GetTemplatePath("include_areas/logo_footer.php"),
+                                Array(),
+                                Array("MODE"=>"html")
+                            );?>
                             <p>
-                                Мы будем очень рады видеть Вас в нашем магазине и готовы помочь с выбором  и поиском определенного товара
+                                <?$APPLICATION->IncludeFile(
+                                    $APPLICATION->GetTemplatePath("include_areas/text_footer.php"),
+                                    Array(),
+                                    Array("MODE"=>"text")
+                                );?>
                             </p>
                         </div>
                     </div>
                     <div class="hidden-xs col-sm-5 col-md-5 col-lg-5 menu">
-                        <ul>
-                            <li><i class="fa fa-chevron-right" aria-hidden="true"></i><a href="">Каталог</a></li>
-                            <li><i class="fa fa-chevron-right" aria-hidden="true"></i><a href="">Доставка</a></li>
-                            <li><i class="fa fa-chevron-right" aria-hidden="true"></i><a href="">Оплата</a></li>
-                            <li><i class="fa fa-chevron-right" aria-hidden="true"></i><a href="">Контакты</a></li>
-                            <li><i class="fa fa-chevron-right" aria-hidden="true"></i><a href="">О компании</a></li>
-                        </ul>
+                        <?$APPLICATION->IncludeComponent("inanime:menu", "ia_bottom_vertical", Array(
+                            "ROOT_MENU_TYPE" => "bottom",
+                            "MENU_CACHE_TYPE" => "A",
+                            "MENU_CACHE_TIME" => "36000000",
+                            "MENU_CACHE_USE_GROUPS" => "Y",
+                            "MENU_THEME" => "site",
+                            "CACHE_SELECTED_ITEMS" => "N",
+                            "MENU_CACHE_GET_VARS" => "",
+                            "MAX_LEVEL" => "3",
+                            "CHILD_MENU_TYPE" => "left",
+                            "USE_EXT" => "Y",
+                            "DELAY" => "N",
+                            "ALLOW_MULTI_SELECT" => "N",
+                            "COMPONENT_TEMPLATE" => "catalog_vertical",
+                            "COMPOSITE_FRAME_MODE" => "A",	// Голосование шаблона компонента по умолчанию
+                            "COMPOSITE_FRAME_TYPE" => "AUTO",	// Содержимое компонента
+                            ),
+                            false
+                            );?>
+
                     </div>
                     <div class="col-xs-24 col-sm-9 col-md-6 col-lg-6 contacts ">
                         <h4>Контакты</h4>
                         <div>
-                            <p>Наш магазин находится в г. Москва пр.Ленина 10, ТЦ "Ultra", 1 этаж Время работы: 7:00 до 16:00</p>
+                            <p>
+                                <?$APPLICATION->IncludeFile(
+                                    $APPLICATION->GetTemplatePath("include_areas/location_text_footer.php"),
+                                    Array(),
+                                    Array("MODE"=>"text")
+                                );?>
+                            </p>
                         </div>
                         <div>
-                            <p>E-mail:support@nyaki.ru Телефон:+7 923 642 8222</p>
+                            <p>
+                                <?$APPLICATION->IncludeFile(
+                                    $APPLICATION->GetTemplatePath("include_areas/contacts_footer.php"),
+                                    Array(),
+                                    Array("MODE"=>"text")
+                                );?>
+                            </p>
                         </div>
                         <div class="social-container visible-xs-block">
                             <a href="http://www.facebook.com" class="social-link facebook"></a>
@@ -37,7 +69,13 @@
                     </div>
                     <div class="hidden-xs col-sm-10 col-md-6 col-lg-6 join">
                         <h4>Присоединяйтесь</h4>
-                        <p>Будем рады видеть Вас! Заходите к нам в гости. Наши группы в соц.сетях:</p>
+                        <p>
+                            <?$APPLICATION->IncludeFile(
+                                $APPLICATION->GetTemplatePath("include_areas/join_text_footer.php"),
+                                Array(),
+                                Array("MODE"=>"text")
+                            );?>
+                        </p>
                         <div class="social-container">
                             <a href="http://www.facebook.com" class="social-link facebook"></a>
                             <a href="http://www.twitter.com" class="social-link twitter"></a>
@@ -50,8 +88,5 @@
 
             </div>
         </footer>
-
-
-
-</body>
+    </body>
 </html>
