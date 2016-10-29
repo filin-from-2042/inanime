@@ -78,23 +78,30 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
             </div>
             <div class="hidden-xs hidden-sm col-md-7 col-lg-6 container user-controls-container">
                 <div class="row">
-                    <button type="button" class="btn btn-default ia-btn text-btn yellow-btn">Регистрация</button>
-                    <button type="button" class="btn btn-default ia-btn text-btn blue-btn">Личный кабинет</button>
-                </div>
-                <div class="row">
-                    <div class="content-container cart-container">
-                        <a class="btn btn-default ia-btn yellow-btn image-btn" href="/personal/cart" role="button"><span class="icon cart-icon"></span></a>
-                        <div class="text-container">
-                                <span>
-                                    <span>2 товара</span><i class="fa fa-long-arrow-right" aria-hidden="true"></i><span class="yellow-text">5.130 &#8381;</span>
-                                </span>
-                        </div>
-                        <a class="btn btn-default ia-btn blue-btn image-btn" href="/personal/cart" role="button"><span class="icon favorite-icon"></span></a>
-                    </div>
+                    <?$APPLICATION->IncludeComponent("bitrix:sale.basket.basket.line", "inanime-template", Array(
+                        "PATH_TO_BASKET" => SITE_DIR."personal/cart/",	// Страница корзины
+                            "PATH_TO_PERSONAL" => SITE_DIR."personal/",	// Страница персонального раздела
+                            "SHOW_PERSONAL_LINK" => "N",	// Отображать персональный раздел
+                            "SHOW_NUM_PRODUCTS" => "Y",	// Показывать количество товаров
+                            "SHOW_TOTAL_PRICE" => "Y",	// Показывать общую сумму по товарам
+                            "SHOW_PRODUCTS" => "N",	// Показывать список товаров
+                            "POSITION_FIXED" => "N",	// Отображать корзину поверх шаблона
+                            "SHOW_AUTHOR" => "Y",	// Добавить возможность авторизации
+                            "PATH_TO_REGISTER" => SITE_DIR."login/",	// Страница регистрации
+                            "PATH_TO_PROFILE" => SITE_DIR."personal/",	// Страница профиля
+                            "COMPONENT_TEMPLATE" => ".default_old",
+                            "PATH_TO_ORDER" => SITE_DIR."personal/order/make/",	// Страница оформления заказа
+                            "SHOW_EMPTY_VALUES" => "Y",	// Выводить нулевые значения в пустой корзине
+                            "HIDE_ON_BASKET_PAGES" => "Y",	// Не показывать на страницах корзины и оформления заказа
+                            "COMPOSITE_FRAME_MODE" => "A",	// Голосование шаблона компонента по умолчанию
+                            "COMPOSITE_FRAME_TYPE" => "AUTO",	// Содержимое компонента
+                        ),
+                        false
+                    );?>
                 </div>
             </div>
             <!-- tablet -->
-            <div class="container hidden-xs col-sm-15 hidden-md hidden-lg">
+            <div class="container visible-sm col-sm-15">
                 <div class="row contacts-container">
                     <div class="col-sm-24">
                         <?$APPLICATION->IncludeFile(
@@ -106,13 +113,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                 </div>
                 <div class="row">
                     <div class="col-sm-11 container buttons-container">
-                        <div class="row account-buttons-container">
-                            <div class="col-sm-12">
-                                <button type="button" class="btn btn-default ia-btn text-btn yellow-btn">Регистрация</button>
-                            </div>
-                            <div class="col-sm-12">
-                                <button type="button" class="btn btn-default ia-btn text-btn blue-btn">Личный кабинет</button>
-                            </div>
+                        <div class="row account-buttons-container" style="min-height:22px">
                         </div>
                         <div class="row search-button-container">
                             <div class="col-sm-12">
@@ -137,15 +138,26 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                         </div>
                     </div>
                     <div class="col-sm-13">
-                        <div class="content-container cart-container">
-                            <a class="btn btn-default ia-btn yellow-btn image-btn" href="#" role="button"><span class="icon cart-icon"></span></a>
-                            <div class="text-container">
-                                <span>
-                                    <span>2 товара</span><i class="fa fa-long-arrow-right" aria-hidden="true"></i><span class="yellow-text">5.130 &#8381;</span>
-                                </span>
-                            </div>
-                            <a class="btn btn-default ia-btn blue-btn image-btn" href="#" role="button"><span class="icon favorite-icon"></span></a>
-                        </div>
+                        <?$APPLICATION->IncludeComponent("bitrix:sale.basket.basket.line", "inanime-template", Array(
+                                "PATH_TO_BASKET" => SITE_DIR."personal/cart/",	// Страница корзины
+                                "PATH_TO_PERSONAL" => SITE_DIR."personal/",	// Страница персонального раздела
+                                "SHOW_PERSONAL_LINK" => "N",	// Отображать персональный раздел
+                                "SHOW_NUM_PRODUCTS" => "Y",	// Показывать количество товаров
+                                "SHOW_TOTAL_PRICE" => "Y",	// Показывать общую сумму по товарам
+                                "SHOW_PRODUCTS" => "N",	// Показывать список товаров
+                                "POSITION_FIXED" => "N",	// Отображать корзину поверх шаблона
+                                "SHOW_AUTHOR" => "Y",	// Добавить возможность авторизации
+                                "PATH_TO_REGISTER" => SITE_DIR."login/",	// Страница регистрации
+                                "PATH_TO_PROFILE" => SITE_DIR."personal/",	// Страница профиля
+                                "COMPONENT_TEMPLATE" => ".default_old",
+                                "PATH_TO_ORDER" => SITE_DIR."personal/order/make/",	// Страница оформления заказа
+                                "SHOW_EMPTY_VALUES" => "Y",	// Выводить нулевые значения в пустой корзине
+                                "HIDE_ON_BASKET_PAGES" => "Y",	// Не показывать на страницах корзины и оформления заказа
+                                "COMPOSITE_FRAME_MODE" => "A",	// Голосование шаблона компонента по умолчанию
+                                "COMPOSITE_FRAME_TYPE" => "AUTO",	// Содержимое компонента
+                            ),
+                            false
+                        );?>
                     </div>
                 </div>
             </div>

@@ -84,6 +84,63 @@
             <?endforeach?>
 
             </ul>
+                            <div class="container visible-xs">
+                                <div class="row contacts-container">
+                                    <div class="col-xs-24">
+                                        <?$APPLICATION->IncludeFile(
+                                            $APPLICATION->GetTemplatePath("include_areas/contacts.php"),
+                                            Array(),
+                                            Array("MODE"=>"html")
+                                        );?>
+                                    </div>
+                                </div>
+                                <div class="row location-container">
+                                    <div class="col-xs-12">
+                                        <span class="geo-title">Мой город:</span>
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button type="button" class="btn btn-default ia-btn text-btn yellow-btn"><i class="fa fa-map-marker" aria-hidden="true"></i> Город <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                    </div>
+                                </div>
+                                <div class="row user-buttons-container">
+                                    <?$APPLICATION->IncludeComponent("bitrix:sale.basket.basket.line", "inanime-template", Array(
+                                            "PATH_TO_BASKET" => SITE_DIR."personal/cart/",	// Страница корзины
+                                            "PATH_TO_PERSONAL" => SITE_DIR."personal/",	// Страница персонального раздела
+                                            "SHOW_PERSONAL_LINK" => "N",	// Отображать персональный раздел
+                                            "SHOW_NUM_PRODUCTS" => "Y",	// Показывать количество товаров
+                                            "SHOW_TOTAL_PRICE" => "Y",	// Показывать общую сумму по товарам
+                                            "SHOW_PRODUCTS" => "N",	// Показывать список товаров
+                                            "POSITION_FIXED" => "N",	// Отображать корзину поверх шаблона
+                                            "SHOW_AUTHOR" => "Y",	// Добавить возможность авторизации
+                                            "PATH_TO_REGISTER" => SITE_DIR."login/",	// Страница регистрации
+                                            "PATH_TO_PROFILE" => SITE_DIR."personal/",	// Страница профиля
+                                            "COMPONENT_TEMPLATE" => ".default_old",
+                                            "PATH_TO_ORDER" => SITE_DIR."personal/order/make/",	// Страница оформления заказа
+                                            "SHOW_EMPTY_VALUES" => "Y",	// Выводить нулевые значения в пустой корзине
+                                            "HIDE_ON_BASKET_PAGES" => "Y",	// Не показывать на страницах корзины и оформления заказа
+                                            "COMPOSITE_FRAME_MODE" => "A",	// Голосование шаблона компонента по умолчанию
+                                            "COMPOSITE_FRAME_TYPE" => "AUTO",	// Содержимое компонента
+                                        ),
+                                        false
+                                    );?>
+                                </div>
+                                <div class="row search-container">
+                                    <div class="col-xs-24">
+                                        <?$APPLICATION->IncludeComponent(
+                                            "bitrix:search.form",
+                                            "flat1",
+                                            array(
+                                                "PAGE" => "/search/",
+                                                "COMPONENT_TEMPLATE" => "flat1",
+                                                "USE_SUGGEST" => "Y",
+                                                "COMPOSITE_FRAME_MODE" => "A",
+                                                "COMPOSITE_FRAME_TYPE" => "AUTO"
+                                            ),
+                                            false
+                                        );?>
+                                    </div>
+                                </div>
+                            </div>
         </div>
     </nav>
 <?endif?>

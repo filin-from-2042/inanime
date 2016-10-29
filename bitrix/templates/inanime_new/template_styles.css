@@ -118,6 +118,16 @@ header .user-controls-container{
 header .user-controls-container .text-btn.blue-btn{
     margin-left: 7px;
 }
+header .text-btn.blue-btn,
+header .text-btn.yellow-btn{
+    box-sizing: content-box;
+}
+header .text-btn.yellow-btn{
+    min-width: 61px;
+}
+header .text-btn.blue-btn{
+    min-width: 80px;
+}
 header .cart-container .text-container{
     display: inline-block;
     width: 165px;
@@ -318,6 +328,12 @@ footer .general-container{
     }
     .text-btn.blue-btn{
         padding:6px 30px;
+    }
+    header .right-button-container{
+
+    }
+    header .left-button-container{
+
     }
 
 }

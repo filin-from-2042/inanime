@@ -192,7 +192,7 @@ nav.navigation .third-level-container li{
     nav.navigation ul.first-level > li:hover{
         background-color: #f2f2ec;
     }
-    nav.navigation .contacts{
+    nav.navigation .visible-xs .contacts{
         color:#fff;
         height:auto;
         display:block;
@@ -200,6 +200,9 @@ nav.navigation .third-level-container li{
         font-size: 20px;
         margin: 18px 19px;
         letter-spacing: 0.5px;
+    }
+    nav.navigation .visible-xs .contacts > span{
+        display: block;
     }
     nav.navigation .location-container{
         margin-top:10px;
