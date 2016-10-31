@@ -200,6 +200,18 @@ footer .general-container{
     background-repeat: no-repeat;
     background-position: 97% 76%;
 }
+
+/******************************* CONTENT *****************************************/
+.content .main-carousel{
+    padding-top: 20px;
+}
+.content .bx-advertisingbanner-content{
+    max-width: 390px !important;
+}
+.content .bx-advertisingbanner-content > div{
+    font-size: 30px !important;
+}
+
 /******************************* MEDIA QUERIES ********************************/
 /* Mobile */
 @media (max-width: 760px) {

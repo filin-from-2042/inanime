@@ -4,10 +4,12 @@ $APPLICATION->SetPageProperty("description", "Мы предлагаем широ
 $APPLICATION->SetPageProperty("keywords", "аниме одежда, аниме берелоки, кулоны");
 $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксессуаров\"");
 ?>
-<?if (IsModuleInstalled("advertising")):?>
-<?$APPLICATION->IncludeComponent(
-	"bitrix:advertising.banner",
-	"bootstrap",
+<div class="row main-carousel">
+    <div class="col-xs-18 col-sm-18 col-md-18 col-lg-18">
+        <?if (IsModuleInstalled("advertising")):?>
+            <?$APPLICATION->IncludeComponent(
+	"bitrix:advertising.banner", 
+	"bootstrap", 
 	array(
 		"COMPONENT_TEMPLATE" => "bootstrap",
 		"TYPE" => "MAIN",
@@ -21,13 +23,19 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
 		"BS_ARROW_NAV" => "Y",
 		"BS_BULLET_NAV" => "Y",
 		"BS_HIDE_FOR_TABLETS" => "N",
-		"BS_HIDE_FOR_PHONES" => "Y",
+		"BS_HIDE_FOR_PHONES" => "N",
 		"CACHE_TYPE" => "A",
 		"CACHE_TIME" => "36000000",
+		"DEFAULT_TEMPLATE" => "-",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
 	false
 );?>
-<?endif?>
+        <?endif?>
+    </div>
+    <div class="hidden-xs col-sm-6 col-md-6 col-lg-6"></div>
+</div>
 
 <h2>Тренды сезона</h2>
 <?$APPLICATION->IncludeComponent(

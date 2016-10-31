@@ -197,4 +197,5 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
 	false
 );?>
 
-<div class="workarea">
+<div class="content">
+    <div class="container">
