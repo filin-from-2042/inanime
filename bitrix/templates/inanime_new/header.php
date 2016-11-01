@@ -17,6 +17,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
     ?>
     <?$APPLICATION->AddHeadScript("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js");?>
     <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/bootstrap.min.js");?>
+    <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/script.js");?>
     <title><?$APPLICATION->ShowTitle()?></title>
 </head>
 <body>
