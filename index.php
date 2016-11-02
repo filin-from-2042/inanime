@@ -38,7 +38,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
         <div class="hidden-xs col-sm-6 col-md-6 col-lg-6">
             <script>
                 $(document).ready(function(){
-                    inanime_new.init_custom_carousel('carousel-custom-vertical');
+                    inanime_new.init_custom_vertical_carousel('carousel-custom-vertical');
                 });
             </script>
             <? $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/css/jquery.bxslider.css');?>

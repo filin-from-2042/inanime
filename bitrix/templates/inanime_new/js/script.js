@@ -2,35 +2,48 @@
  * Created by Set on 31.10.16.
  */
 function inanime_new(){
-    this.init_custom_carousel = function(element_id)
+    // инициализирует вертикальную карусель и сохраняет настройки в объекте одноименном с id html-обертки
+    this.init_custom_vertical_carousel = function(element_id)
     {
         /* конфигурация */
-        //this.cc_height = 180; // ширина изображения
-        this.cc_count = 2; // количество изображений
-        this.cc_position = 0; // текущий сдвиг влево
-        this.carouselEl = document.getElementById(element_id);
-        this.cc_height=this.carouselEl.querySelector('img').height;
-        this.paddingBottom = parseInt($(this.carouselEl.querySelector('li')).css('paddingBottom'));
-
-        this.carouselEl.querySelector('.prev').onclick = function() {
+        var carouselData =
+        {
+            cc_count : 2, // количество изображений
+            cc_position : 0, // текущий сдвиг влево
+            carouselEl : document.getElementById(element_id),
+            cc_height : document.getElementById(element_id).querySelector('img').height,
+            paddingBottom : parseInt($(document.getElementById(element_id).querySelector('li')).css('paddingBottom'))
+        }
+        inanime_new[element_id] = carouselData;
+        carouselData.carouselEl.querySelector('.prev').onclick = function() {
             // сдвиг влево
             // последнее передвижение влево может быть не на 3, а на 2 или 1 элемент
-            inanime_new.cc_position = Math.min(inanime_new.cc_position + (inanime_new.cc_height+ inanime_new.paddingBottom) * inanime_new.cc_count, 0)
+            var prevPosition = inanime_new[element_id].cc_position;
+            var height = inanime_new[element_id].cc_height;
+            var paddingBottom = inanime_new[element_id].paddingBottom;
+            var count = inanime_new[element_id].cc_count;
+
+            inanime_new[element_id].cc_position = Math.min(prevPosition + (height+paddingBottom) * count, 0);
             $('#carousel-custom-vertical ul').animate(
                 {
-                    marginTop:inanime_new.cc_position + 'px'
+                    marginTop:inanime_new[element_id].cc_position + 'px'
                 }
             );
         };
 
-        this.carouselEl.querySelector('.next').onclick = function() {
-            var listElems = inanime_new.carouselEl.querySelectorAll('li');
+        carouselData.carouselEl.querySelector('.next').onclick = function() {
+            var listElems = inanime_new[element_id].carouselEl.querySelectorAll('li');
             // сдвиг вправо
             // последнее передвижение вправо может быть не на 3, а на 2 или 1 элемент
-            inanime_new.cc_position = Math.max(inanime_new.cc_position  - (inanime_new.cc_height+ inanime_new.paddingBottom) * inanime_new.cc_count, -(inanime_new.cc_height+inanime_new.paddingBottom) * (listElems.length - inanime_new.cc_count));
+            var prevPosition = inanime_new[element_id].cc_position;
+            var height = inanime_new[element_id].cc_height;
+            var paddingBottom = inanime_new[element_id].paddingBottom;
+            var count = inanime_new[element_id].cc_count;
+
+            inanime_new[element_id].cc_position = Math.max(prevPosition-(height + paddingBottom)*count, -(height+paddingBottom) * (listElems.length - count));
             $('#carousel-custom-vertical ul').animate(
                 {
-                    marginTop:inanime_new.cc_position + 'px'
+                    marginTop:inanime_new[element_id].cc_position + 'px'
                 }
             );
         };
