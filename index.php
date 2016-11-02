@@ -6,7 +6,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
 ?>
 
     <div class="row main-carousel">
-        <div class="col-xs-18 col-sm-18 col-md-18 col-lg-18">
+        <div class="col-xs-24 col-sm-18 col-md-18 col-lg-18">
             <?if (IsModuleInstalled("advertising")):?>
                 <? $APPLICATION->IncludeComponent(
                     "bitrix:advertising.banner",
@@ -47,7 +47,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
             CModule::IncludeModule("iblock");
             CModule::IncludeModule("catalog");
             $arSelect = Array("ID", "NAME", "DATE_ACTIVE_FROM", "PROPERTY_SHOW_MAIN_SLIDER", "PROPERTY_MAIN_SLIDER_PHOTO", "PREVIEW_PICTURE", "DETAIL_PICTURE", "PREVIEW_TEXT", "PROPERTY_IS_NEWPRODUCT", "DETAIL_PAGE_URL", "PROPERTY_DISCOUNT");
-            $arFilter = Array("IBLOCK_ID" => array(18, 19), "ACTIVE" => "Y", "!PROPERTY_SHOW_MAIN_SLIDER" => false);
+            $arFilter = Array("IBLOCK_ID" => array(18, 19, 23), "ACTIVE" => "Y", "!PROPERTY_SHOW_MAIN_SLIDER" => false);
             $res = CIBlockElement::GetList(Array("ACTIVE_FROM" => "DESC", "SORT" => "ASC"), $arFilter, false, Array("nPageSize" => 4), $arSelect);
             $arSlides = array();
             while ($ob = $res->GetNextElement()) {
@@ -83,6 +83,36 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
             <? } ?>
         </div>
     </div>
+    <div class="row articles-links">
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <a class="article-container grey-container discounts" href="/articles/56063/">
+                <div class="table-wrap">
+                    <span class="text">Постоянным клиентам скидки до 40%</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <a class="article-container grey-container choise"  href="/articles/56064/">
+                <div class="table-wrap">
+                    <span class="text">Огромный выбор</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <a class="article-container grey-container shipping" href="/articles/56065/">
+                <div class="table-wrap">
+                    <span class="text">Бесплатная доставка от 3000 рублей</span>
+                </div>
+            </a>
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <a class="article-container grey-container order" href="/articles/56066/">
+                <div class="table-wrap">
+                    <span class="text">Товар под заказ</span>
+                </div>
+            </a>
+        </div>
+    </div>
 
 <h2>Тренды сезона</h2>
 <?$APPLICATION->IncludeComponent(
@@ -94,7 +124,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
 		"BASKET_URL" => "/personal/cart/",
 		"COMPONENT_TEMPLATE" => ".default",
 		"IBLOCK_TYPE" => "catalog",
-		"SECTION_ID" => $_REQUEST["SECTION_ID"],
+		"SECTION_ID" => "790",
 		"SECTION_CODE" => "",
 		"SECTION_USER_FIELDS" => array(
 			0 => "",

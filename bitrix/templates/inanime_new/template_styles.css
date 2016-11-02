@@ -87,6 +87,10 @@ input.form-control{
 .gray-text{
     color:#79828b;
 }
+.grey-container{
+    border-radius:5px;
+    background-color:rgb(242,242,236);
+}
 /******************************* HEADER ***********************************/
 header{
     padding-top: 30px;
@@ -270,6 +274,54 @@ footer .general-container{
     line-height: 22px;
     text-align: left;
 }
+.row.articles-links{
+    margin-top:20px;
+}
+.row.articles-links > div {
+    padding-left: 10px;
+}
+.row.articles-links .article-container{
+    display:inline-block;
+    width:280px;
+    text-align: left;
+    overflow: hidden;
+    padding:0 15px 0 100px;
+    height:85px;
+    background-repeat: no-repeat;
+    text-decoration: none;
+    color:#000;
+    font-weight: 900;
+    letter-spacing: 1.2px;
+    line-height: 23px;
+}
+.row.articles-links .row{
+    text-align:center;
+}
+.row.articles-links .article-container img{
+    width:85px;
+    height:85px;
+}
+.row.articles-links .article-container .table-wrap{
+    display:table;
+    height:85px;
+}
+.row.articles-links .article-container .text{
+    width: 197px;
+    display: table-cell;
+    vertical-align:middle;
+}
+.row.articles-links .article-container.discounts{
+    background-image: url(images/advantage-icon-discount.png);
+}
+.row.articles-links .article-container.choise{
+    background-image: url(images/advantage-icon-choise.png);
+}
+.row.articles-links .article-container.shipping{
+    background-image: url(images/advantage-icon-free-shiping.png);
+}
+.row.articles-links .article-container.order{
+    background-image: url(images/advantage-icon-pod-zakaz.png);
+}
 
 /******************************* MEDIA QUERIES ********************************/
 /* Mobile */
@@ -315,6 +367,33 @@ footer .general-container{
     }
     .mobile-collapsed{
         display:none;
+    }
+    .content .bx-advertisingbanner-content > div {
+        font-size: 17px !important;
+    }
+    .content .bx-advertisingbanner-content {
+        max-width: 230px !important;
+    }
+
+    .row.articles-links .article-container.discounts{
+        background-image: url(images/advantage-icon-discount-mobile.png);
+    }
+    .row.articles-links .article-container.choise{
+        background-image: url(images/advantage-icon-choise-mobile.png);
+    }
+    .row.articles-links .article-container.shipping{
+        background-image: url(images/advantage-icon-free-shiping-mobile.png);
+    }
+    .row.articles-links .article-container.order{
+        background-image: url(images/advantage-icon-pod-zakaz-mobile.png);
+    }
+    .row.articles-links .article-container{
+        padding:0px;
+        height: 65px;
+        width: 65px;
+    }
+    .row.articles-links .article-container .table-wrap {
+        display: none;
     }
 
     footer .general-container{
@@ -412,6 +491,30 @@ footer .general-container{
     .content .bx-advertisingbanner-content > div{
         font-size: 19px !important;
     }
+    .row.articles-links .article-container{
+        padding-right:0;
+        width:85px;
+    }
+    .row.articles-links .article-container .table-wrap{
+        display: none;
+    }
+    .row.articles-links .article-container{
+        padding:0px;
+        height: 72px;
+        width: 72px;
+    }
+    .row.articles-links .article-container.discounts{
+        background-image: url(images/advantage-icon-discount-tablet.png);
+    }
+    .row.articles-links .article-container.choise{
+        background-image: url(images/advantage-icon-choise-tablet.png);
+    }
+    .row.articles-links .article-container.shipping{
+        background-image: url(images/advantage-icon-free-shiping-tablet.png);
+    }
+    .row.articles-links .article-container.order{
+        background-image: url(images/advantage-icon-pod-zakaz-tablet.png);
+    }
     footer .general-container{
         background-position: 100% 76%;
     }
@@ -464,6 +567,9 @@ footer .general-container{
     .carousel-custom .next{
         width:220px;
     }
+    .row.articles-links .article-container{
+        width:230px;
+    }
     /*.carousel-custom li .text{*/
         /*font-size: 12px;*/
         /*top: 25%;*/
@@ -475,6 +581,9 @@ footer .general-container{
 }
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1200px){
+    .row.articles-links .article-container:nth-child(n+2) {
+        margin-left: 22px;
+    }
 }
 /*@media (min-width: 1240px){*/
     /*.container{*/
