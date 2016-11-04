@@ -1,0 +1,49 @@
+/********************** CAROUSEL PRODUCTS **********************************/
+.carousel-container{
+
+}
+.carousel-products{
+    overflow: hidden;
+    width: 882px;
+    padding-left: 15px;
+    margin-left: -15px;
+}
+/*.carousel-products.vertical{*/
+    /*padding-left: 25px;*/
+    /*margin-left: -25px;*/
+/*}*/
+.carousel-products ul{
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    width: 9999px;
+    margin-top: 13px;
+}
+.carousel-products ul li{
+    /*display: inline-block;*/
+    float: left;
+    padding-right: 15px;
+}
+.carousel-products .title-container{
+    padding: 6px 17px;
+    border-radius: 10px;
+}
+.carousel-products .title-container .title{
+    float: left;
+    font-size: 23px;
+    font-weight: bold;
+    line-height: 38px;
+}
+.carousel-products .title-container .button{
+    float: right;
+    color:#68422e;
+    cursor: pointer;
+}
+.carousel-products .title-container .button.prev{
+    margin-right: 15px;
+}
+.carousel-products .title-container .button i{
+    line-height: 38px;
+    font-size: 16px;
+    font-weight: bold;
+}
