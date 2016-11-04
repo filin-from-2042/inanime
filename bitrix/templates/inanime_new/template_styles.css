@@ -488,7 +488,7 @@ footer .general-container{
     display: inline-block;
 }
 .sections-carousel .fox-icon.top{
-    background: url(images/sections-new-fox-top.png) no-repeat;
+    background: url(images/sections-new-fox-top-desktop.png) no-repeat;
     width: 169px;
     height: 91px;
     top: 48px;
@@ -523,7 +523,7 @@ footer .general-container{
     height: 92px;
     z-index: 101;
     right: 0;
-    margin-top: -70px;
+    margin-top: -59px;
 }
 
 .bx_item_detail_rating .bx_stars_progres {
@@ -627,6 +627,7 @@ footer .general-container{
     }
     .product-item-preview.horizontal{
         display: inline-block;
+        margin-right: 7px;
     }
     .product-item-preview.vertical .price-container .price,
     .product-item-preview.horizontal .price-container .price  {
@@ -703,12 +704,16 @@ footer .general-container{
     .carousel-products .title-container .button.prev {
         margin-right: 10px;
     }
-    #fox-icon-bottom {
+    #fox-icon-bottom,
+    .sections-carousel .fox-icon.bottom{
         display:none;
     }
-    .sections-carousel .fox-icon.top {
-        top: 23px;
-        left: 95px;
+    .sections-carousel .fox-icon.top{
+        background: url(images/sections-new-fox-top-mobile.png) no-repeat;
+        width: 126px;
+        height: 68px;
+        top: 46px;
+        left: 140px;
     }
     .product-item-preview.horizontal .rate-container table {
         margin: auto;
@@ -895,12 +900,16 @@ footer .general-container{
         padding-left: 15px;
     }
     .sections-carousel .fox-icon.bottom {
+        display: none;
         bottom: -26px;
         right: -5px;
     }
     .sections-carousel .fox-icon.top {
-        top: 38px;
-        left: 277px;
+        top: 55px;
+        left: 295px;
+        background: url(images/sections-new-fox-top-tablet.png) no-repeat;
+        width: 140px;
+        height: 75px;
     }
 }
 /* (desktops, 992px and up) */
@@ -958,6 +967,7 @@ footer .general-container{
         /*max-width: 125px;*/
     /*}*/
     .sections-carousel .fox-icon.bottom {
+        display: none;
         bottom: -50px;
         right: 0px;
     }
@@ -969,7 +979,19 @@ footer .general-container{
     .row.articles-links .article-container:nth-child(n+2) {
         margin-left: 22px;
     }
+    .sections-carousel .fox-icon.bottom{
+        display: none;
+    }
 }
+@media (min-width: 1400px){
+    .sections-carousel .fox-icon.bottom{
+        display: inline-block;
+    }
+    #fox-icon-bottom{
+        display: none;
+    }
+}
+
 /*@media (min-width: 1240px){*/
     /*.container{*/
         /*width: 1240px;*/

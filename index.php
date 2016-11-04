@@ -116,7 +116,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
 
 <div class="row sections-carousel">
     <div class="fox-icon top"></div>
-<!--    <div class="fox-icon bottom"></div>-->
+    <div class="fox-icon bottom"></div>
     <h2>Новиники</h2>
     <div class="col-xs-24 col-sm-24 col-md-18 col-md-offset-1 col-lg-offset-0 col-lg-18 column first-section">
         <div class="carousel-container col-sm-24">
@@ -619,5 +619,5 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
         </div>
     </div>
 </div>
-    <div id="fox-icon-bottom" class="fox-icon bottom"></div>
+<div id="fox-icon-bottom" class="fox-icon bottom"></div>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
