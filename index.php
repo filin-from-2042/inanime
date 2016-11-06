@@ -622,6 +622,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
     <div id="fox-icon-bottom" class="fox-icon bottom"></div>
     <div class="row section-reviews-news">
         <div class="col-xs-24 col-sm-24 col-md-18 col-lg-18 reviews-list">
+            <div class="hidden-xs reveiew-icon-fox"></div>
             <div class="title-container clearfix">
                 <div class="btn btn-default ia-btn text-btn blue-dark-btn view-all-btn"><a href="/reviews">Все обзоры</a></div>
                 <h2>Обзоры</h2>
@@ -776,7 +777,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
 	),
 	false
 );?>
-
+                <div class="reveiew-icon-hearts"></div>
             </div>
         </div>
     </div>

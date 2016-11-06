@@ -162,7 +162,9 @@ header .cart-container{
     margin-top: 10px;
 }
 
-
+.content{
+    overflow: hidden;
+}
 /******************************** FOOTER **************************************/
 footer .about .row{
     padding-left: 18px;
@@ -546,6 +548,24 @@ footer .general-container{
 }
 .section-reviews-news{
     padding-top: 30px;
+}
+.section-reviews-news .reveiew-icon-fox{
+    display: inline-block;
+    background: url(images/sections-reviews-news-fox-left.png) no-repeat;
+    width: 85px;
+    height: 115px;
+    position: absolute;
+    margin-top: 120px;
+    margin-left: -77px;
+}
+.section-reviews-news .reveiew-icon-hearts{
+    display: none;
+    background: url(images/sections-reviews-news-heart.png) no-repeat;
+    width: 85px;
+    height: 115px;
+    position: absolute;
+    margin-left: 260px;
+    margin-top: 25px;
 }
 .section-reviews-news .reviews-list{
     padding-top: 15px;
@@ -1035,6 +1055,9 @@ footer .general-container{
         width: 140px;
         height: 75px;
     }
+    .section-reviews-news .reveiew-icon-fox {
+        margin-left: -70px;
+    }
     /******************************* REVIEWS **************************/
     .reviews-list .title-container h2 {
         margin-top: 0;
@@ -1148,7 +1171,9 @@ footer .general-container{
         padding: 6px 15px;
     }
 
-
+    .section-reviews-news .reveiew-icon-hearts{
+        display: inline-block;
+    }
 
 }
 /* Large devices (large desktops, 1200px and up) */
@@ -1164,6 +1189,9 @@ footer .general-container{
     }
     .section-reviews-news .news{
         padding-right: 0;
+    }
+    .section-reviews-news .reveiew-icon-hearts{
+        display: inline-block;
     }
 }
 @media (min-width: 1400px){
