@@ -81,8 +81,3 @@ function inanime_new() {
     }
 }
 window.inanime_new = new inanime_new();
-$(document).ready(function () {
-
-    inanime_new.init_custom_vertical_carousel('carousel-custom-vertical', 2);
-
-});

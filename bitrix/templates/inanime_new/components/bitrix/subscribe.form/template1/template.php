@@ -25,7 +25,7 @@ $frame = $this->createFrame("subscribe-form", false)->begin();
         <div class="text hidden-xs">Узнай первым о последних новостях и акциях</div>
     </div>
     <div class="col-md-12 col-lg-12 column-text">
-        <div class="input-container">
+        <div class="input-container email">
             <input class="form-control" type="text" name="sf_EMAIL" size="20" placeholder="Электронная почта" value="<?=$arResult["EMAIL"]?>" title="<?=GetMessage("subscr_form_email_title")?>" />
             <i class="fa fa-envelope-o mail" aria-hidden="true"></i>
         </div>
