@@ -1,0 +1,49 @@
+.subscribe-form .text{
+    color:#fff;
+    display: inline-block;
+    vertical-align: bottom;
+}
+.subscribe-form .divider{
+    color: #fff;
+    padding: 0 12px 0 16px;
+}
+.subscribe-form .text:first-child{
+    font-weight: bold;
+    font-size: 18px;
+    letter-spacing: 0.6px;
+}
+.subscribe-form form .column-text:nth-of-type(1),
+.subscribe-form form{
+    padding-left: 0;
+}
+.subscribe-form .column-text .input-container{
+    display: inline-block;
+    padding-left: 17px;
+}
+.subscribe-form .input-container i.mail{
+    color:#999999;
+    margin-left: -33px;
+    font-size: 20px;
+    vertical-align: middle;
+}
+.subscribe-form .column-text:nth-of-type(1){
+    padding-top: 5px;
+}
+.subscribe-form .column-text input.form-control {
+    width: 242px;
+    height: 33px;
+}
+.subscribe-form .column-text .yellow-btn{
+    font-size: 14px;
+    padding: 8px 15px;
+    background: #d58d3b;
+    background: -moz-linear-gradient(top,#f4ac5a  0%,#e49c4a 50%,#d58d3b 100%);
+    background: -webkit-linear-gradient(top,#f4ac5a  0%,#e49c4a 50%,#d58d3b 100%);
+    background: -o-linear-gradient(top,#f4ac5a  0%,#e49c4a 50%,#d58d3b 100%);
+    background: -ms-linear-gradient(top,#f4ac5a 0%,#e49c4a 50%,#d58d3b 100%);
+    background: linear-gradient(top,#f4ac5a  0%,#e49c4a 50%,#d58d3b 100%);
+}
+.subscribe-form .column-text .yellow-btn i{
+    font-size: 20px;
+    padding-right: 7px;
+}

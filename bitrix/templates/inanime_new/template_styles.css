@@ -687,6 +687,19 @@ footer .general-container{
     margin-top: 7px;
 }
 
+/********************************* SUBSCRIBE ********************************/
+.section-subscribe{
+    background: rgb(59,174,218);
+    background: -moz-linear-gradient(top,#219bc7  0%,#1d8bb2 50%,#1b7ea1 100%);
+    background: -webkit-linear-gradient(top,#219bc7  0%,#1d8bb2 50%,#1b7ea1 100%);
+    background: -o-linear-gradient(top,#219bc7  0%,#1d8bb2 50%,#1b7ea1 100%);
+    background: -ms-linear-gradient(top,#219bc7 0%,#1d8bb2 50%,#1b7ea1 100%);
+    background: linear-gradient(top,#219bc7  0%,#1d8bb2 50%,#1b7ea1 100%);
+    padding: 13px 0;
+}
+.section-subscribe .container{
+    padding-left: 0;
+}
 /******************************* MEDIA QUERIES ********************************/
 /* Mobile */
 @media (max-width: 760px) {
@@ -906,7 +919,8 @@ footer .general-container{
         letter-spacing: 1px;
     }
     .content .section-about {
-        height: 400px;
+        min-height: 470px;
+        height: auto;
     }
     .content .section-about h2 {
         font-size: 17px;
@@ -915,6 +929,16 @@ footer .general-container{
         left: -877px;
         width:auto;
         height: 100%;
+    }
+    .section-subscribe{
+        text-align: center;
+    }
+    .subscribe-form form .column-text:nth-of-type(1){
+        padding-top: 17px;
+        padding-right: 0;
+    }
+    .subscribe-form form .column-text .input-container{
+        padding-top: 24px;
     }
 }
 
@@ -1160,6 +1184,9 @@ footer .general-container{
     }
     .content .section-about h2 {
         font-size: 24px;
+    }
+    .section-subscribe{
+        text-align: center;
     }
 }
 /* (desktops, 992px and up) */

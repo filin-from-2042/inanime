@@ -803,4 +803,23 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
             ?></div>
     </div>
 </div>
+<div class="section-subscribe">
+    <div class="container">
+        <?$APPLICATION->IncludeComponent(
+	"bitrix:subscribe.form", 
+	"template1", 
+	array(
+		"USE_PERSONALIZATION" => "Y",
+		"PAGE" => "#SITE_DIR#personal/subscribe/subscr_edit.php",
+		"SHOW_HIDDEN" => "Y",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "3600",
+		"COMPONENT_TEMPLATE" => "template1",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
+	),
+	false
+);?>
+    </div>
+</div>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
