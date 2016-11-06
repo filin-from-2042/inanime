@@ -44,6 +44,15 @@ body{
     padding: 15px 18px 18px;
     border-radius: 10px;
 }
+.more-btn{
+    border-radius: 10px;
+    font-size: 18px;
+    padding: 6px 14px;
+}
+.more-btn span{
+    vertical-align: middle;
+    line-height: 30px;
+}
 .social-link{
     display: inline-block;
     width: 31px;
@@ -548,6 +557,7 @@ footer .general-container{
 }
 .section-reviews-news{
     padding-top: 30px;
+    padding-bottom: 50px;
 }
 .section-reviews-news .reveiew-icon-fox{
     display: inline-block;
@@ -566,6 +576,7 @@ footer .general-container{
     position: absolute;
     margin-left: 260px;
     margin-top: 25px;
+    z-index: 100;
 }
 .section-reviews-news .reviews-list{
     padding-top: 15px;
@@ -641,6 +652,39 @@ footer .general-container{
 }
 .review-container .review-info .text i{
     padding-right: 5px;
+}
+
+/****************************** ABOUT *********************************/
+.content .section-about{
+    background-color: rgba(0,0,0,0.4);
+    text-align: center;
+    height: 317px;
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+}
+.content .section-about .container{
+    padding-top: 30px;
+}
+.content .section-about h2{
+    text-transform: uppercase;
+    font-size: 37px;
+    font-weight: bold;
+    color: #f5ad5b;
+    margin-bottom: 20px;
+}
+.content .section-about .content-text p{
+    margin-bottom: 18px;
+}
+.content .section-about img{
+    /*width: 100%;*/
+    position: absolute;
+    left: 0;
+    right: 0;
+    z-index: -1;
+}
+.content .section-about .more-btn{
+    margin-top: 7px;
 }
 
 /******************************* MEDIA QUERIES ********************************/
@@ -861,7 +905,17 @@ footer .general-container{
         line-height: 22px;
         letter-spacing: 1px;
     }
-
+    .content .section-about {
+        height: 400px;
+    }
+    .content .section-about h2 {
+        font-size: 17px;
+    }
+    .content .section-about img {
+        left: -877px;
+        width:auto;
+        height: 100%;
+    }
 }
 
 /* Tablet */
@@ -1101,6 +1155,12 @@ footer .general-container{
     .review-container .review-anonce {
         line-height: 18px;
     }
+    .content .section-about img {
+        left: -313px;
+    }
+    .content .section-about h2 {
+        font-size: 24px;
+    }
 }
 /* (desktops, 992px and up) */
 @media (min-width: 992px) {
@@ -1200,6 +1260,9 @@ footer .general-container{
     }
     #fox-icon-bottom{
         display: none;
+    }
+    .content .section-about img {
+        width: 100%;
     }
 }
 

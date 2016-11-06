@@ -43,10 +43,7 @@ $arEnding = Array(
                         $res = CIBlockElement::GetProperty(IntVal($arItem["IBLOCK_ID"]),IntVal($arItem["ID"]), array("sort" => "asc"), Array("CODE"=>"FORUM_MESSAGE_CNT"));
                         if ($ob = $res->GetNext())
                         {
-                            if($ob["VALUE"])
-                            {
-                               echo $ob["VALUE"]." комментар".getNumEnding(IntVal($ob["VALUE"]), $arEnding);
-                            }
+                            if($ob["VALUE"]) echo $ob["VALUE"]." комментар".getNumEnding(IntVal($ob["VALUE"]), $arEnding);
                             else {echo '0 комментариев';}
                         }
                         ?>

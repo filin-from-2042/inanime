@@ -199,4 +199,3 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
 );?>
 
 <div class="content">
-    <div class="container">

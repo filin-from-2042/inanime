@@ -4,7 +4,7 @@ $APPLICATION->SetPageProperty("description", "Мы предлагаем широ
 $APPLICATION->SetPageProperty("keywords", "аниме одежда, аниме берелоки, кулоны");
 $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксессуаров\"");
 ?>
-
+<div class="container">
     <div class="row main-carousel">
         <div class="col-xs-24 col-sm-18 col-md-18 col-lg-18">
             <?if (IsModuleInstalled("advertising")):?>
@@ -83,6 +83,8 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
             <? } ?>
         </div>
     </div>
+</div>
+<div class="container">
     <div class="row articles-links">
         <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
             <a class="article-container grey-container discounts" href="/articles/56063/">
@@ -113,7 +115,8 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
             </a>
         </div>
     </div>
-
+</div>
+<div class="container">
 <div class="row sections-carousel">
     <div class="fox-icon top"></div>
     <div class="fox-icon bottom"></div>
@@ -620,6 +623,8 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
         </div>
     </div>
     <div id="fox-icon-bottom" class="fox-icon bottom"></div>
+</div>
+<div class="container">
     <div class="row section-reviews-news">
         <div class="col-xs-24 col-sm-24 col-md-18 col-lg-18 reviews-list">
             <div class="hidden-xs reveiew-icon-fox"></div>
@@ -781,4 +786,21 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
             </div>
         </div>
     </div>
+</div>
+<div class="section-about">
+    <img src="<?=SITE_TEMPLATE_PATH."/images/sections-about-background.png"?>">
+    <div class="container">
+        <div class="row">
+            <?
+            $res = CIBlockElement::GetList(Array(), array("ID"=>56071,"IBLOCK_ID"=>23, "ACTIVE"=>"Y"), false, Array("nPageSize"=>50), array());
+            while($ob = $res->GetNextElement())
+            {
+                $arFields = $ob->GetFields();
+                echo '<h2 class="yellow-text">'.$arFields["NAME"].'</h2>';
+                echo '<div class="content-text">'.$arFields["PREVIEW_TEXT"].'</div>';
+                echo '<a class="btn btn-default ia-btn yellow-btn more-btn" href="'.$arFields["DETAIL_PAGE_URL"].'" role="button"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></a>';
+            }
+            ?></div>
+    </div>
+</div>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
