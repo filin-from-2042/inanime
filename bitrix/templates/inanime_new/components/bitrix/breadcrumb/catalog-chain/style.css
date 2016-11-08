@@ -1,0 +1,31 @@
+.bx-breadcrumb {
+	margin: 10px 0;
+    color:#79828b;
+    text-align: center;
+}
+.bx-breadcrumb i {
+	line-height: 13px;
+	font-size: 12px;
+	vertical-align: middle;
+	margin-right: 5px;
+}
+.bx-breadcrumb .bx-breadcrumb-item {
+	/*float: left;*/
+    display: inline-block;
+	margin-bottom: 10px;
+	white-space: nowrap;
+	line-height: 13px;
+	vertical-align: middle;
+	/*margin-right: 10px;*/
+}
+.bx-breadcrumb .bx-breadcrumb-item span {
+	font-family: "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+	font-size: 11px;
+}
+.bx-breadcrumb .bx-breadcrumb-item a {
+    color:#79828b;
+    border-bottom: none;
+}
+.bx-breadcrumb .bx-breadcrumb-item a:hover {
+    color:#79828b;
+}

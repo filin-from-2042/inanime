@@ -1,0 +1,13 @@
+.section-catalog {
+    padding-top: 40px;
+}
+
+.section-catalog h1{
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    margin-top: 0;
+    margin-bottom: 45px;
+}

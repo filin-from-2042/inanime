@@ -703,6 +703,42 @@ footer .general-container{
 .section-subscribe .container{
     padding-left: 0;
 }
+
+/******************************* CATALOG ITEMS ***********************************/
+.section-catalog .product-item-preview{
+    display: inline-block;
+    margin: 0 0 25px 0;
+}
+.section-catalog .product-item-preview:nth-child(3n+2){
+    margin: 0 10px;
+}
+.section-catalog .product-item-preview.vertical .data-container{
+    max-width: 275px;
+}
+.section-catalog .product-item-preview.vertical .title-container .text{
+    height: 20px;
+    overflow: hidden;
+}
+.section-catalog .sort-container .select-container.order,
+.section-catalog .sort-container .select-container.quantity,
+.section-catalog .sort-container .type-buttons{
+    height: 35px;
+}
+.section-catalog .sort-container .select-container.order{
+    float:left;
+}
+.section-catalog .sort-container .select-container.quantity{
+    float:right;
+}
+.section-catalog .sort-container .select-container select{
+    width: 100px;
+}
+.section-catalog .sort-container .type-buttons{
+    text-align: center;
+}
+.section-catalog .select-container .select-title{
+    display: inline-block;
+}
 /******************************* MEDIA QUERIES ********************************/
 /* Mobile */
 @media (max-width: 760px) {
