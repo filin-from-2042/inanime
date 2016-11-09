@@ -1,4 +1,5 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
+<?$APPLICATION->AddHeadScript($this->GetFolder()."/jquery.lazyload.min.js");?>
 <div class="container section-catalog">
     <?$APPLICATION->IncludeComponent(
         "bitrix:breadcrumb",
@@ -214,7 +215,11 @@
             $(window).scroll(function() {
 
                 /* Если высота окна + высота прокрутки больше или равна высоте всего документа и ajax-запрос в настоящий момент не выполняется, то запускаем ajax-запрос. 600 - это высота подвала в пикселях */
-                if($(window).scrollTop() + $(window).height() >= $(document).height() - 600 && !inProgress) {
+                if($(window).scrollTop() + $(window).height() >= $(document).height() - 600 && !inProgress)
+                {
+                    var splittedVal = $('.section-catalog #section-sort-order').val().split(';');
+                    var sortField = splittedVal[0];
+                    var sortType = splittedVal[1];
 
                     $.ajax({
                         url: '/ajax/catalog_pager.php',
@@ -222,8 +227,8 @@
                         data: {
                             "PAGEN_1" : startFrom,
                             "section_id": <?=$catalog_section_id?>,
-                            "sort_field": '<?=$arParams["ELEMENT_SORT_FIELD"]?>',
-                            "sort_order": '<?=$arParams["ELEMENT_SORT_ORDER"]?>',
+                            "sort_field": sortField,
+                            "sort_order": sortType,
                             "page_element_count": '<?=$arParams["PAGE_ELEMENT_COUNT"]?>',
                             "price_code" : '<?=json_encode($arParams["PRICE_CODE"])?>'
                         },
@@ -233,13 +238,16 @@
                         }
                     }).done(function(data){
                         $('.items-section #overlay-load').remove();
-
-                        $(".items-section .items-container").append($(data).find('.product-item-preview'));
+                        var parsedData = $(data);
+                        // манипуляции с классом new для добавления lazyload новым элементам
+                        parsedData.find('.product-item-preview img.lazy').addClass('new');
+                        $(".items-section .items-container").append(parsedData.find('.product-item-preview'));
                         startFrom += 1;
                         if (maxPages>=startFrom){
                             inProgress = false;
                         }
-
+                        $(".items-section .items-container .product-item-preview img.lazy.new").lazyload({effect : "fadeIn"});
+                        $(".items-section .items-container .product-item-preview img.lazy.new").removeClass('new');
                     });
 
                 }

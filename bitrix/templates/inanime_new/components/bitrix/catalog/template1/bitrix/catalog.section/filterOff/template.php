@@ -19,11 +19,15 @@ $arAvailableSort = array(
     "quantity" => Array("catalog_QUANTITY", "asc")
 );
 ?>
+<?if($arParams["DISPLAY_TOP_PAGER"]):?>
+    <p><?=$arResult["NAV_STRING"]?></p>
+<?endif?>
+
 <div class="items-section">
     <div class="sort-container clearfix">
         <div class="select-container order">
             <div class="select-title"><?= GetMessage('SECT_SORT_LABEL'); ?>:</div>
-            <select name="sort_order" onchange="inanime_new.refreshCatalogBySort(this.value, <?=$arParams["SECTION_ID"]?>,<?=$arParams["PAGE_ELEMENT_COUNT"]?>)">
+            <select name="sort_order" id="section-sort-order" onchange="inanime_new.refreshCatalogBySort(this.value, <?=$arParams["SECTION_ID"]?>,<?=$arParams["PAGE_ELEMENT_COUNT"]?>)">
                 <?
                 foreach ($arAvailableSort as $key => $val):?>
                     <option value="<?= $val[0]; ?>;desc" <?=($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc')?'selected':''?> >По <?= GetMessage('SECT_SORT_' . $key); ?> (по убыванию)</option>
@@ -44,7 +48,8 @@ $arAvailableSort = array(
 
             <div class="product-item-preview vertical">
                 <div class="image-container">
-                    <img src="<?=$arElement["PREVIEW_PICTURE"]["SRC"]?>" />
+<!--                    <img src="--><?//=$arElement["PREVIEW_PICTURE"]["SRC"]?><!--" class="lazy"/>-->
+                    <img data-original="<?=$arElement["PREVIEW_PICTURE"]["SRC"]?>" class="lazy" />
                     <div class="icons-container">
                         <?if($arElement["DATE_ACTIVE_FROM"]):?>
                             <?//товары не более 2ух недель - новинки?>
@@ -109,4 +114,10 @@ $arAvailableSort = array(
             </div>
         <?endforeach?>
     </div>
+    <script>
+        $(document).ready(function(){$("img.lazy").lazyload({effect : "fadeIn"});});
+    </script>
 </div>
+<?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
+    <p><?=$arResult["NAV_STRING"]?></p>
+<?endif?>

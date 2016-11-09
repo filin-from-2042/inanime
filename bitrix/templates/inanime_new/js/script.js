@@ -78,14 +78,13 @@ function inanime_new() {
                 }
             );
         };
-    }
+    };
     this.refreshCatalogBySort = function (sortValue, sectionId, elementsCount)
     {
         var splittedVal = sortValue.split(';')
         var sortField = splittedVal[0];
         var sortType = splittedVal[1];
-        console.log(sortField);
-        console.log(sortType);
+
         $.ajax({
             url: '/ajax/catalog_pager.php',
             method: 'POST',

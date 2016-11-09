@@ -1,7 +1,8 @@
 <?foreach($arResult["ITEMS"] as $arElement):?>
     <div class="product-item-preview vertical">
         <div class="image-container">
-            <img src="<?=$arElement["PREVIEW_PICTURE"]["SRC"]?>" />
+<!--            <img src="--><?//=$arElement["PREVIEW_PICTURE"]["SRC"]?><!--" />-->
+            <img data-original="<?=$arElement["PREVIEW_PICTURE"]["SRC"]?>"  class="lazy" />
             <div class="icons-container">
                 <?if($arElement["DATE_ACTIVE_FROM"]):?>
                     <?if(((strtotime("now")-strtotime($arElement["DATE_ACTIVE_FROM"]))/86400) <= 14):?>
