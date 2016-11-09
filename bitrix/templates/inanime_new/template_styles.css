@@ -739,6 +739,16 @@ footer .general-container{
 .section-catalog .select-container .select-title{
     display: inline-block;
 }
+.section-catalog  .items-section #overlay-load{
+    position: absolute;
+    top:0;
+    left:0;
+    background: #fff;
+    opacity: 0.5;
+    height: 4444px;
+    width: 100%;
+    z-index:110;;
+}
 /******************************* MEDIA QUERIES ********************************/
 /* Mobile */
 @media (max-width: 760px) {

@@ -79,5 +79,33 @@ function inanime_new() {
             );
         };
     }
+    this.refreshCatalogBySort = function (sortValue, sectionId, elementsCount)
+    {
+        var splittedVal = sortValue.split(';')
+        var sortField = splittedVal[0];
+        var sortType = splittedVal[1];
+        console.log(sortField);
+        console.log(sortType);
+        $.ajax({
+            url: '/ajax/catalog_pager.php',
+            method: 'POST',
+            data: {
+                "PAGEN_1" : 1,
+                "section_id": sectionId,
+                "sort_field": String(sortField),
+                "sort_order": String(sortType),
+                "page_element_count": String(elementsCount),
+                "price_code" : '["BASE"]'
+            },
+            beforeSend: function() {
+                inProgress = true;
+                $(".items-section").append('<div id="overlay-load"></div>');
+            }
+        }).done(function(data){
+            $('.items-section #overlay-load').remove();
+            $(".items-section .items-container .product-item-preview").remove();
+            $(".items-section .items-container").append($(data).find('.product-item-preview'));
+        });
+    }
 }
 window.inanime_new = new inanime_new();
