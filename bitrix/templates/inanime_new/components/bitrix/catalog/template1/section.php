@@ -137,7 +137,8 @@
                 "bitrix:catalog.section",
                 "withFilter",
                 Array(
-                    "INCLUDE_SUBSECTIONS" => "N",
+                    "SHOW_ALL_WO_SECTION" => "Y",
+                    "INCLUDE_SUBSECTIONS" => "Y",
                     "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
                     "IBLOCK_ID" => $arParams["IBLOCK_ID"],
                     "SECTION_ID" => $catalog_section_id,
@@ -179,12 +180,12 @@
             ?>
         </div>
     <?}?>
-</div>
     <script>
         /*AJAX прогрузка*/
         $(document).ready(function(){
+            $("img.lazy").lazyload({effect : "fadeIn"});
             /* С какой страницы надо делать выборку из базы при ajax-запросе */
-            var startFrom = 2;
+            window.scrollLoadStartFrom = 2;
 
             /* максимальное количество страниц */
             <?
@@ -204,56 +205,22 @@
             $max_pages = ceil($max_elements/$elem_per_page);
             ?>
 
-            var maxPages = <?=$max_pages?>;
+            window.scrollLoadMaxPages = <?=$max_pages?>;
 
-            /* Переменная-флаг для отслеживания того, происходит ли в данный момент ajax-запрос. В самом начале даем ей значение false, т.е. запрос не в процессе выполнения */
-            var inProgress = false;
-
-            /*если количество элементов на странице < количества элементов в разделе*/
-            if (maxPages<startFrom) inProgress = true;
-
+            inanime_new.inProgress = false;
             $(window).scroll(function() {
 
+                /*если количество элементов на странице < количества элементов в разделе*/
+                if (window.scrollLoadMaxPages < window.scrollLoadStartFrom) inanime_new.inProgress = true;
                 /* Если высота окна + высота прокрутки больше или равна высоте всего документа и ajax-запрос в настоящий момент не выполняется, то запускаем ajax-запрос. 600 - это высота подвала в пикселях */
-                if($(window).scrollTop() + $(window).height() >= $(document).height() - 600 && !inProgress)
+                if($(window).scrollTop() + $(window).height() >= $(document).height() - 600 && !inanime_new.inProgress)
                 {
-                    var splittedVal = $('.section-catalog #section-sort-order').val().split(';');
-                    var sortField = splittedVal[0];
-                    var sortType = splittedVal[1];
-
-                    $.ajax({
-                        url: '/ajax/catalog_pager.php',
-                        method: 'POST',
-                        data: {
-                            "PAGEN_1" : startFrom,
-                            "section_id": <?=$catalog_section_id?>,
-                            "sort_field": sortField,
-                            "sort_order": sortType,
-                            "page_element_count": '<?=$arParams["PAGE_ELEMENT_COUNT"]?>',
-                            "price_code" : '<?=json_encode($arParams["PRICE_CODE"])?>'
-                        },
-                        beforeSend: function() {
-                            inProgress = true;
-                            $(".items-section").append('<div id="overlay-load"></div>');
-                        }
-                    }).done(function(data){
-                        $('.items-section #overlay-load').remove();
-                        var parsedData = $(data);
-                        // манипуляции с классом new для добавления lazyload новым элементам
-                        parsedData.find('.product-item-preview img.lazy').addClass('new');
-                        $(".items-section .items-container").append(parsedData.find('.product-item-preview'));
-                        startFrom += 1;
-                        if (maxPages>=startFrom){
-                            inProgress = false;
-                        }
-                        $(".items-section .items-container .product-item-preview img.lazy.new").lazyload({effect : "fadeIn"});
-                        $(".items-section .items-container .product-item-preview img.lazy.new").removeClass('new');
-                    });
-
+                    var splittedVal = $('.section-catalog #section-sort-order').val();
+                    inanime_new.getSectionPage(splittedVal, <?=$catalog_section_id?>, '<?=$arParams["PAGE_ELEMENT_COUNT"]?>', window.scrollLoadStartFrom);
+                    window.scrollLoadStartFrom ++;
                 }
             });
         });
     </script>
-
-
 </div>
+

@@ -27,7 +27,7 @@ $arAvailableSort = array(
     <div class="sort-container clearfix">
         <div class="select-container order">
             <div class="select-title"><?= GetMessage('SECT_SORT_LABEL'); ?>:</div>
-            <select name="sort_order" id="section-sort-order" onchange="inanime_new.refreshCatalogBySort(this.value, <?=$arParams["SECTION_ID"]?>,<?=$arParams["PAGE_ELEMENT_COUNT"]?>)">
+            <select name="sort_order" id="section-sort-order" onchange="inanime_new.getSectionPage(this.value, <?=$arParams["SECTION_ID"]?>,<?=$arParams["PAGE_ELEMENT_COUNT"]?>, 1, true);window.scrollLoadStartFrom = 2;">
                 <?
                 foreach ($arAvailableSort as $key => $val):?>
                     <option value="<?= $val[0]; ?>;desc" <?=($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc')?'selected':''?> >По <?= GetMessage('SECT_SORT_' . $key); ?> (по убыванию)</option>
@@ -48,7 +48,6 @@ $arAvailableSort = array(
 
             <div class="product-item-preview vertical">
                 <div class="image-container">
-<!--                    <img src="--><?//=$arElement["PREVIEW_PICTURE"]["SRC"]?><!--" class="lazy"/>-->
                     <img data-original="<?=$arElement["PREVIEW_PICTURE"]["SRC"]?>" class="lazy" />
                     <div class="icons-container">
                         <?if($arElement["DATE_ACTIVE_FROM"]):?>
@@ -114,9 +113,6 @@ $arAvailableSort = array(
             </div>
         <?endforeach?>
     </div>
-    <script>
-        $(document).ready(function(){$("img.lazy").lazyload({effect : "fadeIn"});});
-    </script>
 </div>
 <?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
     <p><?=$arResult["NAV_STRING"]?></p>

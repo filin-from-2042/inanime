@@ -79,17 +79,18 @@ function inanime_new() {
             );
         };
     };
-    this.refreshCatalogBySort = function (sortValue, sectionId, elementsCount)
+    /* Переменная-флаг для отслеживания того, происходит ли в данный момент ajax-запрос. В самом начале даем ей значение false, т.е. запрос не в процессе выполнения */
+    this.inProgress = false;
+    this.getSectionPage = function(sortValue, sectionId, elementsCount, pageNumber, withReplace = false)
     {
-        var splittedVal = sortValue.split(';')
+        var splittedVal = sortValue.split(';');
         var sortField = splittedVal[0];
         var sortType = splittedVal[1];
-
         $.ajax({
             url: '/ajax/catalog_pager.php',
             method: 'POST',
             data: {
-                "PAGEN_1" : 1,
+                "PAGEN_1" : pageNumber,
                 "section_id": sectionId,
                 "sort_field": String(sortField),
                 "sort_order": String(sortType),
@@ -97,13 +98,21 @@ function inanime_new() {
                 "price_code" : '["BASE"]'
             },
             beforeSend: function() {
-                inProgress = true;
+                window.inanime_new.inProgress = true;
                 $(".items-section").append('<div id="overlay-load"></div>');
             }
         }).done(function(data){
+
             $('.items-section #overlay-load').remove();
-            $(".items-section .items-container .product-item-preview").remove();
-            $(".items-section .items-container").append($(data).find('.product-item-preview'));
+            var parsedData = $(data);
+            // манипуляции с классом new для добавления lazyload новым элементам
+            parsedData.find('.product-item-preview img.lazy').addClass('new');
+            if(withReplace) $(".items-section .items-container .product-item-preview").remove();
+            $(".items-section .items-container").append(parsedData.find('.product-item-preview'));
+
+            $(".items-section .items-container .product-item-preview img.lazy.new").lazyload({effect : "fadeIn"});
+            $(".items-section .items-container .product-item-preview img.lazy.new").removeClass('new');
+            window.inanime_new.inProgress = false;
         });
     }
 }

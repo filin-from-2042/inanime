@@ -1,4 +1,6 @@
-
+<?
+$this->setFrameMode(true);
+?>
 <div class="row">
     <div class="col-md-6 col-lg-6">
         <?
@@ -22,105 +24,113 @@
         ?>
     </div>
     <div class="col-md-18 col-lg-18">
-        <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
-        /** @var array $arParams */
-        /** @var array $arResult */
-        /** @global CMain $APPLICATION */
-        /** @global CUser $USER */
-        /** @global CDatabase $DB */
-        /** @var CBitrixComponentTemplate $this */
-        /** @var string $templateName */
-        /** @var string $templateFile */
-        /** @var string $templateFolder */
-        /** @var string $componentPath */
-        /** @var CBitrixComponent $component */
-        $this->setFrameMode(true);
-        ?>
-        <div class="catalog-section">
-            <?if($arParams["DISPLAY_TOP_PAGER"]):?>
-                <p><?=$arResult["NAV_STRING"]?></p>
-            <?endif?>
-            <table class="data-table" cellspacing="0" cellpadding="0" border="0" width="100%">
-                <thead>
-                <tr>
-                    <td><?=GetMessage("CATALOG_TITLE")?></td>
-                    <?if(count($arResult["ITEMS"]) > 0):
-                        foreach($arResult["ITEMS"][0]["DISPLAY_PROPERTIES"] as $arProperty):?>
-                            <td><?=$arProperty["NAME"]?></td>
-                        <?endforeach;
-                    endif;?>
-                    <?foreach($arResult["PRICES"] as $code=>$arPrice):?>
-                        <td><?=$arPrice["TITLE"]?></td>
-                    <?endforeach?>
-                    <?if(count($arResult["PRICES"]) > 0):?>
-                        <td>&nbsp;</td>
-                    <?endif?>
-                </tr>
-                </thead>
-                <?foreach($arResult["ITEMS"] as $arElement):?>
+        <?if($arParams["DISPLAY_TOP_PAGER"]):?>
+            <p><?=$arResult["NAV_STRING"]?></p>
+        <?endif?>
+
+        <div class="items-section">
+            <div class="sort-container clearfix">
+                <div class="select-container order">
                     <?
-                    $this->AddEditAction($arElement['ID'], $arElement['EDIT_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
-                    $this->AddDeleteAction($arElement['ID'], $arElement['DELETE_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BCS_ELEMENT_DELETE_CONFIRM')));
+                        $arAvailableSort = array(
+                            "price" => Array("catalog_PRICE_1", "asc"),
+                            "rating" => Array("PROPERTY_rating", "asc"),
+                            "date_active" => Array("active_from", "asc"),
+                            "quantity" => Array("catalog_QUANTITY", "asc")
+                        );
                     ?>
-                    <tr id="<?=$this->GetEditAreaId($arElement['ID']);?>">
-                        <td>
-                            <a href="<?=$arElement["DETAIL_PAGE_URL"]?>"><?=$arElement["NAME"]?></a>
-                            <?if(count($arElement["SECTION"]["PATH"])>0):?>
-                                <br />
-                                <?foreach($arElement["SECTION"]["PATH"] as $arPath):?>
-                                    / <a href="<?=$arPath["SECTION_PAGE_URL"]?>"><?=$arPath["NAME"]?></a>
-                                <?endforeach?>
-                            <?endif?>
-                        </td>
-                        <?foreach($arElement["DISPLAY_PROPERTIES"] as $pid=>$arProperty):?>
-                            <td>
-                                <?if(is_array($arProperty["DISPLAY_VALUE"]))
-                                    echo implode("&nbsp;/&nbsp;", $arProperty["DISPLAY_VALUE"]);
-                                elseif($arProperty["DISPLAY_VALUE"] === false)
-                                    echo "&nbsp;";
-                                else
-                                    echo $arProperty["DISPLAY_VALUE"];?>
-                            </td>
-                        <?endforeach?>
-                        <?foreach($arResult["PRICES"] as $code=>$arPrice):?>
-                            <td>
-                                <?if($arPrice = $arElement["PRICES"][$code]):?>
-                                    <?if($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"]):?>
-                                        <s><?=$arPrice["PRINT_VALUE"]?></s><br /><span class="catalog-price"><?=$arPrice["PRINT_DISCOUNT_VALUE"]?></span>
-                                    <?else:?>
-                                        <span class="catalog-price"><?=$arPrice["PRINT_VALUE"]?></span>
+                    <div class="select-title"><?= GetMessage('SECT_SORT_LABEL'); ?>:</div>
+                    <select name="sort_order" id="section-sort-order" onchange="inanime_new.getSectionPage(this.value, <?=$arParams["SECTION_ID"]?>,<?=$arParams["PAGE_ELEMENT_COUNT"]?>, 1, true);window.scrollLoadStartFrom = 2;">
+                        <?
+                        foreach ($arAvailableSort as $key => $val):?>
+                            <option value="<?= $val[0]; ?>;desc" <?=($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc')?'selected':''?> >По <?= GetMessage('SECT_SORT_' . $key); ?> (по убыванию)</option>
+                            <option value="<?= $val[0]; ?>;asc" <?=($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='asc')?'selected':''?> >По <?= GetMessage('SECT_SORT_' . $key); ?> (по возрастанию)</option>
+                        <? endforeach; ?>
+                    </select>
+                </div>
+                <div class="type-buttons">
+                    <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_TOPSALE');?></button>
+                    <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_NEW');?></button>
+                    <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_RECOMMENDED');?></button>
+                </div>
+            </div>
+            <hr>
+            <div class="items-container">
+
+                <?foreach($arResult["ITEMS"] as $arElement):?>
+
+                    <div class="product-item-preview vertical">
+                        <div class="image-container">
+                            <img data-original="<?=$arElement["PREVIEW_PICTURE"]["SRC"]?>" class="lazy" />
+                            <div class="icons-container">
+                                <?if($arElement["DATE_ACTIVE_FROM"]):?>
+                                    <?//товары не более 2ух недель - новинки?>
+                                    <?if(((strtotime("now")-strtotime($arElement["DATE_ACTIVE_FROM"]))/86400) <= 14):?>
+                                        <div class="additional-icon new"></div>
                                     <?endif?>
-                                <?else:?>
-                                    &nbsp;
-                                <?endif;?>
-                            </td>
-                        <?endforeach;?>
-                        <?if(count($arResult["PRICES"]) > 0):?>
-                            <td>
-                                <?if($arElement["CAN_BUY"]):?>
-                                    <noindex>
-                                        <a href="<?echo $arElement["BUY_URL"]?>" rel="nofollow"><?echo GetMessage("CATALOG_BUY")?></a>
-                                        &nbsp;<a href="<?echo $arElement["ADD_URL"]?>" rel="nofollow"><?echo GetMessage("CATALOG_ADD")?></a>
-                                    </noindex>
-                                <?elseif((count($arResult["PRICES"]) > 0) || is_array($arElement["PRICE_MATRIX"])):?>
-                                    <?=GetMessage("CATALOG_NOT_AVAILABLE")?>
-                                    <?$APPLICATION->IncludeComponent("bitrix:sale.notice.product", ".default", array(
-                                            "NOTIFY_ID" => $arElement['ID'],
-                                            "NOTIFY_URL" => htmlspecialcharsback($arElement["SUBSCRIBE_URL"]),
-                                            "NOTIFY_USE_CAPTHA" => "N"
-                                        ),
-                                        $component
-                                    );?>
-                                <?endif?>&nbsp;
-                            </td>
-                        <?endif;?>
-                    </tr>
-                <?endforeach;?>
-            </table>
+                                <?endif?>
+                                <?if($arElement["PROPERTIES"]["IS_BESTSELLER"]["VALUE"]=="Да"):?>
+                                    <div class="additional-icon bestseller"></div>
+                                <?endif?>
+                                <?if($arElement["PROPERTIES"]["IS_RECOMMEND"]["VALUE"]=="Да"):?>
+                                    <div class="additional-icon recommended"></div>
+                                <?endif?>
+                            </div>
+                        </div>
+                        <div class="data-container">
+                            <div class="price-container">
+                                <?foreach($arResult["PRICES"] as $code=>$arPrice):?>
+                                    <td>
+                                        <?if($arPrice = $arElement["PRICES"][$code]):?>
+                                            <?if($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"]):?>
+                                                <span class="price old"><?=$arPrice["PRINT_VALUE"]?> &#8381;</span>
+                                                <span class="price yellow-text"><?=$arPrice["PRINT_DISCOUNT_VALUE"]?> &#8381;</span>
+                                            <?else:?>
+                                                <span class="price yellow-text"><?=$arPrice["PRINT_VALUE"]?> &#8381;</span>
+                                            <?endif;?>
+                                        <?else:?>
+                                            &nbsp;
+                                        <?endif;?>
+                                    </td>
+                                <?endforeach;?>
+                            </div>
+                            <div class="title-container">
+                                <a href="<?=$arElement["DETAIL_PAGE_URL"]?>" class="link">
+                                    <div class="text"><?=$arElement["NAME"]?></div>
+                                    <div class="article">
+                                        <?
+                                        if($arElement["PROPERTIES"]["ARTNUMBER1"]["VALUE"])
+                                            echo 'арт.'.$arElement["PROPERTIES"]["ARTNUMBER1"]["VALUE"];
+                                        else echo '';
+                                        ?>
+                                    </div>
+                                </a>
+                            </div>
+                            <div class="rate-container">
+                                <?$APPLICATION->IncludeComponent(
+                                    "bitrix:iblock.vote",
+                                    "stars",
+                                    Array(
+                                        "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
+                                        "IBLOCK_ID" => $arParams["IBLOCK_ID"],
+                                        "ELEMENT_ID" => $arElement["ID"],
+                                        "MAX_VOTE" => $arParams["MAX_VOTE"],
+                                        "VOTE_NAMES" => $arParams["VOTE_NAMES"],
+                                        "CACHE_TYPE" => $arParams["CACHE_TYPE"],
+                                        "CACHE_TIME" => $arParams["CACHE_TIME"],
+                                    ),
+                                    $component
+                                );?>
+                            </div>
+                        </div>
+                    </div>
+                <?endforeach?>
+                </div>
+            </div>
             <?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
                 <p><?=$arResult["NAV_STRING"]?></p>
             <?endif?>
-        </div>
 
+        </div>
     </div>
 </div>
