@@ -463,11 +463,12 @@ footer .general-container{
 .product-item-preview .title-container .link,
 .product-item-preview .title-container .link:hover {
     color:#79828b;
+    display: inline-block;
 }
 .product-item-preview .title-container .article{
     font-size: 12px;
     padding-top: 1px;
-    min-height: 17px;
+    min-height: 20px;
 }
 .product-item-preview .rate-container {
     margin-top:5px;
@@ -708,9 +709,10 @@ footer .general-container{
 .section-catalog .product-item-preview{
     display: inline-block;
     margin: 0 0 25px 0;
+    vertical-align: top;
 }
 .section-catalog .product-item-preview:nth-child(3n+2){
-    margin: 0 10px;
+    margin: 0 10px 25px;
 }
 .section-catalog .product-item-preview.vertical .data-container{
     max-width: 275px;
