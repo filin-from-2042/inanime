@@ -231,7 +231,7 @@
                 /* Если высота окна + высота прокрутки больше или равна высоте всего документа и ajax-запрос в настоящий момент не выполняется, то запускаем ajax-запрос. 600 - это высота подвала в пикселях */
                 if($(window).scrollTop() + $(window).height() >= $(document).height() - 600 && !inanime_new.inProgress)
                 {
-                    var splittedVal = $('.section-catalog #section-sort-order').val();
+                    var splittedVal =  $('.sort-container .select-container .btn .sort-value.hidden').text();
                     inanime_new.getSectionPage(splittedVal, <?=$catalog_section_id?>, '<?=$arParams["PAGE_ELEMENT_COUNT"]?>', window.scrollLoadStartFrom);
                     window.scrollLoadStartFrom ++;
                 }

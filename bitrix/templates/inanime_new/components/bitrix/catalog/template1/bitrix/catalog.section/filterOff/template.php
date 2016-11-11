@@ -14,11 +14,22 @@ $this->setFrameMode(true);
             $currSort;
             foreach ($_SESSION["inanime_new_catalogdata"]["arAvailableSort"] as $key => $val)
             {
-                if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-top"></span>';
-                if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='asc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-bottom"></span>';
-                $strList .= '<li><span onclick="inanime_new.getSectionPage(\''.$val[0].';desc\','.$arParams["SECTION_ID"].','.$arParams["PAGE_ELEMENT_COUNT"].',1,true);window.scrollLoadStartFrom = 2;inanime_new.ddSetSelectedText(this);">'.GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-top"></span></li>'."\n\r";
-                $strList .= '<li><span onclick="inanime_new.getSectionPage(\''.$val[0].';asc\','.$arParams["SECTION_ID"].','.$arParams["PAGE_ELEMENT_COUNT"].',1,true);window.scrollLoadStartFrom = 2;inanime_new.ddSetSelectedText(this);">'.GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-bottom"></span></li>'."\n\r";
-
+                if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-top"></span><span class="sort-value hidden">'.$val[0].';desc</span>';
+                if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='asc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-bottom"></span><span class="sort-value hidden">'.$val[0].';asc</span>';
+                $strList .= '<li>
+                                <span onclick="inanime_new.getSectionPage(\''.$val[0].';desc\','.$arParams["SECTION_ID"].','.$arParams["PAGE_ELEMENT_COUNT"].',1,true);window.scrollLoadStartFrom = 2;inanime_new.ddSetSelectedText(this);">
+                                    '.GetMessage('SECT_SORT_' . $key).'
+                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                    <span class="sort-value hidden">'.$val[0].';desc</span>
+                                </span>
+                            </li>'."\n\r";
+                $strList .= '<li>
+                                <span onclick="inanime_new.getSectionPage(\''.$val[0].';asc\','.$arParams["SECTION_ID"].','.$arParams["PAGE_ELEMENT_COUNT"].',1,true);window.scrollLoadStartFrom = 2;inanime_new.ddSetSelectedText(this);">
+                                    '.GetMessage('SECT_SORT_' . $key).'
+                                    <span class="glyphicon glyphicon-triangle-bottom"></span>
+                                    <span class="sort-value hidden">'.$val[0].';asc</span>
+                                </span>
+                            </li>'."\n\r";
             }
             $strList .= '</ul>'."\n\r";
             ?>
