@@ -4,15 +4,26 @@ $this->setFrameMode(true);
 <div class="row">
     <div class="col-md-24 col-lg-24">
         <div class="sort-container clearfix">
-            <div class="select-container order">
-                <div class="select-title"><?= GetMessage('SECT_SORT_LABEL'); ?>:</div>
-                <select name="sort_order" id="section-sort-order" onchange="inanime_new.getSectionPage(this.value, <?=$arParams["SECTION_ID"]?>,<?=$arParams["PAGE_ELEMENT_COUNT"]?>, 1, true);window.scrollLoadStartFrom = 2;">
-                    <?
-                    foreach ($_SESSION["inanime_new_catalogdata"]["arAvailableSort"] as $key => $val):?>
-                        <option value="<?= $val[0]; ?>;desc" <?=($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc')?'selected':''?> >По <?= GetMessage('SECT_SORT_' . $key); ?> (по убыванию)</option>
-                        <option value="<?= $val[0]; ?>;asc" <?=($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='asc')?'selected':''?> >По <?= GetMessage('SECT_SORT_' . $key); ?> (по возрастанию)</option>
-                    <? endforeach; ?>
-                </select>
+            <div class="select-title"><?= GetMessage('SECT_SORT_LABEL'); ?>:</div>
+            <div class="dropdown select-container order">
+                <?
+                $strList = '<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">'."\n\r";
+                $currSort;
+                foreach ($_SESSION["inanime_new_catalogdata"]["arAvailableSort"] as $key => $val)
+                {
+                    if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-top"></span>';
+                    if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='asc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-bottom"></span>';
+                    $strList .= '<li><span onclick="inanime_new.getSectionPage(\''.$val[0].';desc\','.$arParams["SECTION_ID"].','.$arParams["PAGE_ELEMENT_COUNT"].',1,true);window.scrollLoadStartFrom = 2;inanime_new.ddSetSelectedText(this);">'.GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-top"></span></li>'."\n\r";
+                    $strList .= '<li><span onclick="inanime_new.getSectionPage(\''.$val[0].';asc\','.$arParams["SECTION_ID"].','.$arParams["PAGE_ELEMENT_COUNT"].',1,true);window.scrollLoadStartFrom = 2;inanime_new.ddSetSelectedText(this);">'.GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-bottom"></span></li>'."\n\r";
+
+                }
+                $strList .= '</ul>'."\n\r";
+                ?>
+                <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                    <span class="glyphicon glyphicon-chevron-down"></span>
+                    <span class="text"><?=$currSort?></span>
+                </button>
+                <?=$strList?>
             </div>
             <div class="type-buttons">
                 <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_TOPSALE');?></button>

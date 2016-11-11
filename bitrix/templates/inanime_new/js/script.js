@@ -114,6 +114,10 @@ function inanime_new() {
             $(".items-section .items-container .product-item-preview img.lazy.new").removeClass('new');
             window.inanime_new.inProgress = false;
         });
+    };
+    this.ddSetSelectedText = function (element)
+    {
+        $(element).closest(".dropdown").find(".btn.dropdown-toggle").text('').append('<span class="glyphicon glyphicon-chevron-down"></span><span class="text">'+element.innerHTML+'</span>')/*.text(element.innerHTML)*/;
     }
 }
 window.inanime_new = new inanime_new();
