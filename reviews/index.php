@@ -2,10 +2,10 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Обзоры");
 ?><?$APPLICATION->IncludeComponent(
-	"bitrix:news",
-	".default",
-	Array(
-		"COMPONENT_TEMPLATE" => ".default",
+	"bitrix:news", 
+	"reviews", 
+	array(
+		"COMPONENT_TEMPLATE" => "reviews",
 		"IBLOCK_TYPE" => "news",
 		"IBLOCK_ID" => "24",
 		"NEWS_COUNT" => "20",
@@ -13,14 +13,14 @@ $APPLICATION->SetTitle("Обзоры");
 		"USE_RSS" => "N",
 		"USE_RATING" => "N",
 		"USE_CATEGORIES" => "N",
-		"USE_REVIEW" => "N",
+		"USE_REVIEW" => "Y",
 		"USE_FILTER" => "N",
 		"SORT_BY1" => "ACTIVE_FROM",
 		"SORT_ORDER1" => "DESC",
 		"SORT_BY2" => "SORT",
 		"SORT_ORDER2" => "ASC",
 		"CHECK_DATES" => "Y",
-		"SEF_MODE" => "N",
+		"SEF_MODE" => "Y",
 		"AJAX_MODE" => "N",
 		"AJAX_OPTION_JUMP" => "N",
 		"AJAX_OPTION_STYLE" => "Y",
@@ -44,8 +44,14 @@ $APPLICATION->SetTitle("Обзоры");
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
 		"PREVIEW_TRUNCATE_LEN" => "",
 		"LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"LIST_FIELD_CODE" => array(0=>"",1=>"",),
-		"LIST_PROPERTY_CODE" => array(0=>"",1=>"",),
+		"LIST_FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"LIST_PROPERTY_CODE" => array(
+			0 => "",
+			1 => "",
+		),
 		"HIDE_LINK_WHEN_NO_DETAIL" => "N",
 		"DISPLAY_NAME" => "Y",
 		"META_KEYWORDS" => "-",
@@ -53,8 +59,14 @@ $APPLICATION->SetTitle("Обзоры");
 		"BROWSER_TITLE" => "-",
 		"DETAIL_SET_CANONICAL_URL" => "N",
 		"DETAIL_ACTIVE_DATE_FORMAT" => "d.m.Y",
-		"DETAIL_FIELD_CODE" => array(0=>"",1=>"",),
-		"DETAIL_PROPERTY_CODE" => array(0=>"",1=>"",),
+		"DETAIL_FIELD_CODE" => array(
+			0 => "",
+			1 => "",
+		),
+		"DETAIL_PROPERTY_CODE" => array(
+			0 => "",
+			1 => "",
+		),
 		"DETAIL_DISPLAY_TOP_PAGER" => "N",
 		"DETAIL_DISPLAY_BOTTOM_PAGER" => "Y",
 		"DETAIL_PAGER_TITLE" => "Страница",
@@ -72,11 +84,21 @@ $APPLICATION->SetTitle("Обзоры");
 		"SET_STATUS_404" => "N",
 		"SHOW_404" => "N",
 		"MESSAGE_404" => "",
-		"VARIABLE_ALIASES" => Array(
-			"SECTION_ID" => "SECTION_ID",
-			"ELEMENT_ID" => "ELEMENT_ID"
+		"SEF_FOLDER" => "/reviews/",
+		"MESSAGES_PER_PAGE" => "10",
+		"USE_CAPTCHA" => "Y",
+		"REVIEW_AJAX_POST" => "Y",
+		"PATH_TO_SMILE" => "/bitrix/images/forum/smile/",
+		"FORUM_ID" => "4",
+		"URL_TEMPLATES_READ" => "",
+		"SHOW_LINK_TO_FORUM" => "Y",
+		"SEF_URL_TEMPLATES" => array(
+			"news" => "",
+			"section" => "",
+			"detail" => "#ELEMENT_CODE#/",
 		)
-	)
+	),
+	false
 );?>
 <div></div>
  <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
