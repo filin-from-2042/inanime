@@ -1,0 +1,31 @@
+/*************************************** CATALOG LEFT  ***********************/
+.catalog-top-hierarhy{
+    list-style: none;
+    border-radius: 10px;
+    padding: 0;
+    padding-bottom: 22px;
+    text-align: center;
+}
+.catalog-top-hierarhy li{
+    display: inline-block;
+    height: 25px;
+}
+
+.catalog-top-hierarhy a{
+    color:#82664a;
+    margin-left: 15px;
+    padding: 0;
+    line-height: 25px;
+    font-size: 15px;
+    display: block;
+}
+.catalog-top-hierarhy a:hover{
+    text-decoration: none;
+    color:#5d3d1d;
+    font-weight: bold;
+}
+
+.catalog-top-hierarhy a:hover,
+.catalog-top-hierarhy li.active a{
+    border-bottom: 2px dotted #5d3d1d;
+}

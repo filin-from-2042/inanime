@@ -1,23 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
-/** @var array $arParams */
-/** @var array $arResult */
-/** @global CMain $APPLICATION */
-/** @global CUser $USER */
-/** @global CDatabase $DB */
-/** @var CBitrixComponentTemplate $this */
-/** @var string $templateName */
-/** @var string $templateFile */
-/** @var string $templateFolder */
-/** @var string $componentPath */
-/** @var CBitrixComponent $component */
 $this->setFrameMode(true);
-
-$arAvailableSort = array(
-    "price" => Array("catalog_PRICE_1", "asc"),
-    "rating" => Array("PROPERTY_rating", "asc"),
-    "date_active" => Array("active_from", "asc"),
-    "quantity" => Array("catalog_QUANTITY", "asc")
-);
 ?>
 <?if($arParams["DISPLAY_TOP_PAGER"]):?>
     <p><?=$arResult["NAV_STRING"]?></p>
@@ -29,7 +11,7 @@ $arAvailableSort = array(
             <div class="select-title"><?= GetMessage('SECT_SORT_LABEL'); ?>:</div>
             <select name="sort_order" id="section-sort-order" onchange="inanime_new.getSectionPage(this.value, <?=$arParams["SECTION_ID"]?>,<?=$arParams["PAGE_ELEMENT_COUNT"]?>, 1, true);window.scrollLoadStartFrom = 2;">
                 <?
-                foreach ($arAvailableSort as $key => $val):?>
+                foreach ($_SESSION["inanime_new_catalogdata"]["arAvailableSort"] as $key => $val):?>
                     <option value="<?= $val[0]; ?>;desc" <?=($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc')?'selected':''?> >По <?= GetMessage('SECT_SORT_' . $key); ?> (по убыванию)</option>
                     <option value="<?= $val[0]; ?>;asc" <?=($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='asc')?'selected':''?> >По <?= GetMessage('SECT_SORT_' . $key); ?> (по возрастанию)</option>
                 <? endforeach; ?>

@@ -1,8 +1,30 @@
-<?
+<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 $this->setFrameMode(true);
 ?>
 <div class="row">
-    <div class="col-md-6 col-lg-6">
+    <div class="col-md-24 col-lg-24">
+        <div class="sort-container clearfix">
+            <div class="select-container order">
+                <div class="select-title"><?= GetMessage('SECT_SORT_LABEL'); ?>:</div>
+                <select name="sort_order" id="section-sort-order" onchange="inanime_new.getSectionPage(this.value, <?=$arParams["SECTION_ID"]?>,<?=$arParams["PAGE_ELEMENT_COUNT"]?>, 1, true);window.scrollLoadStartFrom = 2;">
+                    <?
+                    foreach ($_SESSION["inanime_new_catalogdata"]["arAvailableSort"] as $key => $val):?>
+                        <option value="<?= $val[0]; ?>;desc" <?=($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc')?'selected':''?> >По <?= GetMessage('SECT_SORT_' . $key); ?> (по убыванию)</option>
+                        <option value="<?= $val[0]; ?>;asc" <?=($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='asc')?'selected':''?> >По <?= GetMessage('SECT_SORT_' . $key); ?> (по возрастанию)</option>
+                    <? endforeach; ?>
+                </select>
+            </div>
+            <div class="type-buttons">
+                <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_TOPSALE');?></button>
+                <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_NEW');?></button>
+                <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_RECOMMENDED');?></button>
+            </div>
+        </div>
+        <hr>
+    </div>
+</div>
+<div class="row">
+    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <?
         $APPLICATION->IncludeComponent(
             "bitrix:catalog.smart.filter", "", Array(
@@ -23,38 +45,12 @@ $this->setFrameMode(true);
         );
         ?>
     </div>
-    <div class="col-md-18 col-lg-18">
+    <div class="col-xs-18 col-sm-18 col-md-18 col-lg-18">
         <?if($arParams["DISPLAY_TOP_PAGER"]):?>
             <p><?=$arResult["NAV_STRING"]?></p>
         <?endif?>
 
         <div class="items-section">
-            <div class="sort-container clearfix">
-                <div class="select-container order">
-                    <?
-                        $arAvailableSort = array(
-                            "price" => Array("catalog_PRICE_1", "asc"),
-                            "rating" => Array("PROPERTY_rating", "asc"),
-                            "date_active" => Array("active_from", "asc"),
-                            "quantity" => Array("catalog_QUANTITY", "asc")
-                        );
-                    ?>
-                    <div class="select-title"><?= GetMessage('SECT_SORT_LABEL'); ?>:</div>
-                    <select name="sort_order" id="section-sort-order" onchange="inanime_new.getSectionPage(this.value, <?=$arParams["SECTION_ID"]?>,<?=$arParams["PAGE_ELEMENT_COUNT"]?>, 1, true);window.scrollLoadStartFrom = 2;">
-                        <?
-                        foreach ($arAvailableSort as $key => $val):?>
-                            <option value="<?= $val[0]; ?>;desc" <?=($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc')?'selected':''?> >По <?= GetMessage('SECT_SORT_' . $key); ?> (по убыванию)</option>
-                            <option value="<?= $val[0]; ?>;asc" <?=($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='asc')?'selected':''?> >По <?= GetMessage('SECT_SORT_' . $key); ?> (по возрастанию)</option>
-                        <? endforeach; ?>
-                    </select>
-                </div>
-                <div class="type-buttons">
-                    <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_TOPSALE');?></button>
-                    <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_NEW');?></button>
-                    <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_RECOMMENDED');?></button>
-                </div>
-            </div>
-            <hr>
             <div class="items-container">
 
                 <?foreach($arResult["ITEMS"] as $arElement):?>

@@ -27,13 +27,21 @@
                 $catalog_iblock_id = $uf_value["IBLOCK_ID"];
                 $catalog_section_id = $uf_value["ID"];
             }
+            // sort data
+            $_SESSION["inanime_new_catalogdata"]["arAvailableSort"] = array(
+                "price" => Array("catalog_PRICE_1", "asc"),
+                "rating" => Array("PROPERTY_rating", "asc"),
+                "date_active" => Array("active_from", "asc"),
+                "quantity" => Array("catalog_QUANTITY", "asc")
+            );
+
             ?>
             <h1><?=$sectionName?></h1>
         </div>
     </div>
     <?if($arResult["VARIABLES"]["SECTION_CODE"]=="kategorii" || $arResult["VARIABLES"]["SECTION_CODE"]=="po-filmam-igram"){?>
         <div class="row">
-            <div class="col-md-6 col-lg-6">
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
                 <?$APPLICATION->IncludeComponent(
                     "bitrix:catalog.section.list",
                     "catalog-left",
@@ -58,7 +66,7 @@
                 );
                 ?>
             </div>
-            <div class="col-md-18 col-lg-18">
+            <div class="col-xs-18 col-sm-18 col-md-18 col-lg-18">
                 <?$APPLICATION->IncludeComponent(
                     "bitrix:catalog.section",
                     "filterOff",
@@ -108,9 +116,17 @@
         </div>
     <?}else{?>
         <div class="row">
+            <?
+            /*$res = CIBlockSection::GetNavChain($arParams["IBLOCK_ID"], $catalog_section_id,array());
+            $sectionListSID;
+            while($sec = $res->GetNext())
+            {
+                if($sec["ID"]==209 || $sec["ID"]==808) $sectionListSID=$sec["ID"];
+            }*/
+            ?>
             <?$APPLICATION->IncludeComponent(
                 "bitrix:catalog.section.list",
-                "",
+                "catalog-top",
                 array(
                     "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
                     "IBLOCK_ID" => $arParams["IBLOCK_ID"],
