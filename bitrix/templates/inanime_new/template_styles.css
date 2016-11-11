@@ -174,25 +174,6 @@ input.form-control{
     background-color:#fff;
 }
 
-.section-catalog .sort-container .select-title,
-.section-catalog .sort-container .select-container.order{
-    display:inline-block;
-    vertical-align:middle;
-}
-.section-catalog .select-container.order .btn,
-.section-catalog .select-container.order .dropdown-menu {
-    min-width: 100px;
-}
-.select-container.dropdown .btn > span.text {
-    width:65px;
-}
-.section-catalog .select-container.order span.glyphicon {
-    font-size: 10px;
-    padding-left: 2px;
-}
-.section-catalog .select-container.order span.glyphicon.glyphicon-triangle-bottom {
-    vertical-align: middle;
-}
 /******************************* HEADER ***********************************/
 header{
     padding-top: 30px;
@@ -799,23 +780,26 @@ footer .general-container{
     height: 20px;
     overflow: hidden;
 }
-/*.section-catalog .sort-container .select-container.order,*/
-/*.section-catalog .sort-container .select-container.quantity,*/
-/*.section-catalog .sort-container .type-buttons{*/
-    /*height: 35px;*/
-/*}*/
-/*.section-catalog .sort-container .select-container.order{*/
-    /*float:left;*/
-/*}*/
-/*.section-catalog .sort-container .select-container.quantity{*/
-    /*float:right;*/
-/*}*/
-/*.section-catalog .sort-container .select-container select{*/
-    /*width: 100px;*/
-/*}*/
-/*.section-catalog .sort-container .type-buttons{*/
-    /*text-align: center;*/
-/*}*/
+.section-catalog .sort-container .select-title,
+.section-catalog .sort-container .select-container.order,
+.section-catalog .sort-container .type-buttons{
+    display:inline-block;
+    vertical-align:middle;
+}
+.section-catalog .select-container.order .btn,
+.section-catalog .select-container.order .dropdown-menu {
+    min-width: 100px;
+}
+.select-container.dropdown .btn > span.text {
+    width:65px;
+}
+.section-catalog .select-container.order span.glyphicon {
+    font-size: 10px;
+    padding-left: 2px;
+}
+.section-catalog .select-container.order span.glyphicon.glyphicon-triangle-bottom {
+    vertical-align: middle;
+}
 .section-catalog .select-container .select-title{
     display: inline-block;
 }

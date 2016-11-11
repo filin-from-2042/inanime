@@ -26,7 +26,7 @@ $this->setFrameMode(true);
                 <?=$strList?>
             </div>
             <div class="type-buttons">
-                <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_TOPSALE');?></button>
+                <button type="button" class="btn btn-primary type-btn" data-toggle="button"><?= GetMessage('CATALOG_BTN_TOPSALE');?></button>
                 <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_NEW');?></button>
                 <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_RECOMMENDED');?></button>
             </div>
