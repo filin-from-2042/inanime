@@ -81,22 +81,21 @@ function inanime_new() {
     };
     /* Переменная-флаг для отслеживания того, происходит ли в данный момент ajax-запрос. В самом начале даем ей значение false, т.е. запрос не в процессе выполнения */
     this.inProgress = false;
-    this.getSectionPage = function(sortValue, sectionId, elementsCount, pageNumber, withReplace = false)
+    this.getSectionPage = function( filterData, sortData, pageNumber, withReplace = false)
     {
-        var splittedVal = sortValue.split(';');
-        var sortField = splittedVal[0];
-        var sortType = splittedVal[1];
+        var postData = {
+                        "PAGEN_1" : pageNumber,
+                        "section_id": String(window.currCatalogSectionID),
+                        "sort_data": JSON.stringify(sortData),
+                        "filter_data": JSON.stringify(filterData),
+                        "page_element_count": String(window.currCatalogPageElementCount),
+                        "price_code" : '["BASE"]'
+                    };
+        console.log(postData);
         $.ajax({
             url: '/ajax/catalog_pager.php',
             method: 'POST',
-            data: {
-                "PAGEN_1" : pageNumber,
-                "section_id": sectionId,
-                "sort_field": String(sortField),
-                "sort_order": String(sortType),
-                "page_element_count": String(elementsCount),
-                "price_code" : '["BASE"]'
-            },
+            data: postData,
             beforeSend: function() {
                 window.inanime_new.inProgress = true;
                 $(".items-section").append('<div id="overlay-load"></div>');
@@ -104,11 +103,12 @@ function inanime_new() {
         }).done(function(data){
 
             $('.items-section #overlay-load').remove();
-            var parsedData = $(data);
+            window.scrollLoadMaxPages = $(data).find('#maxPages').text();
+            var parsedData = $(data).find('.product-item-preview');
             // манипуляции с классом new для добавления lazyload новым элементам
-            parsedData.find('.product-item-preview img.lazy').addClass('new');
+            parsedData.find('img.lazy').addClass('new');
             if(withReplace) $(".items-section .items-container .product-item-preview").remove();
-            $(".items-section .items-container").append(parsedData.find('.product-item-preview'));
+            $(".items-section .items-container").append(parsedData);
 
             $(".items-section .items-container .product-item-preview img.lazy.new").lazyload({effect : "fadeIn"});
             $(".items-section .items-container .product-item-preview img.lazy.new").removeClass('new');
@@ -117,8 +117,83 @@ function inanime_new() {
     };
     this.ddSetSelectedText = function (element)
     {
+        var inputElment = $(element).closest(".dropdown").find(".btn.dropdown-toggle input[type='hidden']");
+        inputElment.val($(element).find(".sort-value.hidden").text());
+
         $(element).closest(".dropdown").find(".btn.dropdown-toggle")
-                                        .text('').append('<span class="glyphicon glyphicon-chevron-down"></span><span class="text">'+element.innerHTML+'</span>');
+                                        .text('').append('<span class="glyphicon glyphicon-chevron-down"></span><span class="text">'+element.innerHTML+'</span>')
+                                                .append(inputElment);
+        this.changeViewHandler();
+    };
+
+    this.gatherInputsValues = function (values, elements)
+    {
+        if(elements)
+        {
+            for(var i = 0; i < elements.length; i++)
+            {
+                var el = elements[i];
+                if (el.disabled || !el.type)
+                    continue;
+
+                switch(el.type.toLowerCase())
+                {
+                    case 'text':
+                    case 'textarea':
+                    case 'password':
+                    case 'hidden':
+                    case 'select-one':
+                        if(el.value.length)
+                            values[values.length] = {name : el.name, value : el.value};
+                        break;
+                    case 'radio':
+                    case 'checkbox':
+                        if(el.checked)
+                            values[values.length] = {name : el.name, value : el.value};
+                        break;
+                    case 'select-multiple':
+                        for (var j = 0; j < el.options.length; j++)
+                        {
+                            if (el.options[j].selected)
+                                values[values.length] = {name : el.name, value : el.options[j].value};
+                        }
+                        break;
+                    default:
+                        break;
+                }
+            }
+        }
+    };
+
+    this.changeViewHandler = function(scrollChange = false)
+    {
+        if(!!this.timer)
+        {
+            clearTimeout(this.timer);
+        }
+
+        this.timer = setTimeout(function(){
+            var filterData = [];
+            var form = document.getElementById('inanime-filter-form');
+            window.inanime_new.gatherInputsValues(filterData, BX.findChildren(form, {'tag': new RegExp('^(input|select)$', 'i')}, true));
+
+            filterData[filterData.length] = {name:"discount", value: $(".btn.btn-primary.type-btn.discount").attr("aria-pressed") || "false"};
+            filterData[filterData.length] = {name:"week-goods", value: $(".btn.btn-primary.type-btn.week-goods").attr("aria-pressed") || "false"};
+            filterData[filterData.length] = {name:"topsale", value: $(".btn.btn-primary.type-btn.topsale").attr("aria-pressed") || "false"};
+
+            var sortVal =  $('.sort-container .select-container .btn .sort-value.hidden').text();
+            var splittedVal = sortVal.split(';');
+            var sortData = {sortField:splittedVal[0], sortType:splittedVal[1]};
+            if(scrollChange)
+            {
+                window.inanime_new.getSectionPage(filterData, sortData, window.scrollLoadStartFrom, false );
+                window.scrollLoadStartFrom ++;
+            }
+            else{
+                window.inanime_new.getSectionPage(filterData, sortData, 1, true );
+                window.scrollLoadStartFrom =2;
+            }
+        },  500);
     }
 }
 window.inanime_new = new inanime_new();

@@ -1,7 +1,58 @@
 <?require_once($_SERVER['DOCUMENT_ROOT']. "/bitrix/modules/main/include/prolog_before.php");
 ?>
-<?$APPLICATION->IncludeComponent(
-	"bitrix:catalog.section", 
+<?
+$sortData = json_decode($_REQUEST["sort_data"], true);
+$filterData = json_decode($_REQUEST["filter_data"], true);
+//var_dump($filterData);
+$arrFilter = array();
+$arrFilter["PROPERTY_IS_EIGHTEEN"] = false;
+foreach($filterData as $field)
+{
+    switch($field["name"])
+    {
+        case 'arrFilter_P1_MIN':{
+         $minPrice = $field["value"];
+
+        }; break;
+        case 'arrFilter_P1_MAX': {
+            $maxPrice = $field["value"];
+            $arrFilter["><CATALOG_PRICE_1"]=array($minPrice,$maxPrice);
+        }break;
+        case 'BRAND_REF1':{
+            $arrFilter["PROPERTY_BRAND_REF1"]=$field["value"];
+        };break;
+        case 'MATERIAL1':{
+            $arrFilter["PROPERTY_MATERIAL1"] = $field["value"];
+        }break;
+        case 'IS_EIGHTEEN':{
+            unset($arrFilter["PROPERTY_IS_EIGHTEEN"]);
+        }break;
+        case 'discount': $discount = ($field["value"]=='false')?false:true;break;
+        case 'week-goods': $weekGoods = ($field["value"]=='false')?false:true;break;
+        case 'topsale': $topsale = ($field["value"]=='false')?false:true;break;
+    }
+}
+$newArr = $arrFilter;
+$newArr['IBLOCK_ID']='19';
+$newArr['SECTION_ID']=$_REQUEST["section_id"];
+$newArr['ACTIVE']='Y';
+$newArr['INCLUDE_SUBSECTIONS']='Y';
+
+$elem_per_page = $_REQUEST["page_element_count"];
+CModule::IncludeModule("iblock");
+$max_elements = CIBlockElement::GetList( array(),
+    $newArr,
+    array(),
+    false,
+    array('ID',
+        'NAME')
+);
+$max_pages = ceil($max_elements/$elem_per_page);
+
+echo '<div>';
+echo '<span class="hidden" id="maxPages">'.$max_pages.'</span>';
+$APPLICATION->IncludeComponent(
+	"bitrix:catalog.section",
 	"ajax-catalog", 
 	array(
 		"SEF_MODE" => "N",
@@ -16,8 +67,8 @@
 			0 => "",
 			1 => "",
 		),
-		"ELEMENT_SORT_FIELD" => $_REQUEST["sort_field"],
-		"ELEMENT_SORT_ORDER" => $_REQUEST["sort_order"],
+		"ELEMENT_SORT_FIELD" => $sortData["sortField"],
+		"ELEMENT_SORT_ORDER" => $sortData["sortType"],
 		"FILTER_NAME" => "arrFilter",
 		"INCLUDE_SUBSECTIONS" => "Y",
 		"SHOW_ALL_WO_SECTION" => "Y",
@@ -98,4 +149,6 @@
 		"AJAX_OPTION_ADDITIONAL" => "undefined"
 	),
 	false
-);?>
+);
+echo '</div>';
+?>

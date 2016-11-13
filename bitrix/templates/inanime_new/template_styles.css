@@ -127,7 +127,8 @@ input.form-control{
     padding-left: 10px;
 }
 .select-container .btn,
-.select-container.order .dropdown-menu {
+.select-container.order .dropdown-menu,
+.inanime-input-field{
     color:#79828b;
     font-size:13px;
 }
@@ -173,7 +174,14 @@ input.form-control{
 .select-container .btn:focus {
     background-color:#fff;
 }
-
+/****************** INPUT ******************************/
+.inanime-input-field{
+    border: 2px solid #5d3d1d;
+    border-radius: 10px;
+    height:29px;
+    text-align: center;
+    display: inline-block;
+}
 /******************************* HEADER ***********************************/
 header{
     padding-top: 30px;

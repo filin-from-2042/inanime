@@ -1,3 +1,4 @@
+
 <?foreach($arResult["ITEMS"] as $arElement):?>
     <div class="product-item-preview vertical">
         <div class="image-container">

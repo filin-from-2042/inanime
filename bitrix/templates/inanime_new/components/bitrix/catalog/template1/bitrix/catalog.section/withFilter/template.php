@@ -14,14 +14,14 @@ $this->setFrameMode(true);
                     if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-top"></span><span class="sort-value hidden">'.$val[0].';desc</span>';
                     if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='asc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-bottom"></span><span class="sort-value hidden">'.$val[0].';asc</span>';
                     $strList .= '<li>
-                                    <span onclick="inanime_new.getSectionPage(\''.$val[0].';desc\','.$arParams["SECTION_ID"].','.$arParams["PAGE_ELEMENT_COUNT"].',1,true);window.scrollLoadStartFrom = 2;inanime_new.ddSetSelectedText(this);">
+                                    <span onclick="inanime_new.ddSetSelectedText(this);">
                                         '.GetMessage('SECT_SORT_' . $key).'
                                         <span class="glyphicon glyphicon-triangle-top"></span>
                                         <span class="sort-value hidden">'.$val[0].';desc</span>
                                     </span>
                                 </li>'."\n\r";
                     $strList .= '<li>
-                                    <span onclick="inanime_new.getSectionPage(\''.$val[0].';asc\','.$arParams["SECTION_ID"].','.$arParams["PAGE_ELEMENT_COUNT"].',1,true);window.scrollLoadStartFrom = 2;inanime_new.ddSetSelectedText(this);">
+                                    <span onclick="inanime_new.ddSetSelectedText(this);">
                                         '.GetMessage('SECT_SORT_' . $key).'
                                         <span class="glyphicon glyphicon-triangle-bottom"></span>
                                         <span class="sort-value hidden">'.$val[0].';asc</span>
@@ -37,9 +37,9 @@ $this->setFrameMode(true);
                 <?=$strList?>
             </div>
             <div class="type-buttons">
-                <button type="button" class="btn btn-primary type-btn" data-toggle="button"><?= GetMessage('CATALOG_BTN_TOPSALE');?></button>
-                <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_NEW');?></button>
-                <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_RECOMMENDED');?></button>
+                <button type="button" class="btn btn-primary type-btn discount" data-toggle="button"><?= GetMessage('CATALOG_BTN_DISCOUNT');?></button>
+                <button type="button" class="btn btn-primary type-btn week-goods" data-toggle="button"><?= GetMessage('CATALOG_BTN_WEEK_GOODS');?></button>
+                <button type="button" class="btn btn-primary type-btn topsale" data-toggle="button"><?= GetMessage('CATALOG_BTN_TOPSALE');?></button>
             </div>
         </div>
         <hr>
@@ -49,7 +49,7 @@ $this->setFrameMode(true);
     <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
         <?
         $APPLICATION->IncludeComponent(
-            "bitrix:catalog.smart.filter", "", Array(
+            "bitrix:catalog.smart.filter", "visual_vertical1", Array(
                 "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
                 "IBLOCK_ID" => $arParams["IBLOCK_ID"],
                 "SECTION_ID" => $arCurSection['ID'],

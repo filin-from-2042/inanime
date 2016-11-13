@@ -40,9 +40,9 @@ $this->setFrameMode(true);
             <?=$strList?>
         </div>
         <div class="type-buttons">
-            <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_TOPSALE');?></button>
-            <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_NEW');?></button>
-            <button type="button" class="btn btn-default type-btn"><?= GetMessage('CATALOG_BTN_RECOMMENDED');?></button>
+            <button type="button" class="btn btn-primary type-btn discount" data-toggle="button"><?= GetMessage('CATALOG_BTN_DISCOUNT');?></button>
+            <button type="button" class="btn btn-primary type-btn week-goods" data-toggle="button"><?= GetMessage('CATALOG_BTN_WEEK_GOODS');?></button>
+            <button type="button" class="btn btn-primary type-btn topsale" data-toggle="button"><?= GetMessage('CATALOG_BTN_TOPSALE');?></button>
         </div>
     </div>
     <hr>

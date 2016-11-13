@@ -1,6 +1,8 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
+
 <?$APPLICATION->AddHeadScript($this->GetFolder()."/jquery.lazyload.min.js");?>
 <div class="container section-catalog">
+
     <?$APPLICATION->IncludeComponent(
         "bitrix:breadcrumb",
         "catalog-chain",
@@ -116,14 +118,6 @@
         </div>
     <?}else{?>
         <div class="row">
-            <?
-            /*$res = CIBlockSection::GetNavChain($arParams["IBLOCK_ID"], $catalog_section_id,array());
-            $sectionListSID;
-            while($sec = $res->GetNext())
-            {
-                if($sec["ID"]==209 || $sec["ID"]==808) $sectionListSID=$sec["ID"];
-            }*/
-            ?>
             <?$APPLICATION->IncludeComponent(
                 "bitrix:catalog.section.list",
                 "catalog-top",
@@ -222,6 +216,8 @@
             ?>
 
             window.scrollLoadMaxPages = <?=$max_pages?>;
+            window.currCatalogSectionID = <?=$catalog_section_id?>;
+            window.currCatalogPageElementCount = <?=$elem_per_page?>;
 
             inanime_new.inProgress = false;
             $(window).scroll(function() {
@@ -231,9 +227,7 @@
                 /* Если высота окна + высота прокрутки больше или равна высоте всего документа и ajax-запрос в настоящий момент не выполняется, то запускаем ajax-запрос. 600 - это высота подвала в пикселях */
                 if($(window).scrollTop() + $(window).height() >= $(document).height() - 600 && !inanime_new.inProgress)
                 {
-                    var splittedVal =  $('.sort-container .select-container .btn .sort-value.hidden').text();
-                    inanime_new.getSectionPage(splittedVal, <?=$catalog_section_id?>, '<?=$arParams["PAGE_ELEMENT_COUNT"]?>', window.scrollLoadStartFrom);
-                    window.scrollLoadStartFrom ++;
+                    inanime_new.changeViewHandler(true);
                 }
             });
         });
