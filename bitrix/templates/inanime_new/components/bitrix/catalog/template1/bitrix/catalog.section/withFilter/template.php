@@ -16,14 +16,14 @@ $this->setFrameMode(true);
                     $strList .= '<li>
                                     <span onclick="inanime_new.ddSetSelectedText(this);">
                                         '.GetMessage('SECT_SORT_' . $key).'
-                                        <span class="glyphicon glyphicon-triangle-top"></span>
+                                        <span class="glyphicon glyphicon-triangle-bottom"></span>
                                         <span class="sort-value hidden">'.$val[0].';desc</span>
                                     </span>
                                 </li>'."\n\r";
                     $strList .= '<li>
                                     <span onclick="inanime_new.ddSetSelectedText(this);">
                                         '.GetMessage('SECT_SORT_' . $key).'
-                                        <span class="glyphicon glyphicon-triangle-bottom"></span>
+                                        <span class="glyphicon glyphicon-triangle-top"></span>
                                         <span class="sort-value hidden">'.$val[0].';asc</span>
                                     </span>
                                 </li>'."\n\r";
