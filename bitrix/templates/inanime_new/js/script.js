@@ -91,7 +91,6 @@ function inanime_new() {
                         "page_element_count": String(window.currCatalogPageElementCount),
                         "price_code" : '["BASE"]'
                     };
-        console.log(postData);
         $.ajax({
             url: '/ajax/catalog_pager.php',
             method: 'POST',

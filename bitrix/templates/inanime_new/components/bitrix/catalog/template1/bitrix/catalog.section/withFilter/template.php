@@ -37,16 +37,16 @@ $this->setFrameMode(true);
                 <?=$strList?>
             </div>
             <div class="type-buttons">
-                <button type="button" class="btn btn-primary type-btn discount" data-toggle="button"><?= GetMessage('CATALOG_BTN_DISCOUNT');?></button>
-                <button type="button" class="btn btn-primary type-btn week-goods" data-toggle="button"><?= GetMessage('CATALOG_BTN_WEEK_GOODS');?></button>
-                <button type="button" class="btn btn-primary type-btn topsale" data-toggle="button"><?= GetMessage('CATALOG_BTN_TOPSALE');?></button>
+                <button type="button" class="btn btn-primary type-btn topsale" data-toggle="button" onclick="inanime_new.changeViewHandler()"><?= GetMessage('CATALOG_BTN_TOPSALE');?></button>
+                <button type="button" class="btn btn-primary type-btn discount" data-toggle="button" onclick="inanime_new.changeViewHandler()"><?= GetMessage('CATALOG_BTN_DISCOUNT');?></button>
+                <button type="button" class="btn btn-primary type-btn week-goods" data-toggle="button" onclick="inanime_new.changeViewHandler()"><?= GetMessage('CATALOG_BTN_WEEK_GOODS');?></button>
             </div>
         </div>
         <hr>
     </div>
 </div>
 <div class="row">
-    <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+    <div class="hidden-xs hidden-sm col-md-6 col-lg-6">
         <?
         $APPLICATION->IncludeComponent(
             "bitrix:catalog.smart.filter", "visual_vertical1", Array(
@@ -67,7 +67,7 @@ $this->setFrameMode(true);
         );
         ?>
     </div>
-    <div class="col-xs-18 col-sm-18 col-md-18 col-lg-18">
+    <div class="col-xs-24 col-sm-24 col-md-18 col-lg-18">
         <?if($arParams["DISPLAY_TOP_PAGER"]):?>
             <p><?=$arResult["NAV_STRING"]?></p>
         <?endif?>

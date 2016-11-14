@@ -43,7 +43,7 @@
     </div>
     <?if($arResult["VARIABLES"]["SECTION_CODE"]=="kategorii" || $arResult["VARIABLES"]["SECTION_CODE"]=="po-filmam-igram"){?>
         <div class="row">
-            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            <div class="hidden-xs hidden-sm col-md-6 col-lg-6">
                 <?$APPLICATION->IncludeComponent(
                     "bitrix:catalog.section.list",
                     "catalog-left",
@@ -68,7 +68,7 @@
                 );
                 ?>
             </div>
-            <div class="col-xs-18 col-sm-18 col-md-18 col-lg-18">
+            <div class="col-xs-24 col-sm-24 col-md-18 col-lg-18">
                 <?$APPLICATION->IncludeComponent(
                     "bitrix:catalog.section",
                     "filterOff",
@@ -142,7 +142,7 @@
             );
             ?>
         </div>
-        <div class="row">
+        <div class="row container">
             <?$APPLICATION->IncludeComponent(
                 "bitrix:catalog.section",
                 "withFilter",

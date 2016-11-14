@@ -1,9 +1,9 @@
 <?require_once($_SERVER['DOCUMENT_ROOT']. "/bitrix/modules/main/include/prolog_before.php");
 ?>
 <?
+// парсинг полей для сортировки и фильтрации
 $sortData = json_decode($_REQUEST["sort_data"], true);
 $filterData = json_decode($_REQUEST["filter_data"], true);
-//var_dump($filterData);
 $arrFilter = array();
 $arrFilter["PROPERTY_IS_EIGHTEEN"] = false;
 foreach($filterData as $field)
@@ -32,6 +32,72 @@ foreach($filterData as $field)
         case 'topsale': $topsale = ($field["value"]=='false')?false:true;break;
     }
 }
+if($discount||$weekGoods||$topsale)
+{
+    $IDs = array();
+    $weekGoodsIDs = array(19,20,21,22,23,24,25,26,27,28,29,30);
+    if (CModule::IncludeModule("catalog"))
+    {
+        if($weekGoods)
+        {
+            $dbProductDiscounts = CCatalogDiscount::GetList(
+                array("SORT" => "ASC"),
+                array(
+                    "ID" => $weekGoodsIDs,
+                    "ACTIVE" => "Y",
+                    "!>ACTIVE_FROM" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
+                    "!<ACTIVE_TO" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
+                    "COUPON" => ""
+                    ),
+                false,
+                false,
+                array(
+                    "ID", "PRODUCT_ID", "SECTION_ID"
+                )
+            );
+
+            while ($arProductDiscounts = $dbProductDiscounts->Fetch())
+            {
+                if($arProductDiscounts["PRODUCT_ID"]) $IDs[]=$arProductDiscounts["PRODUCT_ID"];
+            }
+        }
+        if($discount)
+        {
+            $dbProductDiscounts = CCatalogDiscount::GetList(
+                array("SORT" => "ASC"),
+                array(
+                    "!ID" => $weekGoodsIDs,
+                    "ACTIVE" => "Y",
+                    "!>ACTIVE_FROM" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
+                    "!<ACTIVE_TO" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
+                    "COUPON" => ""
+                ),
+                false,
+                false,
+                array(
+                    "ID", "PRODUCT_ID", "SECTION_ID"
+                )
+            );
+
+            while ($arProductDiscounts = $dbProductDiscounts->Fetch())
+            {
+                if($arProductDiscounts["PRODUCT_ID"]) $IDs[]=$arProductDiscounts["PRODUCT_ID"];
+            }
+        }
+        if($topsale)
+        {
+            $res = CIBlockElement::GetList(Array("SORT"=>"ASC"), array('!PROPERTY_IS_BESTSELLER'=>false), Array("ID"));
+            while($ar_fields = $res->GetNext())
+            {
+                if($ar_fields["ID"]) $IDs[]=$ar_fields["ID"];
+            }
+            //$arrFilter['!PROPERTY_IS_BESTSELLER'] = false;
+        }
+    }
+    $arrFilter["ID"] = $IDs;
+}
+
+// кол-во страниц товаров с текущем фильтром
 $newArr = $arrFilter;
 $newArr['IBLOCK_ID']='19';
 $newArr['SECTION_ID']=$_REQUEST["section_id"];
@@ -50,6 +116,7 @@ $max_elements = CIBlockElement::GetList( array(),
 $max_pages = ceil($max_elements/$elem_per_page);
 
 echo '<div>';
+var_dump($arrFilter);
 echo '<span class="hidden" id="maxPages">'.$max_pages.'</span>';
 $APPLICATION->IncludeComponent(
 	"bitrix:catalog.section",
