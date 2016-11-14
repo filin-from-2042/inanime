@@ -53,6 +53,31 @@ body{
     vertical-align: middle;
     line-height: 30px;
 }
+.splitted-btn {
+    padding:0;
+    border-radius:10px;
+}
+.splitted-btn span {
+    display:inline-block;
+    padding:11px 13px;
+    vertical-align:top;
+}
+.splitted-btn span.icon-btn {
+    border-right:1px solid rgb(247,187,114);
+}
+.splitted-btn:hover span.icon-btn {
+    border-right:1px solid #e6e6e6;
+}
+.splitted-btn span.icon-btn img {
+    width:17px;
+}
+.splitted-btn span.text-btn {
+    font-size: 14px;
+    padding: 13px 43px 9px 32px;
+}
+.splitted-btn span.text-btn.already-subscribe{
+    padding: 13px 26px 9px 20px;
+}
 .social-link{
     display: inline-block;
     width: 31px;
@@ -576,6 +601,13 @@ footer .general-container{
 .product-item-preview.horizontal .data-container{
     display:inline-block;
 }
+.product-item-preview .image-btn.in-favorite {
+    padding:14px;
+    margin-left: 5px;
+}
+.product-item-preview .image-btn.in-favorite img {
+    width:17px;
+}
 
 .sections-carousel{
     margin-top: 50px;
@@ -992,6 +1024,25 @@ footer .general-container{
     .product-item-preview .icons-container .additional-icon{
         margin-top: -30px;
     }
+    .product-item-preview .splitted-btn.in-cart span.text-btn {
+        font-size: 13px;
+        padding: 7px 4px;
+    }
+    .product-item-preview .splitted-btn.in-cart span.text-btn.already-subscribe{
+        font-size: 10px;
+        max-width: 74px;
+        white-space: initial;
+    }
+    .product-item-preview .splitted-btn.in-cart span.icon-btn {
+        display:none;
+    }
+    .product-item-preview .image-btn.in-favorite {
+        padding: 10px;
+        margin-left: 2px;
+    }
+    .product-item-preview .image-btn.in-favorite img {
+        width: 12px;
+    }
 
     footer .general-container{
         background-position: 120% 76%;
@@ -1260,6 +1311,28 @@ footer .general-container{
     }
     .product-item-preview .icons-container .additional-icon{
         margin-top: -30px;
+    }
+    .product-item-preview .splitted-btn.in-cart span.text-btn {
+        font-size: 11px;
+        padding: 9px 34px 9px 23px;
+    }
+    .product-item-preview .splitted-btn.in-cart span.text-btn.already-subscribe{
+        padding: 9px 10px 9px 10px;
+    }
+    .product-item-preview .splitted-btn.in-cart span.icon-btn img {
+        width:12px;
+    }
+    .product-item-preview .splitted-btn.in-cart span {
+        padding:9px 11px;
+    }
+    .product-item-preview .splitted-btn.in-cart span.icon-btn i{
+        font-size: 16px;
+    }
+    .product-item-preview .image-btn.in-favorite {
+        padding:11px;
+    }
+    .product-item-preview .image-btn.in-favorite img {
+        width:13px;
     }
 
     footer .general-container{

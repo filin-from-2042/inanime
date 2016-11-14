@@ -11,8 +11,8 @@ $this->setFrameMode(true);
                 $currSort;
                 foreach ($_SESSION["inanime_new_catalogdata"]["arAvailableSort"] as $key => $val)
                 {
-                    if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-top"></span><span class="sort-value hidden">'.$val[0].';desc</span>';
-                    if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='asc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-bottom"></span><span class="sort-value hidden">'.$val[0].';asc</span>';
+                    if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-bottom"></span><span class="sort-value hidden">'.$val[0].';desc</span>';
+                    if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='asc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-top"></span><span class="sort-value hidden">'.$val[0].';asc</span>';
                     $strList .= '<li>
                                     <span onclick="inanime_new.ddSetSelectedText(this);">
                                         '.GetMessage('SECT_SORT_' . $key).'
@@ -76,7 +76,6 @@ $this->setFrameMode(true);
             <div class="items-container">
 
                 <?foreach($arResult["ITEMS"] as $arElement):?>
-
                     <div class="product-item-preview vertical">
                         <div class="image-container">
                             <img data-original="<?=$arElement["PREVIEW_PICTURE"]["SRC"]?>" class="lazy" />
@@ -123,6 +122,41 @@ $this->setFrameMode(true);
                                         ?>
                                     </div>
                                 </a>
+                            </div>
+                            <div class="buttons-container">
+                                <?if($arElement["CAN_BUY"]){?>
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="inanime_new.addToCart(<?=$arElement['ID']?>
+                                        ,1
+                                        ,'<?=$arElement["NAME"]?>'
+                                        ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
+                                        ,false)">
+                                        <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" /></span>
+                                        <span class="text-btn">В корзину</span>
+                                    </button>
+                                <?
+                                }else{
+                                    ?>
+                                    <?$APPLICATION->IncludeComponent(
+                                        "bitrix:catalog.product.subscribe",
+                                        "inanime-subscribe",
+                                        Array(
+                                            "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
+                                            "BUTTON_ID" => $arElement['ID']."-in-cart-btn",
+                                            "CACHE_TIME" => "3600",
+                                            "CACHE_TYPE" => "A",
+                                            "PRODUCT_ID" => $arElement['ID']
+                                        )
+                                    );?>
+                                <?
+                                }
+                                ?>
+                                <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite" onclick="inanime_new.addToCart(<?=$arElement['ID']?>
+                                    ,1
+                                    ,'<?=$arElement["NAME"]?>'
+                                    ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
+                                    ,true)">
+                                    <img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" />
+                                </button>
                             </div>
                             <div class="rate-container">
                                 <?$APPLICATION->IncludeComponent(

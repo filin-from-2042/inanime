@@ -193,6 +193,30 @@ function inanime_new() {
                 window.scrollLoadStartFrom =2;
             }
         },  500);
+    };
+
+    this.addToCart=function(productID, quantity, productName, price, delay=false )
+    {
+        $.ajax({
+            type: "POST",
+            url: "/ajax/basket.php",
+            data: {
+                priceCode : '["BASE"]',
+                productID : productID,
+                quantity: quantity,
+                price : price,
+                name : productName,
+                delay:(delay) ? 'Y' : 'N'
+            },
+            //dataType: 'json',
+            success: function(data){
+                $('header .content-container.cart-container').contents().remove();
+                $('header .content-container.cart-container').append($(data).find('.content-container.cart-container').contents());
+            },
+            error: function( xhr, textStatus ) {
+                alert( [ xhr.status, textStatus ] );
+            }
+        });
     }
 }
 window.inanime_new = new inanime_new();

@@ -116,7 +116,6 @@ $max_elements = CIBlockElement::GetList( array(),
 $max_pages = ceil($max_elements/$elem_per_page);
 
 echo '<div>';
-var_dump($arrFilter);
 echo '<span class="hidden" id="maxPages">'.$max_pages.'</span>';
 $APPLICATION->IncludeComponent(
 	"bitrix:catalog.section",

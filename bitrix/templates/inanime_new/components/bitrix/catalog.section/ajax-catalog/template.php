@@ -47,6 +47,41 @@
                     </div>
                 </a>
             </div>
+            <div class="buttons-container">
+                <?if($arElement["CAN_BUY"]){?>
+                    <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="inanime_new.addToCart(<?=$arElement['ID']?>
+                        ,1
+                        ,'<?=$arElement["NAME"]?>'
+                        ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
+                        ,false)">
+                        <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" /></span>
+                        <span class="text-btn">В корзину</span>
+                    </button>
+                <?
+                }else{
+                    ?>
+                    <?$APPLICATION->IncludeComponent(
+                        "bitrix:catalog.product.subscribe",
+                        "inanime-subscribe",
+                        Array(
+                            "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
+                            "BUTTON_ID" => $arElement['ID']."-in-cart-btn",
+                            "CACHE_TIME" => "3600",
+                            "CACHE_TYPE" => "A",
+                            "PRODUCT_ID" => $arElement['ID']
+                        )
+                    );?>
+                <?
+                }
+                ?>
+                <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite" onclick="inanime_new.addToCart(<?=$arElement['ID']?>
+                    ,1
+                    ,'<?=$arElement["NAME"]?>'
+                    ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
+                    ,true)">
+                    <img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" />
+                </button>
+            </div>
             <div class="rate-container">
                 <?$APPLICATION->IncludeComponent(
                     "bitrix:iblock.vote",
