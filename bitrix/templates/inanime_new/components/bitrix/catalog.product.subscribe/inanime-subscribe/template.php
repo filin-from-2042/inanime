@@ -25,6 +25,7 @@ $paramsForJs = array(
 );
 
 $templateData = $paramsForJs;
+$APPLICATION->AddHeadScript($this->GetFolder()."/script.js");
 ?>
 
 <button type="button" class="<?=htmlspecialcharsbx($arResult['BUTTON_CLASS'])?>"

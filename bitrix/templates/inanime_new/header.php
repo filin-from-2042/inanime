@@ -103,8 +103,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                             "COMPOSITE_FRAME_MODE" => "A",	// Голосование шаблона компонента по умолчанию
                             "COMPOSITE_FRAME_TYPE" => "AUTO",	// Содержимое компонента
                         ),
-                        false
-                    );?>
+                        false                    );?>
                 </div>
             </div>
             <!-- tablet -->

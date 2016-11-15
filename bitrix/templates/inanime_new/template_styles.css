@@ -882,6 +882,39 @@ footer .general-container{
 .section-catalog .type-buttons .type-btn.discount{
      border-color:#3baeda;
 }
+/********************* SECTION DESCRIPTION *******************************/
+.section-description{
+    position: relative;
+    margin: 15px 0 45px;
+}
+.section-description .text{
+    line-height: 22px;
+    height: 70px;
+    color:#79828b;
+    overflow: hidden;
+}
+.section-description .show-below-btn{
+    display: inline-block;
+    width: 55px;
+    height: 30px;
+    border-radius: 10px;
+    border:2px solid #ebebeb;
+    position: absolute;
+    left:49%;
+    bottom:-43px;
+    color:#68422e;
+    background-color: #fff;
+    text-align: center;
+    cursor:pointer;
+}
+.section-description .show-below-btn:hover{
+    background-color: #e6e6e6;
+    border-color: #adadad;
+}
+.section-description .show-below-btn i{
+    line-height: 26px;
+    font-size: 20px;
+}
 /******************************* MEDIA QUERIES ********************************/
 /* Mobile */
 @media (max-width: 760px) {
