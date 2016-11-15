@@ -59,6 +59,35 @@
                 <i class="fa fa-angle-double-down" aria-hidden="true"></i>
             </div>
         </div>
+        <div class="row section-main-banner">
+            <?if (IsModuleInstalled("advertising")):?>
+                <? $APPLICATION->IncludeComponent(
+                    "bitrix:advertising.banner",
+                    "bootstrap",
+                    array(
+                        "COMPONENT_TEMPLATE" => "bootstrap",
+                        "TYPE" => "MAIN",
+                        "NOINDEX" => "Y",
+                        "QUANTITY" => "3",
+                        "BS_EFFECT" => "fade",
+                        "BS_CYCLING" => "N",
+                        "BS_WRAP" => "Y",
+                        "BS_PAUSE" => "Y",
+                        "BS_KEYBOARD" => "Y",
+                        "BS_ARROW_NAV" => "Y",
+                        "BS_BULLET_NAV" => "Y",
+                        "BS_HIDE_FOR_TABLETS" => "N",
+                        "BS_HIDE_FOR_PHONES" => "N",
+                        "CACHE_TYPE" => "A",
+                        "CACHE_TIME" => "36000000",
+                        "DEFAULT_TEMPLATE" => "-",
+                        "COMPOSITE_FRAME_MODE" => "A",
+                        "COMPOSITE_FRAME_TYPE" => "AUTO"
+                    ),
+                    false
+                );?>
+            <?endif?>
+        </div>
     </div>
     <script>
         /*AJAX прогрузка*/
