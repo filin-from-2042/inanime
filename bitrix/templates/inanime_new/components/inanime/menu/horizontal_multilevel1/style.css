@@ -300,7 +300,7 @@ nav.navigation .third-level-container li{
         top:0;
     }
 }
-@media (min-width: 992px) and (max-width: 1200px){
+@media (min-width: 992px) and (max-width: 1230px){
     nav.navigation ul.first-level > li.dropdown{
         width:200px;
     }
@@ -328,7 +328,7 @@ nav.navigation .third-level-container li{
         padding:5 0 10px;
     }
 }
-@media (min-width: 1200px){
+@media (min-width: 1230px){
     nav.navigation ul.second-level > li.dropdown:hover  div.third-level-container.last{
         width:118%;
     }

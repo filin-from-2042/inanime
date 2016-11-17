@@ -936,6 +936,10 @@ footer .general-container{
         vertical-align: top;
         margin-left:4px;
     }
+    header .cart-container,
+    #carousel-custom-vertical{
+        display:none;
+    }
     header .navbar-toggle,
     header .navbar-toggle.collapsed{
         border-color:rgb(95,60,28);
@@ -1465,7 +1469,7 @@ footer .general-container{
     }
 
 }
-@media (min-width: 992px) and (max-width: 1200px)
+@media (min-width: 992px) and (max-width: 1230px)
 {
     input.form-control.search-input{
         width: 257px;
@@ -1524,7 +1528,7 @@ footer .general-container{
 
 }
 /* Large devices (large desktops, 1200px and up) */
-@media (min-width: 1200px){
+@media (min-width: 1230px){
     .row.articles-links .article-container:nth-child(n+2) {
         margin-left: 22px;
     }
