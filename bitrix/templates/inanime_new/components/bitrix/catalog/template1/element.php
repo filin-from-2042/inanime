@@ -1,12 +1,9 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<div class="page page_catalog-item">
+<div>
 
-
-    <div class="group">
-        <div class="main-side">
 <?$ElementID = $APPLICATION->IncludeComponent(
 	"bitrix:catalog.element",
-	"",
+	"inanime-product",
 	array(
 		"IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
 		"IBLOCK_ID" => $arParams["IBLOCK_ID"],
@@ -81,100 +78,7 @@
 	),
 	$component
 );?>
-            </div>
-        </div>
-<div class="right-side">
-                        <?
-                        global $arrRecFilter;
 
-                        $APPLICATION->IncludeComponent(
-                             "bitrix:catalog.section", "detail_recommend", Array(
-                            "AJAX_MODE" => "N",
-                            "IBLOCK_TYPE" => "catalog",
-                            "IBLOCK_ID" => "2",
-                            "SECTION_ID" => "",
-                            "SECTION_CODE" => "",
-                            "SECTION_USER_FIELDS" => array(0 => "PREVIEW_PICTURE",),
-                            "ELEMENT_SORT_FIELD" => "ACTIVE_FROM",
-                            "ELEMENT_SORT_ORDER" => "DESC",
-                            "ELEMENT_SORT_FIELD2" => "SORT",
-                            "ELEMENT_SORT_ORDER2" => "ASC",
-                            "FILTER_NAME" => "arrRecFilter",
-                            "INCLUDE_SUBSECTIONS" => "Y",
-                            "SHOW_ALL_WO_SECTION" => "Y",
-                            "SECTION_URL" => "",
-                            "DETAIL_URL" => "",
-                            "BASKET_URL" => "/personal/order/make/",
-                            "ACTION_VARIABLE" => "action",
-                            "PRODUCT_ID_VARIABLE" => "id",
-                            "PRODUCT_QUANTITY_VARIABLE" => "quantity",
-                            "PRODUCT_PROPS_VARIABLE" => "prop",
-                            "SECTION_ID_VARIABLE" => "SECTION_ID",
-                            "META_KEYWORDS" => "-",
-                            "META_DESCRIPTION" => "-",
-                            "BROWSER_TITLE" => "-",
-                            "ADD_SECTIONS_CHAIN" => "N",
-                            "DISPLAY_COMPARE" => "N",
-                            "SET_TITLE" => "Y",
-                            "SET_STATUS_404" => "N",
-                            "PAGE_ELEMENT_COUNT" => 40,
-                            "LINE_ELEMENT_COUNT" => "1",
-                            "PROPERTY_CODE" => array(
-                                0 => "IS_NEWPRODUCT",
-                                1 => "MINIMUM_PRICE_COMBINE"
-                            ),
-                            "OFFERS_FIELD_CODE" => array("NAME", "PREVIEW_PICTURE", "DETAIL_PICTURE"),
-                            "OFFERS_PROPERTY_CODE" => array("SIZES_SHOES", "SIZES_CLOTHES", "COLOR_REF", "MORE_PHOTO", "ARTNUMBER"),
-                            "OFFERS_SORT_FIELD" => "sort",
-                            "OFFERS_SORT_ORDER" => "asc",
-                            "OFFERS_SORT_FIELD2" => "id",
-                            "OFFERS_SORT_ORDER2" => "desc",
-                            "PRODUCT_DISPLAY_MODE" => "Y",
-                            "OFFER_TREE_PROPS" => array("SIZES_SHOES", "SIZES_CLOTHES", "COLOR_REF"),
-                            "OFFERS_LIMIT" => "5",
-                            "PRICE_CODE" => array(0 => "BASE"),
-                            "USE_PRICE_COUNT" => "N",
-                            "SHOW_PRICE_COUNT" => "1",
-                            "PRICE_VAT_INCLUDE" => "Y",
-                            "PRODUCT_PROPERTIES" => array(),
-                            "USE_PRODUCT_QUANTITY" => "Y",
-                            "CACHE_TYPE" => "A",
-                            "CACHE_TIME" => "36000000",
-                            "CACHE_FILTER" => "N",
-                            "CACHE_GROUPS" => "Y",
-                            "DISPLAY_TOP_PAGER" => "N",
-                            "DISPLAY_BOTTOM_PAGER" => "Y",
-                            "PAGER_TITLE" => "Товары",
-                            "PAGER_SHOW_ALWAYS" => "N",
-                            "PAGER_TEMPLATE" => "arrows",
-                            "PAGER_DESC_NUMBERING" => "N",
-                            "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",
-                            "PAGER_SHOW_ALL" => "N",
-                            "HIDE_NOT_AVAILABLE" => "N",
-                            "CONVERT_CURRENCY" => "N",
-                            "OFFERS_CART_PROPERTIES" => array("SIZES_SHOES", "SIZES_CLOTHES", "COLOR_REF"),
-                            "AJAX_OPTION_JUMP" => "N",
-                            "AJAX_OPTION_STYLE" => "Y",
-                            "AJAX_OPTION_HISTORY" => "N"
-                                ), false
-                        );
-                        ?>
-            <? unset($GLOBALS["arrFilter"]); ?>
-            <div class="banner banner_col">
-
-            <?
-            $APPLICATION->IncludeComponent("bitrix:advertising.banner", "", Array(
-                "TYPE" => "good_page",
-                "CACHE_TYPE" => "A",
-                "NOINDEX" => "Y",
-                "CACHE_TIME" => "3600"
-                    )
-            );
-            ?>
-            </div>
-
-        </div>
-    </div>
 </div>
 
 <?

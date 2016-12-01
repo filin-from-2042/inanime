@@ -49,8 +49,11 @@ $this->setFrameMode(true);
     <div class="items-container">
 
         <?foreach($arResult["ITEMS"] as $arElement):?>
-
-            <div class="product-item-preview vertical">
+            <?
+            $this->AddEditAction($arElement['ID'], $arElement['EDIT_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
+            $this->AddDeleteAction($arElement['ID'], $arElement['DELETE_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BCS_ELEMENT_DELETE_CONFIRM')));
+            ?>
+            <div class="product-item-preview vertical" id="<?=$this->GetEditAreaId($arElement['ID']);?>">
                 <div class="image-container">
                     <img data-original="<?=$arElement["PREVIEW_PICTURE"]["SRC"]?>" class="lazy" />
                     <div class="icons-container">

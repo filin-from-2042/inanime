@@ -25,7 +25,6 @@ $paramsForJs = array(
 );
 
 $templateData = $paramsForJs;
-$APPLICATION->AddHeadScript($this->GetFolder()."/script.js");
 ?>
 
 <button type="button" class="<?=htmlspecialcharsbx($arResult['BUTTON_CLASS'])?>"
@@ -41,7 +40,6 @@ $APPLICATION->AddHeadScript($this->GetFolder()."/script.js");
 
 	BX.message({
 		CPST_SUBSCRIBE_POPUP_TITLE: '<?=GetMessageJS('CPST_SUBSCRIBE_POPUP_TITLE');?>',
-<!--		CPST_SUBSCRIBE_BUTTON_NAME: '--><?//=GetMessageJS('CPST_SUBSCRIBE_BUTTON_NAME');?><!--',-->
 		CPST_SUBSCRIBE_BUTTON_NAME: '<span class="icon-btn" style="width:43px;box-sizing: border-box"><i class="fa fa-2x fa-exclamation-circle" aria-hidden="true"></i></span><span class="text-btn"><?=Loc::getMessage('CPST_SUBSCRIBE_BUTTON_NAME')?></span>',
 		CPST_SUBSCRIBE_BUTTON_CLOSE: '<?=GetMessageJS('CPST_SUBSCRIBE_BUTTON_CLOSE');?>',
 		CPST_SUBSCRIBE_MANY_CONTACT_NOTIFY: '<?=GetMessageJS('CPST_SUBSCRIBE_MANY_CONTACT_NOTIFY');?>',
@@ -53,7 +51,6 @@ $APPLICATION->AddHeadScript($this->GetFolder()."/script.js");
 		CPST_STATUS_SUCCESS: '<?=GetMessageJS('CPST_STATUS_SUCCESS');?>',
 		CPST_STATUS_ERROR: '<?=GetMessageJS('CPST_STATUS_ERROR');?>',
 		CPST_ENTER_WORD_PICTURE: '<?=GetMessageJS('CPST_ENTER_WORD_PICTURE');?>',
-<!--		CPST_TITLE_ALREADY_SUBSCRIBED: '--><?//=GetMessageJS('CPST_TITLE_ALREADY_SUBSCRIBED');?><!--',-->
 		CPST_TITLE_ALREADY_SUBSCRIBED: '<span class="icon-btn" style="width:43px;box-sizing: border-box"><i class="fa fa-2x fa-exclamation-circle" aria-hidden="true"></i></span><span class="text-btn already-subscribe"><?=Loc::getMessage('CPST_TITLE_ALREADY_SUBSCRIBED')?></span>',
 		CPST_POPUP_SUBSCRIBED_TITLE: '<?=GetMessageJS('CPST_POPUP_SUBSCRIBED_TITLE');?>',
 		CPST_POPUP_SUBSCRIBED_TEXT: '<?=GetMessageJS('CPST_POPUP_SUBSCRIBED_TEXT');?>'

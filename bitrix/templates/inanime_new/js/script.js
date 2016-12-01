@@ -79,6 +79,51 @@ function inanime_new() {
             );
         };
     };
+    // инициализация карусели дял карточки товара
+    this.init_product_horizontal_carousel = function(element_id, elements_count)
+    {
+        var carouselData =
+        {
+            cc_count: elements_count,
+            cc_position: 0,
+            carouselEl: document.getElementById(element_id),
+            cc_width: $(document.getElementById(element_id).querySelector('li')).width(),
+            paddingRight: parseInt($(document.getElementById(element_id).querySelector('li')).css('paddingRight'))
+        };
+
+        inanime_new[element_id] = carouselData;
+        $('#'+element_id).css('width',(carouselData.cc_width+carouselData.paddingRight)*elements_count );
+        $('#'+element_id).closest('.photo-carousel-container').find('.prev').click(function () {
+            var prevPosition = inanime_new[element_id].cc_position;
+            var width = inanime_new[element_id].cc_width;
+            var paddingRight = inanime_new[element_id].paddingRight;
+            var count = inanime_new[element_id].cc_count;
+
+            inanime_new[element_id].cc_position = Math.min(prevPosition + (width + paddingRight) * count, 0);
+            $('#' + element_id + ' ul').animate(
+                {
+                    marginLeft: inanime_new[element_id].cc_position + 'px'
+                }
+            );
+        });
+
+        $('#'+element_id).closest('.photo-carousel-container').find('.next').click(function () {
+            var listElems = inanime_new[element_id].carouselEl.querySelectorAll('li');
+            var prevPosition = inanime_new[element_id].cc_position;
+            var width = inanime_new[element_id].cc_width;
+            var paddingRight = inanime_new[element_id].paddingRight;
+            var count = inanime_new[element_id].cc_count;
+
+            inanime_new[element_id].cc_position = Math.max(prevPosition - (width + paddingRight) * count, -(width + paddingRight) * (listElems.length - count));
+            $('#' + element_id + ' ul').animate(
+                {
+                    marginLeft: inanime_new[element_id].cc_position + 'px'
+                }
+            );
+        });
+
+    };
+
     /* Переменная-флаг для отслеживания того, происходит ли в данный момент ajax-запрос. В самом начале даем ей значение false, т.е. запрос не в процессе выполнения */
     this.inProgress = false;
     this.getSectionPage = function( filterData, sortData, pageNumber, withReplace = false)
@@ -217,6 +262,32 @@ function inanime_new() {
                 alert( [ xhr.status, textStatus ] );
             }
         });
-    }
+    };
+
+    // обработчик нажания на кнопку в поле кол-во
+    this.counterButtonClick = function ()
+    {
+        button = $(this)
+        var counterContainer = button.closest('.ia-counter-container');
+        var input = counterContainer.find('input.counter-value');
+        if(button.hasClass('increase'))
+        {
+            input.val(parseInt(input.val())+1);
+        }
+        else if (button.hasClass('decrease'))
+        {
+            if (input.val() > 1) input.val(parseInt(input.val()) - 1);
+        }
+    };
+
+    // обработчик клика по радио кнопке
+    this.radioClick = function (event)
+    {
+        if ($(this).hasClass('ia-radio-button')) var radioButton = $(this);
+        else var radioButton = $(this).closest('.radio-button-container').find('.ia-radio-button');
+        radioButton.closest('.radio-container').find('input.ia-radio-value').val(radioButton.find('span.value.hidden').text());
+        radioButton.closest('.radio-container').find('.ia-radio-button').removeClass('active');
+        radioButton.addClass('active');
+    };
 }
 window.inanime_new = new inanime_new();

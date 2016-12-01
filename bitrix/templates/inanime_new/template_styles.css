@@ -208,6 +208,102 @@ input.form-control{
     display: inline-block;
 }
 
+/***************** IMAGE RADIO BUTTON **************/
+.radio-container .radio-button-container {
+    display:inline-block;
+}
+.ia-radio-button {
+    display:inline-block;
+    border:2px solid rgb(218,218,218);
+    color:rgb(218,218,218);
+    width:33px;
+    height:33px;
+    border-radius:20px;
+    padding:3px
+}
+.ia-radio-button .radio-dot {
+    width: 23px;
+    height: 23px;
+    background-color: #5d3d1d;
+    border-radius: 20px;
+    display:none;
+}
+.radio-button-container .button-title,
+.radio-button-container .ia-radio-button {
+    vertical-align:middle;
+}
+.radio-button-container .button-title {
+    display:inline-block;
+    cursor:pointer;
+    color:#79828b;
+    padding-left: 6px;
+}
+.ia-radio-button.active .radio-dot {
+    display:block;
+}
+.ia-radio-button.small {
+    width: 24px;
+    height: 24px;
+}
+.ia-radio-button.small .radio-dot {
+    width: 14px;
+    height: 14px;
+}
+.image-radio:hover,
+.size-radio:hover {
+    background-color:rgb(218,218,218);
+    cursor:pointer;
+}
+.ia-radio-button.active {
+    background-color:rgb(218,218,218);
+}
+.image-radio img {
+    width:100%;
+    height:100%;
+    border-radius:20px;
+}
+.size-radio {
+    border-radius:10px;
+    text-transform:uppercase;
+    text-align:center;
+}
+.size-radio span {
+    line-height:28px;
+    color:rgb(121,130,139);
+}
+/********************************* COUNTER TEXT INPUT ****************************************/
+.ia-counter-container{
+    display:inline-block;
+    position:relative;
+    text-align: center;
+    width: 82px;
+}
+.ia-counter-container input.counter-value{
+    width: 40px;
+    height: 31px;
+    border: 2px solid #5d3d1d;
+    border-radius: 10px;
+    color:rgb(121,130,139);
+    text-align: center;
+}
+.ia-counter-container .button {
+    position:absolute;
+    display:inline-block;
+    color:#68422e;
+    top: 3px;
+    font-size: 19px;
+}
+.ia-counter-container .button:hover {
+    cursor:pointer;
+}
+.ia-counter-container .button.increase {
+    right:0px;
+}
+.ia-counter-container .button.decrease {
+    left:0px;
+}
+
+
 /******************************* HEADER ***********************************/
 header{
     padding-top: 30px;
@@ -486,6 +582,11 @@ footer .general-container{
 }
 .product-item-preview.vertical .title-container {
     padding: 8px;
+    max-width: 250px;
+}
+.product-item-preview.vertical .title-container .text{
+    max-height: 20px;
+    overflow: hidden;
 }
 
 .product-item-preview.horizontal:first-child{
@@ -820,6 +921,9 @@ footer .general-container{
 .section-catalog .product-item-preview.vertical .title-container .text{
     height: 20px;
     overflow: hidden;
+}
+.section-catalog .product-item-preview.vertical .buttons-container div{
+    display: inline-block;
 }
 .section-catalog .sort-container .select-title,
 .section-catalog .sort-container .select-container.order,
@@ -1182,6 +1286,19 @@ footer .general-container{
     .section-catalog .product-item-preview:nth-child(even){
         margin: 0 0 0 8px;
     }
+
+    /******************************** COMMENTS ***********************/
+    #comments .comment-main {
+        padding: 15px 16px;
+    }
+    #comments .comment-main .nickname-rate-container .nicname,
+    #comments .comment-main .nickname-rate-container .comment-rate {
+        display:block;
+    }
+    #comments .comment-main .nickname-rate-container {
+        text-align:center;
+    }
+
 }
 
 /* Tablet */
@@ -1451,6 +1568,14 @@ footer .general-container{
     }
     .content .section-about h2 {
         font-size: 24px;
+    }
+
+    /******************************** COMMENTS ***********************/
+    #comments .comment-main {
+        padding: 28px 19px;
+    }
+    #comments .comment-main .part-title {
+        margin-top: 17px;
     }
 }
 /* (desktops, 992px and up) */
