@@ -166,25 +166,10 @@ else
                                 <div id="<?=$carouselID;?>" class="preview-photo-carousel">
                                     <ul>
                                         <?
-                                        /*
-                                        foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
-                                        {
-                                            ?>
-                                            <li>
-                                                <div class="photo-container">
-                                                    <img src="<?=$arOnePhoto['SRC'];?>">
-                                                </div>
-                                            </li>
-                                        <?
-                                        }*/
-                                        ?>
-
-                                        <?
                                         if($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"])
                                         {
                                             foreach($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"] as $photoID)
                                             {?>
-                                                ;
                                                 <li>
                                                     <div class="photo-container">
                                                         <img src="<?=CFile::GetFileArray($photoID)["SRC"];?>">
@@ -323,15 +308,17 @@ else
                                         <div id="<?=$carouselID;?>" class="preview-photo-carousel">
                                             <ul>
                                                 <?
-                                                foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
+                                                if($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"])
                                                 {
-                                                    ?>
-                                                    <li>
-                                                        <div class="photo-container">
-                                                            <img src="<?=$arOnePhoto['SRC'];?>">
-                                                        </div>
-                                                    </li>
-                                                <?
+                                                    foreach($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"] as $photoID)
+                                                    {?>
+                                                        <li>
+                                                            <div class="photo-container">
+                                                                <img src="<?=CFile::GetFileArray($photoID)["SRC"];?>">
+                                                            </div>
+                                                        </li>
+                                                    <?
+                                                    }
                                                 }
                                                 ?>
                                             </ul>
