@@ -104,6 +104,23 @@ else
     $canBuy = $arResult['CAN_BUY'];
 }
 ?>
+<div>
+    <?$APPLICATION->IncludeComponent(
+	"bitrix:breadcrumb", 
+	"catalog-chain", 
+	array(
+		"START_FROM" => "0",
+		"PATH" => "",
+		"SITE_ID" => "s2",
+		"COMPONENT_TEMPLATE" => "catalog-chain",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO"
+	),
+	false
+);
+
+    ?>
+</div>
 <div class="product-card">
     <div class="container">
         <div class="row product-info">

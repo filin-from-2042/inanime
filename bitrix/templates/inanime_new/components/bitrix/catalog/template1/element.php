@@ -77,7 +77,10 @@
 		'BRAND_PROP_CODE' => $arParams['DETAIL_BRAND_PROP_CODE']
 	),
 	$component
-);?>
+);
+global $elementIAName;
+$APPLICATION->AddChainItem($elementIAName);
+?>
 
 </div>
 
