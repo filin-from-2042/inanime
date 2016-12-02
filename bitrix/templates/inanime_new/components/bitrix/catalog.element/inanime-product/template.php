@@ -104,10 +104,10 @@ else
     $canBuy = $arResult['CAN_BUY'];
 }
 ?>
-<div>
+<div class="container">
     <?$APPLICATION->IncludeComponent(
 	"bitrix:breadcrumb", 
-	"catalog-chain", 
+	"product-chain",
 	array(
 		"START_FROM" => "0",
 		"PATH" => "",
@@ -289,7 +289,7 @@ else
                                                             ?>
                                                             <li>
                                                                 <div class="photo-container">
-                                                                    <img src="<?=$singleOfferPhoto['SRC'];?>">
+                                                                    <img src="<?=$singleOfferPhoto;?>">
                                                                 </div>
                                                             </li>
                                                         <?
@@ -316,6 +316,7 @@ else
                                 $carouselID = 'preview-photo-carousel_xs';
                                 reset($arResult['MORE_PHOTO']);
                                 $arFirstPhoto = current($arResult['MORE_PHOTO']);
+                                var_dump($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"]);
                                 ?>
                                 <div class="general-container photo-container">
                                     <div class="photo-big-container">
@@ -430,6 +431,51 @@ else
                             ?>
                             <div class="properties-container">
 
+
+
+                                <div class="size-container radio-container">
+                                    <input type="hidden" name="size-radio" class="ia-radio-value" />
+                                    <?
+                                    $sizesData = array();
+                                    $JSColorData = array();
+                                    foreach ($availableSizes as $sizeName=>$sizeColors)
+                                    {?>
+                                        <?
+                                        foreach($offersData as $offerID=>$offerData )
+                                        {
+                                            if($offerData['size']!=$sizeName) continue;
+
+
+                                            $currOfferPrices = implode('-',$offerData['price']);
+                                            $currOfferColor = $offerData['color'];
+
+                                            $JSColorData[$currOfferColor] = array('price'=>$offerData['price'], 'id'=>$offerID);
+                                            /*
+                                            ?>
+                                            <span class="offer-data hidden"><?=$currOfferColor?>;<?=$currOfferPrices?>;<?=$offerID?></span>
+                                            <?*/
+                                            $sizesData[$sizeName][$offerID] = $offerData;
+                                        }?>
+                                        <?if(array_key_exists($sizeName,$sizesData)){?>
+                                        <div class="size-radio ia-radio-button <?= $offersData[$activeOfferID]['size']==$sizeName ? 'active' : ''?>">
+                                            <span class="value hidden"><?= $sizeName?></span>
+                                            <span><?= $sizeName;?></span>
+                                        </div>
+                                    <?}?>
+                                    <?}?>
+                                    <script>
+                                        $(document).ready(function(){
+                                            $('.ia-radio-button,.radio-button-container .button-title').click(inanime_new.radioClick);
+                                            $('.color-container .ia-radio-button,.color-container.radio-button-container .button-title').click(
+                                                function(event){InAnimeCatalogElement<?=$strMainID;?>.colorClick(event)}
+                                            );
+                                            $('.size-container .ia-radio-button,.size-container.radio-button-container .button-title').click(
+                                                function(event){InAnimeCatalogElement<?=$strMainID;?>.sizeClick(event)}
+                                            );
+                                        });
+                                    </script>
+                                </div>
+
                                 <div class="color-container radio-container" >
                                     <input type="hidden" name="color-radio" class="ia-radio-value" />
                                     <?
@@ -448,49 +494,6 @@ else
                                                 <img src="<?=$colorSRC;?>" />
                                             </div>
                                     <?}?>
-                            </div>
-
-                            <div class="size-container radio-container">
-                                <input type="hidden" name="size-radio" class="ia-radio-value" />
-                                <?
-                                $sizesData = array();
-                                $JSColorData = array();
-                                foreach ($availableSizes as $sizeName=>$sizeColors)
-                                {?>
-                                    <?
-                                    foreach($offersData as $offerID=>$offerData )
-                                    {
-                                        if($offerData['size']!=$sizeName) continue;
-
-
-                                        $currOfferPrices = implode('-',$offerData['price']);
-                                        $currOfferColor = $offerData['color'];
-
-                                        $JSColorData[$currOfferColor] = array('price'=>$offerData['price'], 'id'=>$offerID);
-                                        /*
-                                        ?>
-                                        <span class="offer-data hidden"><?=$currOfferColor?>;<?=$currOfferPrices?>;<?=$offerID?></span>
-                                        <?*/
-                                        $sizesData[$sizeName][$offerID] = $offerData;
-                                    }?>
-                                    <?if(array_key_exists($sizeName,$sizesData)){?>
-                                    <div class="size-radio ia-radio-button <?= $offersData[$activeOfferID]['size']==$sizeName ? 'active' : ''?>">
-                                        <span class="value hidden"><?= $sizeName?></span>
-                                        <span><?= $sizeName;?></span>
-                                    </div>
-                                    <?}?>
-                                <?}?>
-                                <script>
-                                    $(document).ready(function(){
-                                        $('.ia-radio-button,.radio-button-container .button-title').click(inanime_new.radioClick);
-                                        $('.color-container .ia-radio-button,.color-container.radio-button-container .button-title').click(
-                                            function(event){InAnimeCatalogElement<?=$strMainID;?>.colorClick(event)}
-                                        );
-                                        $('.size-container .ia-radio-button,.size-container.radio-button-container .button-title').click(
-                                            function(event){InAnimeCatalogElement<?=$strMainID;?>.sizeClick(event)}
-                                        );
-                                    });
-                                </script>
                             </div>
                         </div>
                         <?

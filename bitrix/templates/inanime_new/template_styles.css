@@ -92,6 +92,11 @@ body{
 .social-link.vimeo{
     background: url(images/vimeo-link.png) no-repeat #fff;
 }
+.social-link.vk{
+    background: url(images/vk-link.png) no-repeat #fff;
+}.social-link.youtube{
+     background: url(images/youtube-link.png) no-repeat #fff 50% 50%;
+ }
 /* INPUTS */
 input.form-control{
     border-radius: 10px;

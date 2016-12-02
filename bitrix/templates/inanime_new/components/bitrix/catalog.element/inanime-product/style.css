@@ -1,4 +1,8 @@
 /********************************* PRODUCT CARD ***********************************/
+.photo-big-container{
+    height:420px;
+    width:490px;
+}
 .photo-big{
     border-radius: 10px;
     /*width: 100%;*/
@@ -35,7 +39,8 @@
     right: 5px;
 }
 .photo-carousel-container .prev.button{
-    left: 7px;
+    /*left: 7px;*/
+    left: -5px;
 }
 .photo-carousel-container img {
     max-width: 120px;
@@ -46,17 +51,19 @@
     /*display:inline-block;*/
     /*width: 120px;
     height: 78px;*/
-    width: 120px;
-    height: 95px;
+    width: 130px;
+    /*height: 95px;*/
+    height: 105px;
     padding-right: 15px;
 }
 .preview-photo-carousel ul li .photo-container {
     width: 100%;
     display: inline-block;
-    height: 100%;
+    /*height: 100%;*/
     padding: 5px;
     border-radius:10px;
     cursor:pointer;
+    overflow: hidden;
 }
 .preview-photo-carousel ul li:hover .photo-container {
     padding:4px;
@@ -69,6 +76,9 @@
 .product-info .photo-big-container {
     /*height:415px;*/
     text-align: center;
+}
+.product-info .photo-big-container img{
+    cursor: zoom-in;
 }
 .product-info .data-column{
     padding-left: 45px;
@@ -111,6 +121,7 @@
     margin-top: 3px;
     font-size: 15px;
     letter-spacing: 0.6px;
+    min-height: 76px;
 }
 .product-info .discount .discount-amount{
     margin-right: 24px;
@@ -134,12 +145,14 @@
 .product-info .color-container,
 .product-info .size-container {
     display:inline-block;
+    vertical-align: middle;
 }
 .product-info .properties-container {
     margin-top:30px;
 }
 .product-info .color-container {
-    margin-right:17px;
+    /*margin-right:17px;*/
+    margin-left:17px;
 }
 .product-info .properties-container .ia-radio-button {
     margin-right:4px;
@@ -186,12 +199,16 @@
 /* Mobile */
 @media (max-width: 760px) {
     /*****************PRODUCT INFO **********************/
+    .photo-big-container{
+        height:220px;
+        width:260px;
+    }
     .photo-big {
-        max-height: 250px;
-        max-width: 289px;
+        max-height: 220px;
+        max-width: 260px;
     }
     .product-info {
-        margin-top: 68px;
+        /*margin-top: 68px;*/
     }
     .product-info .data-column {
         padding-left: 15px;
@@ -311,7 +328,11 @@
 @media (min-width: 760px) and (max-width:992px) {
     /********************** PRODUCT INFO *******************/
     .product-info {
-        margin-top: 80px;
+        /*margin-top: 80px;*/
+    }
+    .photo-big-container{
+        height:240px;
+        width:280px;
     }
     .photo-big {
         max-width:280px;
@@ -397,6 +418,9 @@
     }
     .photo-carousel-container .prev.button {
         left: 3px;
+    }
+    .photo-big-container{
+        width:370px;
     }
     .photo-big {
         max-width:370px;
