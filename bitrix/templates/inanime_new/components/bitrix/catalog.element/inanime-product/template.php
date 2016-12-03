@@ -277,6 +277,15 @@ else
                                 foreach($photoGalleryData as $galleryID=>$galleryPhoto)
                                 {
                                     $carouselID = 'preview-photo-carousel_'.$galleryID.'_xs';
+                                    $showGallery = false;
+                                    if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
+                                    {
+                                        if($activeOfferID==$galleryID) $showGallery = true;
+                                    }
+                                    else
+                                    {
+                                        if($strMainID==$galleryID) $showGallery = true;
+                                    }
                                     ?>
                                     <div class="general-container photo-container <?=$galleryID?>" <?=($showGallery)?'':'style="display:none;"'?>>
                                         <div class="photo-big-container">
