@@ -78,6 +78,12 @@ body{
 .splitted-btn span.text-btn.already-subscribe{
     padding: 13px 26px 9px 20px;
 }
+.ia-button {
+    color: #68422e;
+    cursor: pointer;
+    font-size: 21px;
+    display: inline-block;
+}
 .social-link{
     display: inline-block;
     width: 31px;
@@ -308,6 +314,63 @@ input.form-control{
     left:0px;
 }
 
+/******************************* POPUP ************************************/
+.ia-modal  .modal-dialog {
+    width: 470px;
+    margin: 372px auto;
+}
+.ia-modal .modal-header h4{
+    text-transform:uppercase;
+    text-align:center;
+    font-weight: bold;
+    font-size: 21px;
+    letter-spacing: 1px;
+}
+.ia-modal  .modal-header {
+    border: none;
+    padding-top: 54px;
+}
+.ia-modal .modal-title {
+    font-family: "Myriad Pro";
+}
+.ia-modal .modal-content{
+    border-radius: 10px;
+}
+.ia-modal .close{
+    position: absolute;
+    right: -31px;
+    top: -32px;
+    background-color: #de263c;
+    opacity: 1;
+    color: #fff;
+    font-size: 13px;
+    width: 27px;
+    height: 27px;
+    border-radius: 8px;
+}
+.ia-modal .modal-content .status-container{
+    text-align:center;
+    display:none;
+}
+.ia-modal .modal-content .status-container .success {
+    color:rgb(99,186,196);
+    width:250px;
+    display:inline-block;
+    font-size: 13px;
+    letter-spacing: 0.5px;
+}
+.ia-modal .button-container {
+    text-align:center;
+    margin-top: 28px;
+    padding-bottom: 37px
+}
+.ia-modal .button-container button {
+    font-size: 14px;
+    padding: 10px 47px;
+}
+.ia-modal  .modal-body {
+    color:rgb(121,130,139);
+}
 
 /***************** QUESTIONS ******************/
 #questions .question-text {

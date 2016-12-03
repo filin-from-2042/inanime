@@ -8,6 +8,7 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
     : $arResult['NAME']
 );
 
+$photoGalleryData = array();
 if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
 {
     //var_dump($arResult['OFFERS']);
@@ -48,8 +49,6 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
     $minPriceBuff=$arResult['OFFERS'][0]["MIN_PRICE"]["DISCOUNT_VALUE"];
     // данные по всем предложениям
     $offersData = array();
-    // метка отражает наличие своей галереи у товарного предложения
-    $offerPhotoMark = false;
     foreach($arResult['OFFERS'] as $offer)
     {
         if($minPriceBuff>0 && $offer["MIN_PRICE"]["DISCOUNT_VALUE"]<$minPriceBuff)
@@ -62,7 +61,6 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
         {
             foreach($offer["PROPERTIES"]["GALLERY_PHOTO"]["VALUE"] as $photoID)
             {
-                $offerPhotoMark = true;
                 $offerPhotos[]= CFile::GetFileArray($photoID)["SRC"];
             }
         }
@@ -89,7 +87,32 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
         //if(!empty($offer["PROPERTIES"]["COLOR_REF"]["VALUE"]))
             $availableSizes[$offer["PROPERTIES"]["SIZE_GLK"]["VALUE"]][] = $offer["PROPERTIES"]["COLOR_REF"]["VALUE"];
 
+        foreach($offerPhotos as $offerPhoto)
+        {
+            $photoGalleryData[$offer["ID"]][] = $offerPhoto;
+        }
     }
+
+    if(empty($photoGalleryData))
+    {
+        if($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"])
+        {
+            foreach($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"] as $photoID)
+            {
+                $photoGalleryData[$strMainID][] = CFile::GetFileArray($photoID)['SRC'];
+            }
+        }
+
+        if(empty($photoGalleryData))
+        {
+            foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
+            {
+                $photoGalleryData[$strMainID][] = $arOnePhoto['SRC'];
+            }
+        }
+    }
+
+
 
 //    var_dump($activeOfferID);
 //    var_dump($offersData);
@@ -102,6 +125,21 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
 else
 {
     $canBuy = $arResult['CAN_BUY'];
+    if($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"])
+    {
+        foreach($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"] as $photoID)
+        {
+            $photoGalleryData[$strMainID][] = CFile::GetFileArray($photoID)['SRC'];
+        }
+    }
+
+    if(empty($photoGalleryData))
+    {
+        foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
+        {
+            $photoGalleryData[$strMainID][] = $arOnePhoto['SRC'];
+        }
+    }
 }
 ?>
 <div class="container">
@@ -126,31 +164,40 @@ else
         <div class="row product-info">
             <div class="hidden-xs col-sm-10 col-md-10 col-lg-10 photo-column">
                 <?
-                if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']) && $offerPhotoMark)
-                {
-                    foreach($offersData as $offerID=>$offerData)
+                    if(!empty($photoGalleryData))
                     {
-                        if(is_array($offerData['photo']) && count($offerData['photo'])>0)
+                        foreach($photoGalleryData as $galleryID=>$galleryPhoto)
                         {
-                            $carouselID = 'preview-photo-carousel_'.$offerID;
+                            $carouselID = 'preview-photo-carousel_'.$galleryID;
+                            $showGallery = false;
+                            if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
+                            {
+                                   if($activeOfferID==$galleryID) $showGallery = true;
+                            }
+                            else
+                            {
+                                if($strMainID==$galleryID) $showGallery = true;
+                            }
                             ?>
-                            <div class="general-container photo-container <?=$offerID?>" style="display:<?=($offerID==$activeOfferID)?'block':'none'?>">
+                            <div class="general-container photo-container <?=$galleryID?>" <?=($showGallery)?'':'style="display:none;"'?>>
                                 <div class="photo-big-container">
-                                    <img src="<?=$offerData['photo'][0];?>" class="photo-big">
+                                    <img src="<?=$galleryPhoto[0];?>" class="photo-big">
                                 </div>
                                 <div class="photo-carousel-container">
                                     <div id="<?=$carouselID;?>" class="preview-photo-carousel">
                                         <ul>
                                             <?
-                                            foreach($offerData['photo'] as $singleOfferPhoto)
+                                            if($galleryPhoto)
                                             {
-                                                ?>
-                                                <li>
-                                                    <div class="photo-container">
-                                                        <img src="<?=$singleOfferPhoto;?>">
-                                                    </div>
-                                                </li>
-                                            <?
+                                                foreach($galleryPhoto as $photoSRC)
+                                                {?>
+                                                    <li>
+                                                        <div class="photo-container">
+                                                            <img src="<?=$photoSRC?>">
+                                                        </div>
+                                                    </li>
+                                                <?
+                                                }
                                             }
                                             ?>
                                         </ul>
@@ -159,60 +206,16 @@ else
                                         <div class="next button"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
                                         <div class="prev button"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
                                     </div>
+                                    <script>
+                                        $(document).ready(function () {
+                                            inanime_new.init_product_horizontal_carousel('<?=$carouselID?>', 4);
+                                        });
+                                    </script>
                                 </div>
-                                <script>
-                                    $(document).ready(function () {
-                                        inanime_new.init_product_horizontal_carousel('<?=$carouselID?>', 4);
-                                    });
-                                </script>
                             </div>
                             <?
                         }
                     }
-                }else{
-
-                        $carouselID = 'preview-photo-carousel';
-
-                        reset($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"]);
-                        $arFirstPhoto = current($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"]);
-                        ?>
-                        <div class="general-container photo-container">
-                            <div class="photo-big-container">
-                                <img src="<?=CFile::GetFileArray($arFirstPhoto)["SRC"];?>" class="photo-big">
-                            </div>
-                            <div class="photo-carousel-container">
-                                <div id="<?=$carouselID;?>" class="preview-photo-carousel">
-                                    <ul>
-                                        <?
-                                        if($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"])
-                                        {
-                                            foreach($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"] as $photoID)
-                                            {?>
-                                                <li>
-                                                    <div class="photo-container">
-                                                        <img src="<?=CFile::GetFileArray($photoID)["SRC"];?>">
-                                                    </div>
-                                                </li>
-                                            <?
-                                            }
-                                        }
-                                        ?>
-                                    </ul>
-                                </div>
-                                <div class="nav-container">
-                                    <div class="next button"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-                                    <div class="prev button"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
-                                </div>
-                            </div>
-                            <script>
-                                $(document).ready(function () {
-                                    inanime_new.init_product_horizontal_carousel('<?=$carouselID?>', 4);
-                                });
-                            </script>
-                        </div>
-                        <?
-                    unset($arOnePhoto);
-                }
                 ?>
             </div>
             <div class="col-xs-24 col-sm-14 col-md-14 col-lg-14">
@@ -269,39 +272,38 @@ else
 
                         <div class="visible-xs">
                             <?
-                            if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
+                            if(!empty($photoGalleryData))
                             {
-                                foreach($offersData as $offerID=>$offerData)
+                                foreach($photoGalleryData as $galleryID=>$galleryPhoto)
                                 {
-                                    if(is_array($offerData['photo']) && count($offerData['photo'])>0)
-                                    {
-                                        $carouselID = 'preview-photo-carousel_'.$offerID.'_xs';
-                                        ?>
-                                        <div class="general-container photo-container <?=$offerID?>" style="display:<?=($offerID==$activeOfferID)?'block':'none'?>">
-                                            <div class="photo-big-container">
-                                                <img src="<?=$offerData['photo'][0];?>" class="photo-big">
-                                            </div>
-                                            <div class="photo-carousel-container">
-                                                <div id="<?=$carouselID;?>" class="preview-photo-carousel">
-                                                    <ul>
-                                                        <?
-                                                        foreach($offerData['photo'] as $singleOfferPhoto)
-                                                        {
-                                                            ?>
+                                    $carouselID = 'preview-photo-carousel_'.$galleryID.'_xs';
+                                    ?>
+                                    <div class="general-container photo-container <?=$galleryID?>" <?=($showGallery)?'':'style="display:none;"'?>>
+                                        <div class="photo-big-container">
+                                            <img src="<?=$galleryPhoto[0];?>" class="photo-big">
+                                        </div>
+                                        <div class="photo-carousel-container">
+                                            <div id="<?=$carouselID;?>" class="preview-photo-carousel">
+                                                <ul>
+                                                    <?
+                                                    if($galleryPhoto)
+                                                    {
+                                                        foreach($galleryPhoto as $photoSRC)
+                                                        {?>
                                                             <li>
                                                                 <div class="photo-container">
-                                                                    <img src="<?=$singleOfferPhoto;?>">
+                                                                    <img src="<?=$photoSRC?>">
                                                                 </div>
                                                             </li>
                                                         <?
                                                         }
-                                                        ?>
-                                                    </ul>
-                                                </div>
-                                                <div class="nav-container">
-                                                    <div class="next button"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-                                                    <div class="prev button"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
-                                                </div>
+                                                    }
+                                                    ?>
+                                                </ul>
+                                            </div>
+                                            <div class="nav-container">
+                                                <div class="next button"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
+                                                <div class="prev button"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
                                             </div>
                                             <script>
                                                 $(document).ready(function () {
@@ -309,52 +311,9 @@ else
                                                 });
                                             </script>
                                         </div>
-                                    <?
-                                    }
-                                }
-                            }else{
-
-                                $carouselID = 'preview-photo-carousel_xs';
-                                reset($arResult['MORE_PHOTO']);
-                                $arFirstPhoto = current($arResult['MORE_PHOTO']);
-                                var_dump($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"]);
-                                ?>
-                                <div class="general-container photo-container">
-                                    <div class="photo-big-container">
-                                        <img src="<?=$arFirstPhoto?>" class="photo-big">
                                     </div>
-                                    <div class="photo-carousel-container">
-                                        <div id="<?=$carouselID;?>" class="preview-photo-carousel">
-                                            <ul>
-                                                <?
-                                                if($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"])
-                                                {
-                                                    foreach($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"] as $photoID)
-                                                    {?>
-                                                        <li>
-                                                            <div class="photo-container">
-                                                                <img src="<?=CFile::GetFileArray($photoID)["SRC"];?>">
-                                                            </div>
-                                                        </li>
-                                                    <?
-                                                    }
-                                                }
-                                                ?>
-                                            </ul>
-                                        </div>
-                                        <div class="nav-container">
-                                            <div class="next button"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
-                                            <div class="prev button"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
-                                        </div>
-                                    </div>
-                                    <script>
-                                        $(document).ready(function () {
-                                            inanime_new.init_product_horizontal_carousel('<?=$carouselID?>', 4);
-                                        });
-                                    </script>
-                                </div>
                                 <?
-                                unset($arOnePhoto);
+                                }
                             }
                             ?>
                         </div>
@@ -432,13 +391,11 @@ else
                             ?>
                             <div class="properties-container">
 
-
-
                                 <div class="size-container radio-container">
                                     <input type="hidden" name="size-radio" class="ia-radio-value" />
                                     <?
                                     $sizesData = array();
-                                    $JSColorData = array();
+                                    $JSStartColorData = array();
                                     foreach ($availableSizes as $sizeName=>$sizeColors)
                                     {?>
                                         <?
@@ -446,23 +403,17 @@ else
                                         {
                                             if($offerData['size']!=$sizeName) continue;
 
-
-                                            $currOfferPrices = implode('-',$offerData['price']);
                                             $currOfferColor = $offerData['color'];
-
-                                            $JSColorData[$currOfferColor] = array('price'=>$offerData['price'], 'id'=>$offerID);
-                                            /*
-                                            ?>
-                                            <span class="offer-data hidden"><?=$currOfferColor?>;<?=$currOfferPrices?>;<?=$offerID?></span>
-                                            <?*/
+                                            if($offersData[$activeOfferID]['size']==$sizeName)
+                                                $JSStartColorData[$currOfferColor] = array('price'=>$offerData['price'], 'id'=>$offerID);
                                             $sizesData[$sizeName][$offerID] = $offerData;
                                         }?>
                                         <?if(array_key_exists($sizeName,$sizesData)){?>
-                                        <div class="size-radio ia-radio-button <?= $offersData[$activeOfferID]['size']==$sizeName ? 'active' : ''?>">
-                                            <span class="value hidden"><?= $sizeName?></span>
-                                            <span><?= $sizeName;?></span>
-                                        </div>
-                                    <?}?>
+                                            <div class="size-radio ia-radio-button <?= $offersData[$activeOfferID]['size']==$sizeName ? 'active' : ''?>">
+                                                <span class="value hidden"><?= $sizeName?></span>
+                                                <span><?= $sizeName;?></span>
+                                            </div>
+                                        <?}?>
                                     <?}?>
                                     <script>
                                         $(document).ready(function(){
@@ -792,10 +743,38 @@ else
             </div>
         </div>
 
+        <!-- Modal PHOTO LIGHTBOX -->
+        <div class="modal fade ia-modal" id="photo-lightbox-modal" tabindex="-1" role="dialog" aria-labelledby="modalPhotoLightbox">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true" class="clearfix ">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="photo-container">
+                            <img />
+                        </div>
+                        <div class="control-buttons-container">
+                            <div class="prev ia-button">
+                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                            </div>
+                            <div class="next ia-button">
+                                <i class="fa fa-chevron-right" aria-hidden="true"></i>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 <script>
-    var InAnimeCatalogElement<?=$strMainID;?> = new window.InAnimeCatalogElement(<? echo CUtil::PhpToJSObject($sizesData, false, true); ?>,<? echo CUtil::PhpToJSObject($JSColorData, false, true); ?>);
+    var InAnimeCatalogElement<?=$strMainID;?> = new window.InAnimeCatalogElement(<? echo CUtil::PhpToJSObject($sizesData, false, true); ?>,<? echo CUtil::PhpToJSObject($JSStartColorData, false, true); ?>);
     $(document).ready(function(){
         $('.general-container.photo-container .photo-container img').click(function(){
             var newSRC = $(this).attr('src');
