@@ -172,6 +172,7 @@ else
                 }else{
 
                         $carouselID = 'preview-photo-carousel';
+
                         reset($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"]);
                         $arFirstPhoto = current($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"]);
                         ?>
@@ -581,8 +582,216 @@ else
                     </div>
                 </div>
             </div>
-
         </div>
+        <div class="row product-description hidden-md hidden-lg">
+            <div class="col-sm-24">
+                <div class="description-container gray-text">
+                    <?
+                    if ('html' == $arResult['DETAIL_TEXT_TYPE'])
+                    {
+                        echo $arResult['DETAIL_TEXT'];
+                    }
+                    else
+                    {
+                        ?><p><? echo $arResult['DETAIL_TEXT']; ?></p><?
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+        <div class="row product-tabs">
+            <!-- Nav tabs -->
+            <ul class="nav nav-tabs" role="tablist">
+                <li role="presentation" class="active"><a href="#characteristics" aria-controls="characteristics" role="tab" data-toggle="tab">Характеристики</a></li>
+                <li role="presentation"><a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Отзывы</a></li>
+                <li role="presentation"><a href="#shipping" aria-controls="shipping" role="tab" data-toggle="tab">Доставка и гарантии</a></li>
+                <li role="presentation"><a href="#questions" aria-controls="questions" role="tab" data-toggle="tab">Вопрос - ответ</a></li>
+            </ul>
+
+            <!-- Tab panes -->
+            <div class="tab-content">
+                <div role="tabpanel" class="tab-pane active" id="characteristics">
+                    <?
+                    if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS'])
+                    {
+                    ?>
+                        <?
+                        if (!empty($arResult['DISPLAY_PROPERTIES']))
+                        {
+                            ?>
+                            <ul class="characteristic-list gray-text">
+                                <?
+                                foreach ($arResult['DISPLAY_PROPERTIES'] as &$arOneProp)
+                                {
+                                    ?>
+                                    <li>
+                                        <span class="char-name"><? echo $arOneProp['NAME']; ?></span>
+                                        <span class="char-value"><?
+                                            echo (
+                                            is_array($arOneProp['DISPLAY_VALUE'])
+                                                ? implode(' / ', $arOneProp['DISPLAY_VALUE'])
+                                                : $arOneProp['DISPLAY_VALUE']
+                                            ); ?>
+                                        </span>
+                                    </li><?
+                                }
+                                unset($arOneProp);
+                                ?>
+                            </ul>
+                        <?
+                        }
+                    }
+                    ?>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="comments">
+                    <div class="comment-container">
+                        <div class="comment-main grey-container ">
+                            <div class="nickname-rate-container">
+                                <div class="nicname">Иван Иванов</div>
+                                <div class="comment-rate"></div>
+                            </div>
+                            <div class="part-title">Плюсы:</div>
+                            <div class="part-text gray-text">Большой ассортимент, качественная продукция</div>
+                            <div class="part-title">Минусы:</div>
+                            <div class="part-text gray-text">Достаточно высокие цены, из-за того, что большинство продукции - импортная<BR>
+                                Мне давно знаком этот небольшой уютный магазинчик, располагающий в пяти минутах ходьбы от метро Технологический институт.
+                                Я с удовольствием наблюдал как расширяется его ассортимент - от обычной продажи дисков с аниме (японской анимацией).
+                            </div>
+                            <div class="part-title">Комментарий:</div>
+                            <div class="part-text gray-text">
+                                Достаточно высокие цены, из-за того, что большинство продукции - импортная<BR>
+                                Мне давно знаком этот небольшой уютный магазинчик, располагающий в пяти минутах ходьбы от метро Технологический институт.
+                                Я с удовольствием наблюдал как расширяется его ассортимент - от обычной продажи дисков с аниме (японской анимацией).
+                            </div>
+                            <div class="date-answer-container">
+                                <div class="text gray-text">29 февраля 2016</div>
+                                <span class="divider">|</span>
+                                <div class="answer-button">Ответить</div>
+                            </div>
+                        </div>
+                        <div class="comment-container sub-comment">
+                            <div class="comment-main grey-container ">
+                                <div class="nickname-rate-container">
+                                    <div class="answer-icon"></div>
+                                    <div class="nicname">Алексей Разин</div>
+                                    <div class="comment-parent-nicname">Ивану Иванову</div>
+                                </div>
+                                <div class="part-text gray-text">
+                                    Достаточно высокие цены, из-за того, что большинство продукции - импортная<br>
+                                    Мне давно знаком этот небольшой уютный магазинчик, располагающий в пяти минутах ходьбы от метро Технологический институт.
+                                    Я с удовольствием наблюдал как расширяется его ассортимент - от обычной продажи дисков с аниме (японской анимацией).
+                                </div>
+                                <div class="date-answer-container">
+                                    <div class="text gray-text">29 февраля 2016</div>
+                                    <span class="divider">|</span>
+                                    <div class="answer-button">Ответить</div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="button-container">
+                            <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="OK" value="Оставить отзыв">
+                                <i class="fa fa-pencil" aria-hidden="true"></i>
+                                <span>Оставить отзыв</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="shipping">
+                    <div class="text-container">
+                        <div class="text-title">Доставка товаров по Москве</div>
+                        <ul>
+                            <li>1. Доставка заказов осуществляется в течении 1-3 рабочих дня (если товар нужно изготавливать, то срок сборки может быть дольше). </li>
+                            <li>2. Доставка работает с 11 до 19 часов. </li>
+                            <li>3. Дату и время доставки сотрудник службы доставки согласует с Вами по телефону. </li>
+                            <li>4. Доставка курьером по Москве стоит 350 рублей. </li>
+                            <li>5. Вы можете забрать заказ самостоятельно в нашем магазине около метро Менделеевская. В этом случае за доставку платить не нужно. </li>
+                        </ul>
+                        <div class="text-title">Доставка товаров по России</div>
+                        <ul>
+                            <li>1. Доставка товаров за пределы Москвы осуществляется транспортными компаниями или почтой. </li>
+                            <li>2. Стоимость доставки любого заказа в любую точку России - 350 рублей (смотрите ниже некоторые исключения).</li>
+                            <li>3. Срок доставки зависит от типа доставки и города. </li>
+                            <li>4. Стоимость доставки первым классом - 600 рублей. Небольшие посылки весом до 2 кг. Требуется полная предоплата заказа.</li>
+                            <li>5. Стоимость доставки EMS - 1200 рублей. Требуется полная предоплата заказа. Доставка на дом в течении нескольких дней.</li>
+                            <li>6. Международная пересылка простой почтой без страховки - 900 рублей. Требуется полная предоплата заказа. </li>
+                            <li>7. Международная пересылка EMS почтой  - 1900 рублей. Требуется полная предоплата заказа. </li>
+                        </ul>
+
+
+                        <div class="text-title">Расчет времени доставки в ваш город:  Волгоград</div>
+
+                        <p>
+                            Задача организации, в особенности же сложившаяся структура организации способствует подготовки и реализации системы обучения кадров,
+                            соответствует насущным потребностям. Повседневная практика показывает, что начало повседневной работы по формированию позиции способствует
+                            подготовки и реализации соответствующий условий активизации. Значимость этих проблем настолько очевидна, что реализация намеченных плановых
+                            заданий требуют определения и уточнения дальнейших направлений развития.
+                        </p>
+                    </div>
+                </div>
+                <div role="tabpanel" class="tab-pane" id="questions">
+                    <div class="question-answer-section-container">
+                        <div class="question-container">
+                            <div class="question-title">
+                                <span class="question-text">Что будет если не весь товар из заказанного окажется в наличии?</span>
+                            </div>
+                            <div class="question-answer gray-text">
+                                Выберите понравившиеся продукты в нужном количестве и добавьте их в «корзину».
+                                Перейдите в «корзину» и проверьте её содержимое. На этом этапе Вы можете изменить количество товара, выбрать подарки,
+                                пробники и ввести код бонуса, если он у Вас есть. Нажмите кнопку «Оформить заказ». Авторизуйтесь, если у Вас уже есть Личный Кабинет,
+                                или пройдите регистрацию. Выберете желаемый способ доставки и оплаты.  Сверьте еще раз содержимое Вашей «корзины». Нажмите «Завершить заказ».
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question-answer-section-container">
+                        <div class="question-container">
+                            <div class="question-title">
+                                <span class="question-text">Можете ли вы изготовить товар с моей картинкой?</span>
+                            </div>
+                            <div class="question-answer gray-text">
+                                Выберите понравившиеся продукты в нужном количестве и добавьте их в «корзину».
+                                Перейдите в «корзину» и проверьте её содержимое. На этом этапе Вы можете изменить количество товара, выбрать подарки,
+                                пробники и ввести код бонуса, если он у Вас есть. Нажмите кнопку «Оформить заказ». Авторизуйтесь, если у Вас уже есть Личный Кабинет,
+                                или пройдите регистрацию. Выберете желаемый способ доставки и оплаты.  Сверьте еще раз содержимое Вашей «корзины». Нажмите «Завершить заказ».
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question-answer-section-container">
+                        <div class="question-container">
+                            <div class="question-title">
+                                <span class="question-text">Как подтвердить заказ? </span>
+                            </div>
+                            <div class="question-answer gray-text">
+                                Выберите понравившиеся продукты в нужном количестве и добавьте их в «корзину».
+                                Перейдите в «корзину» и проверьте её содержимое. На этом этапе Вы можете изменить количество товара, выбрать подарки,
+                                пробники и ввести код бонуса, если он у Вас есть. Нажмите кнопку «Оформить заказ». Авторизуйтесь, если у Вас уже есть Личный Кабинет,
+                                или пройдите регистрацию. Выберете желаемый способ доставки и оплаты.  Сверьте еще раз содержимое Вашей «корзины». Нажмите «Завершить заказ».
+                            </div>
+                        </div>
+                    </div>
+                    <div class="question-answer-section-container">
+                        <div class="question-container">
+                            <div class="question-title">
+                                <span class="question-text">Заказ пришел, но я не хочу его выкупать. Как вернуть предоплату и сколько времени вы можете хранить мой заказ?</span>
+                            </div>
+                            <div class="question-answer gray-text">
+                                Выберите понравившиеся продукты в нужном количестве и добавьте их в «корзину».
+                                Перейдите в «корзину» и проверьте её содержимое. На этом этапе Вы можете изменить количество товара, выбрать подарки,
+                                пробники и ввести код бонуса, если он у Вас есть. Нажмите кнопку «Оформить заказ». Авторизуйтесь, если у Вас уже есть Личный Кабинет,
+                                или пройдите регистрацию. Выберете желаемый способ доставки и оплаты.  Сверьте еще раз содержимое Вашей «корзины». Нажмите «Завершить заказ».
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="button-container">
+                        <button class="btn btn-default ia-btn text-btn blue-btn question-btn" type="submit" name="OK" value="Задать вопрос">
+                            <span class="icon-question"></span>
+                            <span>Задать вопрос</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 <script>

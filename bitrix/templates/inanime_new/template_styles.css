@@ -309,6 +309,153 @@ input.form-control{
 }
 
 
+/***************** QUESTIONS ******************/
+#questions .question-text {
+    color: #5d3d1d;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    border-bottom: 2px dotted #5d3d1d;
+    cursor:pointer;
+}
+#questions .question-title {
+    margin-bottom: 26px;
+    padding-left: 10px;
+}
+#questions .question-text.active,
+#questions .question-text:hover {
+    border-bottom:2px dotted transparent;
+}
+#questions .question-container .question-answer {
+    display:none;
+    padding-left: 27px;
+    padding-bottom: 33px;
+}
+#questions .question-container.opened .question-answer{
+    display:block;
+}
+
+#questions .question-btn ,
+.product-tabs .button-container .question-btn {
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 9px 19px;
+    vertical-align: bottom;
+    border-radius: 10px;
+}
+
+#questions  .question-btn .icon-question ,
+.product-tabs .button-container .question-btn .icon-question {
+    display:inline-block;
+    width:21px;
+    height:20px;
+    background:url(images/question-icon-cursor.png) no-repeat;
+}
+.product-tabs .button-container .question-btn span {
+    vertical-align:baseline;
+}
+.product-tabs .button-container {
+    text-align:center;
+}
+#questions .question-container .product-link-container{
+    padding-left: 10px;
+    margin-bottom: 26px;
+    margin-top: -14px;
+    font-size: 12px;
+}
+#questions .question-container .product-link-container .text{
+    margin-right: 5px;
+}
+#questions .question-container .product-link-container .product-link:before,
+#questions .question-container .product-link-container .product-link:after{
+    content:'"';
+}
+/**************** COMMENTS ***********************/
+#comments .comment-main {
+    margin-bottom: 15px;
+}
+#comments  .comment-container.sub-comment {
+    margin-left: 35px;
+}
+#comments .comment-main{
+    padding: 30px 38px;
+}
+#comments .comment-main .nickname-rate-container .nicname{
+    font-size: 18px;
+    font-weight: bold;
+    letter-spacing: 1px;
+}
+#comments .comment-main .nickname-rate-container {
+    /*margin-bottom: 20px;*/
+}
+#comments .comment-main .part-title{
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
+    margin-top: 15px;
+}
+#comments .comment-main .part-text{
+    line-height: 17px;
+}
+#comments .date-answer-container .text,
+#comments .date-answer-container .answer-button,
+#comments .comment-main .nickname-rate-container .answer-icon,
+#comments .comment-main .nickname-rate-container .nicname,
+#comments .comment-main .nickname-rate-container .comment-parent-nicname{
+    display: inline-block;
+}
+#comments .date-answer-container .answer-button{
+    margin-top: 22px;
+}
+#comments .comment-main .nickname-rate-container .comment-parent-nicname{
+    color:#bbbbbb;
+    font-style: italic;
+}
+#comments .comment-main .nickname-rate-container > div{
+    margin-right: 10px;
+}
+#comments .comment-main .nickname-rate-container .answer-icon{
+    width: 22px;
+    height: 21px;
+    background: url(images/comment-icon-answer.png) no-repeat;
+    vertical-align: text-bottom;
+}
+#comments .comment-main .date-answer-container{
+    font-size: 13px;
+}
+#comments .comment-main .date-answer-container .divider{
+    margin: 0 5px;
+}
+#comments .comment-main .date-answer-container .answer-button{
+    color:#63bac4;
+    text-decoration: underline;
+    cursor: pointer;
+}
+#comments .comment-main .date-answer-container .answer-button:hover{
+    text-decoration: none;
+}
+#comments .comment-container .button-container{
+    text-align: center;
+}
+#comments .comment-container .button-container .blue-btn{
+    text-transform: uppercase;
+    font-size: 14px;
+    padding: 9px 19px;
+    vertical-align: bottom;
+    border-radius: 10px;
+}
+#comments .comment-container .button-container button>i{
+    font-size: 22px;
+}
+#comments .comment-container .button-container button > span{
+    vertical-align: text-bottom;
+}
+#comments .comment-container.sub-comment .nickname-rate-container{
+    margin-bottom: 20px;
+}
+
+
+
 /******************************* HEADER ***********************************/
 header{
     padding-top: 30px;
