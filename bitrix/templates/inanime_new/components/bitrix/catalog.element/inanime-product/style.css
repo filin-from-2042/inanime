@@ -331,8 +331,8 @@
         padding-right: 5px;
     }
     .photo-carousel-container img {
-        max-width: 70px;
-        max-height: 55px;
+        max-width: 60px;
+        max-height: 45px;
     }
     .preview-photo-carousel {
         margin-top: 13px;
@@ -452,8 +452,8 @@
         padding-right: 5px;
     }
     .preview-photo-carousel img {
-        max-width: 70px;
-        max-height: 55px;
+        max-width: 60px;
+        max-height: 45px;
     }
     .photo-carousel-container .button {
         margin-top: -36px;
@@ -521,8 +521,8 @@
         padding-right: 10px;
     }
     .preview-photo-carousel img {
-        max-width:95px;
-        max-height: 75px;
+        max-width:85px;
+        max-height: 65px;
     }
     .photo-carousel-container .prev.button {
         left: 3px;
