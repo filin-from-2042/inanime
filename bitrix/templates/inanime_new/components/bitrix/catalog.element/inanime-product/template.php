@@ -99,7 +99,7 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
         {
             foreach($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"] as $photoID)
             {
-                $photoGalleryData[$strMainID][] = CFile::GetFileArray($photoID)['SRC'];
+                $photoGalleryData[$arResult['ID']][] = CFile::GetFileArray($photoID)['SRC'];
             }
         }
 
@@ -107,13 +107,10 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
         {
             foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
             {
-                $photoGalleryData[$strMainID][] = $arOnePhoto['SRC'];
+                $photoGalleryData[$arResult['ID']][] = $arOnePhoto['SRC'];
             }
         }
     }
-
-
-
 //    var_dump($activeOfferID);
 //    var_dump($offersData);
 //    echo '<br>';
@@ -129,7 +126,7 @@ else
     {
         foreach($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"] as $photoID)
         {
-            $photoGalleryData[$strMainID][] = CFile::GetFileArray($photoID)['SRC'];
+            $photoGalleryData[$arResult['ID']][] = CFile::GetFileArray($photoID)['SRC'];
         }
     }
 
@@ -137,7 +134,7 @@ else
     {
         foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
         {
-            $photoGalleryData[$strMainID][] = $arOnePhoto['SRC'];
+            $photoGalleryData[$arResult['ID']][] = $arOnePhoto['SRC'];
         }
     }
 }
@@ -667,34 +664,13 @@ else
                 </div>
                 <div role="tabpanel" class="tab-pane" id="shipping">
                     <div class="text-container">
-                        <div class="text-title">Доставка товаров по Москве</div>
-                        <ul>
-                            <li>1. Доставка заказов осуществляется в течении 1-3 рабочих дня (если товар нужно изготавливать, то срок сборки может быть дольше). </li>
-                            <li>2. Доставка работает с 11 до 19 часов. </li>
-                            <li>3. Дату и время доставки сотрудник службы доставки согласует с Вами по телефону. </li>
-                            <li>4. Доставка курьером по Москве стоит 350 рублей. </li>
-                            <li>5. Вы можете забрать заказ самостоятельно в нашем магазине около метро Менделеевская. В этом случае за доставку платить не нужно. </li>
-                        </ul>
-                        <div class="text-title">Доставка товаров по России</div>
-                        <ul>
-                            <li>1. Доставка товаров за пределы Москвы осуществляется транспортными компаниями или почтой. </li>
-                            <li>2. Стоимость доставки любого заказа в любую точку России - 350 рублей (смотрите ниже некоторые исключения).</li>
-                            <li>3. Срок доставки зависит от типа доставки и города. </li>
-                            <li>4. Стоимость доставки первым классом - 600 рублей. Небольшие посылки весом до 2 кг. Требуется полная предоплата заказа.</li>
-                            <li>5. Стоимость доставки EMS - 1200 рублей. Требуется полная предоплата заказа. Доставка на дом в течении нескольких дней.</li>
-                            <li>6. Международная пересылка простой почтой без страховки - 900 рублей. Требуется полная предоплата заказа. </li>
-                            <li>7. Международная пересылка EMS почтой  - 1900 рублей. Требуется полная предоплата заказа. </li>
-                        </ul>
-
-
-                        <div class="text-title">Расчет времени доставки в ваш город:  Волгоград</div>
-
-                        <p>
-                            Задача организации, в особенности же сложившаяся структура организации способствует подготовки и реализации системы обучения кадров,
-                            соответствует насущным потребностям. Повседневная практика показывает, что начало повседневной работы по формированию позиции способствует
-                            подготовки и реализации соответствующий условий активизации. Значимость этих проблем настолько очевидна, что реализация намеченных плановых
-                            заданий требуют определения и уточнения дальнейших направлений развития.
-                        </p>
+                        <?
+                        $APPLICATION->IncludeFile(
+                            $APPLICATION->GetTemplatePath("include_areas/shipping_text.php"),
+                            Array(),
+                            Array("MODE"=>"html")
+                        );
+                        ?>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="questions">
