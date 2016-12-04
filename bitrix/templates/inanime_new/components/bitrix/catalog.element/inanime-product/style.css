@@ -464,9 +464,6 @@
         max-height: 250px;
         border-radius: 10px;
     }
-    #photo-lightbox-modal.ia-modal .close {
-        right: 0px;
-    }
 
 }
 /* Tablet */

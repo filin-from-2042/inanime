@@ -1237,6 +1237,24 @@ footer .general-container{
 /******************************* MEDIA QUERIES ********************************/
 /* Mobile */
 @media (max-width: 760px) {
+
+    /*********** GENERAL ***************/
+    .ia-modal .close {
+        right: 0px;
+    }
+    .ia-modal .modal-dialog {
+        width: 316px;
+    }
+    .ia-modal .modal-body {
+        padding: 15px 10px;
+    }
+    .ia-modal input.form-control,
+    .ia-modal textarea.form-control {
+        width: 290px;
+    }
+    .ia-modal .icon-input-container {
+        padding: 12px 0px;
+    }
     header{
         padding-top:20px;
     }
