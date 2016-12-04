@@ -432,7 +432,8 @@
         margin-top: 30px;
         padding: 0 16px;
     }
-    .product-tabs .nav-tabs > li.active > a {
+    .product-tabs .nav-tabs > li.active > a ,
+    .product-tabs .nav-tabs > li.active > a:hover{
         background-color: #5d3d1d;
         color:#fff;
         padding: 16px 23px
