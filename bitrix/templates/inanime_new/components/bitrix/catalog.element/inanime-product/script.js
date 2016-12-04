@@ -8,11 +8,11 @@
     {
         this.sizesData = sizeDataArray;
         this.currentColorConfig = startColorData;
+        this.popupGalleryID=null;
     };
 
     window.InAnimeCatalogElement.prototype.sizeClick = function(event)
     {
-        console.log(1);
         var sizeButton = event.delegateTarget;
         //console.log(this.sizesData);
         //this.currentSizeConfig
@@ -41,7 +41,6 @@
                 else radioButton.css('display','none');
             }
         );
-        //console.log(this.currentColorConfig);
     };
 
     window.InAnimeCatalogElement.prototype.colorClick = function(event)
@@ -66,11 +65,10 @@
         }
 
         $('.general-container.photo-container').css('display','none');
-        $('.general-container.photo-container.'+colorData.id).css('display','block');
+//        $('.general-container.photo-container. '+colorData.id).css('display','block');
+        $('.general-container.photo-container#photo_gallery_'+colorData.id+',' +
+            '.general-container.photo-container#photo_gallery_xs_'+colorData.id).css('display','block');
 
-
-
-        console.log(this.currentColorConfig[color]);
     }
 
 })(window);

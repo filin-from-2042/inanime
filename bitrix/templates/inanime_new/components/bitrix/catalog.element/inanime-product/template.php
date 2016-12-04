@@ -179,7 +179,7 @@ else
                                 if($strMainID==$galleryID) $showGallery = true;
                             }
                             ?>
-                            <div class="general-container photo-container <?=$galleryID?>" <?=($showGallery)?'':'style="display:none;"'?>>
+                            <div class="general-container photo-container" id="photo_gallery_<?=$galleryID?>" <?=($showGallery)?'':'style="display:none;"'?>>
                                 <div class="photo-big-container">
                                     <img src="<?=$galleryPhoto[0];?>" class="photo-big">
                                 </div>
@@ -287,7 +287,7 @@ else
                                         if($strMainID==$galleryID) $showGallery = true;
                                     }
                                     ?>
-                                    <div class="general-container photo-container <?=$galleryID?>" <?=($showGallery)?'':'style="display:none;"'?>>
+                                    <div class="general-container photo-container" id="photo_gallery_xs_<?=$galleryID?>"  <?=($showGallery)?'':'style="display:none;"'?>>
                                         <div class="photo-big-container">
                                             <img src="<?=$galleryPhoto[0];?>" class="photo-big">
                                         </div>
@@ -785,6 +785,28 @@ else
 <script>
     var InAnimeCatalogElement<?=$strMainID;?> = new window.InAnimeCatalogElement(<? echo CUtil::PhpToJSObject($sizesData, false, true); ?>,<? echo CUtil::PhpToJSObject($JSStartColorData, false, true); ?>);
     $(document).ready(function(){
+        $('.general-container.photo-container .photo-big-container img').click(function(){
+            var galleryID = $(this).closest('.general-container.photo-container').attr('id');
+            InAnimeCatalogElement<?=$strMainID;?>.popupGalleryID = galleryID;
+            $('#photo-lightbox-modal .photo-container img').attr('src',$(this).attr('src'));
+            $('#photo-lightbox-modal').modal()
+        });
+
+        $('#photo-lightbox-modal .control-buttons-container .ia-button').click(function(){
+            var button = $(this);
+            var currSRC = button.closest('.modal-body').find('.photo-container img').attr('src');
+
+            var newSRC;
+            if(button.hasClass('prev'))
+                newSRC = $('#'+InAnimeCatalogElement<?=$strMainID;?>.popupGalleryID+' .photo-carousel-container img[src="'+currSRC+'"]')
+                .closest('li').prev().find('img').attr('src');
+            else if(button.hasClass('next'))
+                newSRC = $('#'+InAnimeCatalogElement<?=$strMainID;?>.popupGalleryID+' .photo-carousel-container img[src="'+currSRC+'"]')
+                                .closest('li').next().find('img').attr('src');
+            if(newSRC)
+                button.closest('.modal-body').find('.photo-container img').attr('src',newSRC);
+        });
+
         $('.general-container.photo-container .photo-container img').click(function(){
             var newSRC = $(this).attr('src');
             $(this).closest('.general-container.photo-container').find('.photo-big-container img').attr('src',newSRC);

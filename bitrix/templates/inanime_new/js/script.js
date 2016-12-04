@@ -267,7 +267,7 @@ function inanime_new() {
     // обработчик нажания на кнопку в поле кол-во
     this.counterButtonClick = function ()
     {
-        button = $(this)
+        var button = $(this)
         var counterContainer = button.closest('.ia-counter-container');
         var input = counterContainer.find('input.counter-value');
         if(button.hasClass('increase'))
