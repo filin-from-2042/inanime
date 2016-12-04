@@ -176,7 +176,7 @@ else
                             }
                             else
                             {
-                                if($strMainID==$galleryID) $showGallery = true;
+                                if($arResult['ID']==$galleryID) $showGallery = true;
                             }
                             ?>
                             <div class="general-container photo-container" id="photo_gallery_<?=$galleryID?>" <?=($showGallery)?'':'style="display:none;"'?>>
@@ -284,7 +284,7 @@ else
                                     }
                                     else
                                     {
-                                        if($strMainID==$galleryID) $showGallery = true;
+                                        if($arResult['ID']==$galleryID) $showGallery = true;
                                     }
                                     ?>
                                     <div class="general-container photo-container" id="photo_gallery_xs_<?=$galleryID?>"  <?=($showGallery)?'':'style="display:none;"'?>>
@@ -470,11 +470,15 @@ else
                             <span class="gray-text count-text">шт.</span>
                             <div class="buttons-container">
                                 <?if($canBuy){?>
-                                    <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="inanime_new.addToCart(parseInt($(this).find('.hidden.value').text())
-                                        ,parseInt($('.ia-counter-container input.counter-value').val())
-                                        ,'<?=$arResult["NAME"]?>'
-                                        ,<?=$minPrice['DISCOUNT_VALUE'];?>
-                                        ,false)">
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart"
+                                        onclick="
+                                                inanime_new.addToCart(
+                                                    parseInt($(this).find('.hidden.value').text())
+                                                    ,parseInt($('.ia-counter-container input.counter-value').val())
+                                                    ,'<?=$arResult["NAME"]?>'
+                                                    ,<?=($minPrice['DISCOUNT_VALUE'])?$minPrice['DISCOUNT_VALUE']:9;?>
+                                                    ,false)
+                                            ">
                                         <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
                                         <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" width="17"/></span>
                                         <span class="text-btn">В корзину</span>
@@ -496,9 +500,14 @@ else
                                 <?
                                 }
                                 ?>
-
-                                <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite hidden-sm hidden-xs">
-                                    <img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>"/>
+                                <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite hidden-sm hidden-xs"
+                                    onclick="inanime_new.addToCart(parseInt($(this).find('.hidden.value').text())
+                                        ,parseInt($('.ia-counter-container input.counter-value').val())
+                                        ,'<?=$arResult["NAME"]?>'
+                                        ,<?=($minPrice['DISCOUNT_VALUE'])?$minPrice['DISCOUNT_VALUE']:9;?>
+                                        ,true)">
+                                    <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
+                                    <img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" />
                                 </button>
                             </div>
                         </div>

@@ -23,7 +23,7 @@ CModule::IncludeModule("catalog");
 //    );
 
 //    CSaleBasket::Add($arFields);
-    Add2BasketByProductID(intval($_REQUEST['productID']),1, array("DELAY" => $_REQUEST['delay']),array());
+    Add2BasketByProductID(intval($_REQUEST['productID']),intval($_REQUEST['quantity']), array("DELAY" => $_REQUEST['delay']),array());
 
     $APPLICATION->IncludeComponent("bitrix:sale.basket.basket.line", "inanime-template", Array(
             "PATH_TO_BASKET" => SITE_DIR."personal/cart/",	// Страница корзины
