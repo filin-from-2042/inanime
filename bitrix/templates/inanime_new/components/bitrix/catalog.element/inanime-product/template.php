@@ -476,7 +476,7 @@ else
                                                     parseInt($(this).find('.hidden.value').text())
                                                     ,parseInt($('.ia-counter-container input.counter-value').val())
                                                     ,'<?=$arResult["NAME"]?>'
-                                                    ,<?=($minPrice['DISCOUNT_VALUE'])?$minPrice['DISCOUNT_VALUE']:9;?>
+                                                    ,parseInt($('.price-container .price.yellow-text').text())
                                                     ,false)
                                             ">
                                         <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
@@ -504,7 +504,7 @@ else
                                     onclick="inanime_new.addToCart(parseInt($(this).find('.hidden.value').text())
                                         ,parseInt($('.ia-counter-container input.counter-value').val())
                                         ,'<?=$arResult["NAME"]?>'
-                                        ,<?=($minPrice['DISCOUNT_VALUE'])?$minPrice['DISCOUNT_VALUE']:9;?>
+                                        ,parseInt($('.price-container .price.yellow-text').text())
                                         ,true)">
                                     <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
                                     <img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" />
