@@ -610,57 +610,102 @@ else
                     ?>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="comments">
-                    <div class="comment-container">
-                        <div class="comment-main grey-container ">
-                            <div class="nickname-rate-container">
-                                <div class="nicname">Иван Иванов</div>
-                                <div class="comment-rate"></div>
-                            </div>
-                            <div class="part-title">Плюсы:</div>
-                            <div class="part-text gray-text">Большой ассортимент, качественная продукция</div>
-                            <div class="part-title">Минусы:</div>
-                            <div class="part-text gray-text">Достаточно высокие цены, из-за того, что большинство продукции - импортная<BR>
-                                Мне давно знаком этот небольшой уютный магазинчик, располагающий в пяти минутах ходьбы от метро Технологический институт.
-                                Я с удовольствием наблюдал как расширяется его ассортимент - от обычной продажи дисков с аниме (японской анимацией).
-                            </div>
-                            <div class="part-title">Комментарий:</div>
-                            <div class="part-text gray-text">
-                                Достаточно высокие цены, из-за того, что большинство продукции - импортная<BR>
-                                Мне давно знаком этот небольшой уютный магазинчик, располагающий в пяти минутах ходьбы от метро Технологический институт.
-                                Я с удовольствием наблюдал как расширяется его ассортимент - от обычной продажи дисков с аниме (японской анимацией).
-                            </div>
-                            <div class="date-answer-container">
-                                <div class="text gray-text">29 февраля 2016</div>
-                                <span class="divider">|</span>
-                                <div class="answer-button">Ответить</div>
-                            </div>
-                        </div>
-                        <div class="comment-container sub-comment">
-                            <div class="comment-main grey-container ">
-                                <div class="nickname-rate-container">
-                                    <div class="answer-icon"></div>
-                                    <div class="nicname">Алексей Разин</div>
-                                    <div class="comment-parent-nicname">Ивану Иванову</div>
-                                </div>
-                                <div class="part-text gray-text">
-                                    Достаточно высокие цены, из-за того, что большинство продукции - импортная<br>
-                                    Мне давно знаком этот небольшой уютный магазинчик, располагающий в пяти минутах ходьбы от метро Технологический институт.
-                                    Я с удовольствием наблюдал как расширяется его ассортимент - от обычной продажи дисков с аниме (японской анимацией).
-                                </div>
-                                <div class="date-answer-container">
-                                    <div class="text gray-text">29 февраля 2016</div>
-                                    <span class="divider">|</span>
-                                    <div class="answer-button">Ответить</div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="button-container">
-                            <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="OK" value="Оставить отзыв">
-                                <i class="fa fa-pencil" aria-hidden="true"></i>
-                                <span>Оставить отзыв</span>
-                            </button>
-                        </div>
-                    </div>
+
+                    <?
+                    if ('Y' == $arParams['USE_COMMENTS'])
+                    {
+                        ?>
+                        <?$APPLICATION->IncludeComponent(
+                        "bitrix:catalog.comments",
+                        "product-comments",
+                        array(
+                            "ELEMENT_ID" => $arResult['ID'],
+                            "ELEMENT_CODE" => "",
+                            "IBLOCK_ID" => $arParams['IBLOCK_ID'],
+                            "SHOW_DEACTIVATED" => $arParams['SHOW_DEACTIVATED'],
+                            "URL_TO_COMMENT" => "",
+                            "WIDTH" => "",
+                            "COMMENTS_COUNT" => "5",
+                            "BLOG_USE" => $arParams['BLOG_USE'],
+                            "FB_USE" => $arParams['FB_USE'],
+                            "FB_APP_ID" => $arParams['FB_APP_ID'],
+                            "VK_USE" => $arParams['VK_USE'],
+                            "VK_API_ID" => $arParams['VK_API_ID'],
+                            "CACHE_TYPE" => $arParams['CACHE_TYPE'],
+                            "CACHE_TIME" => $arParams['CACHE_TIME'],
+                            'CACHE_GROUPS' => $arParams['CACHE_GROUPS'],
+                            "BLOG_TITLE" => "",
+                            "BLOG_URL" => $arParams['BLOG_URL'],
+                            "PATH_TO_SMILE" => "",
+                            "EMAIL_NOTIFY" => $arParams['BLOG_EMAIL_NOTIFY'],
+                            "AJAX_POST" => "Y",
+                            "SHOW_SPAM" => "Y",
+                            "SHOW_RATING" => "N",
+                            "FB_TITLE" => "",
+                            "FB_USER_ADMIN_ID" => "",
+                            "FB_COLORSCHEME" => "light",
+                            "FB_ORDER_BY" => "reverse_time",
+                            "VK_TITLE" => "",
+                            "TEMPLATE_THEME" => $arParams['~TEMPLATE_THEME']
+                        ),
+                        $component,
+                        array("HIDE_ICONS" => "Y")
+                    );?>
+                    <?
+                    }
+                    ?>
+
+<!--                    <div class="comment-container">-->
+<!--                        <div class="comment-main grey-container ">-->
+<!--                            <div class="nickname-rate-container">-->
+<!--                                <div class="nicname">Иван Иванов</div>-->
+<!--                                <div class="comment-rate"></div>-->
+<!--                            </div>-->
+<!--                            <div class="part-title">Плюсы:</div>-->
+<!--                            <div class="part-text gray-text">Большой ассортимент, качественная продукция</div>-->
+<!--                            <div class="part-title">Минусы:</div>-->
+<!--                            <div class="part-text gray-text">Достаточно высокие цены, из-за того, что большинство продукции - импортная<BR>-->
+<!--                                Мне давно знаком этот небольшой уютный магазинчик, располагающий в пяти минутах ходьбы от метро Технологический институт.-->
+<!--                                Я с удовольствием наблюдал как расширяется его ассортимент - от обычной продажи дисков с аниме (японской анимацией).-->
+<!--                            </div>-->
+<!--                            <div class="part-title">Комментарий:</div>-->
+<!--                            <div class="part-text gray-text">-->
+<!--                                Достаточно высокие цены, из-за того, что большинство продукции - импортная<BR>-->
+<!--                                Мне давно знаком этот небольшой уютный магазинчик, располагающий в пяти минутах ходьбы от метро Технологический институт.-->
+<!--                                Я с удовольствием наблюдал как расширяется его ассортимент - от обычной продажи дисков с аниме (японской анимацией).-->
+<!--                            </div>-->
+<!--                            <div class="date-answer-container">-->
+<!--                                <div class="text gray-text">29 февраля 2016</div>-->
+<!--                                <span class="divider">|</span>-->
+<!--                                <div class="answer-button">Ответить</div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="comment-container sub-comment">-->
+<!--                            <div class="comment-main grey-container ">-->
+<!--                                <div class="nickname-rate-container">-->
+<!--                                    <div class="answer-icon"></div>-->
+<!--                                    <div class="nicname">Алексей Разин</div>-->
+<!--                                    <div class="comment-parent-nicname">Ивану Иванову</div>-->
+<!--                                </div>-->
+<!--                                <div class="part-text gray-text">-->
+<!--                                    Достаточно высокие цены, из-за того, что большинство продукции - импортная<br>-->
+<!--                                    Мне давно знаком этот небольшой уютный магазинчик, располагающий в пяти минутах ходьбы от метро Технологический институт.-->
+<!--                                    Я с удовольствием наблюдал как расширяется его ассортимент - от обычной продажи дисков с аниме (японской анимацией).-->
+<!--                                </div>-->
+<!--                                <div class="date-answer-container">-->
+<!--                                    <div class="text gray-text">29 февраля 2016</div>-->
+<!--                                    <span class="divider">|</span>-->
+<!--                                    <div class="answer-button">Ответить</div>-->
+<!--                                </div>-->
+<!--                            </div>-->
+<!--                        </div>-->
+<!--                        <div class="button-container">-->
+<!--                            <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="OK" value="Оставить отзыв">-->
+<!--                                <i class="fa fa-pencil" aria-hidden="true"></i>-->
+<!--                                <span>Оставить отзыв</span>-->
+<!--                            </button>-->
+<!--                        </div>-->
+<!--                    </div>-->
                 </div>
                 <div role="tabpanel" class="tab-pane" id="shipping">
                     <div class="text-container">
