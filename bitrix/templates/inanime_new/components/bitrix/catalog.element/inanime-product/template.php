@@ -19,7 +19,6 @@ $isBestseller = (bool)$arResult["PROPERTIES"]["IS_BESTSELLER"]["VALUE"];
 
 if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
 {
-    //var_dump($arResult['OFFERS']);
     $canBuy = $arResult['OFFERS'][$arResult['OFFERS_SELECTED']]['CAN_BUY'];
 
 
@@ -90,7 +89,8 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
             'color'=>$offer["PROPERTIES"]["COLOR_REF"]["VALUE"],
             'price'=>$prices,
             'size'=>$offer["PROPERTIES"]["SIZE_GLK"]["VALUE"],
-            'photo'=>$offerPhotos
+            'photo'=>$offerPhotos,
+            'can_buy'=>$offer["CAN_BUY"]
             );
         //if(!empty($offer["PROPERTIES"]["COLOR_REF"]["VALUE"]))
             $availableSizes[$offer["PROPERTIES"]["SIZE_GLK"]["VALUE"]][] = $offer["PROPERTIES"]["COLOR_REF"]["VALUE"];
@@ -119,13 +119,6 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
             }
         }
     }
-//    var_dump($activeOfferID);
-//    var_dump($offersData);
-//    echo '<br>';
-//    var_dump($availableColors);
-//    echo '<br>';
-//    var_dump($availableSizes);
-//    echo '<br>';
 }
 else
 {
@@ -243,11 +236,8 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                 <span class="art">арт.<?=$arResult["PROPERTIES"]["ARTNUMBER1"]["VALUE"]?></span>
                             <?}?>
 
-                            <?if($canBuy){?>
-                            <span class="avalable">В наличие</span>
-                            <?}else{?>
-                            <span class="notavalable">Нет в наличии</span>
-                            <?}?>
+                            <span class="avalable <?=(!$canBuy)?'hidden':''?>">В наличие</span>
+                            <span class="notavalable <?=($canBuy)?'hidden':''?>">Нет в наличии</span>
 
                             <div class="hidden-xs hidden-md  hidden-lg">
                                 <?$APPLICATION->IncludeFile(
@@ -442,7 +432,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
 
                                             $currOfferColor = $offerData['color'];
                                             if($offersData[$activeOfferID]['size']==$sizeName)
-                                                $JSStartColorData[$currOfferColor] = array('price'=>$offerData['price'], 'id'=>$offerID);
+                                                $JSStartColorData[$currOfferColor] = array('price'=>$offerData['price'], 'id'=>$offerID, 'can_buy'=>$offerData['can_buy']);
                                             $sizesData[$sizeName][$offerID] = $offerData;
                                         }?>
                                         <?if(array_key_exists($sizeName,$sizesData)){?>
@@ -497,37 +487,34 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                             </div>
                             <span class="gray-text count-text">шт.</span>
                             <div class="buttons-container">
-                                <?if($canBuy){?>
-                                    <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart"
-                                        onclick="
-                                                inanime_new.addToCart(
-                                                    parseInt($(this).find('.hidden.value').text())
-                                                    ,parseInt($('.ia-counter-container input.counter-value').val())
-                                                    ,'<?=$arResult["NAME"]?>'
-                                                    ,parseInt($('.price-container .price.yellow-text').text())
-                                                    ,false)
-                                            ">
-                                        <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
-                                        <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" width="17"/></span>
-                                        <span class="text-btn">В корзину</span>
-                                    </button>
-                                <?
-                                }else{
-                                    ?>
-                                    <?$APPLICATION->IncludeComponent(
-                                        "bitrix:catalog.product.subscribe",
-                                        "inanime-subscribe",
-                                        Array(
-                                            "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
-                                            "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
-                                            "CACHE_TIME" => $arParams["CACHE_TIME"],
-                                            "CACHE_TYPE" => $arParams["CACHE_TYPE"],
-                                            "PRODUCT_ID" => $arResult['ID']
-                                        )
-                                    );?>
-                                <?
-                                }
-                                ?>
+                                    <div class="button-wrap in-cart" <?=(!$canBuy)?'style="display:none"':''?>>
+                                        <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart"
+                                            onclick="
+                                                    inanime_new.addToCart(
+                                                        parseInt($(this).find('.hidden.value').text())
+                                                        ,parseInt($('.ia-counter-container input.counter-value').val())
+                                                        ,'<?=$arResult["NAME"]?>'
+                                                        ,parseInt($('.price-container .price.yellow-text').text())
+                                                        ,false)
+                                                ">
+                                            <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
+                                            <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" width="17"/></span>
+                                            <span class="text-btn">В корзину</span>
+                                        </button>
+                                    </div>
+                                    <div class="button-wrap subscribe" <?=($canBuy)?'style="display:none"':''?>>
+                                        <?$APPLICATION->IncludeComponent(
+                                            "bitrix:catalog.product.subscribe",
+                                            "inanime-subscribe",
+                                            Array(
+                                                "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
+                                                "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
+                                                "CACHE_TIME" => $arParams["CACHE_TIME"],
+                                                "CACHE_TYPE" => $arParams["CACHE_TYPE"],
+                                                "PRODUCT_ID" => (isset($arResult['OFFERS']) && !empty($arResult['OFFERS'])) ? $activeOfferID : $arResult['ID']
+                                            )
+                                        );?>
+                                    </div>
                                 <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite hidden-sm hidden-xs"
                                     onclick="inanime_new.addToCart(parseInt($(this).find('.hidden.value').text())
                                         ,parseInt($('.ia-counter-container input.counter-value').val())

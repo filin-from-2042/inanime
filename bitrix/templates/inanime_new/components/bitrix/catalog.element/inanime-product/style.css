@@ -179,6 +179,9 @@
     display:inline-block;
     margin-left: 29px;
 }
+.product-info .counter-button-container .buttons-container .button-wrap{
+    display: inline-block;
+}
 .product-info .counter-button-container .buttons-container .in-favorite {
     padding:13px;
     margin-left: 4px;

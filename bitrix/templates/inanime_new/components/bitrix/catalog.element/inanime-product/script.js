@@ -6,7 +6,7 @@
 
     window.InAnimeCatalogElement = function(params)
     {
-        this.sizesData = params.sizeDataArray;
+        this.sizesData = params.sizesData;
         this.currentColorConfig = params.startColorData;
         this.ajaxURL = params.ajaxURL;
         this.popupGalleryID=null;
@@ -26,7 +26,8 @@
          {
              this.currentColorConfig[this.sizesData[size][offerID].color] = {
                  price:this.sizesData[size][offerID].price,
-                 id:offerID
+                 id:offerID,
+                 can_buy:this.sizesData[size][offerID].can_buy
              }
          }
         }
@@ -72,6 +73,22 @@
         {
             $(this).text(colorData.id);
         });
+        $('.product-info .buttons-container .button-wrap.subscribe button').attr('data-item',colorData.id);
+        if(colorData.can_buy)
+        {
+            $('.product-info .avalable').removeClass('hidden');
+            $('.product-info .notavalable').addClass('hidden');
+            $('.product-info .buttons-container .button-wrap.in-cart').show();
+            $('.product-info .buttons-container .button-wrap.subscribe').hide();
+        }
+        else
+        {
+            $('.product-info .avalable').addClass('hidden');
+            $('.product-info .notavalable').removeClass('hidden');
+            $('.product-info .buttons-container .button-wrap.in-cart').hide();
+            $('.product-info .buttons-container .button-wrap.subscribe').show();
+        }
+
     };
 
     window.InAnimeCatalogElement.prototype.addQuestion = function(event)
