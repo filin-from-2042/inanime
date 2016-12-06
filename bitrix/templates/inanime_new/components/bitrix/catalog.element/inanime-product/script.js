@@ -4,10 +4,11 @@
         return;
     }
 
-    window.InAnimeCatalogElement = function(sizeDataArray, startColorData)
+    window.InAnimeCatalogElement = function(params)
     {
-        this.sizesData = sizeDataArray;
-        this.currentColorConfig = startColorData;
+        this.sizesData = params.sizeDataArray;
+        this.currentColorConfig = params.startColorData;
+        this.ajaxURL = params.ajaxURL;
         this.popupGalleryID=null;
     };
 
@@ -70,6 +71,30 @@
         $('button.in-cart span.value, button.in-favorite span.value').each(function()
         {
             $(this).text(colorData.id);
+        });
+    };
+
+    window.InAnimeCatalogElement.prototype.addQuestion = function(event)
+    {
+        var formContainer = $(event.delegateTarget).closest('.modal-body');
+
+        $.ajax({
+            type: "POST",
+            url: this.ajaxURL,
+            data: {
+                action:'addQuestion',
+                question : formContainer.find('textarea[name="mail-text"]').val(),
+                username : formContainer.find('input[name="username"]').val(),
+                email: formContainer.find('input[name="email"]').val(),
+                sessid:BX.bitrix_sessid()
+            },
+            //dataType: 'json',
+            success: function(data){
+                formContainer.find('.status-container').show();
+            },
+            error: function( xhr, textStatus ) {
+                alert( [ xhr.status, textStatus ] );
+            }
         });
     }
 

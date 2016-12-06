@@ -138,6 +138,7 @@ else
         }
     }
 }
+$arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
@@ -654,130 +655,38 @@ else
                     <?
                     }
                     ?>
-
-<!--                    <div class="comment-container">-->
-<!--                        <div class="comment-main grey-container ">-->
-<!--                            <div class="nickname-rate-container">-->
-<!--                                <div class="nicname">Иван Иванов</div>-->
-<!--                                <div class="comment-rate"></div>-->
-<!--                            </div>-->
-<!--                            <div class="part-title">Плюсы:</div>-->
-<!--                            <div class="part-text gray-text">Большой ассортимент, качественная продукция</div>-->
-<!--                            <div class="part-title">Минусы:</div>-->
-<!--                            <div class="part-text gray-text">Достаточно высокие цены, из-за того, что большинство продукции - импортная<BR>-->
-<!--                                Мне давно знаком этот небольшой уютный магазинчик, располагающий в пяти минутах ходьбы от метро Технологический институт.-->
-<!--                                Я с удовольствием наблюдал как расширяется его ассортимент - от обычной продажи дисков с аниме (японской анимацией).-->
-<!--                            </div>-->
-<!--                            <div class="part-title">Комментарий:</div>-->
-<!--                            <div class="part-text gray-text">-->
-<!--                                Достаточно высокие цены, из-за того, что большинство продукции - импортная<BR>-->
-<!--                                Мне давно знаком этот небольшой уютный магазинчик, располагающий в пяти минутах ходьбы от метро Технологический институт.-->
-<!--                                Я с удовольствием наблюдал как расширяется его ассортимент - от обычной продажи дисков с аниме (японской анимацией).-->
-<!--                            </div>-->
-<!--                            <div class="date-answer-container">-->
-<!--                                <div class="text gray-text">29 февраля 2016</div>-->
-<!--                                <span class="divider">|</span>-->
-<!--                                <div class="answer-button">Ответить</div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="comment-container sub-comment">-->
-<!--                            <div class="comment-main grey-container ">-->
-<!--                                <div class="nickname-rate-container">-->
-<!--                                    <div class="answer-icon"></div>-->
-<!--                                    <div class="nicname">Алексей Разин</div>-->
-<!--                                    <div class="comment-parent-nicname">Ивану Иванову</div>-->
-<!--                                </div>-->
-<!--                                <div class="part-text gray-text">-->
-<!--                                    Достаточно высокие цены, из-за того, что большинство продукции - импортная<br>-->
-<!--                                    Мне давно знаком этот небольшой уютный магазинчик, располагающий в пяти минутах ходьбы от метро Технологический институт.-->
-<!--                                    Я с удовольствием наблюдал как расширяется его ассортимент - от обычной продажи дисков с аниме (японской анимацией).-->
-<!--                                </div>-->
-<!--                                <div class="date-answer-container">-->
-<!--                                    <div class="text gray-text">29 февраля 2016</div>-->
-<!--                                    <span class="divider">|</span>-->
-<!--                                    <div class="answer-button">Ответить</div>-->
-<!--                                </div>-->
-<!--                            </div>-->
-<!--                        </div>-->
-<!--                        <div class="button-container">-->
-<!--                            <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="OK" value="Оставить отзыв">-->
-<!--                                <i class="fa fa-pencil" aria-hidden="true"></i>-->
-<!--                                <span>Оставить отзыв</span>-->
-<!--                            </button>-->
-<!--                        </div>-->
-<!--                    </div>-->
                 </div>
                 <div role="tabpanel" class="tab-pane" id="shipping">
                     <div class="text-container">
                         <?
-                        $APPLICATION->IncludeFile(
-                            $APPLICATION->GetTemplatePath("include_areas/shipping_text.php"),
-                            Array(),
-                            Array("MODE"=>"html")
-                        );
+                        if(CModule::IncludeModule("iblock"))
+                        {
+                            $res = CIBlockElement::GetByID(56129);
+                            if($ar_res = $res->GetNext())
+                                echo $ar_res["~DETAIL_TEXT"];
+                        }
                         ?>
                     </div>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="questions">
-                    <div class="question-answer-section-container">
-                        <div class="question-container">
-                            <div class="question-title">
-                                <span class="question-text">Что будет если не весь товар из заказанного окажется в наличии?</span>
-                            </div>
-                            <div class="question-answer gray-text">
-                                Выберите понравившиеся продукты в нужном количестве и добавьте их в «корзину».
-                                Перейдите в «корзину» и проверьте её содержимое. На этом этапе Вы можете изменить количество товара, выбрать подарки,
-                                пробники и ввести код бонуса, если он у Вас есть. Нажмите кнопку «Оформить заказ». Авторизуйтесь, если у Вас уже есть Личный Кабинет,
-                                или пройдите регистрацию. Выберете желаемый способ доставки и оплаты.  Сверьте еще раз содержимое Вашей «корзины». Нажмите «Завершить заказ».
-                            </div>
-                        </div>
-                    </div>
-                    <div class="question-answer-section-container">
-                        <div class="question-container">
-                            <div class="question-title">
-                                <span class="question-text">Можете ли вы изготовить товар с моей картинкой?</span>
-                            </div>
-                            <div class="question-answer gray-text">
-                                Выберите понравившиеся продукты в нужном количестве и добавьте их в «корзину».
-                                Перейдите в «корзину» и проверьте её содержимое. На этом этапе Вы можете изменить количество товара, выбрать подарки,
-                                пробники и ввести код бонуса, если он у Вас есть. Нажмите кнопку «Оформить заказ». Авторизуйтесь, если у Вас уже есть Личный Кабинет,
-                                или пройдите регистрацию. Выберете желаемый способ доставки и оплаты.  Сверьте еще раз содержимое Вашей «корзины». Нажмите «Завершить заказ».
-                            </div>
-                        </div>
-                    </div>
-                    <div class="question-answer-section-container">
-                        <div class="question-container">
-                            <div class="question-title">
-                                <span class="question-text">Как подтвердить заказ? </span>
-                            </div>
-                            <div class="question-answer gray-text">
-                                Выберите понравившиеся продукты в нужном количестве и добавьте их в «корзину».
-                                Перейдите в «корзину» и проверьте её содержимое. На этом этапе Вы можете изменить количество товара, выбрать подарки,
-                                пробники и ввести код бонуса, если он у Вас есть. Нажмите кнопку «Оформить заказ». Авторизуйтесь, если у Вас уже есть Личный Кабинет,
-                                или пройдите регистрацию. Выберете желаемый способ доставки и оплаты.  Сверьте еще раз содержимое Вашей «корзины». Нажмите «Завершить заказ».
-                            </div>
-                        </div>
-                    </div>
-                    <div class="question-answer-section-container">
-                        <div class="question-container">
-                            <div class="question-title">
-                                <span class="question-text">Заказ пришел, но я не хочу его выкупать. Как вернуть предоплату и сколько времени вы можете хранить мой заказ?</span>
-                            </div>
-                            <div class="question-answer gray-text">
-                                Выберите понравившиеся продукты в нужном количестве и добавьте их в «корзину».
-                                Перейдите в «корзину» и проверьте её содержимое. На этом этапе Вы можете изменить количество товара, выбрать подарки,
-                                пробники и ввести код бонуса, если он у Вас есть. Нажмите кнопку «Оформить заказ». Авторизуйтесь, если у Вас уже есть Личный Кабинет,
-                                или пройдите регистрацию. Выберете желаемый способ доставки и оплаты.  Сверьте еще раз содержимое Вашей «корзины». Нажмите «Завершить заказ».
-                            </div>
-                        </div>
-                    </div>
-
+                    <?
+                    if(CModule::IncludeModule("iblock"))
+                    {
+                        $res = CIBlockElement::GetByID(56128);
+                        if($ar_res = $res->GetNext())
+                           echo $ar_res["~DETAIL_TEXT"];
+                    }
+                    ?>
                     <div class="button-container">
                         <button class="btn btn-default ia-btn text-btn blue-btn question-btn" type="submit" name="OK" value="Задать вопрос">
                             <span class="icon-question"></span>
                             <span>Задать вопрос</span>
                         </button>
                     </div>
+                    <script>
+                        $('#questions .question-answer-section-container .question-title').click(inanime_new.questionClick);
+                        $('#questions .button-container .question-btn').click(function(){$('#question-popup').modal()});
+                    </script>
                 </div>
             </div>
         </div>
@@ -810,10 +719,66 @@ else
             </div>
         </div>
 
+
+        <!-- Modal QUESTION-->
+        <div class="modal fade ia-modal" id="question-popup" tabindex="-1" role="dialog" aria-labelledby="modalQuestionPopup">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true" class="clearfix ">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                        <h4 class="modal-title">Задать вопрос</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <?
+                            global $USER;
+                            if (!$USER->IsAuthorized())
+                            {
+                            ?>
+                                <div class="icon-input-container">
+                                    <div class="icon-input-wrap">
+                                        <input type="text" name="username" value="" placeholder="Имя" class="form-control username-input">
+                                        <i class="fa fa-user" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                                <div class="icon-input-container">
+                                    <div class="icon-input-wrap">
+                                        <input type="text" name="email" value="" placeholder="Электронная почта" class="form-control email-input">
+                                        <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                    </div>
+                                </div>
+                            <?}?>
+                            <div class="icon-input-container">
+                                <div class="icon-input-wrap">
+                                    <textarea name="mail-text" placeholder="Текс сообщения"  class="form-control email-textarea" value=""></textarea>
+                                </div>
+                            </div>
+                            <div class="status-container">
+                                <div class="success">Ответ на Ваш вопрос можно будет прочитать в личном кабинете</div>
+                            </div>
+                            <div class="button-container">
+                                <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="send-button" value="Отправить">
+                                    <span>Отправить</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
+<?
+$arJSParams['sizesData'] = $sizesData;
+$arJSParams['startColorData'] = $JSStartColorData;
+?>
 <script>
-    var InAnimeCatalogElement<?=$strMainID;?> = new window.InAnimeCatalogElement(<? echo CUtil::PhpToJSObject($sizesData, false, true); ?>,<? echo CUtil::PhpToJSObject($JSStartColorData, false, true); ?>);
+    var InAnimeCatalogElement<?=$strMainID;?> = new window.InAnimeCatalogElement(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
     $(document).ready(function(){
         $('.general-container.photo-container .photo-big-container img').click(function(){
             var galleryID = $(this).closest('.general-container.photo-container').attr('id');
@@ -841,5 +806,16 @@ else
             var newSRC = $(this).attr('src');
             $(this).closest('.general-container.photo-container').find('.photo-big-container img').attr('src',newSRC);
         });
+
+
+        $('#question-popup button[name="send-button"]').click(function(event){
+            event.preventDefault();
+            InAnimeCatalogElement<?=$strMainID;?>.addQuestion(event);
+        });
+        $('#question-popup').on('hidden.bs.modal', function (e) {
+            var modal = $(this);
+            modal.find('.status-container').hide();
+            modal.find('input,textarea').val('');
+        })
     });
 </script>

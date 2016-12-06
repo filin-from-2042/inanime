@@ -104,13 +104,17 @@ body{
      background: url(images/youtube-link.png) no-repeat #fff 50% 50%;
  }
 /* INPUTS */
-input.form-control{
+input.form-control,
+textarea.form-control{
     border-radius: 10px;
     height: 31px;
     width: 340px;
     border: 2px solid #5d3d1d;
     font-size: 12px;
     display: inline-block;
+}
+textarea.form-control {
+    height: 85px;
 }
 .search-input-container{
     position:  relative;
@@ -312,6 +316,23 @@ input.form-control{
 }
 .ia-counter-container .button.decrease {
     left:0px;
+}
+
+/******** INPUT WITH ICON *****************/
+.icon-input-container {
+    text-align:center;
+    padding: 12px 10px;
+}
+.icon-input-wrap {
+    position:relative;
+    display:inline-block;
+}
+.icon-input-container i {
+    position: absolute;
+    top: 21%;
+    right: 11px;
+    font-size: 17px;
+    color:rgb(176,178,185);
 }
 
 /******************************* POPUP ************************************/

@@ -289,5 +289,13 @@ function inanime_new() {
         radioButton.closest('.radio-container').find('.ia-radio-button').removeClass('active');
         radioButton.addClass('active');
     };
+    // обработчик нажатия на заголовок Вопрос-ответ
+    this.questionClick = function ()
+    {
+        var questionTitle = $(this);
+        var questionContainer = questionTitle.closest('.question-container');
+        if (questionContainer.hasClass('opened')) questionContainer.removeClass('opened');
+        else questionContainer.addClass('opened');
+    }
 }
 window.inanime_new = new inanime_new();
