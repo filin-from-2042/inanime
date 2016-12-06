@@ -33,16 +33,21 @@
         }
 
         var that = this;
-
+        var firstActiveButton = null;
         $('.properties-container .color-container .ia-radio-button').each(
             function()
             {
                 var radioButton = $(this);
                 var colorValue = radioButton.find('.value.hidden').text();
-                if(that.currentColorConfig[colorValue]!=undefined) radioButton.css('display','inline-block');
+                if(that.currentColorConfig[colorValue]!=undefined)
+                {
+                    if(!firstActiveButton) firstActiveButton = radioButton;
+                    radioButton.css('display','inline-block');
+                }
                 else radioButton.css('display','none');
             }
         );
+        firstActiveButton.trigger('click');
     };
 
     window.InAnimeCatalogElement.prototype.colorClick = function(event)
