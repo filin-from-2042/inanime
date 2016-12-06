@@ -77,6 +77,15 @@
     /*height:415px;*/
     text-align: center;
 }
+.product-info .photo-big-container .img-wrap{
+    display: inline-block;
+    position: relative;
+}
+.product-info .photo-big-container .img-wrap .additional-icon {
+    position: absolute;
+    top: -15px;
+    left: -15px;
+}
 .product-info .photo-big-container img{
     cursor: zoom-in;
 }
@@ -436,7 +445,7 @@
     .product-tabs .nav-tabs > li.active > a:hover{
         background-color: #5d3d1d;
         color:#fff;
-        padding: 16px 23px
+        padding: 16px 16px
     }
     .product-tabs .nav.nav-tabs {
         padding: 0px 28px;

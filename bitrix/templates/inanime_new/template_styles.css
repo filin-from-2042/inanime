@@ -223,6 +223,29 @@ textarea.form-control {
     display: inline-block;
 }
 
+/***************** ADDITIONAL ICONS (BESTSELLER, RECOMMENDED, NEW) **********************/
+.additional-icon{
+    display:inline-block;
+    width:131px;
+    height:60px;
+    position: relative;
+}
+.additional-icon.new {
+    background-image:url(images/product-icon-new-desktop.png);
+    background-repeat:no-repeat;
+    z-index: 100;
+}
+.additional-icon.bestseller{
+    background-image:url(images/product-icon-bestseller-desktop.png);
+    background-repeat:no-repeat;
+    z-index: 99;
+}
+.additional-icon.recommended{
+    background-image:url(images/product-icon-recommended-desktop.png);
+    background-repeat:no-repeat;
+    z-index: 98;
+}
+
 /***************** IMAGE RADIO BUTTON **************/
 .radio-container .radio-button-container {
     display:inline-block;
@@ -913,27 +936,9 @@ footer .general-container{
     left: -17px;
 }
 .product-item-preview .icons-container .additional-icon{
-    display:inline-block;
-    width:131px;
-    height:60px;
-    margin-top: -23px;
-    position: relative;
-}
-.product-item-preview .icons-container .additional-icon.new {
-    background-image:url(images/product-icon-new-desktop.png);
-    background-repeat:no-repeat;
-    z-index: 100;
-}
-.product-item-preview .icons-container .additional-icon.bestseller{
-    background-image:url(images/product-icon-bestseller-desktop.png);
-    background-repeat:no-repeat;
-    z-index: 99;
-}
-.product-item-preview .icons-container .additional-icon.recommended{
-    background-image:url(images/product-icon-recommended-desktop.png);
-    background-repeat:no-repeat;
-    z-index: 98;
-}
+     margin-top: -23px;
+ }
+
 .product-item-preview.horizontal .image-container,
 .product-item-preview.horizontal .data-container{
     display:inline-block;
@@ -1260,6 +1265,7 @@ footer .general-container{
 @media (max-width: 760px) {
 
     /*********** GENERAL ***************/
+    /********************** AI MODAL *************************/
     .ia-modal .close {
         right: 0px;
     }
@@ -1276,6 +1282,24 @@ footer .general-container{
     .ia-modal .icon-input-container {
         padding: 12px 0px;
     }
+
+    /************************** ADDITIONAL ICONS (BESTSELLER, RECOMMENDED, NEW) *****************************/
+    .additional-icon.new {
+        background-image:url(images/product-icon-new-tablet.png);
+        background-repeat:no-repeat;
+        z-index: 100;
+    }
+    .additional-icon.bestseller{
+        background-image:url(images/product-icon-bestseller-tablet.png);
+        background-repeat:no-repeat;
+        z-index: 99;
+    }
+    .additional-icon.recommended{
+        background-image:url(images/product-icon-recommended-tablet.png);
+        background-repeat:no-repeat;
+        z-index: 98;
+    }
+
     header{
         padding-top:20px;
     }
@@ -1400,21 +1424,6 @@ footer .general-container{
     .product-item-preview.horizontal .title-container {
         max-width:115px;
         padding:0;
-    }
-    .product-item-preview .icons-container .additional-icon.new {
-        background-image:url(images/product-icon-new-tablet.png);
-        background-repeat:no-repeat;
-        z-index: 100;
-    }
-    .product-item-preview .icons-container .additional-icon.bestseller{
-        background-image:url(images/product-icon-bestseller-tablet.png);
-        background-repeat:no-repeat;
-        z-index: 99;
-    }
-    .product-item-preview .icons-container .additional-icon.recommended{
-        background-image:url(images/product-icon-recommended-tablet.png);
-        background-repeat:no-repeat;
-        z-index: 98;
     }
     .product-item-preview .icons-container .additional-icon{
         margin-top: -30px;
@@ -1566,6 +1575,24 @@ footer .general-container{
     .image-btn {
         padding: 12px 12px 15px;
     }
+
+    /************************** ADDITIONAL ICONS (BESTSELLER, RECOMMENDED, NEW) ***********************/
+    .additional-icon.new {
+        background-image:url(images/product-icon-new-tablet.png);
+        background-repeat:no-repeat;
+        z-index: 100;
+    }
+    .additional-icon.bestseller{
+        background-image:url(images/product-icon-bestseller-tablet.png);
+        background-repeat:no-repeat;
+        z-index: 99;
+    }
+    .additional-icon.recommended{
+        background-image:url(images/product-icon-recommended-tablet.png);
+        background-repeat:no-repeat;
+        z-index: 98;
+    }
+
     header{
         padding-top: 18px;
     }
@@ -1701,21 +1728,6 @@ footer .general-container{
     }
     .product-item-preview.horizontal .data-container {
         height: 168px;
-    }
-    .product-item-preview .icons-container .additional-icon.new {
-        background-image:url(images/product-icon-new-tablet.png);
-        background-repeat:no-repeat;
-        z-index: 100;
-    }
-    .product-item-preview .icons-container .additional-icon.bestseller{
-        background-image:url(images/product-icon-bestseller-tablet.png);
-        background-repeat:no-repeat;
-        z-index: 99;
-    }
-    .product-item-preview .icons-container .additional-icon.recommended{
-        background-image:url(images/product-icon-recommended-tablet.png);
-        background-repeat:no-repeat;
-        z-index: 98;
     }
     .product-item-preview .icons-container .additional-icon{
         margin-top: -30px;

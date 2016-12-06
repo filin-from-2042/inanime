@@ -115,19 +115,20 @@ if (0 < $ElementID)
 <?
 	}
 	if($arParams["USE_STORE"] == "Y" && IsModuleInstalled("catalog"))
-	{?>
-<?$APPLICATION->IncludeComponent("bitrix:catalog.store.amount", ".default", array(
-		"PER_PAGE" => "10",
-		"USE_STORE_PHONE" => $arParams["USE_STORE_PHONE"],
-		"SCHEDULE" => $arParams["USE_STORE_SCHEDULE"],
-		"USE_MIN_AMOUNT" => $arParams["USE_MIN_AMOUNT"],
-		"MIN_AMOUNT" => $arParams["MIN_AMOUNT"],
-		"ELEMENT_ID" => $ElementID,
-		"STORE_PATH"  =>  $arParams["STORE_PATH"],
-		"MAIN_TITLE"  =>  $arParams["MAIN_TITLE"],
-	),
-	$component
-);?>
-<?
+	{
+        /*?>
+        <?$APPLICATION->IncludeComponent("bitrix:catalog.store.amount", ".default", array(
+                "PER_PAGE" => "10",
+                "USE_STORE_PHONE" => $arParams["USE_STORE_PHONE"],
+                "SCHEDULE" => $arParams["USE_STORE_SCHEDULE"],
+                "USE_MIN_AMOUNT" => $arParams["USE_MIN_AMOUNT"],
+                "MIN_AMOUNT" => $arParams["MIN_AMOUNT"],
+                "ELEMENT_ID" => $ElementID,
+                "STORE_PATH"  =>  $arParams["STORE_PATH"],
+                "MAIN_TITLE"  =>  $arParams["MAIN_TITLE"],
+            ),
+            $component
+        );?>
+        <?*/
 	}
 }?>

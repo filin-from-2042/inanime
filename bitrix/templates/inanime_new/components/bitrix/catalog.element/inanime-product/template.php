@@ -1,6 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 <?
-//var_dump($arResult);
 $strMainID = $this->GetEditAreaId($arResult['ID']);
 $strAlt = (
 isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"] != ''
@@ -9,6 +8,15 @@ isset($arResult["IPROPERTY_VALUES"]["ELEMENT_DETAIL_PICTURE_FILE_ALT"]) && $arRe
 );
 
 $photoGalleryData = array();
+
+$isRecommended = (bool)$arResult["PROPERTIES"]["IS_RECOMMEND"]["VALUE"];
+if($arElement["DATE_ACTIVE_FROM"]){
+    if(((strtotime("now")-strtotime($arElement["DATE_ACTIVE_FROM"]))/86400) <= 14){
+        $isNew = true;
+    }
+}
+$isBestseller = (bool)$arResult["PROPERTIES"]["IS_BESTSELLER"]["VALUE"];
+
 if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
 {
     //var_dump($arResult['OFFERS']);
@@ -179,7 +187,18 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                             ?>
                             <div class="general-container photo-container" id="photo_gallery_<?=$galleryID?>" <?=($showGallery)?'':'style="display:none;"'?>>
                                 <div class="photo-big-container">
-                                    <img src="<?=$galleryPhoto[0];?>" class="photo-big">
+                                    <div class="img-wrap">
+                                        <?if($isNew):?>
+                                            <div class="additional-icon new"></div>
+                                        <?endif?>
+                                        <?if($isBestseller):?>
+                                            <div class="additional-icon bestseller"></div>
+                                        <?endif?>
+                                        <?if($isRecommended):?>
+                                            <div class="additional-icon recommended"></div>
+                                        <?endif?>
+                                        <img src="<?=$galleryPhoto[0];?>" class="photo-big">
+                                    </div>
                                 </div>
                                 <div class="photo-carousel-container">
                                     <div id="<?=$carouselID;?>" class="preview-photo-carousel">
@@ -287,7 +306,18 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                     ?>
                                     <div class="general-container photo-container" id="photo_gallery_xs_<?=$galleryID?>"  <?=($showGallery)?'':'style="display:none;"'?>>
                                         <div class="photo-big-container">
-                                            <img src="<?=$galleryPhoto[0];?>" class="photo-big">
+                                            <div class="img-wrap">
+                                                <?if($isNew):?>
+                                                    <div class="additional-icon new"></div>
+                                                <?endif?>
+                                                <?if($isBestseller):?>
+                                                    <div class="additional-icon bestseller"></div>
+                                                <?endif?>
+                                                <?if($isRecommended):?>
+                                                    <div class="additional-icon recommended"></div>
+                                                <?endif?>
+                                                <img src="<?=$galleryPhoto[0];?>" class="photo-big">
+                                            </div>
                                         </div>
                                         <div class="photo-carousel-container">
                                             <div id="<?=$carouselID;?>" class="preview-photo-carousel">
