@@ -223,6 +223,18 @@ textarea.form-control {
     display: inline-block;
 }
 
+/************* CUSTOM ICONS ***************/
+i.ai-icon-bs {
+    font-family: 'Glyphicons Halflings';
+    font-style:normal;
+}
+i.ai-icon-bs.ia-phone-icon:before {
+    content: "\e183";
+}
+i.ai-icon-bs.ia-link-icon:before {
+    content: "\e144";
+}
+
 /***************** ADDITIONAL ICONS (BESTSELLER, RECOMMENDED, NEW) **********************/
 .additional-icon{
     display:inline-block;

@@ -788,6 +788,58 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
             </div>
         </div>
 
+        <!-- Modal FOUND CHEEPER-->
+        <div class="modal fade ia-modal" id="found-cheaper-popup" tabindex="-1" role="dialog" aria-labelledby="modalFoundCheeper">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                          <span aria-hidden="true" class="clearfix">
+                            <i class="fa fa-times" aria-hidden="true"></i>
+                          </span>
+                        </button>
+                        <h4 class="modal-title">Нашли дешевле?</h4>
+                    </div>
+                    <div class="modal-body">
+                        <form>
+                            <div class="icon-input-container">
+                                <div class="icon-input-wrap">
+                                    <input type="text" name="username" value="" placeholder="Имя" class="form-control username-input">
+                                    <i class="fa fa-user" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="icon-input-container">
+                                <div class="icon-input-wrap">
+                                    <input type="text" name="phone" value="" placeholder="Телефон" class="form-control phone-input">
+                                    <i class="ai-icon-bs ia-phone-icon" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="icon-input-container">
+                                <div class="icon-input-wrap">
+                                    <input type="text" name="email" value="" placeholder="Электронная почта" class="form-control email-input">
+                                    <i class="fa fa-envelope-o" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="icon-input-container">
+                                <div class="icon-input-wrap">
+                                    <input type="text" name="product-link" value="" placeholder="Ссылка на товар" class="form-control product-link-input">
+                                    <i class="ai-icon-bs ia-link-icon" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                            <div class="status-container">
+                                <div class="success">Ссылка на товар отправлена</div>
+                            </div>
+                            <div class="button-container">
+                                <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="send-button" value="Отправить">
+                                    <span>Отправить</span>
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </div>
 </div>
 <?
@@ -834,5 +886,13 @@ $arJSParams['startColorData'] = $JSStartColorData;
             modal.find('.status-container').hide();
             modal.find('input,textarea').val('');
         })
+
+        $('.product-info .discount .found-cheaper').click(function(){
+            $('#found-cheaper-popup').modal();
+        });
+        $('#found-cheaper-popup button[name="send-button"]').click(function(event){
+            event.preventDefault();
+            InAnimeCatalogElement<?=$strMainID;?>.sendCheaper(event);
+        });
     });
 </script>

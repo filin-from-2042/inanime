@@ -26,6 +26,7 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.ph
 if (check_bitrix_sessid())
 {
     $action = $_REQUEST['action'];
+    // Вопрос-ответ
     if($action=='addQuestion')
     {
         $errors = array();
@@ -73,6 +74,35 @@ if (check_bitrix_sessid())
                 CEvent::SendImmediate("USER_NEW_QUESTION",SITE_ID, $arEventFields, 'N', 108);
             }
             else echo "Ошибка: ".$el->LAST_ERROR;
+        }
+        else
+        {
+            echo '<div class="error_msg">';
+            foreach($errors as $error) echo $error.'<br/>';
+            echo '</div>';
+        }
+    }
+    // Нашли дешевле
+    elseif($action=='sendCheaper')
+    {
+        $errors = array();
+        $username =  htmlspecialchars(trim($_REQUEST['username']));
+        $email = htmlspecialchars(trim($_REQUEST['email']));
+        $phone = htmlspecialchars(trim($_REQUEST['phone']));
+        $productLink = htmlspecialchars(trim($_REQUEST['productLink']));
+
+        if(!strlen(trim($email))) $errors[] = 'Не указана почта';
+
+        if(sizeof($errors) == 0)
+        {
+            $arEventFields = array(
+                "USER_NAME"      => $username,
+                "USER_EMAIL"     => $email,
+                "USER_PHONE"     => $phone,
+                "PRODUCT_LINK"  => $productLink
+            );
+            CEvent::SendImmediate("USER_FOUND_CHEAPER",SITE_ID, $arEventFields, 'N', 109);
+            echo 'Ссылка отправлена';
         }
         else
         {

@@ -339,6 +339,11 @@
     margin-left: 5px;
 }
 
+/****** FOUND CHEEPER ************/
+#found-cheaper-popup .icon-input-container i.ia-phone-icon ,
+#found-cheaper-popup .icon-input-container i.ia-link-icon {
+    top: 13%;
+}
 
 
 /* Mobile */

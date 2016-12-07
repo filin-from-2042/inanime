@@ -99,7 +99,6 @@
     window.InAnimeCatalogElement.prototype.addQuestion = function(event)
     {
         var formContainer = $(event.delegateTarget).closest('.modal-body');
-
         $.ajax({
             type: "POST",
             url: this.ajaxURL,
@@ -118,6 +117,31 @@
                 alert( [ xhr.status, textStatus ] );
             }
         });
+    };
+
+    window.InAnimeCatalogElement.prototype.sendCheaper = function(event)
+    {
+        var formContainer = $(event.delegateTarget).closest('.modal-body');
+        $.ajax({
+            type: "POST",
+            url: this.ajaxURL,
+            data: {
+                action:'sendCheaper',
+                username : formContainer.find('input[name="username"]').val(),
+                phone : formContainer.find('input[name="phone"]').val(),
+                email: formContainer.find('input[name="email"]').val(),
+                productLink: formContainer.find('input[name="product-link"]').val(),
+                sessid: BX.bitrix_sessid()
+            },
+//            dataType: 'json',
+            success: function(data){
+                formContainer.find('.status-container').show();
+            },
+            error: function( xhr, textStatus ) {
+                alert( [ xhr.status, textStatus ] );
+            }
+        });
+
     }
 
 })(window);
