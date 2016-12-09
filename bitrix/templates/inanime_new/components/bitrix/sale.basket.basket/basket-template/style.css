@@ -1,0 +1,306 @@
+/********************************* BASKET **************************************/
+
+.ia-basket ul.nav.nav-tabs {
+    /*display:inline-block;*/
+    border:none;
+    width:590px;
+    margin: 0 auto;
+}
+/*.ia-basket ul.nav.nav-tabs:before,
+.ia-basket ul.nav.nav-tabs:after {
+    display:none;
+}*/
+.ia-basket .nav-tabs-container {
+    text-align:center;
+    border-bottom:1px solid #ddd;
+}
+.ia-basket .nav-tabs li {
+    width:191px;
+    cursor:pointer;
+    margin-right: 5px;
+}
+.ia-basket .nav-tabs li a{
+    text-transform:uppercase;
+    background-color:rgb(234,234,228);
+    border-radius: 10px 10px 0 0;
+    /*padding: 11px 50px;*/
+    color:#000;
+}
+.ia-basket .nav-tabs li.active{
+}
+.ia-basket .nav-tabs>li.active>a,
+.ia-basket .nav-tabs>li.active>a:hover,
+.ia-basket .nav-tabs>li.active>a:focus{
+    color:#fff;
+    background-color:rgb(99,186,196);
+}
+.ia-basket .bx-breadcrumb {
+    margin: 48px 0 10px;
+}
+.ia-basket h1 {
+    text-align: center;
+    text-transform: uppercase;
+    font-size: 30px;
+    font-weight: bold;
+    letter-spacing: 1.5px;
+    margin-top: 0;
+    margin-bottom: 45px;
+}
+#my-basket .column-header .column-title{
+    font-weight: bold;
+    display: inline-block;
+    padding: 17px 10px;
+    font-size: 15px;
+    padding-left: 25px;
+}
+#my-basket .column-header.column-units .column-title {
+    padding-left: 0px;
+}
+
+#my-basket .table-header {
+    border-radius:10px;
+}
+#my-basket .table-content-container {
+    border:2px solid #5d3d1d;
+    border-radius:10px;
+    margin-top: 20px;
+    padding: 20px 20px 5px;
+}
+#my-basket .table-content-container .content-row{
+    margin-bottom: 15px;
+}
+#my-basket .table-content-container .content-row,
+#my-basket .table-content-container .column-content{
+    min-height: 80px;
+}
+#my-basket .table-content-container .column-content .column-data{
+    line-height: 80px;
+}
+#my-basket .table-content-container .product-preview{
+    max-width: 92px;
+    max-height: 78px;
+    border-radius: 10px;
+}
+#my-basket .table-content-container .ia-checkbox,
+#my-basket .table-content-container .product-title{
+    display: inline-block;
+}
+#my-basket .table-content-container .product-title {
+    max-width: 230px;
+}
+#my-basket .table-content-container .ia-checkbox [type="checkbox"]:not(:checked) + label:before,
+#my-basket .table-content-container .ia-checkbox [type="checkbox"]:checked + label:before {
+    left: -2px;
+    top: 30px;
+}
+#my-basket .table-content-container .ia-checkbox [type="checkbox"]:not(:checked) + label:after,
+#my-basket .table-content-container .ia-checkbox [type="checkbox"]:checked + label:after {
+    top: 35px;
+    left: 2px;
+}
+#my-basket .table-content-container .ia-checkbox [type="checkbox"]:not(:checked) + label,
+#my-basket .table-content-container .ia-checkbox [type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 40px;
+    cursor: pointer;
+    color: #79828b;
+    font-weight: normal;
+}
+#my-basket .table-content-container .product-title{
+    vertical-align: middle;
+    padding-left: 15px;
+}
+#my-basket .product-title .product-name a{
+    color:#5d3d1d;
+    font-weight: bold;
+    font-size: 15px;
+    letter-spacing: 1px;
+}
+#my-basket .product-title .product-article{
+    color:#79828b;
+    margin-top: 5px;
+}
+#my-basket .table-content-container .column-cost,
+#my-basket .table-content-container .column-count,
+#my-basket .table-content-container .column-all-cost{
+    text-align: right;
+}
+#my-basket .table-content-container .column-all-cost    {
+    font-size: 21px;
+    font-weight: bold;
+
+}
+#my-basket .table-content-container .column-cost .price.old{
+    text-decoration: line-through;
+    color: #000;
+    font-weight: bold;
+    font-size: 18px;
+}
+#my-basket .table-content-container .column-cost .price.yellow-text{
+    font-size: 21px;
+    font-weight: bold;
+    margin-left: 5px;
+    margin-right: 12px;
+}
+#my-basket .table-content-container .column-all-cost .column-data{
+    margin-right: 5px;
+}
+#my-basket .table-content-container .column-units{
+    color: #79828b;
+}
+#my-basket .actions-container{
+    margin-top: 41px;
+}
+#my-basket .action-button-container .put-aside-action{
+    padding: 8px 36px;
+}
+#my-basket .action-button-container .remove-action{
+    padding: 8px 41px;
+    margin-left: 10px
+}
+#my-basket .actions-container .coupon-container{
+    margin-top: 42px;
+}
+#my-basket .actions-container .coupon-container .input-container{
+    display: inline-block;
+}
+#my-basket .actions-container .coupon-container .apply-action{
+    margin-left: 8px;
+    padding: 8px 14px;
+}
+#my-basket .actions-container .coupon-container .discount-container {
+    margin-top: 10px;
+}
+#my-basket .actions-container .basket-action-column{
+    text-align: right;
+}
+#my-basket .actions-container .total-container .total-title,
+#my-basket .actions-container .total-container .total-value{
+    font-weight: bold;
+}
+#my-basket .actions-container .total-container .total-title{
+    letter-spacing: 1px;
+}
+#my-basket .actions-container .total-container .total-value{
+    font-size: 29px;
+    line-height: 20px;
+    margin-right: 26px;
+    margin-left: 12px;
+}
+#my-basket .basket-action-column .action-button-container{
+    margin-top: 41px;
+}
+#my-basket .basket-action-column .action-button-container .ia-btn {
+    padding: 11px 26px;
+    font-size: 14px;
+}
+#my-basket .basket-action-column  .action-button-container .clear-btn{
+    margin-right: 11px;
+    padding: 11px 21px;
+}
+#my-basket .general-text{
+    color: #79828b;
+    margin-top: 53px;
+    margin-bottom: 78px;
+}
+#my-basket .table-content-container .column-content .mobile-row-data-container {
+    display:none;
+}
+
+#my-basket  .discount-container .number {
+    width: 340px;
+}
+
+#my-basket  .discount-container .number.good {
+color:#59a62a
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+    /*************************** BASKET ***************************/
+    .basket-tabs-container .nav.nav-tabs {
+        padding: 0px 28px;
+    }
+    .basket-tabs-container .nav.nav-tabs {
+        text-transform: uppercase;
+        border-bottom: 0;
+        width: 99%;
+    }
+    .basket-tabs-container .nav-tabs > li {
+        width: 100%;
+        text-align: center;
+        margin-top: -5px;
+    }
+    .ia-basket ul.nav.nav-tabs {
+        width: auto;
+    }
+    #my-basket .table-content-container .column-content .product-title{
+        display:block;
+    }
+    #my-basket .table-content-container .column-content .column-data {
+        line-height: 10px;
+    }
+    #my-basket .table-content-container .column-content .mobile-row-data-container {
+        display:inline-block;
+        vertical-align: middle;
+    }
+    #my-basket .table-content-container .column-content .mobile-row-data-container .column-data-all-cost {
+        font-size: 21px;
+        font-weight: bold;
+        margin-left: 18px;
+    }
+    #my-basket .table-content-container .product-title {
+        padding-left: 40px;
+    }
+    #my-basket .table-action-column .coupon-container .coupon-code-input ,
+    #my-basket .table-action-column .coupon-container .discount-container .number{
+        width: 192px;
+    }
+    #my-basket .actions-container {
+        margin-top: 36px;
+        text-align: center;
+    }
+    #my-basket .actions-container .basket-action-column {
+        margin-top: 29px;
+    }
+    #my-basket .actions-container .total-container .total-value {
+        margin-right: 13px;
+    }
+    #my-basket .basket-action-column .action-button-container .clear-btn {
+        margin-right: 19px;
+        padding: 11px 9px;
+    }
+    #my-basket .basket-action-column .action-button-container .ia-btn {
+        padding: 12px 14px;
+        font-size: 12px;
+    }
+    #my-basket .basket-action-column .action-button-container {
+        text-align: center;
+    }
+
+}
+/* Tablet */
+@media (min-width: 760px) and (max-width:992px) {
+    /************************** BASKET ***************************/
+    #my-basket .actions-container {
+        margin-top: 17px;
+    }
+    #my-basket .actions-container .table-action-column {
+        padding-left: 23px;
+    }
+    #my-basket .table-action-column .coupon-container .coupon-code-input,
+    #my-basket .table-action-column .coupon-container .discount-container .number{
+        width: 202px;
+    }
+    #my-basket .actions-container .basket-action-column {
+        padding-left:0;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1230px){
+
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1230px){
+
+}

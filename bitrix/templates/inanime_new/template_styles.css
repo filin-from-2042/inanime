@@ -25,6 +25,24 @@ body{
     background-color:rgb(99,186,196);
     padding:6px 30px;
 }
+.red-btn{
+    background-color:#d24354;
+    padding:6px 30px;
+}
+.ia-close-btn{
+    background-color: #de263c;
+    opacity: 1;
+    color: #fff;
+    font-size: 13px;
+    width: 27px;
+    height: 27px;
+    border-radius: 8px;
+    border:none;
+}
+.gray-btn{
+    background-color:#bdbec5;
+    padding:6px 30px;
+}
 .blue-dark-btn{
     background-color:#39acd8;
 }
@@ -235,6 +253,10 @@ i.ai-icon-bs.ia-link-icon:before {
     content: "\e144";
 }
 
+span.rub:before{
+    content: ' ₽';
+}
+
 /***************** ADDITIONAL ICONS (BESTSELLER, RECOMMENDED, NEW) **********************/
 .additional-icon{
     display:inline-block;
@@ -353,6 +375,79 @@ i.ai-icon-bs.ia-link-icon:before {
     left:0px;
 }
 
+/******************************* CUSTOM INANIME CHECKBOX *******************/
+.ia-checkbox [type="checkbox"]:not(:checked),
+.ia-checkbox [type="checkbox"]:checked {
+    position: absolute;
+    left: -9999px;
+}
+.ia-checkbox [type="checkbox"]:not(:checked) + label,
+.ia-checkbox [type="checkbox"]:checked + label {
+    position: relative;
+    padding-left: 30px;
+    cursor: pointer;
+    color:#79828b;
+    font-weight: normal;
+}
+.ia-checkbox [type="checkbox"]:not(:checked) + label:before,
+.ia-checkbox [type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 22px;
+    height: 22px;
+    /*border: 1px solid #aaa;*/
+    background: #d9d9d9;
+    border-radius: 5px;
+    /*box-shadow: inset 0 1px 3px rgba(0,0,0,.3);*/
+}
+.ia-checkbox [type="checkbox"]:not(:checked) + label:after,
+.ia-checkbox [type="checkbox"]:checked + label:after {
+    /*content: '✔';*/
+    font: normal normal normal 14px/1 FontAwesome;
+    content: "\f00c";
+    position: absolute;
+    top: 6px;
+    left: 3px;
+    font-size: 16px;
+    line-height: 0.8;
+    color: #5d3d1d;
+    transition: all .2s;
+}
+.ia-checkbox [type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+.ia-checkbox [type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+}
+
+/* disabled checkbox */
+.ia-checkbox [type="checkbox"]:disabled:not(:checked) + label:before,
+.ia-checkbox [type="checkbox"]:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #bbb;
+    background-color: #ddd;
+}
+.ia-checkbox [type="checkbox"]:disabled:checked + label:after {
+    color: #999;
+}
+.ia-checkbox [type="checkbox"]:disabled + label {
+    color: #aaa;
+}
+/* accessibility */
+.ia-checkbox [type="checkbox"]:checked:focus + label:before,
+.ia-checkbox [type="checkbox"]:not(:checked):focus + label:before {
+    border: 1px dotted #5d3d1d;
+}
+
+/* hover style just for information */
+.ia-checkbox label:hover:before {
+    border: 1px solid #5d3d1d!important;
+}
+
 /******** INPUT WITH ICON *****************/
 .icon-input-container {
     text-align:center;
@@ -368,6 +463,23 @@ i.ai-icon-bs.ia-link-icon:before {
     right: 11px;
     font-size: 17px;
     color:rgb(176,178,185);
+}
+
+
+/******************************* COUPON **********************************/
+.discount-container .number  {
+    display: inline-block;
+    font-size: 12px;
+    padding: 8px 18px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+    width: 310px;
+}
+.discount-container .ia-close-btn{
+    vertical-align: middle;
+    margin-left: 9px;
+    width: 32px;
+    height: 32px;
 }
 
 /******************************* POPUP ************************************/
