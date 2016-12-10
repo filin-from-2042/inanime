@@ -3,6 +3,16 @@
 /** @var array $arParams */
 /** @var array $arResult */
 use Bitrix\Main;
+if ($_REQUEST["action"]=="clearAll" and CModule::IncludeModule("sale"))
+{
+    CSaleBasket::DeleteAll(CSaleBasket::GetBasketUserID());
+}
+/*
+if ($_REQUEST["BasketDelete"]=="Y" and CModule::IncludeModule("sale"))
+{
+    CSaleBasket::DeleteAll(CSaleBasket::GetBasketUserID());
+}
+
 
 $defaultParams = array(
 	'TEMPLATE_THEME' => 'blue'
@@ -28,3 +38,4 @@ if ('' != $arParams['TEMPLATE_THEME'])
 }
 if ('' == $arParams['TEMPLATE_THEME'])
 	$arParams['TEMPLATE_THEME'] = 'blue';
+*/

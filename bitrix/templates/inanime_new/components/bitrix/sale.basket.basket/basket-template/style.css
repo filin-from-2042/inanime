@@ -198,6 +198,16 @@
     margin-right: 11px;
     padding: 11px 21px;
 }
+#my-basket .basket-action-column  .action-button-container .clear-btn a,
+#my-basket .basket-action-column  .action-button-container .clear-btn a:hover,
+#my-basket .basket-action-column  .action-button-container .clear-btn a:focus{
+    color: #fff;
+    text-decoration: none;
+}
+#my-basket .basket-action-column  .action-button-container .clear-btn:hover a,
+#my-basket .basket-action-column  .action-button-container .clear-btn a:hover{
+    color:#333;
+}
 #my-basket .general-text{
     color: #79828b;
     margin-top: 53px;

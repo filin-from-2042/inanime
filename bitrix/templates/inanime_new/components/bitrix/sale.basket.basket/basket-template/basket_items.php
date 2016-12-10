@@ -3,7 +3,9 @@
 use Bitrix\Sale\DiscountCouponsManager;
 
 if (!empty($arResult["ERROR_MESSAGE"]))
+{
     ShowError($arResult["ERROR_MESSAGE"]);
+}
 
 $bDelayColumn  = false;
 $bDeleteColumn = false;
@@ -11,7 +13,7 @@ $bWeightColumn = false;
 $bPropsColumn  = false;
 $bPriceType    = false;
 $arJSParams = array();
-
+$arJSParams["currentPage"] = $APPLICATION->GetCurPage();
 function getProductArticul($productID)
 {
     $artNumber='';
@@ -28,7 +30,7 @@ function getProductArticul($productID)
     return $artNumber;
 }
 
-//if ($normalCount > 0):
+if ($normalCount > 0):
 ?>
 <div class="my-basket-tab-container">
     <div class="row table-header grey-container hidden-xs">
@@ -297,8 +299,9 @@ function getProductArticul($productID)
                 <span class="total-value yellow-text"><?=$arResult["allSum_FORMATED"]?> </span>
             </div>
             <div class="action-button-container">
-                <button type="button" class="btn btn-default ia-btn text-btn gray-btn clear-btn">Очистить корзину</button>
-                <button type="button" class="btn btn-default ia-btn text-btn yellow-btn checkout-btn">Оформить заказ</button>
+<!--                <button type="text" class="btn btn-default ia-btn text-btn gray-btn clear-btn"><a href="--><?//=$APPLICATION->GetCurPage()?><!--?BasketDelete=Y ">Очистить корзину</a></button>-->
+                <button type="button" class="btn btn-default ia-btn text-btn gray-btn clear-btn" onclick="iaBasket.clearAll()">Очистить корзину</button>
+                <button type="button" class="btn btn-default ia-btn text-btn yellow-btn checkout-btn" onclick="iaBasket.checkOut()">Оформить заказ</button>
             </div>
         </div>
     </div>
@@ -318,5 +321,19 @@ function getProductArticul($productID)
     </script>
 </div>
 <?
-//endif;
+else:
+    ?>
+    <div id="basket_items_list">
+        <table>
+            <tbody>
+            <tr>
+                <td style="text-align:center">
+                    <div class=""><?=GetMessage("SALE_NO_ITEMS");?></div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+<?
+endif;
 ?>

@@ -4,6 +4,7 @@ InAnimeBasket = function (params)
     console.log(params);
     this.deleteActions = params.deleteActions;
     this.delayActions = params.delayActions;
+    this.currentPage = params.currentPage;
     var that = this;
     $('.ia-basket #my-basket .content-row input[type="checkbox"]').click(that.setAvailabilityActionButtons);
     $('.table-action-column .action-button-container button.put-aside-action').click(function(event){that.delayButtonAction(event, that)});
@@ -58,7 +59,8 @@ InAnimeBasket.prototype.deleteButtonAction = function(event, that)
             $.ajax({
                 type: "POST",
                 async:false,
-                url: '/personal/cart/?basketAction='+that.deleteActions[elementID],
+//                url: '/personal/cart/?basketAction='+that.deleteActions[elementID],
+                url: that.deleteActions[elementID],
                 success: function(data){
                     newCartData = data;
                 },
@@ -494,4 +496,31 @@ InAnimeBasket.prototype.couponCreate = function(couponBlock, oneCoupon)
             ]
         }
     ));
+};
+
+InAnimeBasket.prototype.checkOut = function()
+{
+    if (!!BX('coupon'))
+        BX('coupon').disabled = true;
+    BX("basket_form").submit();
+    return true;
+};
+
+InAnimeBasket.prototype.clearAll = function()
+{
+    console.log(this.currentPage);
+
+    BX.ajax({
+        url: this.currentPage,
+        method: 'POST',
+        data: {
+            action : 'clearAll'
+        },
+        onsuccess: function(result)
+        {
+           window.location.reload();
+        }
+    });
+
+    return false;
 };
