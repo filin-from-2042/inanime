@@ -225,6 +225,23 @@
 color:#59a62a
 }
 
+
+/****************************************** PUT ASIDE ********************/
+#put-aside{
+    padding-top: 50px;
+}
+/*#put-aside .product-item-preview:nth-child(n+2){
+    margin-left:10px;
+    margin-bottom: 25px;
+}
+#put-aside .product-item-preview:nth-child(5n){
+     margin-left:0px;
+ }*/
+#put-aside .product-item-preview{
+    margin-right:10px;
+    margin-bottom: 25px;
+}
+
 /* Mobile */
 @media (max-width: 760px) {
     /*************************** BASKET ***************************/
