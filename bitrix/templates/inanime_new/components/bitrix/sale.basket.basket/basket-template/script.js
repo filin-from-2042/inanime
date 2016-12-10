@@ -29,12 +29,13 @@ InAnimeBasket.prototype.delayButtonAction = function(event, that)
     var elementID;
     var newCartData;
     $('.content-row input[type="checkbox"]').each(function(){
+
         if(this.checked){
             elementID = this.id.split('_')[1];
             $.ajax({
                 type: "POST",
                 async:false,
-                url: '/personal/cart/?basketAction='+that.delayActions[elementID],
+                url: that.delayActions[elementID],
                 success: function(data){
                     newCartData = data;
                 },

@@ -1,7 +1,7 @@
 <?
 //var_dump($arResult)
 ?>
-<div class="product-item-preview vertical" id="<?=$this->GetEditAreaId($arElement['ID']);?>">
+<div class="product-item-preview vertical" id="<?=$this->GetEditAreaId($arResult['ID']);?>">
     <div class="image-container">
                     <img src="<?=$arResult["PREVIEW_PICTURE"]["SRC"]?>" />
 <!--        <img data-original="--><?//=$arResult["PREVIEW_PICTURE"]["SRC"]?><!--"  class="lazy" />-->
@@ -21,9 +21,11 @@
     </div>
     <div class="data-container">
         <div class="price-container">
-            <?foreach($arResult["PRICES"] as $code=>$arPrice):?>
+            <?
+            //var_dump($arResult);
+            foreach($arResult["PRICES"] as $code=>$arPrice):?>
                 <td>
-                    <?if($arPrice = $arElement["PRICES"][$code]):?>
+                    <?if($arPrice = $arResult["PRICES"][$code]):?>
                         <?if($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"]):?>
                             <span class="price old"><?=$arPrice["PRINT_VALUE"]?></span>
                             <span class="price yellow-text"><?=$arPrice["PRINT_DISCOUNT_VALUE"]?></span>
@@ -50,9 +52,9 @@
         </div>
         <div class="buttons-container">
             <?if($arResult["CAN_BUY"]){?>
-                <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="inanime_new.addToCart(<?=$arElement['ID']?>
+                <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
                     ,1
-                    ,'<?=$arElement["NAME"]?>'
+                    ,'<?=$arResult["NAME"]?>'
                     ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
                     ,false)">
                     <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" /></span>
@@ -75,7 +77,7 @@
             <?
             }
             ?>
-            <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite" onclick="inanime_new.addToCart(<?=$arElement['ID']?>
+            <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
                 ,1
                 ,'<?=$arResult["NAME"]?>'
                 ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>

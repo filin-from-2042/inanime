@@ -1,4 +1,7 @@
 /********************************* BASKET **************************************/
+.product-item-preview.vertical{
+    display: inline-block;
+}
 
 .ia-basket ul.nav.nav-tabs {
     /*display:inline-block;*/
