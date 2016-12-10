@@ -113,9 +113,11 @@ $this->setFrameMode(true);
                         <?
                         }else{
                             ?>
-                            <?$APPLICATION->IncludeComponent(
+                            <?
+                            $APPLICATION->IncludeComponent(
                                 "bitrix:catalog.product.subscribe",
                                 "inanime-subscribe",
+//                                "",
                                 Array(
                                     "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
                                     "BUTTON_ID" => $arElement['ID']."-in-cart-btn",
@@ -123,7 +125,9 @@ $this->setFrameMode(true);
                                     "CACHE_TYPE" => "A",
                                     "PRODUCT_ID" => $arElement['ID']
                                 )
-                            );?>
+                            );
+
+                            ?>
                         <?
                         }
                         ?>

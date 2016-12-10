@@ -73,8 +73,20 @@ $arUrls = array(
                                         <?include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_delay.php");?>
                                     </div>
                                     <div role="tabpanel" class="tab-pane" id="not-available">
-                                        <?//include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_subscribed.php");?>
-                                        <?include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_not_available.php");?>
+                                        <div class="container">
+                                        <?
+                                        $APPLICATION->IncludeComponent(
+                                            "bitrix:catalog.product.subscribe.list",
+                                            "inanime-subscribe-list",
+//                                            '',
+                                            Array(
+                                                "CACHE_TIME" => "3600",
+                                                "CACHE_TYPE" => "A",
+                                                "LINE_ELEMENT_COUNT" => "3"
+                                            )
+                                        );
+                                        ?>
+                                        </div>
                                     </div>
                                 </div>
 

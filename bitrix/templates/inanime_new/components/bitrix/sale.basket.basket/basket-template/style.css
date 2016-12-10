@@ -227,7 +227,8 @@ color:#59a62a
 
 
 /****************************************** PUT ASIDE ********************/
-#put-aside{
+#put-aside,
+#not-available{
     padding-top: 50px;
 }
 /*#put-aside .product-item-preview:nth-child(n+2){
@@ -237,7 +238,8 @@ color:#59a62a
 #put-aside .product-item-preview:nth-child(5n){
      margin-left:0px;
  }*/
-#put-aside .product-item-preview{
+#put-aside .product-item-preview,
+#not-available .product-item-preview{
     margin-right:10px;
     margin-bottom: 25px;
 }
