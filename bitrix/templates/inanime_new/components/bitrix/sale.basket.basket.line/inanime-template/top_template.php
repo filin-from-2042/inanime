@@ -32,7 +32,7 @@
         <a class="btn btn-default ia-btn yellow-btn image-btn" href="/personal/cart" role="button"><span class="icon cart-icon"></span></a>
         <div class="text-container">
             <span>
-                <span><?=$arResult['NUM_PRODUCTS'].' '.$arResult['PRODUCT(S)']?></span><i class="fa fa-long-arrow-right" aria-hidden="true"></i><span class="yellow-text"><?=$arResult['TOTAL_PRICE']?> &#8381;</span>
+                <span><?=$arResult['NUM_PRODUCTS'].' '.$arResult['PRODUCT(S)']?></span><i class="fa fa-long-arrow-right" aria-hidden="true"></i><span class="yellow-text"><?=$arResult['TOTAL_PRICE']?></span>
             </span>
         </div>
         <a class="btn btn-default ia-btn blue-btn image-btn" href="/personal/cart" role="button"><span class="icon favorite-icon"></span></a>

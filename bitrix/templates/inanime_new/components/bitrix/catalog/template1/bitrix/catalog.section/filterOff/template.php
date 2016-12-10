@@ -77,10 +77,10 @@ $this->setFrameMode(true);
                             <td>
                                 <?if($arPrice = $arElement["PRICES"][$code]):?>
                                     <?if($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"]):?>
-                                        <span class="price old"><?=$arPrice["PRINT_VALUE"]?> &#8381;</span>
-                                        <span class="price yellow-text"><?=$arPrice["PRINT_DISCOUNT_VALUE"]?> &#8381;</span>
+                                        <span class="price old"><?=$arPrice["PRINT_VALUE"]?></span>
+                                        <span class="price yellow-text"><?=$arPrice["PRINT_DISCOUNT_VALUE"]?></span>
                                     <?else:?>
-                                        <span class="price yellow-text"><?=$arPrice["PRINT_VALUE"]?> &#8381;</span>
+                                        <span class="price yellow-text"><?=$arPrice["PRINT_VALUE"]?></span>
                                     <?endif;?>
                                 <?else:?>
                                     &nbsp;
