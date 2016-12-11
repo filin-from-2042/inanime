@@ -36,13 +36,15 @@ if (isset($templateData['BLOG_USE']) && $templateData['BLOG_USE'] == 'Y')
 			"ELEMENT_ID" => $templateData['BLOG']['AJAX_PARAMS']['ELEMENT_ID'],
 			"NO_URL_IN_COMMENTS" => "L"
 		);
-		$APPLICATION->IncludeComponent(
+		?>
+        <?$APPLICATION->IncludeComponent(
 			'bitrix:blog.post.comment',
 			'adapt',
 			$arBlogCommentParams,
 			$this,
 			array('HIDE_ICONS' => 'Y')
-		);
+		);?>
+        <?
 		return;
 	}
 	else
@@ -53,10 +55,12 @@ if (isset($templateData['BLOG_USE']) && $templateData['BLOG_USE'] == 'Y')
 		if ($templateData['BLOG']['AJAX_PARAMS']['SHOW_RATING'] == 'Y')
 		{
 			ob_start();
-			$APPLICATION->IncludeComponent(
+			?>
+            <?$APPLICATION->IncludeComponent(
 				"bitrix:rating.vote", $arParams['RATING_TYPE'],
 				array()
-			);
+			);?>
+            <?
 			ob_end_clean();
 		}
 	}

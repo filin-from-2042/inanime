@@ -47,8 +47,7 @@ $this->setFrameMode(true);
 </div>
 <div class="row">
     <div class="hidden-xs hidden-sm col-md-6 col-lg-6">
-        <?
-        $APPLICATION->IncludeComponent(
+        <?$APPLICATION->IncludeComponent(
             "bitrix:catalog.smart.filter", "visual_vertical1", Array(
                 "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
                 "IBLOCK_ID" => $arParams["IBLOCK_ID"],

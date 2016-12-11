@@ -14,9 +14,9 @@
                 $currIBLOCK_ID = $ar_res['IBLOCK_ID'];
                 $currSECTION_ID = $ar_res['IBLOCK_SECTION_ID'];
             }
-        }
+        }?>
 
-        $APPLICATION->IncludeComponent(
+        <?$APPLICATION->IncludeComponent(
         "bitrix:catalog.element",
         "inanime-preview-list-product",
         Array(
@@ -116,7 +116,8 @@
             "COMPOSITE_FRAME_TYPE" => "AUTO"
         ),
         false
-    );
+    );?>
+<?
 }
 
 

@@ -113,8 +113,7 @@ $this->setFrameMode(true);
                         <?
                         }else{
                             ?>
-                            <?
-                            $APPLICATION->IncludeComponent(
+                            <?$APPLICATION->IncludeComponent(
                                 "bitrix:catalog.product.subscribe",
                                 "inanime-subscribe",
 //                                "",
@@ -126,7 +125,6 @@ $this->setFrameMode(true);
                                     "PRODUCT_ID" => $arElement['ID']
                                 )
                             );
-
                             ?>
                         <?
                         }

@@ -25,7 +25,8 @@ CModule::IncludeModule("catalog");
 //    CSaleBasket::Add($arFields);
     Add2BasketByProductID(intval($_REQUEST['productID']),intval($_REQUEST['quantity']), array("DELAY" => $_REQUEST['delay']),array());
 
-    $APPLICATION->IncludeComponent("bitrix:sale.basket.basket.line", "inanime-template", Array(
+    ?>
+    <?$APPLICATION->IncludeComponent("bitrix:sale.basket.basket.line", "inanime-template", Array(
             "PATH_TO_BASKET" => SITE_DIR."personal/cart/",	// Страница корзины
             "PATH_TO_PERSONAL" => SITE_DIR."personal/",	// Страница персонального раздела
             "SHOW_PERSONAL_LINK" => "N",	// Отображать персональный раздел
@@ -44,9 +45,7 @@ CModule::IncludeModule("catalog");
             "COMPOSITE_FRAME_TYPE" => "AUTO",	// Содержимое компонента
         ),
         false
-    );
-
-?>
+    );?>
 
 <?// подключение служебной части эпилога  
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/epilog_after.php");?>

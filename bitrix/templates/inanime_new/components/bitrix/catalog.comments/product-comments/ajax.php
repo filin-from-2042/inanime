@@ -38,13 +38,15 @@ if (check_bitrix_sessid())
 	}
 	if (!empty($commParams))
 	{
-		$APPLICATION->IncludeComponent(
+		?>
+        <?$APPLICATION->IncludeComponent(
 			'bitrix:catalog.comments',
 			'product-comments',
 			$commParams,
 			null,
 			array('HIDE_ICONS' => 'Y')
-		);
+		);?>
+    <?
 	}
 }
 die();

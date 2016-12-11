@@ -117,6 +117,8 @@ $max_pages = ceil($max_elements/$elem_per_page);
 
 echo '<div>';
 echo '<span class="hidden" id="maxPages">'.$max_pages.'</span>';
+?>
+<?
 $APPLICATION->IncludeComponent(
 	"bitrix:catalog.section",
 	"ajax-catalog", 
@@ -215,6 +217,7 @@ $APPLICATION->IncludeComponent(
 		"AJAX_OPTION_ADDITIONAL" => "undefined"
 	),
 	false
-);
+);?>
+<?
 echo '</div>';
 ?>
