@@ -9,7 +9,7 @@
         Array(
             "START_FROM" => "0",
             "PATH" => "",
-            "SITE_ID" => ""
+            "SITE_ID" => SITE_ID
         )
     );?>
     <div class="row">
