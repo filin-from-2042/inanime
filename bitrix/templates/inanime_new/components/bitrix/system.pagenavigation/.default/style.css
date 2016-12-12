@@ -1,0 +1,33 @@
+
+/******************************** PAGINATION *******************************/
+.ia-pagination.pagination{
+    margin: 0;
+}
+.ia-pagination.pagination a{
+    border: none;
+    color:#79828b;
+    font-size: 18px;
+    padding: 6px 5px;
+}
+.ia-pagination.pagination a .fa-chevron-left,
+.ia-pagination.pagination a .fa-chevron-right{
+    color:#68422e;
+    font-size: 18px;
+    font-weight: bold;
+    line-height: 24px;
+}
+.ia-pagination.pagination>.active>a{
+    background-color: transparent;
+    color:#79828b;
+    font-weight: bolder;
+    font-size: 21px;
+    line-height: 20px;
+    padding: 8px 5px;
+}
+.ia-pagination.pagination>li>a:hover,
+.ia-pagination.pagination>li>a:focus{
+    z-index: 2;
+    color: #79828b;
+    background-color: transparent;
+    border-color: transparent;
+}

@@ -1,0 +1,64 @@
+/********************************* REVIEWS LIST *************************************/
+.ia-reviews-list.reviews-list  {
+
+}
+.ia-reviews-list.reviews-list {
+    padding: 55px 0px 0px;
+}
+.ia-reviews-list.reviews-list .reviews-list-container {
+    margin-top: 0px;
+}
+.ia-reviews-list .review-container:nth-child(odd) {
+    margin-right: 25px;
+}
+.ia-reviews-list.reviews-list .review-container {
+    margin-bottom: 25px;
+}
+.ia-reviews-list.reviews-list .reviews-list-container {
+    /* margin-top: 20px; */
+}
+.ia-reviews-list.reviews-list .pagination-container {
+    /*display:inline-block;*/
+    text-align: right;
+}
+.ia-news-single .text-container img{
+    border-radius:10px;
+}
+
+ /*Mobile */
+@media (max-width: 760px) {
+    .ia-reviews-list.reviews-list{
+        text-align: center;
+    }
+    .ia-reviews-list.reviews-list .review-anonce{
+        display: none;
+    }
+    .ia-reviews-list.reviews-list .review-container:nth-child(odd) {
+         margin-right: 0px;
+    }
+}
+ /*Tablet */
+@media (min-width: 760px) and (max-width:992px) {
+}
+
+@media (min-width: 992px) and (max-width: 1230px){
+    .ia-reviews-list.reviews-list .review-container {
+        width: 450px;
+        height: 280px;
+    }
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1230px){
+    .ia-reviews-list.reviews-list .review-container{
+        width: 585px;
+        height: 318px;
+    }
+
+    .ia-reviews-list.reviews-list .review-container .review-title,
+    .ia-reviews-list.reviews-list .review-container .review-anonce {
+        padding: 5px 130px 5px 36px;
+    }
+    .ia-reviews-list.reviews-list .review-container .review-info {
+        margin-bottom: 78px;
+    }
+}
