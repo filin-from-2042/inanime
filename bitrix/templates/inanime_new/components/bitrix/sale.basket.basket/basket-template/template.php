@@ -41,7 +41,7 @@ $arUrls = array(
                     <div>
                         <?$APPLICATION->IncludeComponent(
                             "bitrix:breadcrumb",
-                            "product-chain",
+                            "catalog-chain",
                             array(
                                 "START_FROM" => "0",
                                 "PATH" => "",
