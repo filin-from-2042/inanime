@@ -613,7 +613,7 @@ $this->addExternalCss("/bitrix/css/main/font-awesome.css");
 				<?
 				}
 				?>
-			</div><!--//row-->
+			</div>
 			<div class="row">
 				<div class="col-xs-12 bx-filter-button-box">
 					<div class="bx-filter-block">

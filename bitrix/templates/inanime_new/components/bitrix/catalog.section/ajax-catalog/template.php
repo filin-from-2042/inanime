@@ -6,7 +6,6 @@
     ?>
     <div class="product-item-preview vertical" id="<?=$this->GetEditAreaId($arElement['ID']);?>">
         <div class="image-container">
-<!--            <img src="--><?//=$arElement["PREVIEW_PICTURE"]["SRC"]?><!--" />-->
             <img data-original="<?=$arElement["PREVIEW_PICTURE"]["SRC"]?>"  class="lazy" />
             <div class="icons-container">
                 <?if($arElement["DATE_ACTIVE_FROM"]):?>

@@ -14,8 +14,6 @@ $itemsCount = count($arResult["ITEMS"]);
 			<div class="bx_slider_photo_container">
 				<div class="bx_slider_photo_background"></div>
 				<a href="<?=$detailPageURL?>" class="bx_slider_photo_element" style="background: #fff url('<?=$arItem["DETAIL_PICTURE"]["SRC"]?>') no-repeat center;">
-					<!--<div class="bx_stick_disc">-25%</div>
-					<div class="bx_stick new">New</div>-->
 				</a>
 			</div>
 			<div class="bx_slider_content_container">

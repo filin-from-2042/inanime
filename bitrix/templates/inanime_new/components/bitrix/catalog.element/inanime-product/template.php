@@ -584,7 +584,6 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
             </div>
         </div>
         <div class="row product-tabs">
-            <!-- Nav tabs -->
             <ul class="nav nav-tabs" role="tablist">
                 <li role="presentation" class="active"><a href="#characteristics" aria-controls="characteristics" role="tab" data-toggle="tab">Характеристики</a></li>
                 <li role="presentation"><a href="#comments" aria-controls="comments" role="tab" data-toggle="tab">Отзывы</a></li>
@@ -592,7 +591,6 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                 <li role="presentation"><a href="#questions" aria-controls="questions" role="tab" data-toggle="tab">Вопрос - ответ</a></li>
             </ul>
 
-            <!-- Tab panes -->
             <div class="tab-content">
                 <div role="tabpanel" class="tab-pane active" id="characteristics">
                     <?
@@ -708,7 +706,6 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
             </div>
         </div>
 
-        <!-- Modal PHOTO LIGHTBOX -->
         <div class="modal fade ia-modal" id="photo-lightbox-modal" tabindex="-1" role="dialog" aria-labelledby="modalPhotoLightbox">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -737,7 +734,6 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
         </div>
 
 
-        <!-- Modal QUESTION-->
         <div class="modal fade ia-modal" id="question-popup" tabindex="-1" role="dialog" aria-labelledby="modalQuestionPopup">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
@@ -788,7 +784,6 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
             </div>
         </div>
 
-        <!-- Modal FOUND CHEEPER-->
         <div class="modal fade ia-modal" id="found-cheaper-popup" tabindex="-1" role="dialog" aria-labelledby="modalFoundCheeper">
             <div class="modal-dialog" role="document">
                 <div class="modal-content">

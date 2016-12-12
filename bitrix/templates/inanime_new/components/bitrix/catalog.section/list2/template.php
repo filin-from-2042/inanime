@@ -45,7 +45,6 @@ $itemCounter = 0;
                     </div>
                     <div class="data-container">
                         <div class="price-container">
-<!--                            <span class="price old">--><?//=CPrice::GetBasePrice($arElement["ID"])["PRICE"]?><!-- &#8381;</span>-->
                             <span class="price yellow-text"><?=CPrice::GetBasePrice($arElement["ID"])["PRICE"]?> &#8381;</span>
                         </div>
                         <div class="title-container">

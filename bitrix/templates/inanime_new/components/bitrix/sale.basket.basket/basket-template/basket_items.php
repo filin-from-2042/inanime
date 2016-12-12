@@ -299,7 +299,6 @@ if ($normalCount > 0):
                 <span class="total-value yellow-text"><?=$arResult["allSum_FORMATED"]?> </span>
             </div>
             <div class="action-button-container">
-<!--                <button type="text" class="btn btn-default ia-btn text-btn gray-btn clear-btn"><a href="--><?//=$APPLICATION->GetCurPage()?><!--?BasketDelete=Y ">Очистить корзину</a></button>-->
                 <button type="button" class="btn btn-default ia-btn text-btn gray-btn clear-btn" onclick="iaBasket.clearAll()">Очистить корзину</button>
                 <button type="button" class="btn btn-default ia-btn text-btn yellow-btn checkout-btn" onclick="iaBasket.checkOut()">Оформить заказ</button>
             </div>

@@ -13,7 +13,6 @@ BX.ready( function(){
 	}
 });
 </script>
-<!--<div class="blog-comments" id="blg-comment---><?//=$arParams["ID"]?><!--">-->
 <div class="blog-comments" id="comments">
 <a name="comments"></a>
 <?
@@ -759,10 +758,6 @@ else
 				if($arParams["NOT_USE_COMMENT_TITLE"] != "Y")
 					$postTitle = "RE: ".CUtil::JSEscape($arResult["Post"]["TITLE"]);
 				?>
-<!--				<div class="blog-add-comment a">-->
-<!--                    <a class="bx_medium bx_bt_button" href="javascript:void(0)" onclick="return showComment('0')"><b>--><?//=GetMessage("B_B_MS_ADD_COMMENT")?><!--</b></a>-->
-<!--                    <br />-->
-<!--                </div>-->
                 <div class="blog-add-comment button-container">
                     <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="OK" value="Оставить отзыв" onclick="return showComment('0')">
                         <i class="fa fa-pencil" aria-hidden="true"></i>

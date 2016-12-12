@@ -28,6 +28,5 @@ $this->setFrameMode(true);?>
             <input type="text" name="q" value="" size="15" maxlength="50" placeholder="Поиск по каталогу" class="form-control search-input" />
         <?endif;?>
         <i class="fa fa-search" aria-hidden="true" onclick="searchForm.submit()"></i>
-<!--        &nbsp;<input name="s" type="submit" value="--><?//=GetMessage("BSF_T_SEARCH_BUTTON");?><!--" />-->
     </div>
 </form>

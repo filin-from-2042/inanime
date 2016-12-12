@@ -26,7 +26,7 @@ $menuBlockId = "catalog_menu_".$this->randString();
 <div class="bx-top-nav bx-<?=$arParams["MENU_THEME"]?>" id="<?=$menuBlockId?>">
 	<nav class="bx-top-nav-container" id="cont_<?=$menuBlockId?>">
 		<ul class="bx-nav-list-1-lvl" id="ul_<?=$menuBlockId?>">
-		<?foreach($arResult["MENU_STRUCTURE"] as $itemID => $arColumns):?>     <!-- first level-->
+		<?foreach($arResult["MENU_STRUCTURE"] as $itemID => $arColumns):?>
 			<?$existPictureDescColomn = ($arResult["ALL_ITEMS"][$itemID]["PARAMS"]["picture_src"] || $arResult["ALL_ITEMS"][$itemID]["PARAMS"]["description"]) ? true : false;?>
 			<li
 				class="bx-nav-1-lvl bx-nav-list-<?=($existPictureDescColomn) ? count($arColumns)+1 : count($arColumns)?>-col <?if($arResult["ALL_ITEMS"][$itemID]["SELECTED"]):?>bx-active<?endif?><?if (is_array($arColumns) && count($arColumns) > 0):?> bx-nav-parent<?endif?>"
@@ -49,11 +49,11 @@ $menuBlockId = "catalog_menu_".$this->randString();
 					</span>
 				</a>
 			<?if (is_array($arColumns) && count($arColumns) > 0):?>
-				<span class="bx-nav-parent-arrow" onclick="obj_<?=$menuBlockId?>.toggleInMobile(this)"><i class="fa fa-angle-left"></i></span> <!-- for mobile -->
+				<span class="bx-nav-parent-arrow" onclick="obj_<?=$menuBlockId?>.toggleInMobile(this)"><i class="fa fa-angle-left"></i></span>
 				<div class="bx-nav-2-lvl-container">
 					<?foreach($arColumns as $key=>$arRow):?>
 						<ul class="bx-nav-list-2-lvl">
-						<?foreach($arRow as $itemIdLevel_2=>$arLevel_3):?>  <!-- second level-->
+						<?foreach($arRow as $itemIdLevel_2=>$arLevel_3):?>
 							<li class="bx-nav-2-lvl">
 								<a
 									href="<?=$arResult["ALL_ITEMS"][$itemIdLevel_2]["LINK"]?>"
@@ -67,7 +67,7 @@ $menuBlockId = "catalog_menu_".$this->randString();
 								</a>
 							<?if (is_array($arLevel_3) && count($arLevel_3) > 0):?>
 								<ul class="bx-nav-list-3-lvl">
-								<?foreach($arLevel_3 as $itemIdLevel_3):?>	<!-- third level-->
+								<?foreach($arLevel_3 as $itemIdLevel_3):?>
 									<li class="bx-nav-3-lvl">
 										<a
 											href="<?=$arResult["ALL_ITEMS"][$itemIdLevel_3]["LINK"]?>"

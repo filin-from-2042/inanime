@@ -60,9 +60,6 @@ $templateData = array(
 				</div>
 			</div>
 		</td>
-<!--		<td>-->
-<!--			<span id="--><?//=$arJSParams["ratingId"]?><!--" class="bx_stars_rating_votes">(0)</span>-->
-<!--		</td>-->
 	</tr>
 </table>
 <script type="text/javascript">

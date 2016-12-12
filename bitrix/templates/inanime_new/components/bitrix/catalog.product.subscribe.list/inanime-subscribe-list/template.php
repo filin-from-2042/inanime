@@ -28,7 +28,6 @@ if (!empty($arResult['ITEMS']))
         <div class="product-item-preview vertical" id="<?=$this->GetEditAreaId($arElement['ID']);?>">
             <div class="image-container">
                 <img src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>" />
-                <!--        <img data-original="--><?//=$arResult["PREVIEW_PICTURE"]["SRC"]?><!--"  class="lazy" />-->
                 <div class="icons-container">
                     <?if($arItem["DATE_ACTIVE_FROM"]):?>
                         <?if(((strtotime("now")-strtotime($arResult["DATE_ACTIVE_FROM"]))/86400) <= 14):?>

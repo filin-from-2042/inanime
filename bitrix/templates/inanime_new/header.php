@@ -18,8 +18,6 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
     <?$APPLICATION->AddHeadScript("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js");?>
     <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/bootstrap.min.js");?>
     <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/script.js");?>
-    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
     <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
@@ -183,8 +181,10 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
         </div>
     </div>
 </header>
-    <?$APPLICATION->IncludeComponent("inanime:menu", "horizontal_multilevel1", Array(
-	"ROOT_MENU_TYPE" => "left",	// Тип меню для первого уровня
+    <?$APPLICATION->IncludeComponent("inanime:menu",
+        "horizontal_multilevel1",
+        Array(
+	    "ROOT_MENU_TYPE" => "left",	// Тип меню для первого уровня
 		"MENU_CACHE_TYPE" => "A",	// Тип кеширования
 		"MENU_CACHE_TIME" => "36000000",	// Время кеширования (сек.)
 		"MENU_CACHE_USE_GROUPS" => "Y",	// Учитывать права доступа

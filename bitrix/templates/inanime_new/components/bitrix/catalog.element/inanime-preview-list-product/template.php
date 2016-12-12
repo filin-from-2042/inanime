@@ -4,7 +4,6 @@
 <div class="product-item-preview vertical" id="<?=$this->GetEditAreaId($arResult['ID']);?>">
     <div class="image-container">
                     <img src="<?=$arResult["PREVIEW_PICTURE"]["SRC"]?>" />
-<!--        <img data-original="--><?//=$arResult["PREVIEW_PICTURE"]["SRC"]?><!--"  class="lazy" />-->
         <div class="icons-container">
             <?if($arResult["DATE_ACTIVE_FROM"]):?>
                 <?if(((strtotime("now")-strtotime($arResult["DATE_ACTIVE_FROM"]))/86400) <= 14):?>

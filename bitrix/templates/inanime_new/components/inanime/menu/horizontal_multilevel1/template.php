@@ -4,7 +4,6 @@
 
     <nav class="navigation mobile-collapsed" id="top-navigation-bar">
         <div class="container">
-            <!-- general menu -->
             <ul class="first-level">
 
             <?

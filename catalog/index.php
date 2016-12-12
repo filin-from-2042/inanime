@@ -1,6 +1,7 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 ?>
+<div>
 <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog", 
 	"template1", 
@@ -279,4 +280,5 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 	),
 	false
 );?>
+</div>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>

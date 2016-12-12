@@ -773,16 +773,17 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
     <img src="<?=SITE_TEMPLATE_PATH."/images/sections-about-background.png"?>">
     <div class="container">
         <div class="row">
-            <?
+            <?php
             $res = CIBlockElement::GetList(Array(), array("ID"=>56071,"IBLOCK_ID"=>23, "ACTIVE"=>"Y"), false, Array("nPageSize"=>50), array());
             while($ob = $res->GetNextElement())
             {
                 $arFields = $ob->GetFields();
-                echo '<h2 class="yellow-text">'.$arFields["NAME"].'</h2>';
-                echo '<div class="content-text">'.$arFields["PREVIEW_TEXT"].'</div>';
-                echo '<a class="btn btn-default ia-btn yellow-btn more-btn" href="'.$arFields["DETAIL_PAGE_URL"].'" role="button"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></a>';
-            }
-            ?></div>
+                ?><h2 class="yellow-text"><?=$arFields["NAME"]?></h2>
+                <div class="content-text"><?=$arFields["PREVIEW_TEXT"]?></div>
+                <a class="btn btn-default ia-btn yellow-btn more-btn" href="<?=$arFields["DETAIL_PAGE_URL"]?>" role="button"><span class="glyphicon glyphicon-option-horizontal" aria-hidden="true"></span></a>
+            <?}
+            ?>
+        </div>
     </div>
 </div>
 <div class="section-subscribe">
