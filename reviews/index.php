@@ -1,11 +1,16 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Обзоры");
-?><?$APPLICATION->IncludeComponent(
+?> <?$APPLICATION->IncludeComponent(
 	"bitrix:news", 
 	"reviews", 
 	array(
-		"COMPONENT_TEMPLATE" => "reviews",
+		"DISPLAY_DATE" => "Y",
+		"DISPLAY_PICTURE" => "Y",
+		"DISPLAY_PREVIEW_TEXT" => "Y",
+		"USE_SHARE" => "N",
+		"SEF_MODE" => "Y",
+		"AJAX_MODE" => "N",
 		"IBLOCK_TYPE" => "news",
 		"IBLOCK_ID" => "24",
 		"NEWS_COUNT" => "20",
@@ -20,32 +25,10 @@ $APPLICATION->SetTitle("Обзоры");
 		"SORT_BY2" => "SORT",
 		"SORT_ORDER2" => "ASC",
 		"CHECK_DATES" => "Y",
-		"SEF_MODE" => "Y",
-		"AJAX_MODE" => "N",
-		"AJAX_OPTION_JUMP" => "N",
-		"AJAX_OPTION_STYLE" => "Y",
-		"AJAX_OPTION_HISTORY" => "N",
-		"AJAX_OPTION_ADDITIONAL" => "",
-		"CACHE_TYPE" => "A",
-		"CACHE_TIME" => "36000000",
-		"CACHE_FILTER" => "N",
-		"CACHE_GROUPS" => "Y",
-		"SET_LAST_MODIFIED" => "N",
-		"SET_TITLE" => "Y",
-		"INCLUDE_IBLOCK_INTO_CHAIN" => "Y",
-		"ADD_SECTIONS_CHAIN" => "Y",
-		"ADD_ELEMENT_CHAIN" => "N",
-		"USE_PERMISSIONS" => "N",
-		"DISPLAY_DATE" => "Y",
-		"DISPLAY_PICTURE" => "Y",
-		"DISPLAY_PREVIEW_TEXT" => "Y",
-		"USE_SHARE" => "N",
-		"COMPOSITE_FRAME_MODE" => "A",
-		"COMPOSITE_FRAME_TYPE" => "AUTO",
 		"PREVIEW_TRUNCATE_LEN" => "",
 		"LIST_ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"LIST_FIELD_CODE" => array(
-			0 => "",
+			0 => "TAGS",
 			1 => "",
 		),
 		"LIST_PROPERTY_CODE" => array(
@@ -61,7 +44,8 @@ $APPLICATION->SetTitle("Обзоры");
 		"DETAIL_ACTIVE_DATE_FORMAT" => "d.m.Y",
 		"DETAIL_FIELD_CODE" => array(
 			0 => "",
-			1 => "",
+			1 => "TAGS",
+			2 => "",
 		),
 		"DETAIL_PROPERTY_CODE" => array(
 			0 => "",
@@ -72,6 +56,16 @@ $APPLICATION->SetTitle("Обзоры");
 		"DETAIL_PAGER_TITLE" => "Страница",
 		"DETAIL_PAGER_TEMPLATE" => "",
 		"DETAIL_PAGER_SHOW_ALL" => "Y",
+		"SET_LAST_MODIFIED" => "N",
+		"SET_TITLE" => "Y",
+		"INCLUDE_IBLOCK_INTO_CHAIN" => "N",
+		"ADD_SECTIONS_CHAIN" => "N",
+		"ADD_ELEMENT_CHAIN" => "Y",
+		"USE_PERMISSIONS" => "N",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "36000000",
+		"CACHE_FILTER" => "N",
+		"CACHE_GROUPS" => "Y",
 		"PAGER_TEMPLATE" => ".default",
 		"DISPLAY_TOP_PAGER" => "N",
 		"DISPLAY_BOTTOM_PAGER" => "Y",
@@ -84,7 +78,6 @@ $APPLICATION->SetTitle("Обзоры");
 		"SET_STATUS_404" => "N",
 		"SHOW_404" => "N",
 		"MESSAGE_404" => "",
-		"SEF_FOLDER" => "/reviews/",
 		"MESSAGES_PER_PAGE" => "10",
 		"USE_CAPTCHA" => "Y",
 		"REVIEW_AJAX_POST" => "Y",
@@ -92,6 +85,14 @@ $APPLICATION->SetTitle("Обзоры");
 		"FORUM_ID" => "4",
 		"URL_TEMPLATES_READ" => "",
 		"SHOW_LINK_TO_FORUM" => "Y",
+		"SEF_FOLDER" => "/reviews/",
+		"AJAX_OPTION_JUMP" => "N",
+		"AJAX_OPTION_STYLE" => "Y",
+		"AJAX_OPTION_HISTORY" => "N",
+		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_TYPE" => "AUTO",
+		"COMPONENT_TEMPLATE" => "reviews",
+		"AJAX_OPTION_ADDITIONAL" => "undefined",
 		"SEF_URL_TEMPLATES" => array(
 			"news" => "",
 			"section" => "",
@@ -99,6 +100,6 @@ $APPLICATION->SetTitle("Обзоры");
 		)
 	),
 	false
-);?>
+);?> 
 <div></div>
  <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
