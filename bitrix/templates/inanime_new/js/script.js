@@ -167,6 +167,11 @@ function inanime_new() {
         $(element).closest(".dropdown").find(".btn.dropdown-toggle")
                                         .text('').append('<span class="glyphicon glyphicon-chevron-down"></span><span class="text">'+element.innerHTML+'</span>')
                                                 .append(inputElment);
+    };
+
+    this.ddSetSelectedCatalogFilter = function (element)
+    {
+        this.ddSetSelectedText(element);
         this.changeViewHandler();
     };
 

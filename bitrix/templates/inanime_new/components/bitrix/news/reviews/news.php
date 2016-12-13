@@ -9,6 +9,8 @@
             "SITE_ID" => SITE_ID
         )
     );?>
+    <div class="container">
+    </div>
     <?$APPLICATION->IncludeComponent(
         "bitrix:news.list",
         "inanime-list",

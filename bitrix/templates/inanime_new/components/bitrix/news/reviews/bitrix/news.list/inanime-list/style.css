@@ -21,6 +21,13 @@
     /*display:inline-block;*/
     text-align: right;
 }
+
+.ia-reviews-list.reviews-list .tag-list-container{
+    float:left;
+}
+.ia-reviews-list.reviews-list .tag-list-container .dropdown.select-container{
+    margin-top: 10px;
+}
 .ia-news-single .text-container img{
     border-radius:10px;
 }

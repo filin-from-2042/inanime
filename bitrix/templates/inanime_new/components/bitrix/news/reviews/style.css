@@ -2,3 +2,10 @@
 .news-list-content {
     padding-top: 18px;
 }
+.news-list-content .select-container.order .btn,
+.news-list-content .select-container.order .dropdown-menu {
+    min-width: 200px;
+}
+.news-list-content .select-container.dropdown .btn > span.text {
+    width: 165px;
+}

@@ -14,14 +14,14 @@ $this->setFrameMode(true);
                     if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-bottom"></span><span class="sort-value hidden">'.$val[0].';desc</span>';
                     if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='asc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-top"></span><span class="sort-value hidden">'.$val[0].';asc</span>';
                     $strList .= '<li>
-                                    <span onclick="inanime_new.ddSetSelectedText(this);">
+                                    <span onclick="inanime_new.ddSetSelectedCatalogFilter(this);">
                                         '.GetMessage('SECT_SORT_' . $key).'
                                         <span class="glyphicon glyphicon-triangle-bottom"></span>
                                         <span class="sort-value hidden">'.$val[0].';desc</span>
                                     </span>
                                 </li>'."\n\r";
                     $strList .= '<li>
-                                    <span onclick="inanime_new.ddSetSelectedText(this);">
+                                    <span onclick="inanime_new.ddSetSelectedCatalogFilter(this);">
                                         '.GetMessage('SECT_SORT_' . $key).'
                                         <span class="glyphicon glyphicon-triangle-top"></span>
                                         <span class="sort-value hidden">'.$val[0].';asc</span>

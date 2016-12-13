@@ -328,7 +328,7 @@ $templateData = array(
                                     </button>
                                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1_<?=$arItem["CODE"]?>">
                                         <li>
-                                            <span onclick="inanime_new.ddSetSelectedText(this);">
+                                            <span onclick="inanime_new.ddSetSelectedCatalogFilter(this);">
                                                 Все
                                                 <span class="sort-value hidden"></span>
                                             </span>
@@ -336,7 +336,7 @@ $templateData = array(
                                     <?foreach ($arItem["VALUES"] as $val => $ar):?>
                                         <?if(empty($ar["VALUE"])) continue;?>
                                         <li>
-                                            <span onclick="inanime_new.ddSetSelectedText(this);">
+                                            <span onclick="inanime_new.ddSetSelectedCatalogFilter(this);">
                                                 <?=$ar["VALUE"]?>
                                             <span class="sort-value hidden"><?=$ar["VALUE"]?></span>
                                             </span>

@@ -25,9 +25,44 @@ $arEnding = Array(
 <h1 class="ia-page-title"><?=$arResult['NAME'];?></h1>
 <div class="content">
     <div class="container reviews-list ia-reviews-list">
-<?if($arParams["DISPLAY_TOP_PAGER"]):?>
-    <?=$arResult["NAV_STRING"]?><br />
-<?endif;?>
+
+        <div class="top-pager-container">
+            <div class="tag-list-container clearfix">
+                <div class="dropdown select-container order">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <?
+                        $res = CIBlockElement::GetList(Array(), Array("ACTIVE"=>"Y", "IBLOCK_ID" => $arParams["IBLOCK_ID"]), false, false, Array("NAME", "TAGS"));
+                        while ($el = $res->Fetch())
+                        {
+                            $arrTags = explode(', ',$el["TAGS"]);
+                            for ($i =0; $i < sizeof($arrTags); $i++)
+                            {
+                                if(empty($arrTags[$i]) || trim($arrTags[$i])=='') continue;
+                                echo '<li>';
+                                    echo '<span onclick="iaReviewList.ddSelectTagFilter(this);">';
+                                        echo $arrTags[$i];
+                                        echo '<span class="sort-value hidden">'.$arrTags[$i].';desc</span>';
+                                    echo '</span>';
+                                echo '</li>';
+                            }
+
+                        }
+                        ?>
+                    </ul>
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                        <span class="text"><?=$currSort?></span>
+                    </button>
+                    <?=$strList?>
+                </div>
+            </div>
+
+            <div class="pager-container">
+                <?if($arParams["DISPLAY_TOP_PAGER"]):?>
+                    <?=$arResult["NAV_STRING"]?><br />
+                <?endif;?>
+            </div>
+        </div>
 <?if(count($arResult["ITEMS"])>0):?>
     <div class="reviews-list-container">
 		<?foreach($arResult["ITEMS"] as $arItem):?>
@@ -76,3 +111,6 @@ $arEnding = Array(
 <?endif;?>
     </div>
 </div>
+<script>
+    var iaReviewList = new InanimeReviewList();
+</script>
