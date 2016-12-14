@@ -175,6 +175,15 @@ textarea.form-control {
     color: #e89638;
     letter-spacing: 1.1px;
 }
+.yellow-text-underline {
+    color: #fc9a00;
+    text-decoration:underline;
+    cursor:pointer;
+}
+.yellow-text-underline:hover {
+    color: #fc9a00;
+    text-decoration:none;
+}
 .gray-text{
     color:#79828b;
 }

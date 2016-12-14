@@ -1,0 +1,27 @@
+/*************************************** ***********************/
+.ia-articles-list-container{
+    padding-top: 40px;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+
+    .ia-articles-list-container {
+        padding-top: 20px;
+    }
+}
+/* Tablet */
+@media (min-width: 760px) and (max-width:992px) {
+    .ia-articles-list-container{
+        padding-top: 20px;
+    }
+
+}
+
+@media (min-width: 992px) and (max-width: 1230px){
+
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1230px){
+
+}

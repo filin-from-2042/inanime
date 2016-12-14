@@ -1,5 +1,17 @@
-<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<div class="news-list-content">
+<?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
+/** @var array $arParams */
+/** @var array $arResult */
+/** @global CMain $APPLICATION */
+/** @global CUser $USER */
+/** @global CDatabase $DB */
+/** @var CBitrixComponentTemplate $this */
+/** @var string $templateName */
+/** @var string $templateFile */
+/** @var string $templateFolder */
+/** @var string $componentPath */
+/** @var CBitrixComponent $component */
+?>
+<div class="container ia-articles-list-container">
     <?$APPLICATION->IncludeComponent(
         "bitrix:breadcrumb",
         "catalog-chain",
@@ -12,6 +24,7 @@
     <?$APPLICATION->IncludeComponent(
         "bitrix:news.list",
         "inanime-list",
+//        "",
         Array(
             "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
             "IBLOCK_ID" => $arParams["IBLOCK_ID"],
