@@ -77,11 +77,11 @@
                                 Array("MODE"=>"text")
                             );?>
                         </p>
-                        <div class="social-container">
-                            <a href="http://www.facebook.com" class="social-link facebook"></a>
-                            <a href="http://www.twitter.com" class="social-link twitter"></a>
-                            <a href="http://vimeo.com" class="social-link vimeo"></a>
-                        </div>
+                        <?$APPLICATION->IncludeFile(
+                            $APPLICATION->GetTemplatePath("include_areas/socials-buttons.php"),
+                            Array(),
+                            Array("MODE"=>"html")
+                        );?>
                     </div>
 
                 </div>
