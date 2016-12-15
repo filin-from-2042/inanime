@@ -59,6 +59,7 @@ $arUrls = array(
                         <div class="basket-tabs-container">
                             <form method="post" action="<?=POST_FORM_ACTION_URI?>" name="basket_form" id="basket_form">
                                 <div class="nav-tabs-container">
+                                    <div class="fox-icon bottom visible-md visible-lg"></div>
                                     <ul class="nav nav-tabs" role="tablist">
                                         <li role="presentation" class="active"><a href="#my-basket" aria-controls="my-basket" role="tab" data-toggle="tab">Моя корзина</a></li>
                                         <li role="presentation"><a href="#put-aside" aria-controls="put-aside" role="tab" data-toggle="tab">Отложенные товары</a></li>

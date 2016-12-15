@@ -298,6 +298,16 @@ span.rub:before{
     z-index: 98;
 }
 
+
+.fox-icon.bottom{
+    bottom: -34px;
+    right: -88px;
+    background: url(images/sections-new-fox-bottom.png) no-repeat;
+    width: 122px;
+    height: 92px;
+    z-index: 100;
+}
+
 /***************** IMAGE RADIO BUTTON **************/
 .radio-container .radio-button-container {
     display:inline-block;
@@ -1139,14 +1149,6 @@ footer .general-container{
     top: 48px;
     z-index: 100;
     left: 340px;
-}
-.sections-carousel .fox-icon.bottom{
-    bottom: -34px;
-    right: -88px;
-    background: url(images/sections-new-fox-bottom.png) no-repeat;
-    width: 122px;
-    height: 92px;
-    z-index: 100;
 }
 .sections-carousel h2{
     font-size: 21px;

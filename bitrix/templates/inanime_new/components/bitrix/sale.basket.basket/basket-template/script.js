@@ -9,6 +9,10 @@ InAnimeBasket = function (params)
     $('.ia-basket #my-basket .content-row input[type="checkbox"]').click(that.setAvailabilityActionButtons);
     $('.table-action-column .action-button-container button.put-aside-action').click(function(event){that.delayButtonAction(event, that)});
     $('.table-action-column .action-button-container button.remove-action').click(function(event){that.deleteButtonAction(event, that)});
+    $(document).ready(function ()
+    {
+        $('.ia-counter-container .button').click(inanime_new.counterButtonClick);
+    });
 };
 
 // включение/отключение кнопок с дейсвиями

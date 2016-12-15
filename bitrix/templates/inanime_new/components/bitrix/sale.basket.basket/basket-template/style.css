@@ -16,6 +16,13 @@
 .ia-basket .nav-tabs-container {
     text-align:center;
     border-bottom:1px solid #ddd;
+    position: relative;
+}
+.ia-basket .nav-tabs-container .fox-icon.bottom{
+    position: absolute;
+    bottom: 0;
+    right:  auto;
+    left: 10px;
 }
 .ia-basket .nav-tabs li {
     width:191px;
@@ -47,7 +54,10 @@
     font-weight: bold;
     letter-spacing: 1.5px;
     margin-top: 0;
-    margin-bottom: 45px;
+    margin-bottom: 50px;
+}
+#my-basket .my-basket-tab-container{
+    padding-top: 57px;
 }
 #my-basket .column-header .column-title{
     font-weight: bold;
