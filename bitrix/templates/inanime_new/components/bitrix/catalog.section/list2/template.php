@@ -18,7 +18,7 @@ $itemCounter = 0;
 ?>
 <div id="<?=$carouselID?>" class="carousel-products vertical">
     <div class="title-container grey-container clearfix">
-        <span class="title"><?=$arResult["NAME"]?></span>
+        <span class="title"><a href="<?=$arResult['SECTION_PAGE_URL']?>"><?=$arResult["NAME"]?></a></span>
         <div class="next button"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
         <div class="prev button"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
     </div>
