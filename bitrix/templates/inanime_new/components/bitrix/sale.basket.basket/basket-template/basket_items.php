@@ -133,7 +133,7 @@ if ($normalCount > 0):
                                         <img class="product-preview" src="<?=$url?>"/>
                                     </label>
                                     <div class="mobile-row-data-container">
-                                        <div class="column-data-all-cost  yellow-text"><?=$arItem["PRICE_FORMATED"]?> ₽</div>
+                                        <div class="column-data-all-cost  yellow-text"><?=$arItem["PRICE_FORMATED"]?></div>
                                         <div class="ia-counter-container">
                                             <div class="increase button"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
                                             <div class="decrease button"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
