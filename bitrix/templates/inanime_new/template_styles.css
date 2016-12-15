@@ -203,20 +203,20 @@ textarea.form-control {
     padding-left: 10px;
 }
 .select-container .btn,
-.select-container.order .dropdown-menu,
+.select-container .dropdown-menu,
 .inanime-input-field{
     color:#79828b;
     font-size:13px;
 }
-.select-container.order .dropdown-menu li {
+.select-container .dropdown-menu li {
     padding-left: 10px;
     cursor: pointer;
 }
-.select-container.order .dropdown-menu li > span {
+.select-container .dropdown-menu li > span {
     width:100%;
     display:inline-block;
 }
-.select-container.order .dropdown-menu li:hover {
+.select-container .dropdown-menu li:hover {
     color:#1a2228;
 }
 .select-container.dropdown .btn > span.glyphicon {
@@ -230,7 +230,7 @@ textarea.form-control {
     /*width:75px;*/
     overflow:hidden;
 }
-.select-container.order .dropdown-menu {
+.select-container .dropdown-menu {
     border-top:none;
     border-left:2px solid #5d3d1d;
     border-right:2px solid #5d3d1d;
@@ -464,6 +464,17 @@ span.rub:before{
 /* hover style just for information */
 .ia-checkbox label:hover:before {
     border: 1px solid #5d3d1d!important;
+}
+
+#overlay-load{
+    position: absolute;
+    top:0;
+    left:0;
+    background: #fff;
+    opacity: 0.5;
+    height: 4444px;
+    width: 100%;
+    z-index:110;;
 }
 
 /******** INPUT WITH ICON *****************/
@@ -1349,16 +1360,6 @@ footer .general-container{
 }
 .section-catalog .select-container .select-title{
     display: inline-block;
-}
-.section-catalog  .items-section #overlay-load{
-    position: absolute;
-    top:0;
-    left:0;
-    background: #fff;
-    opacity: 0.5;
-    height: 4444px;
-    width: 100%;
-    z-index:110;;
 }
 /******************** SELECT TITLE ***********************/
 .section-catalog .select-title{

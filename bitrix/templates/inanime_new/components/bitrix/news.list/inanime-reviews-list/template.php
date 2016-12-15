@@ -28,9 +28,17 @@ $arEnding = Array(
 
         <div class="top-pager-container">
             <div class="tag-list-container clearfix">
-                <div class="dropdown select-container order">
+                <div class="dropdown select-container tag">
                     <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                        <li>
+                            <span onclick="iaReviewList.ddSelectFilter(this);">
+                                &nbsp
+                                <span class="sort-value hidden"></span>
+                            </span>
+                        </li>
                         <?
+                        $currFlter;
+                        if($GLOBALS['arrFilter'] && !empty($GLOBALS['arrFilter']['?TAGS'])) $currFlter = $GLOBALS['arrFilter']['?TAGS'];
                         $res = CIBlockElement::GetList(Array(), Array("ACTIVE"=>"Y", "IBLOCK_ID" => $arParams["IBLOCK_ID"]), false, false, Array("NAME", "TAGS"));
                         while ($el = $res->Fetch())
                         {
@@ -39,21 +47,45 @@ $arEnding = Array(
                             {
                                 if(empty($arrTags[$i]) || trim($arrTags[$i])=='') continue;
                                 echo '<li>';
-                                    echo '<span onclick="iaReviewList.ddSelectTagFilter(this);">';
+                                    echo '<span onclick="iaReviewList.ddSelectFilter(this);">';
                                         echo $arrTags[$i];
-                                        echo '<span class="sort-value hidden">'.$arrTags[$i].';desc</span>';
+                                        echo '<span class="sort-value hidden">'.$arrTags[$i].'</span>';
                                     echo '</span>';
                                 echo '</li>';
                             }
-
                         }
                         ?>
                     </ul>
                     <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
                         <span class="glyphicon glyphicon-chevron-down"></span>
-                        <span class="text"><?=$currSort?></span>
+                        <span class="text">
+                            <?=$currFlter?>
+                            <span class="sort-value hidden"><?=$currFlter?></span>
+                        </span>
                     </button>
-                    <?=$strList?>
+                </div>
+                <div class="dropdown select-container order">
+                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                        <li>
+                            <span onclick="iaReviewList.ddSelectFilter(this);">
+                                Дата публикации <span class="glyphicon glyphicon-triangle-top"></span>
+                                <span class="sort-value hidden"><?=strtolower($arParams['SORT_BY1'])?>;asc</span>
+                            </span>
+                        </li>
+                        <li>
+                            <span onclick="iaReviewList.ddSelectFilter(this);">
+                                Дата публикации <span class="glyphicon glyphicon-triangle-bottom"></span>
+                                <span class="sort-value hidden"><?=strtolower($arParams['SORT_BY1'])?>;desc</span>
+                            </span>
+                        </li>
+                    </ul>
+                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <span class="glyphicon glyphicon-chevron-down"></span>
+                        <span class="text">
+                            Дата публикации<span class="glyphicon glyphicon-triangle-<?=(strtolower($arParams['SORT_ORDER1'])=='asc')?'top':'bottom'?>"></span>
+                            <span class="sort-value hidden"><?=strtolower($arParams['SORT_BY1'])?>;<?=strtolower($arParams['SORT_ORDER1'])?></span>
+                        </span>
+                    </button>
                 </div>
             </div>
 
@@ -67,8 +99,8 @@ $arEnding = Array(
     <div class="reviews-list-container">
 		<?foreach($arResult["ITEMS"] as $arItem):?>
             <?
-            $this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
-            $this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
+            //$this->AddEditAction($arItem['ID'], $arItem['EDIT_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_EDIT"));
+            //$this->AddDeleteAction($arItem['ID'], $arItem['DELETE_LINK'], CIBlock::GetArrayByID($arItem["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BNL_ELEMENT_DELETE_CONFIRM')));
             ?>
             <div class="review-container">
                 <a href="<?=$arItem["DETAIL_PAGE_URL"]?>">
@@ -107,10 +139,19 @@ $arEnding = Array(
 	</div>
 <?endif?>
 <?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
-    <br /><?=$arResult["NAV_STRING"]?>
+    <?=$arResult["NAV_STRING"]?>
 <?endif;?>
     </div>
 </div>
+<?
+    $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
+$arJSParams['elementsPerPage'] = $arParams["NEWS_COUNT"];
+?>
 <script>
-    var iaReviewList = new InanimeReviewList();
+    var iaReviewList = new InanimeReviewList(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
+    $(document).ready(function(){
+        $('.ia-reviews-list .pagination-container .pagination a').click(function(event){
+            iaReviewList.pagSelectFilter(event);
+        });
+    });
 </script>

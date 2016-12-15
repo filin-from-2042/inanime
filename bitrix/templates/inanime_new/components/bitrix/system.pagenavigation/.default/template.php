@@ -74,28 +74,28 @@ $strNavQueryStringFull = ($arResult["NavQueryString"] != "" ? "?".$arResult["Nav
     <nav aria-label="Inanime news list">
         <ul class="ia-pagination pagination">
 
-            <li>
-                <?if ($arResult["NavPageNomer"] > 1):?>
 
-                    <?if($arResult["bSavePage"]):?>
-                        <a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=($arResult["NavPageNomer"]-1)?>" aria-label="Previous">
-                            <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                        </a>
-                    <?else:?>
-                        <?if ($arResult["NavPageNomer"] > 2):?>
+                <?if ($arResult["NavPageNomer"] > 1):?>
+                    <li>
+                        <?if($arResult["bSavePage"]):?>
                             <a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=($arResult["NavPageNomer"]-1)?>" aria-label="Previous">
                                 <i class="fa fa-chevron-left" aria-hidden="true"></i>
                             </a>
                         <?else:?>
-                            <a href="<?=$arResult["sUrlPath"]?><?=$strNavQueryStringFull?>" aria-label="Previous">
-                                <i class="fa fa-chevron-left" aria-hidden="true"></i>
-                            </a>
+                            <?if ($arResult["NavPageNomer"] > 2):?>
+                                <a href="<?=$arResult["sUrlPath"]?>?<?=$strNavQueryString?>PAGEN_<?=$arResult["NavNum"]?>=<?=($arResult["NavPageNomer"]-1)?>" aria-label="Previous">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </a>
+                            <?else:?>
+                                <a href="<?=$arResult["sUrlPath"]?><?=$strNavQueryStringFull?>" aria-label="Previous">
+                                    <i class="fa fa-chevron-left" aria-hidden="true"></i>
+                                </a>
+                            <?endif?>
                         <?endif?>
-                    <?endif?>
-
+                    </li>
                 <?else:?>
                 <?endif?>
-            </li>
+
 
     <?while($arResult["nStartPage"] <= $arResult["nEndPage"]):?>
 

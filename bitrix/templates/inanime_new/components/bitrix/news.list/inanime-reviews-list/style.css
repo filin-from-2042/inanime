@@ -3,7 +3,7 @@
 
 }
 .ia-reviews-list.reviews-list {
-    padding: 55px 0px 0px;
+    padding: 20px 0px 0px;
 }
 .ia-reviews-list.reviews-list .reviews-list-container {
     margin-top: 0px;
@@ -27,6 +27,7 @@
 }
 .ia-reviews-list.reviews-list .tag-list-container .dropdown.select-container{
     margin-top: 10px;
+    display: inline-block;
 }
 .ia-news-single .text-container img{
     border-radius:10px;

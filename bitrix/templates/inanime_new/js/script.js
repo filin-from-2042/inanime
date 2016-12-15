@@ -161,12 +161,14 @@ function inanime_new() {
     };
     this.ddSetSelectedText = function (element)
     {
-        var inputElment = $(element).closest(".dropdown").find(".btn.dropdown-toggle input[type='hidden']");
-        inputElment.val($(element).find(".sort-value.hidden").text());
+        var inputElement = $(element).closest(".dropdown").find(".btn.dropdown-toggle input[type='hidden']");
+        var elementVal = $(element).find(".sort-value.hidden").text();
+        if(elementVal=='cancel') inputElement.val('');
+        else inputElement.val(elementVal);
 
         $(element).closest(".dropdown").find(".btn.dropdown-toggle")
                                         .text('').append('<span class="glyphicon glyphicon-chevron-down"></span><span class="text">'+element.innerHTML+'</span>')
-                                                .append(inputElment);
+                                                .append(inputElement);
     };
 
     this.ddSetSelectedCatalogFilter = function (element)
