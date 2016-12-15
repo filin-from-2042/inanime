@@ -688,7 +688,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
         <div class="col-xs-24 col-sm-24 col-md-6 col-lg-6 news">
             <div class="news-list">
                 <div class="title-container clearfix">
-                    <div class="btn btn-default ia-btn text-btn blue-dark-btn view-all-btn"><a href="news">Все новости</a></div>
+                    <div class="btn btn-default ia-btn text-btn blue-dark-btn view-all-btn"><a href="/articles">Все новости</a></div>
                     <h2>Новости</h2>
                 </div>
             <?$APPLICATION->IncludeComponent(
