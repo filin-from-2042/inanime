@@ -395,7 +395,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                         <?
                                         }
                                         ?>
-                                        <span class="price yellow-text"><? echo $minPrice['DISCOUNT_VALUE']; ?> <span class="rub"></span> ₽</span>
+                                        <span class="price yellow-text"><? echo $minPrice['DISCOUNT_VALUE']; ?> <span class="rub"></span></span>
                                     </div>
                                     <div class="discount">
                                         <?
