@@ -300,8 +300,6 @@ span.rub:before{
 
 
 .fox-icon.bottom{
-    bottom: -34px;
-    right: -88px;
     background: url(images/sections-new-fox-bottom.png) no-repeat;
     width: 122px;
     height: 92px;
@@ -1149,6 +1147,10 @@ footer .general-container{
     top: 48px;
     z-index: 100;
     left: 340px;
+}
+.sections-carousel .fox-icon.bottom{
+    bottom: -34px;
+    right: -88px;
 }
 .sections-carousel h2{
     font-size: 21px;
