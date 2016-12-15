@@ -28,9 +28,12 @@
     float:left;
 }
 .ia-reviews-list.reviews-list .tag-list-container .dropdown.select-container{
-    margin-top: 10px;
     display: inline-block;
 }
+.ia-reviews-list.reviews-list .tag-list-container .dropdown-wrap{
+     margin-top: 10px;
+     display: inline-block;
+ }
 .ia-news-single .text-container img{
     border-radius:10px;
 }
@@ -45,6 +48,18 @@
     }
     .ia-reviews-list.reviews-list .review-container:nth-child(odd) {
          margin-right: 0px;
+    }
+    .ia-reviews-list.reviews-list .tag-list-container{
+        float:none;
+    }
+    .ia-reviews-list.reviews-list .tag-list-container .dropdown-wrap{
+        display: block;
+    }
+    .ia-reviews-list.reviews-list .top-pager-container {
+        min-height: 90px;
+    }
+    .ia-reviews-list.reviews-list .pagination-container{
+        text-align: center;
     }
 }
  /*Tablet */

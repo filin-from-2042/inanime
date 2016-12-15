@@ -28,68 +28,72 @@ $arEnding = Array(
 
         <div class="top-pager-container">
             <div class="tag-list-container clearfix">
-                <div class="dropdown select-container tag">
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
-                        <li>
-                            <span onclick="iaReviewList.ddSelectFilter(this);">
-                                &nbsp
-                                <span class="sort-value hidden"></span>
-                            </span>
-                        </li>
-                        <?
-                        $currFlter;
-                        if($GLOBALS['arrFilter'] && !empty($GLOBALS['arrFilter']['?TAGS'])) $currFlter = $GLOBALS['arrFilter']['?TAGS'];
-                        $res = CIBlockElement::GetList(Array(), Array("ACTIVE"=>"Y", "IBLOCK_ID" => $arParams["IBLOCK_ID"]), false, false, Array("NAME", "TAGS"));
-                        while ($el = $res->Fetch())
-                        {
-                            $arrTags = explode(', ',$el["TAGS"]);
-                            for ($i =0; $i < sizeof($arrTags); $i++)
+                <div class="dropdown-wrap">
+                    <div class="dropdown select-container tag">
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <li>
+                                <span onclick="iaReviewList.ddSelectFilter(this);">
+                                    &nbsp
+                                    <span class="sort-value hidden"></span>
+                                </span>
+                            </li>
+                            <?
+                            $currFlter;
+                            if($GLOBALS['arrFilter'] && !empty($GLOBALS['arrFilter']['?TAGS'])) $currFlter = $GLOBALS['arrFilter']['?TAGS'];
+                            $res = CIBlockElement::GetList(Array(), Array("ACTIVE"=>"Y", "IBLOCK_ID" => $arParams["IBLOCK_ID"]), false, false, Array("NAME", "TAGS"));
+                            while ($el = $res->Fetch())
                             {
-                                if(empty($arrTags[$i]) || trim($arrTags[$i])=='') continue;
-                                echo '<li>';
-                                    echo '<span onclick="iaReviewList.ddSelectFilter(this);">';
-                                        echo $arrTags[$i];
-                                        echo '<span class="sort-value hidden">'.$arrTags[$i].'</span>';
-                                    echo '</span>';
-                                echo '</li>';
+                                $arrTags = explode(', ',$el["TAGS"]);
+                                for ($i =0; $i < sizeof($arrTags); $i++)
+                                {
+                                    if(empty($arrTags[$i]) || trim($arrTags[$i])=='') continue;
+                                    echo '<li>';
+                                        echo '<span onclick="iaReviewList.ddSelectFilter(this);">';
+                                            echo $arrTags[$i];
+                                            echo '<span class="sort-value hidden">'.$arrTags[$i].'</span>';
+                                        echo '</span>';
+                                    echo '</li>';
+                                }
                             }
-                        }
-                        ?>
-                    </ul>
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <span class="glyphicon glyphicon-chevron-down"></span>
-                        <span class="text">
-                            <?=$currFlter?>
-                            <span class="sort-value hidden"><?=$currFlter?></span>
-                        </span>
-                    </button>
+                            ?>
+                        </ul>
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                            <span class="text">
+                                <?=$currFlter?>
+                                <span class="sort-value hidden"><?=$currFlter?></span>
+                            </span>
+                        </button>
+                    </div>
                 </div>
-                <div class="dropdown select-container order">
-                    <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
-                        <li>
-                            <span onclick="iaReviewList.ddSelectFilter(this);">
-                                Дата публикации <span class="glyphicon glyphicon-triangle-top"></span>
-                                <span class="sort-value hidden"><?=strtolower($arParams['SORT_BY1'])?>;asc</span>
+                <div class="dropdown-wrap">
+                    <div class="dropdown select-container order">
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                            <li>
+                                <span onclick="iaReviewList.ddSelectFilter(this);">
+                                    Дата публикации <span class="glyphicon glyphicon-triangle-top"></span>
+                                    <span class="sort-value hidden"><?=strtolower($arParams['SORT_BY1'])?>;asc</span>
+                                </span>
+                            </li>
+                            <li>
+                                <span onclick="iaReviewList.ddSelectFilter(this);">
+                                    Дата публикации <span class="glyphicon glyphicon-triangle-bottom"></span>
+                                    <span class="sort-value hidden"><?=strtolower($arParams['SORT_BY1'])?>;desc</span>
+                                </span>
+                            </li>
+                        </ul>
+                        <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                            <span class="glyphicon glyphicon-chevron-down"></span>
+                            <span class="text">
+                                Дата публикации<span class="glyphicon glyphicon-triangle-<?=(strtolower($arParams['SORT_ORDER1'])=='asc')?'top':'bottom'?>"></span>
+                                <span class="sort-value hidden"><?=strtolower($arParams['SORT_BY1'])?>;<?=strtolower($arParams['SORT_ORDER1'])?></span>
                             </span>
-                        </li>
-                        <li>
-                            <span onclick="iaReviewList.ddSelectFilter(this);">
-                                Дата публикации <span class="glyphicon glyphicon-triangle-bottom"></span>
-                                <span class="sort-value hidden"><?=strtolower($arParams['SORT_BY1'])?>;desc</span>
-                            </span>
-                        </li>
-                    </ul>
-                    <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
-                        <span class="glyphicon glyphicon-chevron-down"></span>
-                        <span class="text">
-                            Дата публикации<span class="glyphicon glyphicon-triangle-<?=(strtolower($arParams['SORT_ORDER1'])=='asc')?'top':'bottom'?>"></span>
-                            <span class="sort-value hidden"><?=strtolower($arParams['SORT_BY1'])?>;<?=strtolower($arParams['SORT_ORDER1'])?></span>
-                        </span>
-                    </button>
+                        </button>
+                    </div>
                 </div>
             </div>
 
-            <div class="pager-container">
+            <div class="pager-container hidden-xs">
                 <?if($arParams["DISPLAY_TOP_PAGER"]):?>
                     <?=$arResult["NAV_STRING"]?><br />
                 <?endif;?>
