@@ -67,7 +67,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
                     $counter = 0;
                     foreach ($arSlides as $slide) {
                         $counter++;
-                        $previewText = (strlen($slide["PREVIEW_TEXT"]) > 83) ? substr($slide["PREVIEW_TEXT"], 0, 80) . '...' : $slide["PREVIEW_TEXT"];
+                        $previewText = (strlen($slide["PREVIEW_TEXT"]) > 83) ? substr($slide["PREVIEW_TEXT"], 0, 60) . '...' : $slide["PREVIEW_TEXT"];
                         $nameText = (strlen($slide["NAME"]) > 43) ? substr($slide["NAME"], 0, 40) . '...' : $slide["NAME"];
                         ?>
                         <li>
