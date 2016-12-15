@@ -37,6 +37,20 @@
 .ia-news-single .text-container img{
     border-radius:10px;
 }
+.ia-reviews-list.reviews-list .review-container .tags-container{
+    position: absolute;
+    margin-top: -57px;
+    margin-left: 30px;
+}
+.ia-reviews-list.reviews-list .review-container .tags-container a{
+    color: #f5ad5b;
+}
+.ia-reviews-list.reviews-list .review-container .tags-container a,
+.ia-reviews-list.reviews-list .review-container .tags-container a:hover,
+.ia-reviews-list.reviews-list .review-container .tags-container a:focus{
+    background-color: transparent;
+}
+
 
  /*Mobile */
 @media (max-width: 760px) {
@@ -61,9 +75,29 @@
     .ia-reviews-list.reviews-list .pagination-container{
         text-align: center;
     }
+    .ia-reviews-list.reviews-list .review-container .tags-container {
+        margin-top: -30px;
+        margin-left: 16px;
+    }
+    .ia-reviews-list.reviews-list .review-container .review-title {
+        text-align: left;
+    }
+    .ia-reviews-list.reviews-list  .review-container .review-info{
+         margin-bottom: 23px;
+     }
+    .ia-reviews-list.reviews-list .review-container {
+        margin-bottom: 10px;
+    }
 }
  /*Tablet */
 @media (min-width: 760px) and (max-width:992px) {
+    .ia-reviews-list.reviews-list .review-container .tags-container{
+        margin-top: -35px;
+        margin-left: 18px;
+    }
+    .ia-reviews-list.reviews-list  .review-container .review-info{
+        margin-bottom: 10px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1230px){

@@ -138,6 +138,23 @@ $arEnding = Array(
                         <?=$arItem["PREVIEW_TEXT"]?>
                     </div>
                 </a>
+
+                <?
+                if($arItem["TAGS"]){
+                    $arrTags = explode(',',$arItem["TAGS"]);
+                    ?>
+                    <div class="tags-container">
+                        <div class="tags-list">
+                            <ul>
+                                <?
+                                foreach($arrTags as $tag)
+                                {?>
+                                    <li><a href="/search/index.php?tags=<?=urlencode($tag)?>"><i class="fa fa-hashtag" aria-hidden="true"></i><?=$tag?></a></li>
+                                <?}?>
+                            </ul>
+                        </div>
+                    </div>
+                <?}?>
             </div>
 		<?endforeach;?>
 	</div>

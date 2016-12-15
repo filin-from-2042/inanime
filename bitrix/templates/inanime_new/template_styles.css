@@ -512,7 +512,8 @@ span.rub:before{
 }
 
 /********************************* TAGS LIST *******************************/
-.tags-list {
+.tags-list,
+.tags-list a{
     color:#f5ad5b;
 }
 .tags-list ul {

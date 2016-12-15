@@ -31,15 +31,25 @@ $arEnding = Array(
     <?if($arParams["DISPLAY_NAME"]!="N" && $arResult["NAME"]):?>
         <h1><?=$arResult["NAME"]?></h1>
     <?endif;?>
-    <div class="tags-container visible-xs">
-        <div class="tags-list">
-            <ul >
-                <li><i class="fa fa-hashtag" aria-hidden="true"></i>фигурки</li>
-                <li><i class="fa fa-hashtag" aria-hidden="true"></i>аниме</li>
-                <li><i class="fa fa-hashtag" aria-hidden="true"></i>Berserker</li>
-            </ul>
+    <?
+    foreach($arResult["FIELDS"] as $code=>$value)
+    {?>
+    <?if($code == "TAGS" && $value):?>
+        <div class="tags-container visible-xs">
+            <div class="tags-list">
+                <ul>
+                    <?
+                    $arTags = explode(',',$value);
+                    foreach($arTags as $tag)
+                    {?>
+                        <li><i class="fa fa-hashtag" aria-hidden="true"></i><?=$tag?></li>
+                    <?}
+                    ?>
+                </ul>
+            </div>
         </div>
-    </div>
+    <?endif;?>
+    <?}?>
     <div class="review-info-container">
         <div class="review-info">
             <div class="date text">
@@ -75,7 +85,7 @@ $arEnding = Array(
                     $arTags = explode(',',$value);
                     foreach($arTags as $tag)
                     {?>
-                        <li><i class="fa fa-hashtag" aria-hidden="true"></i><?=$tag?></li>
+                        <li><a href="/search/index.php?tags=<?=urlencode($tag)?>"><i class="fa fa-hashtag" aria-hidden="true"></i><?=$tag?></a></li>
                     <?}
                 ?>
                 </ul>
