@@ -13,7 +13,7 @@ $APPLICATION->SetTitle("Обзоры");
 		"AJAX_MODE" => "N",
 		"IBLOCK_TYPE" => "news",
 		"IBLOCK_ID" => "24",
-		"NEWS_COUNT" => "2",
+		"NEWS_COUNT" => "8",
 		"USE_SEARCH" => "N",
 		"USE_RSS" => "N",
 		"USE_RATING" => "N",

@@ -21,7 +21,9 @@
     /*display:inline-block;*/
     text-align: right;
 }
-
+.ia-reviews-list.reviews-list .top-pager-container{
+    min-height: 65px;
+}
 .ia-reviews-list.reviews-list .tag-list-container{
     float:left;
 }

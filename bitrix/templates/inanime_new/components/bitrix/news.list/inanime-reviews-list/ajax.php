@@ -48,7 +48,7 @@ if (check_bitrix_sessid())
             "DISPLAY_TOP_PAGER" => "Y",
             "DISPLAY_BOTTOM_PAGER" => "Y",
             "PAGER_TITLE" => "Новости",
-            "PAGER_SHOW_ALWAYS" => "Y",
+            "PAGER_SHOW_ALWAYS" => "N",
             "PAGER_TEMPLATE" => ".default",
             "PAGER_DESC_NUMBERING" => "N",
             "PAGER_DESC_NUMBERING_CACHE_TIME" => "36000",

@@ -10,7 +10,7 @@ window.InanimeReviewList.prototype.ddSelectFilter = function(element)
 {
     inanime_new.ddSetSelectedText(element);
 
-    var pageNumber = $('.ia-reviews-list .pagination-container .pagination .active a').first().text();
+    var pageNumber = $('.ia-reviews-list .pagination-container .pagination .active a').first().text() || 1;
     this.filterList(pageNumber);
 };
 
