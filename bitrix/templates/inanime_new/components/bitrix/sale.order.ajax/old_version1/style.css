@@ -1,0 +1,321 @@
+/********************************* ORDER DRAWING UP **************************/
+.order-drawing-up{
+    padding-top: 138px;
+}
+.order-drawing-up h2{
+    font-size: 22px;
+    text-transform: uppercase;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin-bottom: 35px;
+    padding-left: 13px;
+}
+.order-drawing-up .fio-column .input-container{
+    margin-bottom: 23px;
+}
+.order-drawing-up .fio-column .form-control {
+    width: 357px;
+}
+.order-drawing-up .address-column,
+.order-drawing-up .payment-column{
+    padding-left: 5px;
+}
+.order-drawing-up .address-container .street-data-fields .input-container {
+    display: inline-block;
+    margin-bottom: 18px;
+}
+.order-drawing-up .address-container .input-container {
+    margin-bottom: 23px;
+    margin-right: 7px;
+}
+.order-drawing-up .address-column .radio-button-container{
+    margin-right: 25px;
+}
+.order-drawing-up .address-container input.city-input {
+    width: 505px;
+}
+.order-drawing-up .address-container  input.street-input {
+    width: 295px;
+}
+.order-drawing-up .address-container input.house-number-input,
+.order-drawing-up .address-container input.apartment-input {
+    width: 95px;
+}
+.order-drawing-up .radio-values-container .values-container{
+    margin-top: 30px;
+}
+.order-drawing-up .radio-values-container .values-container > div{
+    display: none;
+}
+.order-drawing-up .radio-values-container .values-container > div.selected{
+    display: block;
+}
+.order-drawing-up .radio-row{
+    margin-top: 5px;
+}
+.order-drawing-up .radio-row .radio-container{
+    margin-top: 28px;
+}
+.order-drawing-up .radio-row .radio-button-container{
+    display: block;
+    margin-bottom: 6px;
+}
+.order-drawing-up .radio-row h3,
+.order-drawing-up .discounts-coupon-row h3{
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+}
+.order-drawing-up .shipping-column .shipping-icon,
+.order-drawing-up .payment-column .payment-icon{
+    /*width: 41px;*/
+    /*height: 28px;*/
+    max-width: 41px;
+    max-height: 28px;
+    border:2px solid #d9d9d9;
+    border-radius: 5px;
+    margin: 0 14px 0 5px;
+}
+.order-drawing-up .shipping-column .shipping-money{
+    color:#fc9a00;
+    font-size: 20px;
+    font-weight: bold;
+    margin-left: 19px;
+    letter-spacing: 2px;
+    line-height: 20px;
+}
+.order-drawing-up .order-comment-row{
+    margin-top: 50px;
+}
+.order-drawing-up .order-comment-container .order-comment-textarea{
+    width: 97%;
+    height: 78px;
+}
+.order-drawing-up .discounts-coupon-row h3{
+    margin-bottom: 27px;
+}
+.order-drawing-up .discounts-coupon-row{
+    margin-top: 30px;
+}
+.order-drawing-up .discount-container .number ,
+.order-drawing-up .coupon-container .number {
+    display: inline-block;
+    font-size: 12px;
+    padding: 8px 18px;
+    border-radius: 10px;
+    letter-spacing: 0.5px;
+    width: 310px;
+}
+.order-drawing-up .discount-container .ia-close-btn,
+.order-drawing-up .coupon-container .ia-close-btn{
+    vertical-align: middle;
+    margin-left: 9px;
+    width: 32px;
+    height: 32px;
+}
+.order-drawing-up .coupon-column{
+    padding-left: 5px;
+}
+.order-drawing-up .discounts-coupon-row .note{
+    margin-top: 10px;
+}
+.order-drawing-up .discounts-coupon-row .costs-row{
+    padding-left: 10px;
+}
+.order-drawing-up .discounts-coupon-row .cost-column,
+.order-drawing-up .discounts-coupon-row .text-column{
+    padding-left: 5px;
+}
+.order-drawing-up .discounts-coupon-row .note .text,
+.order-drawing-up .discounts-coupon-row .note .period{
+    display: block;
+    font-size: 12px;
+}
+.order-drawing-up .costs-button-row .order-cost{
+    margin-top: 50px;
+}
+.order-drawing-up .costs-button-row .all-order-cost{
+    margin-top: 13px;
+}
+/*.order-drawing-up .costs-button-row .order-cost,*/
+/*.order-drawing-up .costs-button-row .all-order-cost{*/
+/*width: 395px;*/
+/*}*/
+.order-drawing-up .costs-button-row .order-cost .text,
+.order-drawing-up .costs-button-row .all-order-cost .text{
+    /*float: left;*/
+    font-weight: bold;
+    font-size: 16px;
+    margin-bottom: 13px;
+}
+.order-drawing-up .costs-button-row .order-cost .cost,
+.order-drawing-up .costs-button-row .all-order-cost .cost{
+    /*float: right;*/
+    font-weight: bold;
+    color:#fc9a00;
+    font-size: 21px;
+    letter-spacing: 1px;
+    line-height: 14px;
+}
+.order-drawing-up .costs-button-row .all-order-cost .cost{
+    font-size: 28px;
+}
+.order-drawing-up .costs-row .button-container{
+    margin-top: 54px;
+    margin-bottom: 110px;
+}
+.order-drawing-up .costs-row .button-container button{
+    font-size: 14px;
+    padding: 11px 36px;
+}
+.order-drawing-up .error-container{
+    text-align: center;
+    margin-top: 17px;
+    display: none;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+    /****************** DRAWING UP *************************/
+    .order-drawing-up .fio-column .form-control {
+        width: 100%;
+    }
+    .order-drawing-up {
+        padding-top: 94px;
+    }
+    .order-drawing-up h2 {
+        font-size: 18px;
+        text-align: center;
+        margin-bottom: 25px;
+    }
+    .order-drawing-up .address-column,
+    .order-drawing-up .payment-column {
+        padding-left: 15px;
+    }
+    .order-drawing-up .address-column .radio-button-container {
+        margin-bottom: 10px;
+    }
+    .order-drawing-up .radio-values-container .values-container {
+        margin-top: 12px;
+    }
+    .order-drawing-up .address-container input.city-input {
+        width: 100%;
+    }
+    .order-drawing-up .address-container input.street-input {
+        width: 214px;
+    }
+    .order-drawing-up .address-container input.house-number-input,
+    .order-drawing-up .address-container input.apartment-input {
+        width: 60px;
+    }
+    .order-drawing-up .address-container .street-data-fields .input-container.apartment-container {
+        display: none;
+    }
+    .order-drawing-up .radio-row h3, .order-drawing-up .discounts-coupon-row h3 {
+        font-size: 17px;
+        text-align: center;
+        margin: 15px 0 10px 0;
+    }
+    .order-drawing-up .payment-column {
+        margin-top: 42px;
+    }
+    .order-drawing-up .order-comment-row {
+        margin-top: 30px;
+    }
+    .order-drawing-up .discount-container .number, .order-drawing-up .coupon-container .number {
+        width: 84%;
+    }
+    .order-drawing-up .discount-container{
+        margin-top: 25px;
+    }
+    .order-drawing-up .coupon-container{
+        margin-top: 14px;
+    }
+    .order-drawing-up .coupon-column {
+        padding-left: 15px;
+    }
+    .order-drawing-up .costs-button-row .order-cost {
+        margin-top: 38px;
+    }
+    .order-drawing-up .cost-column{
+        padding-left: 0;
+    }
+    .order-drawing-up .costs-row .button-container {
+        text-align: right;
+        margin-right: -30px;
+    }
+}
+/* Tablet */
+@media (min-width: 760px) and (max-width:992px) {
+    /************************* DRAWING UP **************************/
+    .order-drawing-up .address-column, .order-drawing-up .payment-column {
+        padding-left: 15px;
+        padding-right: 5px;
+    }
+    .order-drawing-up .address-column .radio-button-container {
+        margin-right: 10px;
+    }
+    .order-drawing-up {
+        padding-top: 100px;
+    }
+    .radio-button-container .button-title {
+        padding-left: 2px;
+    }
+    .order-drawing-up .address-container input.city-input {
+        width: 345px;
+    }
+    .order-drawing-up .address-container input.street-input {
+        width: 256px;
+    }
+    .order-drawing-up .address-container input.house-number-input,
+    .order-drawing-up .address-container input.apartment-input {
+        width: 79px;
+    }
+    .order-drawing-up .radio-row h3, .order-drawing-up .discounts-coupon-row h3 {
+        font-size: 21px;
+        letter-spacing: 1px;
+        margin-top: 10px;
+    }
+    .order-drawing-up .order-comment-row {
+        margin-top: 39px;
+    }
+    .order-drawing-up .discounts-column{
+        padding-right: 5px;
+    }
+    .order-drawing-up .text-column{
+        padding-right: 5px;
+        padding-left: 10px;
+    }
+    .order-drawing-up .cost-column{
+        padding-left: 0px;
+    }
+    .order-drawing-up .costs-row .button-container {
+        margin-top: 58px;
+        text-align: right;
+        margin-right: 50px;
+    }
+    .order-drawing-up .costs-button-row .order-cost {
+        margin-top: 38px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1230px){
+    /******************* DRAW UP ORDER ************************/
+    .order-drawing-up .fio-column .form-control {
+        width: 290px;
+    }
+    .order-drawing-up .address-container input.city-input {
+        width: 460px;
+    }
+    .order-drawing-up .discount-container .number, .order-drawing-up .coupon-container .number {
+        width: 245px;
+    }
+    .order-drawing-up .order-comment-container .order-comment-textarea {
+        width: 815px;
+    }
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1230px){
+
+}
