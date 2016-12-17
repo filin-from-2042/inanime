@@ -2,15 +2,27 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 //$APPLICATION->SetTitle("Корзина");
 ?> <?$APPLICATION->IncludeComponent(
-	"bitrix:sale.basket.basket",
-	"basket-template",
-//	"",
-	Array(
+	"bitrix:sale.basket.basket", 
+	"basket-template", 
+	array(
 		"TEMPLATE_THEME" => "site",
-		"OFFERS_PROPS" => array("COLOR_REF", "SIZES_SHOES", "SIZES_CLOTHES"),
+		"OFFERS_PROPS" => array(
+			0 => "COLOR_REF",
+			1 => "SIZES_SHOES",
+			2 => "SIZES_CLOTHES",
+		),
 		"PATH_TO_ORDER" => "/personal/order/make/",
 		"HIDE_COUPON" => "N",
-		"COLUMNS_LIST" => array("NAME", "DISCOUNT", "PROPS", "DELETE", "DELAY", "PRICE", "QUANTITY", "SUM"),
+		"COLUMNS_LIST" => array(
+			0 => "NAME",
+			1 => "DISCOUNT",
+			2 => "PROPS",
+			3 => "DELETE",
+			4 => "DELAY",
+			5 => "PRICE",
+			6 => "QUANTITY",
+			7 => "SUM",
+		),
 		"PRICE_VAT_SHOW_VALUE" => "Y",
 		"COUNT_DISCOUNT_4_ALL_QUANTITY" => "N",
 		"USE_PREPAYMENT" => "N",
@@ -36,7 +48,9 @@ require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 		"GIFTS_CONVERT_CURRENCY" => "N",
 		"GIFTS_HIDE_NOT_AVAILABLE" => "Y",
 		"COMPOSITE_FRAME_MODE" => "A",
-		"COMPOSITE_FRAME_TYPE" => "AUTO"
-	)
+		"COMPOSITE_FRAME_TYPE" => "AUTO",
+		"COMPONENT_TEMPLATE" => "basket-template"
+	),
+	false
 );?>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
