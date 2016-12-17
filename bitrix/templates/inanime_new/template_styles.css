@@ -1427,6 +1427,154 @@ footer .general-container{
     line-height: 26px;
     font-size: 20px;
 }
+
+
+
+/******************************** PROFILE **************************************/
+.section-personal .menu-container{
+    border-radius: 10px;
+    background-color: #63bac4;
+    width:256px;
+}
+.section-personal .menu-container .fox-icon{
+    background: url(images/sections-new-fox-top-desktop.png) no-repeat;
+    width: 169px;
+    height: 91px;
+    z-index: 100;
+    position: absolute;
+    margin-top: -90px;
+    margin-left: 39px;
+}
+.section-personal .menu-container ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color:#fff;
+    padding: 9px 0 10px 10px;
+}
+.section-personal .menu-container ul li {
+    margin-bottom:5px;
+}
+.section-personal .menu-container ul li a{
+    display: inline-block;
+    width:100%;
+    border-top-left-radius:7px;
+    border-bottom-left-radius:7px;
+    color:#fff;
+    padding: 5px 5px 5px 17px;
+    font-size: 15px;
+    letter-spacing: 0px;
+}
+.section-personal .menu-container ul li a:hover {
+    text-decoration:none;
+    color:#000;
+}
+.section-personal .menu-container ul li.active a,
+.section-personal .menu-container ul li:hover a{
+    background-color: #f2f2ec;
+    color:#000;
+}
+
+/******************** PERSONAL ************************/
+.section-personal {
+    padding-top: 158px;
+    padding-bottom: 100px;
+
+}
+.section-personal .menu-column {
+    padding-left:0;
+}
+.section-personal .fields-column {
+    padding-top:13px;
+}
+.section-personal .fields-column input{
+    font-size: 13px;
+}
+.section-personal .fields-column .input-container {
+    margin-bottom:23px;
+    margin-right: 7px;
+}
+.section-personal .fields-column .save-button-container{
+    margin-top: 30px;
+}
+.section-personal .fields-column .add-address-button-container{
+    margin-top: 8px;
+}
+.section-personal .fields-column .save-button-container button ,
+.section-personal .fields-column .add-address-button-container button {
+    font-size: 14px;
+    padding: 11px 32px;
+}
+
+.section-personal .fio-column .input-container input {
+    width:354px;
+}
+.section-personal .fio-column .radio-container {
+    padding-left: 15px;
+    padding-top: 2px;
+}
+.section-personal .fio-column .radio-container .radio-button-container {
+    margin-right: 17px;
+}
+
+.section-personal .address-column {
+    padding-left:27px;
+}
+.section-personal .address-column input.city-input {
+    width:505px;
+}
+.section-personal .address-column input.street-input {
+    width: 295px;
+}
+.section-personal .address-column input.house-number-input ,
+.section-personal .address-column input.apartment-input {
+    width: 95px;
+}
+.section-personal .address-column .street-data-fields {
+    width:110%;
+}
+.section-personal .address-column .street-data-fields .input-container {
+    display:inline-block;
+    margin-bottom: 18px;
+}
+.section-personal .address-column .add-button-container {
+    padding-left: 48px;
+}
+.section-personal .address-column .add-button.address i,
+.section-personal .address-column .add-button.phone i {
+    font-size: 18px;
+    margin-right: 6px;
+}
+.section-personal .address-column .phone-container {
+    margin-top: 24px;
+}
+.section-personal .address-column .phone-container .input-container {
+    margin-bottom:15px;
+}
+.section-personal .address-column .phone-container .add-button-container {
+    padding-left: 26px;
+}
+.section-personal .address-column .add-button.phone i{
+    vertical-align: middle;
+}
+.section-personal .address-column .address-radio-container .input-container{
+    margin-bottom: 0;
+    min-height: 30px;
+    min-width: 400px;
+}
+.section-personal .address-column .address-radio-container input[disabled]{
+    cursor: pointer;
+    width: 475px;
+    position: absolute;
+}
+.section-personal .address-column .address-radio-container .radio-button-container{
+    margin-bottom: 23px;
+}
+.section-personal .address-column .address-radio-container .radio-button-container:last-child{
+    margin-bottom: 18px;
+}
+
+
 /******************************* MEDIA QUERIES ********************************/
 /* Mobile */
 @media (max-width: 760px) {
@@ -1729,6 +1877,54 @@ footer .general-container{
         text-align:center;
     }
 
+    /***************** PERSONAL PROFILE *******************/
+    .section-personal .menu-container .fox-icon{
+        display: none;
+    }
+
+    .section-personal .menu-container {
+        border-radius: 10px;
+        background-color: #63bac4;
+        width: auto;
+    }
+    .section-personal .menu-column {
+        padding-left: 15px;
+    }
+    .section-personal {
+        padding-top: 103px;
+    }
+    .section-personal .menu-column {
+        margin-bottom: 19px;
+    }
+    .section-personal .fio-column .input-container input {
+        width: 290px;
+    }
+    .section-personal .fio-column .radio-container {
+        padding-left: 23px;
+    }
+    .section-personal .address-column {
+        padding-left: 16px;
+        margin-top: 25px;
+    }
+    .section-personal .address-column input.city-input,
+    .section-personal .address-column input.street-input,
+    .section-personal .fields-column input {
+        width: 290px;
+    }
+    .section-personal .address-column input.house-number-input, .section-personal .address-column input.apartment-input {
+        width: 139px;
+    }
+    .section-personal .address-column .street-data-fields .input-container {
+        margin-bottom: 20px;
+    }
+
+    .section-personal .address-column .address-radio-container .input-container{
+        min-width: 240px;
+    }
+    .section-personal .address-column .address-radio-container input[disabled]{
+        width: 250px;
+    }
+
 }
 
 /* Tablet */
@@ -2010,6 +2206,60 @@ footer .general-container{
     #comments .comment-main .part-title {
         margin-top: 17px;
     }
+
+
+
+    /******************* PERSONAL PROFILE  ********************/
+    .section-personal .menu-container {
+        width: auto;
+    }
+    .section-personal .menu-container ul li a {
+        padding: 5px 5px 5px 3px;
+    }
+    .section-personal .menu-container .fox-icon{
+        margin-left: 32px
+    }
+
+    .section-personal .menu-column {
+        padding-left: 23px;
+        padding-right: 11px;
+    }
+    .section-personal {
+        padding-top: 138px;
+    }
+    .section-personal .fields-column {
+        padding-top: 0px;
+    }
+    .section-personal .fields-column .input-container {
+        margin-bottom: 22px;
+    }
+    .section-personal .fio-column .radio-container {
+        padding-left: 17px;
+        padding-top: 3px;
+    }
+    .section-personal .address-column {
+        padding-left: 12px;
+        margin-top: 26px;
+    }
+    .section-personal .address-column input.city-input {
+        width: 460px;
+    }
+    .section-personal .address-column input.street-input {
+        width: 270px;
+    }
+    .section-personal .address-column input.house-number-input,
+    .section-personal .address-column input.apartment-input {
+        width: 85px;
+    }
+    .section-personal .fields-column .save-button-container {
+        margin-top: 36px;
+    }
+    .section-personal .address-column .address-radio-container .input-container{
+        min-width: 320px;
+    }
+    .section-personal .address-column .address-radio-container input[disabled]{
+        width: 330px;
+    }
 }
 /* (desktops, 992px and up) */
 @media (min-width: 992px) {
@@ -2082,6 +2332,30 @@ footer .general-container{
 
     .section-reviews-news .reveiew-icon-hearts{
         display: inline-block;
+    }
+
+    /****************** PERSONAL - PROFILE *********************/
+    .section-personal .menu-container {
+        width: 100%;
+    }
+
+    .section-personal .fio-column .input-container input {
+        width: 290px;
+    }
+    .section-personal .address-column input.city-input {
+        width: 370px;
+    }
+    .section-personal .address-column input.street-input {
+        width: 197px;
+    }
+    .section-personal .address-column input.house-number-input, .section-personal .address-column input.apartment-input {
+        width: 75px;
+    }
+    .section-personal .address-column .address-radio-container .input-container{
+        min-width: 330px;
+    }
+    .section-personal .address-column .address-radio-container input[disabled]{
+        width: 340px;
     }
 
 }

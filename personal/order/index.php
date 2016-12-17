@@ -1,6 +1,6 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("Заказы");
+$APPLICATION->SetTitle("Просмотр моих заказов");
 ?><?$APPLICATION->IncludeComponent("bitrix:sale.personal.order", "", array(
 	"SEF_MODE" => "Y",
 	"SEF_FOLDER" => "/personal/order/",
