@@ -1,0 +1,76 @@
+
+.section-personal .menu-container{
+    border-radius: 10px;
+    background-color: #63bac4;
+    width:256px;
+}
+.section-personal .menu-container .fox-icon{
+    background: url(images/sections-new-fox-top-desktop.png) no-repeat;
+    width: 169px;
+    height: 91px;
+    z-index: 100;
+    position: absolute;
+    margin-top: -90px;
+    margin-left: 39px;
+}
+.section-personal .menu-container ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    color:#fff;
+    padding: 9px 0 10px 10px;
+}
+.section-personal .menu-container ul li {
+    margin-bottom:5px;
+}
+.section-personal .menu-container ul li a{
+    display: inline-block;
+    width:100%;
+    border-top-left-radius:7px;
+    border-bottom-left-radius:7px;
+    color:#fff;
+    padding: 5px 5px 5px 17px;
+    font-size: 15px;
+    letter-spacing: 0px;
+}
+.section-personal .menu-container ul li a:hover {
+    text-decoration:none;
+    color:#000;
+}
+.section-personal .menu-container ul li.active a,
+.section-personal .menu-container ul li:hover a{
+    background-color: #f2f2ec;
+    color:#000;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+
+    .section-personal .menu-container .fox-icon{
+        display: none;
+    }
+}
+/* Tablet */
+@media (min-width: 760px) and (max-width:992px) {
+
+    .section-personal .menu-container {
+        width: auto;
+    }
+    .section-personal .menu-container ul li a {
+        padding: 5px 5px 5px 3px;
+    }
+    .section-personal .menu-container .fox-icon{
+        margin-left: 32px
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1230px){
+
+    .section-personal .menu-container {
+        width: 100%;
+    }
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1230px){
+
+}
