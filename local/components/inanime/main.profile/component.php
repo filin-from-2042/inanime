@@ -111,7 +111,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && ($_REQUEST["save"] <> '' || $_REQUES
                 $strError.='Не указан новый пароль<br />';
             //else if (strlen($_REQUEST["NEW_PASSWORD"])<6) $strError.='Минимальная длина пароля 6 символов<br />';
 
-            $_REQUEST["NEW_PASSWORD_CONFIRM"] = $_REQUEST["NEW_PASSWORD"];
+            //$_REQUEST["NEW_PASSWORD_CONFIRM"] = $_REQUEST["NEW_PASSWORD"];
         }
 
         if (isset($_REQUEST["TIME_ZONE"]))

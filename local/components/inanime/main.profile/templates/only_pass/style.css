@@ -1,0 +1,80 @@
+/********************* CHANGE PASSWORD *******************/
+.section-personal.change-password h2{
+    margin-top: 0;
+    text-transform: uppercase;
+    font-size: 22px;
+    font-weight: bold;
+    letter-spacing: 0.5px;
+    margin-bottom: 25px;
+}
+.section-personal.change-password .password-column {
+    padding-left: 5px;
+    padding-top: 8px;
+}
+.section-personal.change-password .password-column input{
+    width: 434px;
+}
+.section-personal.change-password  .password-column .change-button-container button{
+    padding: 11px 35px;
+    font-size: 14px;
+}
+.section-personal.change-password .confirm-column .confirm-container{
+    margin-top: 5px;
+    margin-left: 3px;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+    /*************** PERSONAL CHANGE PASSWORD ****************/
+    .section-personal.change-password h2 {
+        letter-spacing: 1px;
+        text-align: center;
+        font-size: 17px;
+        margin-bottom: 13px;
+    }
+    .section-personal.change-password .password-column input {
+        width: 291px;
+    }
+    .section-personal.change-password .password-column {
+        padding-left: 16px;
+    }
+    .section-personal.change-password .password-column .change-button-container{
+        text-align: center;
+        margin-top: 32px;
+    }
+    .section-personal.change-password .confirm-column .confirm-container {
+        margin-top: 22px;
+    }
+}
+/* Tablet */
+@media (min-width: 760px) and (max-width:992px) {
+    /*************************** PERSONAL - CHANGE PASSWORD *****************/
+    .section-personal.change-password .password-column {
+        padding-top: 0px;
+    }
+    .section-personal.change-password h2 {
+        margin-top: 6px;
+        padding-left: 0px;
+    }
+    .section-personal.change-password .password-column .change-button-container{
+        margin-top: 33px;
+    }
+    .section-personal.change-password .confirm-column .confirm-container {
+        margin-top: 35px;
+        margin-left: 0px;
+    }
+    .section-personal.change-password .password-column {
+        padding-left: 13px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1230px){
+    /****************************** PERSONAL - CHANGE PASSWORD ******************/
+    .section-personal.change-password .password-column input {
+        width: 345px;
+    }
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1230px){
+
+}
