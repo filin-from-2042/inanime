@@ -19,7 +19,11 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
             exit();
             //echo ShowNote(GetMessage('PROFILE_DATA_SAVED'));
         }
+        if ($arResult['SUBSCRIBE_MESSAGE'] == 'Y') {
+            echo ShowNote($arResult['SUBSCRIBE_MESSAGE_TEXT']);
+        }
         ?>
+        <?= $arResult["BX_SESSION_CHECK"] ?>
         <input type="hidden" name="lang" value="<?= LANG ?>" />
         <input type="hidden" name="ID" value=<?= $arResult["ID"] ?> />
         <input type="hidden" name="profile-edit" value="Y" />
@@ -58,7 +62,13 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
                     });
                 </script>
             </div>
-            <div class="save-button-container hidden-sm hidden-xs">
+            <div class="confirm-container">
+                <div class="ia-checkbox">
+                    <input type="checkbox" id="subscribe-check" <?=($arResult['SUBSCRIBED']=='Y'?'checked="checked"':'')?> name="subscribe-add">
+                    <label for="subscribe-check">Я хочу получать новости компании, а также информацию об акциях и новых предложениях</label>
+                </div>
+            </div>
+            <div class="save-button-container">
                 <button type="submit" class="btn btn-default ia-btn text-btn yellow-btn" name="save" value="save">Сохранить</button>
             </div>
         </div>

@@ -26,7 +26,87 @@ if (!($arParams['CHECK_RIGHTS'] == 'N' || $USER->CanDoOperation('edit_own_profil
 
 $strError = '';
 
+if(CModule::IncludeModule("subscribe"))
+{
+    if ($USER->IsAuthorized()){
+        global $USER;
+        $USER_ID = $USER->GetID() ;
+    }
+    else {
+        $USER = NULL ;
+    }
+
+    $EMAIL = $USER->GetEmail();
+    $RUB_ID = 1;
+    $alreadySubscribed = false;
+    $subscribedID=0 ;
+
+    // определяем текущую подписку на новости
+    $rs = CSubscription::GetByEmail($EMAIL);
+    while($rubid = $rs->Fetch())
+    {
+        $subscr_rub = CSubscription::GetRubricList($rubid['ID']);
+        while($subscr_rub_arr = $subscr_rub->Fetch())
+        {
+            if( $subscr_rub_arr["ID"] == $RUB_ID)
+            {
+                if($rubid['ACTIVE']!='N') $alreadySubscribed=true;
+                $subscribedID = $rubid['ID'];
+                break;
+            }
+        }
+    }
+    $arResult['SUBSCRIBED'] = ($alreadySubscribed) ? 'Y' : 'N';
+}
+
+
+//var_dump(check_bitrix_sessid());
+//var_dump($_REQUEST);
+//var_dump( bitrix_sessid());
 if ($_SERVER["REQUEST_METHOD"] == "POST" && ($_REQUEST["save"] <> '' || $_REQUEST["apply"] <> '') && check_bitrix_sessid()) {
+
+   if(CModule::IncludeModule("subscribe"))
+   {
+       $subscr = new CSubscription;
+        if($_POST["subscribe-add"]=='on')
+        {
+            if(!$alreadySubscribed)
+            {
+                $arFields = Array(
+                    "USER_ID" => $USER_ID,
+                    "FORMAT" => "html/text",
+                    "EMAIL" => $EMAIL,
+                    "ACTIVE" => "Y",
+                    "RUB_ID" => array($RUB_ID),
+                    "SEND_CONFIRM" => "N"
+                );
+
+                $idsubrscr = $subscr->Add($arFields);
+                if($idsubrscr)
+                {
+                    $arResult['SUBSCRIBE_MESSAGE'] = 'Y';
+                    $arResult['SUBSCRIBE_MESSAGE_TEXT'] = 'Удачно.'.$EMAIL .' подписан на рассылку';
+                }
+                else{
+                    $subscr->Update($subscribedID, array("ACTIVE"=>"Y"));
+                }
+            }
+        }
+        else
+        {
+            if($alreadySubscribed)
+            {
+               if($res = $subscr->Update($subscribedID, array("ACTIVE"=>"N")))
+               {
+                   $arResult['SUBSCRIBE_MESSAGE'] = 'Y';
+                   $arResult['SUBSCRIBE_MESSAGE_TEXT'] = 'Подписка на рассылку отменена';
+               }
+            }
+        }
+
+   }
+
+
     if (COption::GetOptionString('main', 'use_encrypted_auth', 'N') == 'Y') {
         //possible encrypted user password
         $sec = new CRsaSecurity();

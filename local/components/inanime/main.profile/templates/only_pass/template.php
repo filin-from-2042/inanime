@@ -38,8 +38,8 @@ if ($arResult['DATA_SAVED'] == 'Y') {
 <!--        <div class="col-sm-24 col-md-12 col-lg-12 confirm-column">-->
 <!--            <div class="confirm-container">-->
 <!--                <div class="ia-checkbox">-->
-<!--                    <input type="checkbox" id="test2" checked="checked">-->
-<!--                    <label for="test2">Я хочу получать новости компании, а также информацию об акциях и новых предложениях</label>-->
+<!--                    <input type="checkbox" id="subscribe-check" checked="checked" name="subscribe-add">-->
+<!--                    <label for="subscribe-check">Я хочу получать новости компании, а также информацию об акциях и новых предложениях</label>-->
 <!--                </div>-->
 <!--            </div>-->
 <!--        </div>-->

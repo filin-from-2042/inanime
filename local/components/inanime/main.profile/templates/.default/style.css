@@ -66,6 +66,10 @@
 .section-personal .address-column .address-radio-container .radio-button-container:last-child{
     margin-bottom: 18px;
 }
+.section-personal.profile .confirm-container {
+    margin-top: 20px;
+    margin-left: 15px;
+}
 
 
 
