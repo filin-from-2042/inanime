@@ -2,7 +2,7 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Активация дисконтной карты");
 ?>
-    <div class="section-personal profile">
+    <div class="section-personal discount">
         <div class="container">
             <div class="row">
                 <div class="col-xs-24 col-sm-8 col-md-6 col-lg-6 menu-column">
@@ -15,7 +15,7 @@ $APPLICATION->SetTitle("Активация дисконтной карты");
                 </div>
 
                 <div class="col-xs-24 col-sm-16 col-md-18 col-lg-18 fields-column">
-
+                    <?$APPLICATION->IncludeComponent("inanime:user.card", "", array(), false, array('HIDE_ICONS'=>'Y')); ?>
                 </div>
             </div>
         </div>

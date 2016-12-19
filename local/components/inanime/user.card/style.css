@@ -1,0 +1,26 @@
+/***************************** PROFILE DISCOUNT CARD **************************/
+.section-personal.discount .fields-column {
+    padding-top:0;
+}
+.section-personal.discount .cards-inputs-column {
+    padding-top:13px;
+}
+.section-personal.discount .cards-inputs-column {
+    padding-left:5px;
+}
+.section-personal.discount .cards-inputs-column .form-control{
+    width:435px;
+}
+.section-personal.discount .cards-inputs-column .activate-button-container button {
+    padding: 12px 22px;
+    font-size: 14px;
+}
+.section-personal.discount .cards-inputs-column .activate-button-container {
+    margin-top: 30px;
+}
+.section-personal.discount .card-column {
+    padding-left:0;
+}
+.section-personal.discount .card-column .card-container    {
+    border-radius: 10px;
+}
