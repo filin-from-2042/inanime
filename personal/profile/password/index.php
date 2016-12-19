@@ -2,7 +2,7 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Настройки профиля");
 ?>
-    <div class="section-personal profile">
+    <div class="section-personal change-password">
         <div class="container">
             <div class="row">
                 <div class="col-xs-24 col-sm-8 col-md-6 col-lg-6 menu-column">
