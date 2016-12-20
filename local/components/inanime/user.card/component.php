@@ -9,7 +9,7 @@ include('functions.php');
 global $USER;
 // инфоблок, в котором лежат карты
 // у элементов должны быть свойства "USER_GROUP" содержащее номер группы, в которую нужно добавить пользователя и "TYPE" - список (Золотая/Серебрянная)
-$user_cards_iblock = 11;
+$user_cards_iblock = 27;
 // группы к которым идет привязка с помощью дисконтных карт
 // второй массив - размер скидки предоставляемые группой
 // все группы и скидки необходимо создать заранее
@@ -87,21 +87,32 @@ if (!empty($arResult['USER']['UF_USER_CARD']) && strlen($arResult['USER']['UF_US
 /* ------------------------------ ВЫВОД -------------------------- */
 ?>
     <form action="<?=$APPLICATION->GetCurPage()?>" method="POST" class="form_userinfo">
+        <?if ($arResult['MESSAGE'] || $arResult['ERROR']):?>
+            <?if (!empty($arResult['ERROR'])):?>
+                <div class="errortext"><?=$arResult['ERROR']?></div>
+            <?elseif (!empty($arResult['MESSAGE'])):?>
+                <div class="notetext"><?=$arResult['MESSAGE']?></div>
+            <?endif?>
+            <br>
+        <?endif?>
     <?if ($arResult['HAVE_CARD'] == 'Y'):?>
         <div class="row">
             <div class="col-sm-24 col-md-13 col-lg-13 cards-inputs-column">
+                <input type="hidden" name="CURRENT_CARD_ID" value="<?=$arResult['CARD']['ID']?>">
+                <input type="hidden" name="CURRENT_CARD_NAME" value="<?=$arResult['CARD']['NAME']?>">
                 <div class="input-container">
-                    <input type="text" name="number" value="" placeholder="Номер карты" class="form-control number-input">
+                    <input type="text" name="NEW_CARD_NAME" value="" placeholder="Номер карты" class="form-control number-input">
                 </div>
                 <div class="input-container">
-                    <input type="text" name="password" value="" placeholder="Введите пароль" class="form-control password-input">
+                    <input type="text" name="NEW_CARD_PASS" value="" placeholder="Введите пароль" class="form-control password-input">
                 </div>
                 <div class="activate-button-container">
-                    <button type="submit" class="btn btn-default ia-btn text-btn yellow-btn">Изменить</button>
+                    <button type="submit" name="CHANGE_CARD" value="Изменить" class="btn btn-default ia-btn text-btn yellow-btn">Изменить</button>
                 </div>
             </div>
             <div class="col-sm-24 col-md-11 col-lg-11 card-column">
                 <div class="card-container">
+                    <span class="card-number"><?=$arResult['CARD']['PRINT_NAME']?></span>
                     <img width="355" height="215" src="/images/inanime-discount-card.png"/>
                 </div>
             </div>
@@ -110,13 +121,13 @@ if (!empty($arResult['USER']['UF_USER_CARD']) && strlen($arResult['USER']['UF_US
         <div class="row">
             <div class="col-sm-24 col-md-13 col-lg-13 cards-inputs-column">
                 <div class="input-container">
-                    <input type="text" name="number" value="" placeholder="Номер карты" class="form-control number-input">
+                    <input type="text" name="NEW_CARD_NAME" value="" placeholder="Номер карты" class="form-control number-input">
                 </div>
                 <div class="input-container">
-                    <input type="text" name="password" value="" placeholder="Введите пароль" class="form-control password-input">
+                    <input type="text" name="NEW_CARD_PASS" value="" placeholder="Введите пароль" class="form-control password-input">
                 </div>
                 <div class="activate-button-container">
-                    <button type="submit" class="btn btn-default ia-btn text-btn yellow-btn">Активировать</button>
+                    <button type="submit" name="ADD_CARD" value="Активировать" class="btn btn-default ia-btn text-btn yellow-btn">Активировать</button>
                 </div>
             </div>
             <div class="col-sm-24 col-md-11 col-lg-11 card-column">
@@ -146,6 +157,7 @@ if (!empty($arResult['USER']['UF_USER_CARD']) && strlen($arResult['USER']['UF_US
         .section-personal.discount .cards-inputs-column .activate-button-container button {
             padding: 12px 22px;
             font-size: 14px;
+            width:140px;
         }
         .section-personal.discount .cards-inputs-column .activate-button-container {
             margin-top: 30px;
@@ -153,8 +165,19 @@ if (!empty($arResult['USER']['UF_USER_CARD']) && strlen($arResult['USER']['UF_US
         .section-personal.discount .card-column {
             padding-left:0;
         }
-        .section-personal.discount .card-column .card-container    {
+        .section-personal.discount .card-column .card-container {
             border-radius: 10px;
+            display: inline-block;
+            position: relative;
+        }
+        .section-personal.discount .card-column .card-container .card-number{
+            font-family: Ocra Medium;
+            font-size: 23px;
+            position: absolute;
+            bottom: 55px;
+            right: 20px;
+            text-shadow: -1px 1px 0px rgba(0, 0, 0, 0.53);
+            color: rgba(249,244,237,0.9);
         }
         /* Mobile */
         @media (max-width: 760px) {
@@ -168,13 +191,20 @@ if (!empty($arResult['USER']['UF_USER_CARD']) && strlen($arResult['USER']['UF_US
             .section-personal.discount .cards-inputs-column .activate-button-container {
                 text-align: center;
             }
-            .section-personal.discount .card-column .card-container {
-                margin-top: 33px;
+            .section-personal.discount .card-column  {
                 text-align:center;
             }
+            .section-personal.discount .card-column .card-container {
+                 margin-top: 33px;
+                 text-align:center;
+             }
             .section-personal.discount .card-column .card-container img {
                 width: 290px;
                 height: 177px;
+            }
+            .section-personal.discount .card-column .card-container .card-number{
+                font-size: 19px;
+                bottom: 40;
             }
         }
         /* Tablet */

@@ -1,4 +1,8 @@
 /***************************** PROFILE DISCOUNT CARD **************************/
+@font-face {
+    font-family: Ocra Medium;
+    src: url(fonts/ocra-medium.ttf);
+}
 .section-personal.discount .fields-column {
     padding-top:0;
 }
@@ -23,4 +27,11 @@
 }
 .section-personal.discount .card-column .card-container    {
     border-radius: 10px;
+    position: relative;
+}
+.section-personal.discount .card-column .card-container .card-number{
+    font-family: Ocra Medium;
+    position: absolute;
+    bottom: 15px;
+    right: 15px;
 }

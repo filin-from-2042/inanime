@@ -3,6 +3,10 @@
     font-family: Myriad Pro;
     src: url(fonts/MyriadPro-Regular.otf);
 }
+@font-face {
+    font-family: Ocra Medium;
+    src: url(fonts/ocra-medium.ttf);
+}
 body{
     font-family: "Myriad Pro";
 }
