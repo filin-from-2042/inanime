@@ -142,6 +142,9 @@ if (!empty($arResult['USER']['UF_USER_CARD']) && strlen($arResult['USER']['UF_US
 
     <style type="text/css">
         /***************************** PROFILE DISCOUNT CARD **************************/
+        .section-personal.discount{
+            padding-top: 13px;
+        }
         .section-personal.discount .fields-column {
             padding-top:0;
         }
@@ -183,7 +186,8 @@ if (!empty($arResult['USER']['UF_USER_CARD']) && strlen($arResult['USER']['UF_US
         @media (max-width: 760px) {
             /****************************** PERSONAL - ACTIVATE DISCOUNT ******************/
             .section-personal.discount .cards-inputs-column .form-control {
-                width: 290px;
+                /*width: 290px;*/
+                width: 100%;
             }
             .section-personal.discount .cards-inputs-column {
                 padding-left: 14px;
@@ -219,6 +223,9 @@ if (!empty($arResult['USER']['UF_USER_CARD']) && strlen($arResult['USER']['UF_US
             .section-personal.discount .card-column .card-container {
                 margin-top: 33px;
                 margin-left: 13px;
+            }
+            .section-personal.discount .fields-column {
+                padding-top: 13px;
             }
         }
 

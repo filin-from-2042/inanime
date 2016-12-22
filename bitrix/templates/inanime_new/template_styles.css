@@ -1628,6 +1628,7 @@ footer .general-container{
 
 
 
+
 /******************************* MEDIA QUERIES ********************************/
 /* Mobile */
 @media (max-width: 760px) {
@@ -2282,6 +2283,15 @@ footer .general-container{
         padding-left: 10px;
         padding-top: 0px;
         padding-right: 27px;
+    }
+
+    /************************************ DISCOUNT ***********************************/
+    .section-personal-header.discount{
+        margin-top: 20px;
+        margin-left: 170px;
+    }
+    .section-personal-header.discount h1{
+        margin-bottom: 15px;
     }
 }
 /* (desktops, 992px and up) */
