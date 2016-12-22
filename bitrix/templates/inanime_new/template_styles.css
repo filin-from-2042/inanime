@@ -1597,7 +1597,7 @@ footer .general-container{
     margin-top: 40px;
 }
 .section-personal {
-    padding-top: 158px;
+    padding-top: 15px;
     padding-bottom: 100px;
 
 }
@@ -1945,7 +1945,7 @@ footer .general-container{
         padding-left: 15px;
     }
     .section-personal {
-        padding-top: 103px;
+        padding-top: 15px;
     }
     .section-personal .menu-column {
         margin-bottom: 19px;
@@ -1953,6 +1953,9 @@ footer .general-container{
 
     .section-personal .fields-column input {
         width: 290px;
+    }
+    .section-personal.profile .fields-column input {
+        width: 100%;
     }
 
     .section-personal.answers-questions .answers-questions-column {
@@ -2261,13 +2264,16 @@ footer .general-container{
         padding-right: 11px;
     }
     .section-personal {
-        padding-top: 138px;
+        padding-top: 15px;
     }
     .section-personal .fields-column {
         padding-top: 0px;
     }
     .section-personal .fields-column .input-container {
         margin-bottom: 22px;
+    }
+    .section-personal.profile{
+        padding-top: 12px;
     }
 
     /******************************** PERSONAL - ANSWERS QUESTIONS *******************/
@@ -2292,6 +2298,14 @@ footer .general-container{
     }
     .section-personal-header.discount h1{
         margin-bottom: 15px;
+    }
+
+    .section-personal-header.profile {
+        margin-top: 17px;
+        margin-left: 100px;
+    }
+    .section-personal-header.profile h1{
+        margin-bottom: 20px;
     }
 }
 /* (desktops, 992px and up) */
