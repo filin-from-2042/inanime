@@ -13,6 +13,9 @@ $APPLICATION->SetTitle("Активация дисконтной карты");
             )
         );
         ?>
+        <?
+        $APPLICATION->AddChainItem('Активация дисконтной карты');
+        ?>
         <h1 class="ia-page-title">Активация дисконтной карты</h1>
     </div>
     <div class="section-personal discount">

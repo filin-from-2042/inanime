@@ -13,6 +13,9 @@ $APPLICATION->SetTitle("Мои вопросы и ответы");
             )
         );
         ?>
+        <?
+        $APPLICATION->AddChainItem('Мои вопросы и ответы');
+        ?>
         <h1 class="ia-page-title">Мои вопросы и ответы</h1>
     </div>
     <div class="section-personal answers-questions">
