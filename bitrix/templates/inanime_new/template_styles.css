@@ -1626,7 +1626,9 @@ footer .general-container{
     padding: 11px 32px;
 }
 
-
+.section-personal.change-password .fields-column{
+    padding-top: 5px;
+}
 
 
 /******************************* MEDIA QUERIES ********************************/
@@ -2274,6 +2276,13 @@ footer .general-container{
     }
     .section-personal.profile{
         padding-top: 12px;
+    }
+
+    .section-personal-header{
+        margin-top: 20px;
+    }
+    .section-personal-header.change-password .ia-page-title{
+        margin-bottom: 13px;
     }
 
     /******************************** PERSONAL - ANSWERS QUESTIONS *******************/

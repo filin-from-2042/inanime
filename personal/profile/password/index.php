@@ -2,6 +2,20 @@
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
 $APPLICATION->SetTitle("Настройки профиля");
 ?>
+    <div class="section-personal-header change-password">
+        <?$APPLICATION->IncludeComponent(
+            "bitrix:breadcrumb",
+            "catalog-chain",
+            Array(
+                "START_FROM" => "0",
+                "PATH" => "",
+                "SITE_ID" => SITE_ID
+            )
+        );
+        ?>
+        <h1 class="ia-page-title">Настройки профиля</h1>
+    </div>
+
     <div class="section-personal change-password">
         <div class="container">
             <div class="row">
