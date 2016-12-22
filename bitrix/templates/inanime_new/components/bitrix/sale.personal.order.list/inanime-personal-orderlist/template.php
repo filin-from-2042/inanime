@@ -103,7 +103,9 @@ else
                                     </button>
                                 <?}
                             }?>
+                            <?/*?>
                             <button type="submit" class="btn btn-default ia-btn image-btn blue-btn repeat-btn"><i class="fa fa-repeat" aria-hidden="true"></i></button>
+                            <?*/?>
                             <button type="submit" class="btn btn-default ia-btn image-btn yellow-btn option-btn"><span class="glyphicon glyphicon-option-horizontal"></span></button>
                         </div>
                     </div>
