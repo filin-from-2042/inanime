@@ -2,6 +2,8 @@
 
 if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 
+$onlyCurrent = ($arParams['ONLY_CURRENT'] && $arParams['ONLY_CURRENT']==='Y') ? true : false;
+
 if (!empty($arResult['ERRORS']['FATAL']))
 {
     foreach($arResult['ERRORS']['FATAL'] as $error)
@@ -49,6 +51,7 @@ else
     <?
     foreach ($arResult['ORDERS'] as $key => $order)
     {
+        if($onlyCurrent && $order['ORDER']['STATUS_ID']!='E') continue;
         ?>
                 <div class="row table-row" id="<?=$order['ORDER']['ID']?>">
                     <div class="general-data-container clearfix">
@@ -96,7 +99,8 @@ else
                                 {
                                 ?>
                                     <button type="submit" class="btn btn-default ia-btn text-btn yellow-btn pay-btn">
-                                        <a target="_blank" href="<?=htmlspecialcharsbx($payment['PSA_ACTION_FILE'])?>">Оплатить</a></button>
+                                        <a target="_blank" href="<?=htmlspecialcharsbx($payment['PSA_ACTION_FILE'])?>">Оплатить</a>
+                                    </button>
                                 <?}
                             }?>
                             <button type="submit" class="btn btn-default ia-btn image-btn blue-btn repeat-btn"><i class="fa fa-repeat" aria-hidden="true"></i></button>
