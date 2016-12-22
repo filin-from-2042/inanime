@@ -6,6 +6,7 @@
 
     window.InAnimeCatalogElement = function(params)
     {
+        this.productID = params.productID;
         this.sizesData = params.sizesData;
         this.currentColorConfig = params.startColorData;
         this.ajaxURL = params.ajaxURL;
@@ -104,6 +105,7 @@
             url: this.ajaxURL,
             data: {
                 action:'addQuestion',
+                productID: this.productID,
                 question : formContainer.find('textarea[name="mail-text"]').val(),
                 username : formContainer.find('input[name="username"]').val(),
                 email: formContainer.find('input[name="email"]').val(),

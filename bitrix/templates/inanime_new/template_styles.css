@@ -206,6 +206,14 @@ textarea.form-control {
 .brown-dotted-text:hover {
     border-bottom: 2px dotted transparent;
 }
+.light-blue-text-underline {
+    color: #63bac4;
+    text-decoration:underline;
+    cursor:pointer;
+}
+.light-blue-text-underline:hover {
+    text-decoration:none;
+}
 /***** CUSTOM SELECT ******/
 .select-container .btn{
     border:2px solid #5d3d1d;
@@ -672,6 +680,22 @@ span.rub:before{
 #questions .question-container .product-link-container .product-link:after{
     content:'"';
 }
+
+/****************************** PROFILE ANSWERS QUESTIONS ***********************/
+.section-personal.answers-questions{
+    padding-top: 10px;
+}
+.section-personal.answers-questions .answers-questions-column{
+    padding: 0;
+    padding-top: 7px;
+}
+.section-personal.answers-questions .answers-questions-column #questions{
+    border: 2px solid #5d3d1d;
+    border-radius: 10px;
+    padding: 30px 28px;
+}
+
+
 /**************** COMMENTS ***********************/
 #comments .comment-main {
     margin-bottom: 15px;
@@ -1929,6 +1953,13 @@ footer .general-container{
     .section-personal .fields-column input {
         width: 290px;
     }
+
+    .section-personal.answers-questions .answers-questions-column {
+        padding: 10px 15px 0;
+    }
+    .section-personal.answers-questions .answers-questions-column #questions {
+        padding: 20px 3px;
+    }
 }
 
 /* Tablet */
@@ -2236,6 +2267,21 @@ footer .general-container{
     }
     .section-personal .fields-column .input-container {
         margin-bottom: 22px;
+    }
+
+    /******************************** PERSONAL - ANSWERS QUESTIONS *******************/
+
+    .section-personal-header.answers-questions{
+        margin-top: 20px;
+        margin-left: 100px;
+    }
+    .section-personal-header.answers-questions h1{
+        margin-bottom:  15px;
+    }
+    .section-personal.answers-questions .answers-questions-column {
+        padding-left: 10px;
+        padding-top: 0px;
+        padding-right: 27px;
     }
 }
 /* (desktops, 992px and up) */

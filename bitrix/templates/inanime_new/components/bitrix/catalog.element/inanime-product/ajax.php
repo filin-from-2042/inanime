@@ -5,27 +5,10 @@ define('PUBLIC_AJAX_MODE', true);
 define("NOT_CHECK_PERMISSIONS", true);
 define("LOG_FILENAME", $_SERVER["DOCUMENT_ROOT"]."/log.txt");
 
-function custom_mail($to, $subject, $message, $additional_headers='', $additional_parameters='')
-{
-    AddMessage2Log(
-        'To: '.$to.PHP_EOL.
-        'Subject: '.$subject.PHP_EOL.
-        'Message: '.$message.PHP_EOL.
-        'Headers: '.$additional_headers.PHP_EOL.
-        'Params: '.$additional_parameters.PHP_EOL
-    );
-    if ($additional_parameters!='') {
-        return @mail($to, $subject, $message, $additional_headers, $additional_parameters);
-    } else {
-        return @mail($to, $subject, $message, $additional_headers);
-    }
-}
-
-
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/modules/main/include/prolog_before.php");
 if (check_bitrix_sessid())
 {
-    $action = $_REQUEST['action'];
+    $action = htmlspecialchars(trim($_REQUEST['action']));
     // Вопрос-ответ
     if($action=='addQuestion')
     {
@@ -50,11 +33,13 @@ if (check_bitrix_sessid())
         if(sizeof($errors) == 0)
         {
             $questionText = htmlspecialchars(trim($_REQUEST['question']));
+            $productID = intval($_REQUEST['productID']);
             $el = new CIBlockElement;
             $PROP = array();
             $PROP['question'] = $questionText;
             $PROP['email'] = $email;
             $PROP['username'] = $username;
+            $PROP['question_product_id'] = $productID;
 
             $arLoadProductArray = array();
             if($userID) $arLoadProductArray["MODIFIED_BY"]=$userID;
@@ -62,7 +47,7 @@ if (check_bitrix_sessid())
             $arLoadProductArray["IBLOCK_ID"]= 25;
             $arLoadProductArray["PROPERTY_VALUES"]= $PROP;
             $arLoadProductArray["NAME"]= $email;
-            $arLoadProductArray["ACTIVE"] = "N";
+            $arLoadProductArray["ACTIVE"] = "Y";
 
             if($el->Add($arLoadProductArray)){
                 echo 'Вопрос отправлен';

@@ -838,10 +838,12 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
     </div>
 </div>
 <?
+$arJSParams['productID'] = $arResult['ID'];
 $arJSParams['sizesData'] = $sizesData;
 $arJSParams['startColorData'] = $JSStartColorData;
 ?>
 <script>
+    console.log('InAnimeCatalogElement<?=$strMainID;?>');
     var InAnimeCatalogElement<?=$strMainID;?> = new window.InAnimeCatalogElement(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
     $(document).ready(function(){
         $('.general-container.photo-container .photo-big-container img').click(function(){
