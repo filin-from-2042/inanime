@@ -195,7 +195,17 @@ textarea.form-control {
     border-radius:5px;
     background-color:rgb(242,242,236);
 }
-
+.brown-dotted-text {
+    color: #5d3d1d;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+    border-bottom: 2px dotted #5d3d1d;
+    cursor: pointer;
+}
+.brown-dotted-text:hover {
+    border-bottom: 2px dotted transparent;
+}
 /***** CUSTOM SELECT ******/
 .select-container .btn{
     border:2px solid #5d3d1d;
@@ -745,6 +755,85 @@ span.rub:before{
 #comments .comment-container.sub-comment .nickname-rate-container{
     margin-bottom: 20px;
 }
+
+/*************************** SHIPPING TRACKBAR ************************/
+.shipping-bar {
+    padding-left: 70px;
+}
+.shipping-bar li {
+    float:left;
+    text-align:center;
+    width:97px;
+    color:rgb(217,217,217);
+    border-top:1px solid rgb(217,217,217);
+    position:relative;
+}
+.shipping-bar li:last-child {
+    border-top:1px solid transparent;
+    width: 10px;
+}
+.shipping-bar li .icon-wrap{
+    display:inline-block;
+    width:24px;
+    height:24px;
+    border:2px solid rgb(217,217,217);
+    font: normal normal normal 14px/1 FontAwesome;
+    border-radius:50%;
+    position:absolute;
+    left:37px;
+    right:0;
+    margin-top:-12px;
+    background-color: white;
+}
+.shipping-bar li.current {
+    color:rgb(99,186,196);
+    font-weight:bold;
+}
+.shipping-bar li.current .icon-wrap {
+    background-color:rgb(217,217,217);
+}
+.shipping-bar li .icon-wrap i:before {
+    font-style:normal;
+}
+.shipping-bar li.completed .icon-wrap i:before {
+    content: "\f00c";
+}
+.shipping-bar li.not-completed .icon-wrap i:before {
+    content: "\f253";
+}
+.shipping-bar li.not-completed .stage-text{
+    color: #79828b;
+}
+.shipping-bar li.current .icon-wrap i:before {
+    content:"\f111";
+    width: 14px;
+    height:14px;
+}
+.shipping-bar li.current .icon-wrap i {
+    font-size: 17px;
+    line-height:20px;
+    width: 14px;
+    height:14px;
+    content:"\f111";
+}
+.shipping-bar li .icon-wrap i {
+    font-size:10px;
+    line-height:21px;
+    display:inline-block;
+}
+.shipping-bar li .stage-text{
+    display:block;
+    font-size: 12px;
+    width: 100px;
+    margin-top: 22px;
+    text-align: center;
+}
+.shipping-bar .icon-wrap,
+.shipping-bar .stage-text {
+    margin-left: -50px;
+}
+
+
 
 
 
@@ -1480,6 +1569,9 @@ footer .general-container{
 }
 
 /******************** PERSONAL ************************/
+.section-personal-header{
+    margin-top: 40px;
+}
 .section-personal {
     padding-top: 158px;
     padding-bottom: 100px;

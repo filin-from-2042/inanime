@@ -1,0 +1,121 @@
+.more-data-container .price-column{
+    padding-left: 25px;
+    padding-top: 5px;
+}
+.more-data-container .data-list{
+    padding: 30px 0px 0 37px;
+}
+.more-data-container .data-list .title{
+    font-weight: bold;
+}
+.more-data-container .data-list .value{
+    padding-left: 0px;
+    text-align: left;
+}
+.more-data-container .product-name-column,
+.more-data-container .count-column{
+    padding-top: 7px;
+}
+.more-data-container .count-column{
+    padding-left: 28px;
+}
+.more-data-container .controls-buttons-column{
+    text-align: right;
+}
+
+.more-data-container .shipping-progress-container {
+    margin-top: 52px;
+    padding-left: 80px;
+}
+ .more-data-container .close-button-container {
+    text-align:center;
+    padding: 25px 0 21px;
+}
+.more-data-container ul {
+    margin:0;
+    padding:0;
+    list-style:none;
+    padding-left: 20px;
+}
+.more-data-container .brown-text {
+    color: #5d3d1d;
+    font-weight: bold;
+    font-size: 16px;
+    letter-spacing: 0.5px;
+}
+
+/* Mobile */
+@media (max-width: 760px) {
+    /*************************** PERSONAL - ORDERS *******************************/
+    .section-personal.orders .table-row .more-data-container ul {
+        padding-left: 12px;
+    }
+    .section-personal.orders .table-row .more-data-container .brown-text {
+        font-size: 14px;
+    }
+    .section-personal.orders .more-data-container .price-column {
+        padding-left: 3px;
+        padding-top: 0px;
+    }
+    .section-personal.orders .more-data-container .data-list {
+        padding: 23px 0px 0 10px;
+    }
+    .section-personal.orders .more-data-container .data-list .value {
+        padding-left: 15px;
+    }
+    .section-personal.orders .more-data-container .data-list .title {
+        padding: 1px 15px;
+    }
+    .section-personal.orders .more-data-container .shipping-progress-container {
+        margin-top: 25px;
+        padding-left: 11px;
+    }
+    .section-personal.orders .more-data-container .shipping-progress-container .value {
+        color: rgb(99,186,196);
+    }
+    .section-personal.orders .more-data-container .close-button-container {
+        padding: 16px 0 25px;
+    }
+}
+
+/* Tablet */
+@media (min-width: 760px) and (max-width:992px) {
+    /******************************* PERSONAL ORDERS ******************************/
+
+    .section-personal.orders .more-data-container .count-column {
+        padding-left: 0px;
+        padding-right:0;
+    }
+    .section-personal.orders .more-data-container .price-column {
+        padding-left: 14px;
+        padding-top: 0px;
+    }
+    .section-personal.orders .more-data-container .data-list {
+        padding: 15px 0px 0 27px;
+    }
+    .section-personal.orders .more-data-container .shipping-progress-container {
+        margin-top: 25px;
+        padding-left: 27px;
+    }
+    .section-personal.orders .more-data-container .shipping-progress-container .title {
+        font-weight:bold;
+    }
+    .section-personal.orders .more-data-container .shipping-progress-container .value {
+        color: rgb(99,186,196);
+    }
+    .section-personal.orders .more-data-container .close-button-container {
+        text-align: center;
+        padding: 19px 0 21px;
+    }
+}
+@media (min-width: 992px) and (max-width: 1230px){
+    /***************************** PERSONAL ORDERS ****************************/
+
+    .section-personal.orders .more-data-container .shipping-progress-container {
+        padding-left: 37px;
+    }
+    .section-personal.orders .more-data-container .shipping-bar li,
+    .section-personal.orders .more-data-container .shipping-bar li .stage-text {
+        width: 80px;
+    }
+}
