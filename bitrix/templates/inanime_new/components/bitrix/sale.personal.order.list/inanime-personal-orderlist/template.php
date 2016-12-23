@@ -51,7 +51,7 @@ else
     <?
     foreach ($arResult['ORDERS'] as $key => $order)
     {
-        if($onlyCurrent && $order['ORDER']['STATUS_ID']!='E') continue;
+        if($onlyCurrent && $order['ORDER']['STATUS_ID']=='E') continue;
         ?>
                 <div class="row table-row" id="<?=$order['ORDER']['ID']?>">
                     <div class="general-data-container clearfix">
