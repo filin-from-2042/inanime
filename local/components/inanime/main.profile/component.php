@@ -57,16 +57,76 @@ if(CModule::IncludeModule("subscribe"))
         }
     }
     $arResult['SUBSCRIBED'] = ($alreadySubscribed) ? 'Y' : 'N';
+};
+
+
+// добавление профиля покупателя
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["new-address"]<>'' && check_bitrix_sessid())
+{
+    $profiles = CSaleOrderUserProps::GetList(
+        array("DATE_UPDATE" => "DESC"),
+        array("USER_ID" => $USER->GetID())
+    );
+    $profilesCount = $profiles->SelectedRowsCount();
+    $profilesCount++;
+    $arFields = array(
+        "NAME" => "Профиль ".$profilesCount,
+        "USER_ID" => $USER->GetID(),
+        "PERSON_TYPE_ID" => 5
+    );
+    $newProfileID = CSaleOrderUserProps::Add($arFields);
+
+    if ($newProfileID)
+    {
+        $PROPS=Array(
+            array(
+                "USER_PROPS_ID" => $newProfileID,
+                "ORDER_PROPS_ID" => 39,
+                "NAME" => "Ф.И.О.",
+                "VALUE" =>  $_REQUEST["NAME"].' '. $_REQUEST["LAST_NAME"]
+            ),
+            array(
+                "USER_PROPS_ID" => $newProfileID,
+                "ORDER_PROPS_ID" => 40,
+                "NAME" => "E-Mail",
+                "VALUE" => $USER->GetEmail()
+            ),
+            array(
+                "USER_PROPS_ID" => $newProfileID,
+                "ORDER_PROPS_ID" => 41,
+                "NAME" => "Телефон",
+                "VALUE" => $_REQUEST['new-phone']
+            ),
+            array(
+                "USER_PROPS_ID" => $newProfileID,
+                "ORDER_PROPS_ID" => 44,
+                "NAME" => "Местоположение",
+                "VALUE" => intval($_REQUEST['LOCATION'])
+            ),
+            array(
+                "USER_PROPS_ID" => $newProfileID,
+                "ORDER_PROPS_ID" => 45,
+                "NAME" => "Адрес доставки",
+                "VALUE" => 'ул. '.$_REQUEST['street'].', д. '.$_REQUEST['house-number'].', кв. '.$_REQUEST['apartment']
+            )
+        );
+
+        foreach ($PROPS as $prop)
+            CSaleOrderUserPropsValue::Add($prop);
+    }
 }
 
+// удаление профиля покупателя
+if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["remove-profile"]<>'' && check_bitrix_sessid())
+{
+    CSaleOrderUserProps::Delete(intval($_REQUEST["remove-profile"]));
+}
 
-//var_dump(check_bitrix_sessid());
-//var_dump($_REQUEST);
-//var_dump( bitrix_sessid());
 if ($_SERVER["REQUEST_METHOD"] == "POST" && ($_REQUEST["save"] <> '' || $_REQUEST["apply"] <> '') && check_bitrix_sessid()) {
 
    if(CModule::IncludeModule("subscribe"))
    {
+       // подписка на рассылку
        $subscr = new CSubscription;
         if($_POST["subscribe-add"]=='on')
         {
@@ -106,6 +166,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && ($_REQUEST["save"] <> '' || $_REQUES
 
    }
 
+    // установка активного профиля
+    $newUser = new CUser;
+    $fields = Array(
+        "UF_CUSTOMER_PROFILE" => intval($_POST['customer-profile-radio']),
+    );
+    $newUser->Update($USER->GetID(), $fields);
 
     if (COption::GetOptionString('main', 'use_encrypted_auth', 'N') == 'Y') {
         //possible encrypted user password

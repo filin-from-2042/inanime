@@ -13,9 +13,7 @@
 .section-personal .address-column {
     padding-left:27px;
 }
-.section-personal .address-column input.city-input {
-    width:505px;
-}
+
 .section-personal .address-column input.street-input {
     width: 295px;
 }
@@ -54,11 +52,25 @@
     margin-bottom: 0;
     min-height: 30px;
     min-width: 400px;
+    position: relative;
 }
 .section-personal .address-column .address-radio-container input[disabled]{
     cursor: pointer;
     width: 475px;
     position: absolute;
+}
+.section-personal .address-column .input-container .ia-close-btn{
+    position: absolute;
+    right: -5px;
+    top: 1px;
+    /*display: none;*/
+}
+.section-personal .address-column .address-radio-container .ia-close-btn{
+    right: -40px;
+}
+
+.section-personal .address-column .address-radio-container:hover .ia-close-btn{
+    display: inline-block;
 }
 .section-personal .address-column .address-radio-container .radio-button-container{
     margin-bottom: 23px;
@@ -71,6 +83,10 @@
     margin-left: 15px;
 }
 
+.section-personal .address-column .address-container.sample{
+    display: none;
+    /*padding-left: 32px;*/
+}
 
 
 /* Mobile */
@@ -102,7 +118,23 @@
         min-width: 240px;
     }
     .section-personal .address-column .address-radio-container input[disabled]{
-        width: 250px;
+        width: 240px;
+    }
+    .section-personal .address-column .street-data-fields .street-container,
+    .section-personal .address-column .street-data-fields .new-phone-container{
+        display: block;
+    }
+    .section-personal .address-column .street-data-fields{
+        width: 100%;
+    }
+    .section-personal .fields-column .input-container.full-address-container{
+        margin-right: 20px;
+    }
+    .section-personal .address-column .input-container .ia-close-btn {
+        right: 5px;
+    }
+    .section-personal .address-column .address-radio-container .ia-close-btn {
+        right: -30px;
     }
 }
 /* Tablet */
@@ -162,5 +194,14 @@
 }
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1230px){
-
+    .section-personal .address-column .input-container .ia-close-btn {
+        right: -45px;
+    }
+    .section-personal .address-column .address-radio-container .ia-close-btn{
+        right: -110px;
+    }
+    .section-personal .address-column input.city-input ,
+    .section-personal .address-column  .bx-sls {
+        width:505px;
+    }
 }
