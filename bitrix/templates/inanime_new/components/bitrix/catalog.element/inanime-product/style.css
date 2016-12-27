@@ -88,6 +88,7 @@
 }
 .product-info .photo-big-container img{
     cursor: zoom-in;
+    border:1px solid #ccc;
 }
 .product-info .data-column{
     padding-left: 45px;
