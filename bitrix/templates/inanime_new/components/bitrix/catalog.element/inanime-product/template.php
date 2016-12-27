@@ -52,7 +52,7 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
     unset($arProp);
 
     // идентификатор активного предложения при первом заходе на страницу
-    $activeOfferID = 0;
+    $activeOfferID = $arResult['OFFERS'][0]['ID'];
     $minPriceBuff=$arResult['OFFERS'][0]["MIN_PRICE"]["DISCOUNT_VALUE"];
     // данные по всем предложениям
     $offersData = array();
