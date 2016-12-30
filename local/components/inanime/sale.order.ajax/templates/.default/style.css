@@ -184,6 +184,62 @@
     /*display: none;*/
 }
 
+/******************************** DRAWING-UP-COMPLETE **********************************/
+.order-drawing-up-complete{}
+.order-drawing-up-complete .container{
+    text-align: center;
+}
+.order-drawing-up-complete .general-message,
+.order-drawing-up-complete .data-container .title,
+.order-drawing-up-complete .message-container .phone-number{
+    color:#000;
+}
+.order-drawing-up-complete .general-message,
+.order-drawing-up-complete .message-container .phone-number{
+    font-weight: bold;
+}
+.order-drawing-up-complete .message-container .phone-number{
+    letter-spacing: 0.4px;
+}
+.order-drawing-up-complete .message-container{
+    margin-top: 45px;
+}
+.order-drawing-up-complete .general-message{
+    font-size: 21px;
+    letter-spacing: 1px
+}
+.order-drawing-up-complete .contacts-text{
+    margin-top: 10px;
+}
+.order-drawing-up-complete .data-container .value{
+    color:#79828b;
+    margin-left: 10px;
+}
+.order-drawing-up-complete .data-container{
+    display: inline-block;
+}
+.order-drawing-up-complete .data-container .data-field{
+    text-align: left;
+    margin-bottom: 8px;
+}
+.order-drawing-up-complete .general-message{
+    text-transform: uppercase;
+}
+.order-drawing-up-complete  .data-container{
+    margin-top: 55px;
+}
+.order-drawing-up-complete .button-container{
+    margin-top: 50px;
+    margin-bottom: 80px;
+}
+.order-drawing-up-complete .button-container .blue-btn{
+    width: 165px;
+    height: 40px;
+    font-size: 15px;
+    padding: 10px 30px;
+}
+
+
 /* Mobile */
 @media (max-width: 760px) {
 
@@ -258,6 +314,18 @@
         text-align: right;
         margin-right: -30px;
     }
+
+    /******************************** DRAWING-UP-COMPLETE **********************************/
+    .order-drawing-up-complete .data-container {
+        margin-top: 25px;
+    }
+    .order-drawing-up-complete .button-container {
+        margin-top: 20px;
+    }
+    .order-drawing-up-complete .general-message {
+        font-size: 17px;
+    }
+
 }
 /* Tablet */
 @media (min-width: 760px) and (max-width:992px) {
@@ -318,6 +386,17 @@
     }
     .order-drawing-up .ia-page-title{
         margin-bottom: 13px;
+    }
+
+    /******************************** DRAWING-UP-COMPLETE **********************************/
+    .order-drawing-up-complete .message-container {
+        margin-top: 31px;
+    }
+    .order-drawing-up-complete .data-container {
+        margin-top: 30px;
+    }
+    .order-drawing-up-complete .button-container {
+        margin-top: 27px;
     }
 }
 

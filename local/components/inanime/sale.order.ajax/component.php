@@ -1786,6 +1786,25 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
             if ($arOrder = $dbOrder->GetNext()) {
                 $arResult["ORDER_ID"] = $arOrder["ID"];
                 $arResult["ACCOUNT_NUMBER"] = $arOrder["ACCOUNT_NUMBER"];
+
+                $db_props = CSaleOrderProps::GetList(
+                    array("SORT" => "ASC"),
+                    array(
+                        "PERSON_TYPE_ID" => $arOrder["PERSON_TYPE_ID"]
+                    )
+                );
+                while ($arProps = $db_props->Fetch())
+                {
+                    $db_vals = CSaleOrderPropsValue::GetList(
+                        array("SORT" => "ASC"),
+                        array(
+                            "ORDER_ID" => $arOrder["ID"],
+                            "ORDER_PROPS_ID" => $arProps["ID"]
+                        )
+                    );
+                    while ($arVals = $db_vals->Fetch())
+                        $arResult['ORDER_PROPS_DATA'][$arVals['CODE']] = $arVals['VALUE'];
+                }
             }
         }
 
@@ -1800,8 +1819,26 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
             if ($arOrder = $dbOrder->GetNext()) {
                 $arResult["ORDER_ID"] = $ID;
                 $arResult["ACCOUNT_NUMBER"] = $arOrder["ACCOUNT_NUMBER"];
+
+                $db_props = CSaleOrderProps::GetList(
+                    array("SORT" => "ASC"),
+                    array(
+                        "PERSON_TYPE_ID" => $arOrder["PERSON_TYPE_ID"]
+                    )
+                );
+                while ($arProps = $db_props->Fetch())
+                {
+                    $db_vals = CSaleOrderPropsValue::GetList(
+                        array("SORT" => "ASC"),
+                        array(
+                            "ORDER_ID" => $arOrder["ID"],
+                            "ORDER_PROPS_ID" => $arProps["ID"]
+                        )
+                    );
+                    while ($arVals = $db_vals->Fetch())
+                        $arResult['ORDER_PROPS_DATA'][$arVals['CODE']] = $arVals['VALUE'];
+                }
             }
-        }
         if ($arOrder) {
             foreach (GetModuleEvents("sale", "OnSaleComponentOrderOneStepFinal", true) as $arEvent)
                 ExecuteModuleEventEx($arEvent, Array($arResult["ORDER_ID"], &$arOrder, &$arParams));
