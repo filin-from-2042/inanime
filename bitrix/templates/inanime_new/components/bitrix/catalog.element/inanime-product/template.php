@@ -529,7 +529,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                         <script>
                             $(document).ready(function ()
                             {
-                                $('.ia-counter-container .button').click(inanime_new.counterButtonClick(this));
+                                $('.ia-counter-container .button').click(function(){inanime_new.counterButtonClick(this)});
                             });
                         </script>
                     </div>
