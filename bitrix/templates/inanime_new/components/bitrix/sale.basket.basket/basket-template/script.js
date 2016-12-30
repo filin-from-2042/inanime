@@ -1,7 +1,6 @@
 
 InAnimeBasket = function (params)
 {
-    console.log(params);
     this.deleteActions = params.deleteActions;
     this.delayActions = params.delayActions;
     this.currentPage = params.currentPage;
@@ -11,7 +10,11 @@ InAnimeBasket = function (params)
     $('.table-action-column .action-button-container button.remove-action').click(function(event){that.deleteButtonAction(event, that)});
     $(document).ready(function ()
     {
-        $('.ia-counter-container .button').click(inanime_new.counterButtonClick);
+        $('.ia-counter-container .button').click(function()
+        {
+            inanime_new.counterButtonClick(this);
+            that.recalcBasketAjax({})
+        });
     });
 };
 
@@ -148,7 +151,6 @@ InAnimeBasket.prototype.recalcBasketAjax = function(params)
         dataType: 'json',
         onsuccess: function(result)
         {
-            console.log(result);
             BX.closeWait();
 
             if(params.coupon)
@@ -513,8 +515,6 @@ InAnimeBasket.prototype.checkOut = function()
 
 InAnimeBasket.prototype.clearAll = function()
 {
-    console.log(this.currentPage);
-
     BX.ajax({
         url: this.currentPage,
         method: 'POST',

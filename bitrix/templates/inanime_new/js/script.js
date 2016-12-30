@@ -272,9 +272,9 @@ function inanime_new() {
     };
 
     // обработчик нажания на кнопку в поле кол-во
-    this.counterButtonClick = function ()
+    this.counterButtonClick = function (element)
     {
-        var button = $(this)
+        var button = $(element);
         var counterContainer = button.closest('.ia-counter-container');
         var input = counterContainer.find('input.counter-value');
         if(button.hasClass('increase'))
