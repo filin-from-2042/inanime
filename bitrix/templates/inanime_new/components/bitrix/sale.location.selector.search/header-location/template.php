@@ -24,7 +24,7 @@ Loc::loadMessages(__FILE__);
         <i class="fa fa-map-marker" aria-hidden="true"></i><?=$arResult['PATH'][$arResult['VALUE']]['NAME']?><i class="fa fa-chevron-down" aria-hidden="true"></i>
     </button>
 
-	<div id="sls-<?=$arResult['RANDOM_TAG']?>" class="bx-sls <?if(strlen($arResult['MODE_CLASSES'])):?> <?=$arResult['MODE_CLASSES']?><?endif?>" style="display:none;position: absolute">
+	<div id="sls-<?=$arResult['RANDOM_TAG']?>" class="bx-sls <?if(strlen($arResult['MODE_CLASSES'])):?> <?=$arResult['MODE_CLASSES']?><?endif?>" style="display:none;">
 
 		<?if(is_array($arResult['DEFAULT_LOCATIONS']) && !empty($arResult['DEFAULT_LOCATIONS'])):?>
 

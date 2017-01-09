@@ -7,9 +7,10 @@
 	box-shadow: inset 0 1px 2px #ebebeb;
 	font-size: 14px;
 	padding: 0 0px 0 12px;
-	position: relative;
+	/*position: relative;*/
 	background-color: #fff;
     /*overflow: hidden;*/
+    position: absolute;
 }
 
 .bx-sls .dropdown-arrow {
@@ -318,6 +319,19 @@ content: "\f05e";
 @media (max-width: 760px) {
     .text-btn.yellow-btn.location-btn i.fa-chevron-down{
         display: none;
+    }
+    .bx-sls .bx-ui-sls-fake,
+    .bx-sls .bx-ui-sls-route {
+        height: 23px;
+    }
+    .bx-sls .bx-ui-sls-container {
+        line-height: 22px;
+    }
+    .bx-sls .bx-ui-sls-clear {
+        line-height: 22px;
+    }
+    .bx-sls .dropdown-block {
+        position: relative;
     }
 }
 @media (min-width: 760px) and (max-width:992px) {
