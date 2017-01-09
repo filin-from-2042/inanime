@@ -28,7 +28,7 @@
         </div>
     <?endif?>
 
-    <div class="content-container cart-container">
+    <div class="content-container cart-container hidden-xs">
         <a class="btn btn-default ia-btn yellow-btn image-btn" href="/personal/cart" role="button"><span class="icon cart-icon"></span></a>
         <div class="text-container">
             <span>
