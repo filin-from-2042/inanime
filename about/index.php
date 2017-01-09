@@ -1,9 +1,22 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-$APPLICATION->SetTitle("О магазине");
+$APPLICATION->SetTitle("О компании");
 ?>
-<div class="container">
-    <div class="row">
+<div class="container about-text">
+    <div class="section-header">
+        <?$APPLICATION->IncludeComponent(
+            "bitrix:breadcrumb",
+            "catalog-chain",
+            Array(
+                "START_FROM" => "0",
+                "PATH" => "",
+                "SITE_ID" => SITE_ID
+            )
+        );
+        ?>
+        <h1 class="ia-page-title">О компании</h1>
+    </div>
+    <div class="row gray-text">
         <div class="col-xs-24">
             <p>Мы рады приветствовать вас на сайте нашей компании.</p>
 
@@ -15,7 +28,7 @@ $APPLICATION->SetTitle("О магазине");
 
             <p>Мы можем гордиться тем, что у нас один из самых широких ассортиментов одежды в городе и области. </p>
 
-            <h2>Наши возможности</h2>
+            <h2 class="ia-general-title">Наши возможности</h2>
             <div class="row">
                 <div class="col-xs-6">
                     <ul class="bxe-list bxe-lis-blue">
@@ -43,8 +56,13 @@ $APPLICATION->SetTitle("О магазине");
             </div>
             <br/>
             <p>Мы всегда рады общению с нашими клиентами. Если у вас есть какие-либо пожелания, предложения, замечания, касающиеся работы нашего Интернет-магазина - пишите нам, и мы с благодарностью примем ваше мнение во внимание:</p>
-            <p><b>Электронная почта</b>: <a href="mailto:sale@inanime.ru">sale@inanime.ru</a></p>
+            <p><b class="ia-general-title">Электронная почта</b>: <a href="mailto:sale@inanime.ru">sale@inanime.ru</a></p>
         </div>
     </div>
+    <style>
+        .about-text ul{
+            list-style: none;
+        }
+    </style>
 </div>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
