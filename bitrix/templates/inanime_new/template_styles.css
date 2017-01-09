@@ -22,6 +22,9 @@ body{
     text-transform: uppercase;
     font-size:10px;
 }
+.ia-general-title{
+    color:#333;
+}
 .yellow-btn{
     background-color:rgb(245,173,91);
 }
@@ -904,6 +907,13 @@ header .text-btn.yellow-btn{
 header .text-btn.yellow-btn{
     min-width: 61px;
 }
+header .text-btn.yellow-btn.location-btn{
+    box-sizing:border-box;
+    width: 122px;
+    height: 31px;
+    padding: 0;
+}
+
 header .text-btn.blue-btn{
     min-width: 80px;
 }
@@ -2195,6 +2205,10 @@ footer .general-container{
         margin-left: 4px;
         width: 120px;
     }
+    header .text-btn.yellow-btn.location-btn {
+        width: 94px;
+        height: 22px;
+    }
     .search-input-container{
         display: inline-block;
         padding-left: 0;
@@ -2541,6 +2555,9 @@ footer .general-container{
     }
     header .cart-container .text-container {
         width: 138px;
+    }
+    header .search-column{
+        padding: 0;
     }
     .search-input-container .search-input~i.fa-search {
         left: 238px;

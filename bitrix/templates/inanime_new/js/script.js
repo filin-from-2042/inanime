@@ -303,6 +303,32 @@ function inanime_new() {
         var questionContainer = questionTitle.closest('.question-container');
         if (questionContainer.hasClass('opened')) questionContainer.removeClass('opened');
         else questionContainer.addClass('opened');
-    }
+    };
+
 }
 window.inanime_new = new inanime_new();
+
+window.iaHelper_headerLocationCallback = function(itemID, searchObject)
+{
+    $.ajax({
+        type: "POST",
+        url: searchObject.opts.ajaxURL,
+        data: {
+            locationID : itemID,
+            sessid:BX.bitrix_sessid()
+        },
+        //dataType: 'json',
+        success: function(){
+            var path = searchObject.getSelectedPath();
+            $(searchObject.ctrls.scope).hide().siblings('button')
+                .show()
+                .text('')
+                .append('<i class="fa fa-map-marker" aria-hidden="true"></i>'+path[0]['DISPLAY']+'<i class="fa fa-chevron-down" aria-hidden="true"></i>');
+        },
+        error: function( xhr, textStatus ) {
+            alert( [ xhr.status, textStatus ] );
+        }
+    });
+
+
+};

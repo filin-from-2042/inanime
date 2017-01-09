@@ -94,11 +94,63 @@
                                     </div>
                                 </div>
                                 <div class="row location-container">
-                                    <div class="col-xs-12">
+                                    <div class="col-xs-10">
                                         <span class="geo-title">Мой город:</span>
                                     </div>
-                                    <div class="col-xs-12">
-                                        <button type="button" class="btn btn-default ia-btn text-btn yellow-btn"><i class="fa fa-map-marker" aria-hidden="true"></i> Город <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                    <div class="col-xs-14">
+                                        <?
+                                        $locationID = 0;
+                                        $locationName = '';
+                                        if(isset($_SESSION['USER_VALUES']) && isset($_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']))
+                                        {
+                                            $locationID = $_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID'];
+                                            $locationName = $_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['NAME'];
+                                        }else{
+                                            if(CModule::IncludeModule("sale"))
+                                            {
+                                                $db_vars = CSaleLocation::GetList(
+                                                    array(
+                                                        "SORT" => "ASC",
+                                                        "COUNTRY_NAME_LANG" => "ASC",
+                                                        "CITY_NAME_LANG" => "ASC"
+                                                    ),
+                                                    array("CITY_NAME" => 'Новомосковск', "LID" => LANGUAGE_ID, 'COUNTRY_ID'=>19),
+                                                    false,
+                                                    false,
+                                                    array()
+                                                );
+                                                if ($vars = $db_vars->GetNext()){
+                                                    $locationID = $vars['ID'];
+                                                    $locationName = $vars['CITY_NAME'];
+                                                    $_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID'] = $locationID;
+                                                    $_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['NAME'] = $locationName;
+                                                }
+                                            }
+                                        }?>
+                                        <?$APPLICATION->IncludeComponent(
+                                            "bitrix:sale.location.selector.search",
+                                            "header-location",
+                                            array(
+                                                "COMPONENT_TEMPLATE" => "header-location",
+                                                "ID" => $locationID,
+                                                "CODE" => "",
+                                                "INPUT_NAME" => "globalInputAddressLocationSelectorMobile",
+                                                "PROVIDE_LINK_BY" => "id",
+                                                "JS_CONTROL_GLOBAL_ID" => "globalAddressLocationSelectorMobile",
+                                                "JS_CALLBACK" => "iaHelper_headerLocationCallback",
+                                                "AJAX_MODE" => "Y",
+                                                "FILTER_BY_SITE" => "Y",
+                                                "SHOW_DEFAULT_LOCATIONS" => "Y",
+                                                "CACHE_TYPE" => "A",
+                                                "CACHE_TIME" => "36000000",
+                                                "FILTER_SITE_ID" => "current",
+                                                "INITIALIZE_BY_GLOBAL_EVENT" => "",
+                                                "SUPPRESS_ERRORS" => "N",
+                                                "COMPOSITE_FRAME_MODE" => "A",
+                                                "COMPOSITE_FRAME_TYPE" => "AUTO"
+                                            ),
+                                            false
+                                        );?>
                                     </div>
                                 </div>
                                 <div class="row user-buttons-container">

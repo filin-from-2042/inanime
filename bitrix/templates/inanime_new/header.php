@@ -60,10 +60,63 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                 </div>
                 <!-- search -->
                 <div class="row search-row">
-                    <div class="col-md-6 col-lg-6">
-                        <button type="button" class="btn btn-default ia-btn text-btn yellow-btn">Город</button>
+                    <div class="col-md-8 col-lg-6 location-column">
+                        <?
+                        $locationID = 0;
+                        $locationName = '';
+                        if(isset($_SESSION['USER_VALUES']) && isset($_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']))
+                        {
+                            $locationID = $_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID'];
+                            $locationName = $_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['NAME'];
+                        }else{
+                            if(CModule::IncludeModule("sale"))
+                            {
+                                $db_vars = CSaleLocation::GetList(
+                                    array(
+                                        "SORT" => "ASC",
+                                        "COUNTRY_NAME_LANG" => "ASC",
+                                        "CITY_NAME_LANG" => "ASC"
+                                    ),
+                                    array("CITY_NAME" => 'Новомосковск', "LID" => LANGUAGE_ID, 'COUNTRY_ID'=>19),
+                                    false,
+                                    false,
+                                    array()
+                                );
+                                if ($vars = $db_vars->GetNext()){
+                                    $locationID = $vars['ID'];
+                                    $locationName = $vars['CITY_NAME'];
+                                    $_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID'] = $locationID;
+                                    $_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['NAME'] = $locationName;
+                                }
+                            }
+                        }?>
+
+                        <?$APPLICATION->IncludeComponent(
+                            "bitrix:sale.location.selector.search",
+                            "header-location",
+                            array(
+                                "COMPONENT_TEMPLATE" => "header-location",
+                                "ID" => $locationID,
+                                "CODE" => "",
+                                "INPUT_NAME" => "globalInputAddressLocationSelector",
+                                "PROVIDE_LINK_BY" => "id",
+                                "JS_CONTROL_GLOBAL_ID" => "globalAddressLocationSelector",
+                                "JS_CALLBACK" => "iaHelper_headerLocationCallback",
+                                "AJAX_MODE" => "Y",
+                                "FILTER_BY_SITE" => "Y",
+                                "SHOW_DEFAULT_LOCATIONS" => "Y",
+                                "CACHE_TYPE" => "A",
+                                "CACHE_TIME" => "36000000",
+                                "FILTER_SITE_ID" => "current",
+                                "INITIALIZE_BY_GLOBAL_EVENT" => "",
+                                "SUPPRESS_ERRORS" => "N",
+                                "COMPOSITE_FRAME_MODE" => "A",
+                                "COMPOSITE_FRAME_TYPE" => "AUTO"
+                            ),
+                            false
+                        );?>
                     </div>
-                    <div class="col-md-18 col-lg-18">
+                    <div class="col-md-16 col-lg-18 search-column">
 
                         <?$APPLICATION->IncludeComponent(
                             "bitrix:search.form",
@@ -121,7 +174,30 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                         </div>
                         <div class="row search-button-container">
                             <div class="col-sm-12">
-                                <button type="button" class="btn btn-default ia-btn text-btn yellow-btn"><i class="fa fa-map-marker" aria-hidden="true"></i> Город <i class="fa fa-caret-down" aria-hidden="true"></i></button>
+                                <?$APPLICATION->IncludeComponent(
+                                    "bitrix:sale.location.selector.search",
+                                    "header-location",
+                                    array(
+                                        "COMPONENT_TEMPLATE" => "header-location",
+                                        "ID" => $locationID,
+                                        "CODE" => "",
+                                        "INPUT_NAME" => "globalInputAddressLocationSelectorTablet",
+                                        "PROVIDE_LINK_BY" => "id",
+                                        "JS_CONTROL_GLOBAL_ID" => "globalAddressLocationSelectorTablet",
+                                        "JS_CALLBACK" => "iaHelper_headerLocationCallback",
+                                        "AJAX_MODE" => "Y",
+                                        "FILTER_BY_SITE" => "Y",
+                                        "SHOW_DEFAULT_LOCATIONS" => "Y",
+                                        "CACHE_TYPE" => "A",
+                                        "CACHE_TIME" => "36000000",
+                                        "FILTER_SITE_ID" => "current",
+                                        "INITIALIZE_BY_GLOBAL_EVENT" => "",
+                                        "SUPPRESS_ERRORS" => "N",
+                                        "COMPOSITE_FRAME_MODE" => "A",
+                                        "COMPOSITE_FRAME_TYPE" => "AUTO"
+                                    ),
+                                    false
+                                );?>
                             </div>
                             <div class="col-sm-12">
 
