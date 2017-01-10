@@ -1,0 +1,2 @@
+Предлагаем Вам в связи с неполадками воспользоваться <br> купоном <span class="coupon-code yellow-text">SL-G1U7R-TSTZM8W</span>
+на скидку, срок действия <span class="coupon-active-time light-blue-text">7 дней</span> после регистрации

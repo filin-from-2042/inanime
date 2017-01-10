@@ -214,6 +214,9 @@ textarea.form-control {
 .brown-dotted-text:hover {
     border-bottom: 2px dotted transparent;
 }
+.light-blue-text{
+    color: #63bac4;
+}
 .light-blue-text-underline {
     color: #63bac4;
     text-decoration:underline;
@@ -993,6 +996,50 @@ footer .general-container{
     background-image: url(images/hare-footer.png);
     background-repeat: no-repeat;
     background-position: 97% 76%;
+}
+
+/******************************* 404 ******************************************/
+.page-404{
+    color:#1a2127;
+    text-align: center;
+}
+.page-404 .image-container img{
+    width: 240px;
+    height: 155px;
+}
+.page-404 .general-text-container{
+    font-weight: bold;
+}
+.page-404 .general-text-container .text-title{
+    text-transform: uppercase;
+    font-size: 24px;
+}
+.page-404 .general-text-container .text-content{
+    font-size:18px;
+}
+.page-404 .general-text-container,
+.page-404 .coupon-text-container{
+    margin-top: 20px;
+}
+.page-404 .image-container{
+    margin-top: 55px;
+}
+.page-404 .button-container{
+    margin-top: 30px;
+}
+.page-404 .text-wrap{
+    display: inline-block;
+}
+.page-404 .button-container .btn{
+    font-size: 14px;
+    padding: 10px 42px;
+    border-radius: 10px;
+}
+.page-404 .coupon-text-container .coupon-code,
+.page-404 .coupon-text-container .coupon-active-time{
+    font-size: 16px;
+    font-weight: bold;
+    letter-spacing: 1px;
 }
 
 /******************************* CONTENT *****************************************/
@@ -1960,6 +2007,23 @@ footer .general-container{
     footer .contacts .social-container{
         padding-top: 19px;
     }
+    /******************************* 404 ******************************/
+    .page-404 .image-container img{
+        width: 172px;
+        height: 106px;
+    }
+    .page-404 .image-container {
+        margin-top: 43px;
+    }
+    .page-404 .general-text-container .text-title {
+        font-size: 17px;
+    }
+    .page-404 .general-text-container .text-content {
+        font-size: 13px;
+    }
+    .page-404 .general-text-container .text-content .text-wrap{
+        width: 180px;
+    }
     .sections-carousel {
         margin-top: 14px;
     }
@@ -2231,6 +2295,12 @@ footer .general-container{
     footer {
         padding-top: 17px;
     }
+
+    /************************************** 404 *************************/
+    .page-404 .image-container {
+        margin-top: 35px;
+    }
+
     .carousel-custom ul li img{
         height:110px;
     }
