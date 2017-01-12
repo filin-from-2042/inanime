@@ -45,6 +45,53 @@ div.blog-comment-buttons input {
     padding: 10px 0 0 0;
 }
 
+
+/********* ADD COMMENT **********/
+#add-comment textarea.form-control {
+    width:100%;
+}
+#add-comment .icon-input-wrap {
+    display:block;
+}
+#add-comment.ia-modal .modal-dialog {
+    width:600px;
+}
+#add-comment .rating-container {
+    text-align:center;
+}
+#add-comment .modal-body {
+    color:rgb(121,130,139);
+}
+#add-comment .text-title i {
+    margin-right: 8px;
+    font-size: 15px;
+    color:#5d3d1d;
+}
+#add-comment .icon-input-container {
+    padding: 8px 0px;
+}
+#add-comment .row{
+    margin: 0 10px;
+}
+#add-comment .comment-row{
+    margin-top: 10px;
+}
+#add-comment .button-container {
+    margin-top: 23px;
+}
+#add-comment .advantages-column {
+    padding-right:10px
+}
+#add-comment .minus-column {
+    padding-left:10px
+}
+
+@media (max-width: 760px) {
+    #add-comment.ia-modal .modal-dialog {
+        width: 316px;
+    }
+}
+
 @media (max-width:540px){
 	.bx_soc_comments_div .bx-catalog-tab-list li a{
 		font-size:11px;

@@ -20,7 +20,7 @@ if (isset($templateData['BLOG_USE']) && $templateData['BLOG_USE'] == 'Y')
 			'BLOG_URL' => $arResult['BLOG_DATA']['BLOG_URL'],
 			'PATH_TO_SMILE' => $arParams['PATH_TO_SMILE'],
 			'COMMENTS_COUNT' => $arParams['COMMENTS_COUNT'],
-			"DATE_TIME_FORMAT" => $DB->DateFormatToPhp(FORMAT_DATETIME),
+			"DATE_TIME_FORMAT" => "j F Y",
 			"CACHE_TYPE" => $arParams["CACHE_TYPE"],
 			"CACHE_TIME" => $arParams["CACHE_TIME"],
 			"AJAX_POST" => $arParams["AJAX_POST"],

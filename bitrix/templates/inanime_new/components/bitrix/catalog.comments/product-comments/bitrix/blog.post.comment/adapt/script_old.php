@@ -113,10 +113,8 @@ function showComment(key, error, userName, userEmail, needData)
 		BX.hide(BX.findChild(BX('blog-comment-user-fields-UF_BLOG_COMMENT_DOC'), {'className': 'file-selectdialog' }, true, false));
 		BX.show(BX('blog-upload-file'));
 	}
-    // при комментировании отзыва убираем поля Плюсы и Минусы
-    if(key>0) $('#form_c_del .plus-minus-row').hide();
-    $('#add-comment').modal();
 
+	onLightEditorShow(comment);
 	return false;
 }
 
@@ -170,21 +168,7 @@ function editComment(key)
 		BX.show(BX('blog-upload-file'));
 	}
 
-    // если распарсить JSON не удаетя, значит комментарий к отзыву
-    try
-    {
-        var commentData = JSON.parse(comment);
-        $('#form_c_del .advantage-textarea').text(commentData.plus);
-        $('#form_c_del .minus-textarea').text(commentData.minus);
-        $('#form_c_del .comment-textarea').text(commentData.comment);
-    }
-    catch(e)
-    {
-        $('#form_c_del .plus-minus-row').hide();
-        $('#form_c_del .comment-textarea').text(comment);
-    }
-    $('#add-comment').modal('show');
-
+	onLightEditorShow(comment);
 
 	document.form_comment.parentId.value = '';
 	document.form_comment.edit_id.value = key;
@@ -255,20 +239,7 @@ function waitResult(id)
 
 function submitComment()
 {
-    var commentData;
-    // тип комментария по видимости полей Плюсы и Минусы
-    if($('#form_c_del .plus-minus-row').is(':visible'))
-    {
-        commentData = {};
-        commentData.plus = $('#form_c_del .advantage-textarea').val();
-        commentData.minus = $('#form_c_del .minus-textarea').val();
-        commentData.comment = $('#form_c_del .comment-textarea').val();
-        commentData = JSON.stringify(commentData);
-    }
-    else commentData = $('#form_c_del .comment-textarea').val();
-    $('#form_comment input[name="comment"]').val(commentData);
-    $('#add-comment').modal('hide');
-
+	oBlogComLHE.SaveContent();
 	BX('post-button').focus();
 	BX('post-button').disabled = true;
 	obForm = BX('form_comment');

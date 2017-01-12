@@ -11,17 +11,6 @@ BX.ready( function(){
 			{tag:'IMG', attr: 'data-bx-image'}
 		);
 	}
-    // при скрытии окна очистка полей
-    $('#add-comment').on('hidden.bs.modal', function (e) {
-        $('#form_c_del .advantage-textarea').text('');
-        $('#form_c_del .advantage-textarea').val('');
-        $('#form_c_del .minus-textarea').text('');
-        $('#form_c_del .minus-textarea').val('');
-        $('#form_c_del .comment-textarea').text('');
-        $('#form_c_del .comment-textarea').val('');
-
-        $('#form_c_del .plus-minus-row').show();
-    });
 });
 </script>
 <div class="blog-comments comment-container" id="comments">
@@ -66,8 +55,8 @@ function ShowComment($comment, $tabCount=0, $tabSize=2.5, $canModerate=false, $U
         ?>
 
         <a name="<?=$comment["ID"]?>"></a>
-        <div class="blog-comment" style="margin-left:<?=$paddingSize?>em;">
-        <div id="blg-comment-<?=$comment["ID"]?>" class="comment-main grey-container">
+        <div class="blog-comment comment-main grey-container" style="margin-left:<?=$paddingSize?>em;">
+        <div id="blg-comment-<?=$comment["ID"]?>">
         <?
         if($comment["PUBLISH_STATUS"] == BLOG_PUBLISH_STATUS_PUBLISH || $comment["SHOW_SCREENNED"] == "Y" || $comment["ID"] == "preview")
         {
@@ -129,24 +118,8 @@ function ShowComment($comment, $tabCount=0, $tabSize=2.5, $canModerate=false, $U
                     "NAME_LIST_FORMATTED" => "",
                 );
 
-            $commentData = json_decode($comment["TextFormated"], true);
-            // признак комментария к отзыву
-            $parentMark = isset($comment["PARENT_ID"]) && $comment["PARENT_ID"];
-            if($parentMark)
-            {
-                // данные создателя родительского комментария
-                $parentCommentData = CBlogComment::GetByID($comment["PARENT_ID"]);
-                $rsUser = CUser::GetByID($parentCommentData['AUTHOR_ID']);
-                $parentUserData = $rsUser->Fetch();
-                $parentUserName = $parentUserData['NAME'].' '.$parentUserData['LAST_NAME'];
-            }
-
             if(strlen($comment["urlToBlog"])>0)
             {
-                if($parentMark)
-                {?>
-                    <div class="answer-icon"></div>
-                <?}
                 ?>
                 <div class="blog-author nicname">
                     <?
@@ -182,20 +155,10 @@ function ShowComment($comment, $tabCount=0, $tabSize=2.5, $canModerate=false, $U
                     );
                     ?>
                 </div>
-                <?
-                if($parentMark)
-                {
-                    ?>
-                    <div class="comment-parent-nicname"><?=$parentUserName?></div>
-                <?}?>
             <?
             }
             elseif(strlen($comment["urlToAuthor"])>0)
             {
-                if($parentMark)
-                {?>
-                    <div class="answer-icon"></div>
-                <?}
                 ?><div class="blog-author nicname">
                 <?if($arParams["SEO_USER"] == "Y"):?>
                 <noindex>
@@ -234,27 +197,12 @@ function ShowComment($comment, $tabCount=0, $tabSize=2.5, $canModerate=false, $U
                 </noindex>
             <?endif;?>
                 </div>
-
-                <?
-                if($parentMark)
-                {
-                    ?>
-                    <div class="comment-parent-nicname"><?=$parentUserName?></div>
-                <?}?>
             <?
             }
             else
             {
-                if($parentMark)
-                {?>
-                    <div class="answer-icon"></div>
-                <?}?>
+                ?>
                 <div class="blog-author nicname"><?=$comment["AuthorName"]?></div>
-                <?
-                if($parentMark)
-                {?>
-                    <div class="comment-parent-nicname"><?=$parentUserName?></div>
-                <?}?>
             <?
             }
 
@@ -266,6 +214,7 @@ function ShowComment($comment, $tabCount=0, $tabSize=2.5, $canModerate=false, $U
             }
 
             ?>
+            <?/*?><div class="blog-comment-date"><?=$comment["DateFormated"]?></div><?*/?>
         </div>
         <div class="blog-clear-float"></div>
         <div class="blog-comment-content">
@@ -276,19 +225,8 @@ function ShowComment($comment, $tabCount=0, $tabSize=2.5, $canModerate=false, $U
             <?
             }
             ?>
+            <?=$comment["TextFormated"]?>
             <?
-            if($commentData)
-            {
-                ?>
-                <div class="part-title">Плюсы:</div>
-                <div class="part-text gray-text"><?=$commentData['plus']?></div>
-                <div class="part-title">Минусы:</div>
-                <div class="part-text gray-text"><?=$commentData['minus']?></div>
-                <div class="part-title">Комментарий:</div>
-                <div class="part-text gray-text"><?=$commentData['comment']?></div>
-            <?
-            } else echo '<span class="gray-text">'.$comment["TextFormated"].'</span>';
-
             if(!empty($arParams["arImages"][$comment["ID"]]))
             {
                 ?>
@@ -337,6 +275,17 @@ function ShowComment($comment, $tabCount=0, $tabSize=2.5, $canModerate=false, $U
                 <?
                 }
 
+                if(IntVal($comment["PARENT_ID"])>0)
+                {
+                    ?>
+                    <span class="blog-vert-separator divider">|</span>
+                    <span class="blog-comment-parent"><a href="#<?=$comment["PARENT_ID"]?>"><?=GetMessage("B_B_MS_PARENT")?></a></span>
+                <?
+                }
+                ?>
+                <span class="blog-vert-separator divider">|</span>
+                <span class="blog-comment-link"><a href="#<?=$comment["ID"]?>"><?=GetMessage("B_B_MS_LINK")?></a></span>
+                <?
                 if($comment["CAN_EDIT"] == "Y")
                 {
                     ?>
@@ -458,7 +407,7 @@ function ShowComment($comment, $tabCount=0, $tabSize=2.5, $canModerate=false, $U
         </div>
         <div id="err_comment_<?=$comment['ID']?>"></div>
         <div id="form_comment_<?=$comment['ID']?>"></div>
-        <div id="new_comment_cont_<?=$comment['ID']?>" style="margin-left:<?=$paddingSizeNew?>em;"></div>
+        <div id="new_comment_cont_<?=$comment['ID']?>" style="padding-left:<?=$paddingSizeNew?>em;"></div>
         <div id="new_comment_<?=$comment['ID']?>" style="display:none;"></div>
 
         <?
@@ -648,6 +597,8 @@ else
                 <?
             }
         }else{
+            //var_dump($arResult["CommentsResult"]);
+            //var_dump($arResult["Comments"]);
             RecursiveComments($arResult["CommentsResult"], $arResult["firstLevel"], 0, true, $arResult["canModerate"], $arResult["User"], $arResult["use_captcha"], $arResult["CanUserComment"], $arResult["COMMENT_ERROR"], $arResult["Comments"], $arParams);
         }
         if($arResult["is_ajax_post"] != "Y")
@@ -679,97 +630,112 @@ else
 			}*/
 			$ajaxPath = $templateFolder.'/ajax.php';
 			?>
-            <div id="form_comment_" style="display:none;">
-                <div id="form_c_del" style="display:none;">
+			<div id="form_comment_" style="display:none;">
+				<div id="form_c_del" style="display:none;">
+				<div class="blog-comment-form">
+				<form method="POST" name="form_comment" id="form_comment" action="<?=$ajaxPath; ?>">
+				<input type="hidden" name="parentId" id="parentId" value="">
+				<input type="hidden" name="edit_id" id="edit_id" value="">
+				<input type="hidden" name="act" id="act" value="add">
+				<input type="hidden" name="post" value="Y">
+				<?
+				if(isset($_REQUEST["IBLOCK_ID"]))
+				{
+					?><input type="hidden" name="IBLOCK_ID" value="<?=(int)$_REQUEST["IBLOCK_ID"]; ?>"><?
+				}
+				if(isset($_REQUEST["ELEMENT_ID"]))
+				{
+					?><input type="hidden" name="ELEMENT_ID" value="<?=(int)$_REQUEST["ELEMENT_ID"]; ?>"><?
+				}
+				if(isset($_REQUEST["SITE_ID"]))
+				{
+					?><input type="hidden" name="SITE_ID" value="<?=htmlspecialcharsbx($_REQUEST["SITE_ID"]); ?>"><?
+				}
 
-                        <div class="modal fade ia-modal" id="add-comment" tabindex="-1" role="dialog" aria-labelledby="addComment">
+				echo makeInputsFromParams($arParams["PARENT_PARAMS"]);
+				echo bitrix_sessid_post();?>
+				<div class="blog-comment-fields">
+					<?
+					if(empty($arResult["User"]))
+					{
+						?>
+						<div class="blog-comment-field blog-comment-field-user">
+							<div class="blog-comment-field blog-comment-field-author"><div class="blog-comment-field-text"><label for="user_name"><?=GetMessage("B_B_MS_NAME")?></label><span class="blog-required-field">*</span></div><span><input maxlength="255" size="30" tabindex="3" type="text" name="user_name" id="user_name" value="<?=htmlspecialcharsEx($_SESSION["blog_user_name"])?>"></span></div>
+							<div class="blog-comment-field-user-sep">&nbsp;</div>
+							<div class="blog-comment-field blog-comment-field-email"><div class="blog-comment-field-text"><label for="">E-mail</label></div><span><input maxlength="255" size="30" tabindex="4" type="text" name="user_email" id="user_email" value="<?=htmlspecialcharsEx($_SESSION["blog_user_email"])?>"></span></div>
+							<div class="blog-clear-float"></div>
+						</div>
+						<?
+					}
+					?>
+					<?if($arParams["NOT_USE_COMMENT_TITLE"] != "Y")
+					{
+						?>
+						<div class="blog-comment-field blog-comment-field-title">
+							<div class="blog-comment-field">
+							<div class="blog-comment-field-text"><label for="user_name"><?=GetMessage("BPC_SUBJECT")?></label></div>
+							<span><input size="70" type="text" name="subject" id="subject" value=""></span>
+							<div class="blog-clear-float"></div>
+							</div>
+						</div>
+						<?
+					}
 
-                            <div class="blog-comment-form">
-                                <form method="POST" name="form_comment" id="form_comment" action="<?=$ajaxPath; ?>">
-                                    <input type="hidden" name="parentId" id="parentId" value="">
-                                    <input type="hidden" name="edit_id" id="edit_id" value="">
-                                    <input type="hidden" name="act" id="act" value="add">
-                                    <input type="hidden" name="post" value="Y">
-                                    <?
-                                    if(isset($_REQUEST["IBLOCK_ID"]))
-                                    {
-                                        ?><input type="hidden" name="IBLOCK_ID" value="<?=(int)$_REQUEST["IBLOCK_ID"]; ?>"><?
-                                    }
-                                    if(isset($_REQUEST["ELEMENT_ID"]))
-                                    {
-                                        ?><input type="hidden" name="ELEMENT_ID" value="<?=(int)$_REQUEST["ELEMENT_ID"]; ?>"><?
-                                    }
-                                    if(isset($_REQUEST["SITE_ID"]))
-                                    {
-                                        ?><input type="hidden" name="SITE_ID" value="<?=htmlspecialcharsbx($_REQUEST["SITE_ID"]); ?>"><?
-                                    }
+					include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/lhe.php");
 
-                                    echo makeInputsFromParams($arParams["PARENT_PARAMS"]);
-                                    echo bitrix_sessid_post();?>
+					if($arResult["COMMENT_PROPERTIES"]["SHOW"] == "Y")
+					{
+						?><br /><?
+						$eventHandlerID = false;
+						$eventHandlerID = AddEventHandler('main', 'system.field.edit.file', array('CBlogTools', 'blogUFfileEdit'));
+						foreach($arResult["COMMENT_PROPERTIES"]["DATA"] as $FIELD_NAME => $arPostField)
+						{
+							if($FIELD_NAME=='UF_BLOG_COMMENT_DOC')
+							{
+								?><a id="blog-upload-file" href="javascript:blogShowFile()"><?=GetMessage("BLOG_ADD_FILES")?></a><?
+							}
+							?>
+							<div id="blog-comment-user-fields-<?=$FIELD_NAME?>"><?=($FIELD_NAME=='UF_BLOG_COMMENT_DOC' ? "" : $arPostField["EDIT_FORM_LABEL"].":")?>
+								<?$APPLICATION->IncludeComponent(
+										"bitrix:system.field.edit",
+										$arPostField["USER_TYPE"]["USER_TYPE_ID"],
+										array("arUserField" => $arPostField), null, array("HIDE_ICONS"=>"Y"));?>
+							</div><?
+						}
+						if ($eventHandlerID !== false && ( intval($eventHandlerID) > 0 ))
+							RemoveEventHandler('main', 'system.field.edit.file', $eventHandlerID);
+					}
 
-                                    <div class="modal-dialog" role="document">
-                                        <div class="modal-content">
-                                            <div class="modal-header">
-                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                          <span aria-hidden="true" class="clearfix ">
-                                            <i class="fa fa-times" aria-hidden="true"></i>
-                                          </span>
-                                                </button>
+					if(strlen($arResult["NoCommentReason"]) > 0)
+					{
+						?>
+						<div id="nocommentreason" style="display:none;"><?=$arResult["NoCommentReason"]?></div>
+						<?
+					}
+					if($arResult["use_captcha"]===true)
+					{
+						?>
+						<div class="blog-comment-field blog-comment-field-captcha">
+							<div class="blog-comment-field-captcha-label">
+								<label for=""><?=GetMessage("B_B_MS_CAPTCHA_SYM")?></label><span class="blog-required-field">*</span><br>
+								<input type="hidden" name="captcha_code" id="captcha_code" value="<?=$arResult["CaptchaCode"]?>">
+								<input type="text" size="30" name="captcha_word" id="captcha_word" value=""  tabindex="7">
+								</div>
+							<div class="blog-comment-field-captcha-image"><div id="div_captcha"></div></div>
+						</div>
+						<?
+					}
+					?>
 
-                                                <h4 class="modal-title">Оставить отзыв</h4>
-                                            </div>
-                                            <div class="modal-body">
-                                                <form>
-                                                    <div class="row plus-minus-row">
-                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-ls-12 advantages-column">
-                                                            <div class="text-title"><i class="fa fa-plus" aria-hidden="true"></i>Плюсы</div>
-                                                            <div class="icon-input-container">
-                                                                <div class="icon-input-wrap">
-                                                                    <textarea name="advantage-text" class="form-control advantage-textarea"></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                        <div class="col-xs-12 col-sm-12 col-md-12 col-ls-12 minus-column">
-                                                            <div class="text-title"><i class="fa fa-minus" aria-hidden="true"></i>Минусы</div>
-                                                            <div class="icon-input-container">
-                                                                <div class="icon-input-wrap">
-                                                                    <textarea name="minus-text" class="form-control minus-textarea"></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="row comment-row">
-                                                        <div class="col-xs-24 col-sm-24 col-md-24 col-lg-24">
-                                                            <div class="text-title"><i class="fa fa-commenting" aria-hidden="true"></i>Комментарий</div>
-                                                            <div class="icon-input-container">
-                                                                <div class="icon-input-wrap">
-                                                                    <textarea name="minus-text" class="form-control comment-textarea"></textarea>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                    <div class="status-container">
-                                                        <div class="success">Ответ на Ваш вопрос можно будет прочитать в личном кабинете</div>
-                                                    </div>
-                                                    <div class="button-container">
-
-                                                        <input class="btn btn-default ia-btn text-btn blue-btn" tabindex="10" value="<?=GetMessage("B_B_MS_SEND")?>" type="button" name="sub-post" id="post-button" onclick="submitComment()">
-
-                                                    </div>
-                                                    <input type="hidden" name="comment" value="">
-                                                </form>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <input type="hidden" name="blog_upload_cid" id="upload-cid" value="">
-                                </form>
-                            </div>
-
-                        </div>
-                    </div>
-                </div>
-
+					<div class="blog-comment-buttons">
+						<input tabindex="10" value="<?=GetMessage("B_B_MS_SEND")?>" type="button" name="sub-post" id="post-button" onclick="submitComment()">
+					</div>
+				</div>
+				<input type="hidden" name="blog_upload_cid" id="upload-cid" value="">
+				</form>
+				</div>
+			</div>
+			</div>
 			<?
 			if($arResult["use_captcha"]===true)
 			{
@@ -783,6 +749,8 @@ else
 				<?
 			}
 		}
+
+
 		?>
 		<?
 		if($arResult["is_ajax_post"] != "Y")
@@ -793,26 +761,6 @@ else
 				if($arParams["NOT_USE_COMMENT_TITLE"] != "Y")
 					$postTitle = "RE: ".CUtil::JSEscape($arResult["Post"]["TITLE"]);
 				?>
-
-                <div id="form_comment_0">
-                    <div id="err_comment_0"></div>
-                    <div id="form_comment_0"></div>
-                    <div id="new_comment_cont_0"></div>
-                    <div id="new_comment_0" style="display:none;"></div>
-                </div>
-                <?
-                if((strlen($arResult["COMMENT_ERROR"])>0 || strlen($_POST["preview"]) > 0)
-                && IntVal($_POST["parentId"]) == 0 && strlen($_POST["parentId"]) < 2 && IntVal($_POST["edit_id"]) <= 0)
-                {
-                ?>
-                    <script>
-                        top.text0 = text0 = '<?=CUtil::JSEscape($_POST["comment"])?>';
-                        top.title0 = title0 = '<?=CUtil::JSEscape($_POST["subject"])?>';
-                        showComment('0', 'Y', '<?=CUtil::JSEscape($_POST["user_name"])?>', '<?=CUtil::JSEscape($_POST["user_email"])?>', 'Y');
-                    </script>
-                    <?
-                }?>
-
                 <div class="blog-add-comment button-container">
                     <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="OK" value="Оставить отзыв" onclick="return showComment('0')">
                         <i class="fa fa-pencil" aria-hidden="true"></i>
@@ -847,6 +795,30 @@ else
 				?>
 				</div>
 				<?
+			}
+
+			if($arResult["CanUserComment"])
+			{
+				?>
+
+				<div id="form_comment_0">
+					<div id="err_comment_0"></div>
+					<div id="form_comment_0"></div>
+					<div id="new_comment_cont_0"></div>
+					<div id="new_comment_0" style="display:none;"></div>
+				</div>
+				<?
+				if((strlen($arResult["COMMENT_ERROR"])>0 || strlen($_POST["preview"]) > 0)
+					&& IntVal($_POST["parentId"]) == 0 && strlen($_POST["parentId"]) < 2 && IntVal($_POST["edit_id"]) <= 0)
+				{
+					?>
+					<script>
+					top.text0 = text0 = '<?=CUtil::JSEscape($_POST["comment"])?>';
+					top.title0 = title0 = '<?=CUtil::JSEscape($_POST["subject"])?>';
+					showComment('0', 'Y', '<?=CUtil::JSEscape($_POST["user_name"])?>', '<?=CUtil::JSEscape($_POST["user_email"])?>', 'Y');
+					</script>
+					<?
+				}
 			}
 		}
 	}

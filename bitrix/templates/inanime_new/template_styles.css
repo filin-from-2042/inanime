@@ -760,17 +760,25 @@ span.rub:before{
 #comments .comment-main .date-answer-container{
     font-size: 13px;
 }
+#comments .comment-main .date-answer-container .blog-comment-date{
+    font-size: 13px;
+}
 #comments .comment-main .date-answer-container .divider{
     margin: 0 5px;
+    color:#333;
 }
 #comments .comment-main .date-answer-container .answer-button{
-    color:#63bac4;
+    color:#63bac4 !important;
     text-decoration: underline;
     cursor: pointer;
 }
 #comments .comment-main .date-answer-container .answer-button:hover{
     text-decoration: none;
 }
+#comments .comment-main .blog-comment-cont-white{
+    background-color: transparent;
+}
+
 #comments .button-container{
     text-align: center;
 }
@@ -2118,7 +2126,7 @@ footer .general-container{
     #comments .comment-main {
         padding: 15px 16px;
     }
-    #comments .comment-main .nickname-rate-container .nicname,
+    #comments .comment-main .nickname-rate-container .comment-parent-nicname,
     #comments .comment-main .nickname-rate-container .comment-rate {
         display:block;
     }
