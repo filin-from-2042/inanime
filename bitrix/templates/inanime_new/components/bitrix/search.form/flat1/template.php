@@ -25,7 +25,7 @@ $this->setFrameMode(true);?>
                     ),
                     $component, array("HIDE_ICONS" => "Y")
         );?><?else:?>
-            <input type="text" name="q" value="" size="15" maxlength="50" placeholder="Поиск по каталогу" class="form-control search-input" />
+            <input type="text" name="q" value="" size="15" maxlength="50" placeholder="Поиск" class="form-control search-input" />
         <?endif;?>
         <i class="fa fa-search" aria-hidden="true" onclick="searchForm.submit()"></i>
     </div>
