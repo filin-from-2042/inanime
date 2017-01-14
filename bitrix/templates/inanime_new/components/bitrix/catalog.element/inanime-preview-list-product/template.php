@@ -49,60 +49,120 @@
                 </div>
             </a>
         </div>
-        <div class="buttons-container">
-            <?if($arResult["CAN_BUY"]){?>
-                <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
+        <?if($arParams['RATE_FIRS'] && $arParams['RATE_FIRS']=='Y'){?>
+
+            <div class="rate-container first-block">
+                <?$APPLICATION->IncludeComponent(
+                    "bitrix:iblock.vote",
+                    "stars",
+                    array(
+                        "IBLOCK_TYPE" => $arParams['IBLOCK_TYPE'],
+                        "IBLOCK_ID" => $arParams['IBLOCK_ID'],
+                        "ELEMENT_ID" => $arResult['ID'],
+                        "ELEMENT_CODE" => "",
+                        "MAX_VOTE" => "5",
+                        "VOTE_NAMES" => array("1", "2", "3", "4", "5"),
+                        "SET_STATUS_404" => "N",
+                        "DISPLAY_AS_RATING" => $arParams['VOTE_DISPLAY_AS_RATING'],
+                        "CACHE_TYPE" => $arParams['CACHE_TYPE'],
+                        "CACHE_TIME" => $arParams['CACHE_TIME']
+                    ),
+                    $component,
+                    array("HIDE_ICONS" => "Y")
+                );?>
+            </div>
+            <div class="buttons-container last-block">
+                <?if($arResult["CAN_BUY"]){?>
+                    <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
+                        ,1
+                        ,'<?=$arResult["NAME"]?>'
+                        ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
+                        ,false)">
+                        <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" /></span>
+                        <span class="text-btn">В корзину</span>
+                    </button>
+                <?
+                }else{
+                    ?>
+                    <?$APPLICATION->IncludeComponent(
+                        "bitrix:catalog.product.subscribe",
+                        "inanime-subscribe",
+                        Array(
+                            "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
+                            "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
+                            "CACHE_TIME" => "3600",
+                            "CACHE_TYPE" => "A",
+                            "PRODUCT_ID" => $arResult['ID']
+                        )
+                    );?>
+                <?
+                }
+                ?>
+                <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
                     ,1
                     ,'<?=$arResult["NAME"]?>'
                     ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
-                    ,false)">
-                    <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" /></span>
-                    <span class="text-btn">В корзину</span>
+                    ,true)">
+                    <img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" />
                 </button>
-            <?
-            }else{
+            </div>
+        <?}else{?>
+            <div class="buttons-container">
+                <?if($arResult["CAN_BUY"]){?>
+                    <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
+                        ,1
+                        ,'<?=$arResult["NAME"]?>'
+                        ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
+                        ,false)">
+                        <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" /></span>
+                        <span class="text-btn">В корзину</span>
+                    </button>
+                <?
+                }else{
+                    ?>
+                    <?$APPLICATION->IncludeComponent(
+                        "bitrix:catalog.product.subscribe",
+                        "inanime-subscribe",
+                        Array(
+                            "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
+                            "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
+                            "CACHE_TIME" => "3600",
+                            "CACHE_TYPE" => "A",
+                            "PRODUCT_ID" => $arResult['ID']
+                        )
+                    );?>
+                <?
+                }
                 ?>
+                <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
+                    ,1
+                    ,'<?=$arResult["NAME"]?>'
+                    ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
+                    ,true)">
+                    <img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" />
+                </button>
+            </div>
+            <div class="rate-container">
                 <?$APPLICATION->IncludeComponent(
-                    "bitrix:catalog.product.subscribe",
-                    "inanime-subscribe",
-                    Array(
-                        "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
-                        "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
-                        "CACHE_TIME" => "3600",
-                        "CACHE_TYPE" => "A",
-                        "PRODUCT_ID" => $arResult['ID']
-                    )
+                    "bitrix:iblock.vote",
+                    "stars",
+                    array(
+                        "IBLOCK_TYPE" => $arParams['IBLOCK_TYPE'],
+                        "IBLOCK_ID" => $arParams['IBLOCK_ID'],
+                        "ELEMENT_ID" => $arResult['ID'],
+                        "ELEMENT_CODE" => "",
+                        "MAX_VOTE" => "5",
+                        "VOTE_NAMES" => array("1", "2", "3", "4", "5"),
+                        "SET_STATUS_404" => "N",
+                        "DISPLAY_AS_RATING" => $arParams['VOTE_DISPLAY_AS_RATING'],
+                        "CACHE_TYPE" => $arParams['CACHE_TYPE'],
+                        "CACHE_TIME" => $arParams['CACHE_TIME']
+                    ),
+                    $component,
+                    array("HIDE_ICONS" => "Y")
                 );?>
-            <?
-            }
-            ?>
-            <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
-                ,1
-                ,'<?=$arResult["NAME"]?>'
-                ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
-                ,true)">
-                <img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" />
-            </button>
-        </div>
-        <div class="rate-container">
-            <?$APPLICATION->IncludeComponent(
-                "bitrix:iblock.vote",
-                "stars",
-                array(
-                    "IBLOCK_TYPE" => $arParams['IBLOCK_TYPE'],
-                    "IBLOCK_ID" => $arParams['IBLOCK_ID'],
-                    "ELEMENT_ID" => $arResult['ID'],
-                    "ELEMENT_CODE" => "",
-                    "MAX_VOTE" => "5",
-                    "VOTE_NAMES" => array("1", "2", "3", "4", "5"),
-                    "SET_STATUS_404" => "N",
-                    "DISPLAY_AS_RATING" => $arParams['VOTE_DISPLAY_AS_RATING'],
-                    "CACHE_TYPE" => $arParams['CACHE_TYPE'],
-                    "CACHE_TIME" => $arParams['CACHE_TIME']
-                ),
-                $component,
-                array("HIDE_ICONS" => "Y")
-            );?>
-        </div>
+            </div>
+
+        <?}?>
     </div>
 </div>

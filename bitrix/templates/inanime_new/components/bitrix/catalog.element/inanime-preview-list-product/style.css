@@ -1,4 +1,11 @@
 /*************************************** ***********************/
 .product-item-preview.vertical{
     display: inline-block;
+    background-color: #fff;
+}
+.product-item-preview.vertical .buttons-container.last-block{
+    margin-bottom: 10px;
+}
+.product-item-preview.vertical .rate-container.first-block{
+    margin-top: 0;
 }

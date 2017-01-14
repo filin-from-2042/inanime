@@ -44,6 +44,7 @@ function inanime_new() {
             cc_count: elements_count,
             cc_position: 0,
             carouselEl: document.getElementById(element_id),
+//            TODO: refactor only jquery
             cc_width: $(document.getElementById(element_id).querySelector('li')).width(),
             paddingRight: parseInt($(document.getElementById(element_id).querySelector('li')).css('paddingRight'))
         };
