@@ -4,7 +4,8 @@
 // парсинг полей для сортировки и фильтрации
 $sortData = json_decode($_REQUEST["sort_data"], true);
 $filterData = json_decode($_REQUEST["filter_data"], true);
-$arrFilter = array();
+//$arrFilter = array();
+global $arrFilter;
 $arrFilter["PROPERTY_IS_EIGHTEEN"] = false;
 foreach($filterData as $field)
 {
@@ -17,16 +18,16 @@ foreach($filterData as $field)
         case 'arrFilter_P1_MAX': {
             $maxPrice = $field["value"];
             $arrFilter["><CATALOG_PRICE_1"]=array($minPrice,$maxPrice);
-        }break;
+        };break;
         case 'BRAND_REF1':{
             $arrFilter["PROPERTY_BRAND_REF1"]=$field["value"];
         };break;
         case 'MATERIAL1':{
             $arrFilter["PROPERTY_MATERIAL1"] = $field["value"];
-        }break;
+        };break;
         case 'IS_EIGHTEEN':{
             unset($arrFilter["PROPERTY_IS_EIGHTEEN"]);
-        }break;
+        };break;
         case 'discount': $discount = ($field["value"]=='false')?false:true;break;
         case 'week-goods': $weekGoods = ($field["value"]=='false')?false:true;break;
         case 'topsale': $topsale = ($field["value"]=='false')?false:true;break;
@@ -45,8 +46,8 @@ if($discount||$weekGoods||$topsale)
                 array(
                     "ID" => $weekGoodsIDs,
                     "ACTIVE" => "Y",
-                    "!>ACTIVE_FROM" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
-                    "!<ACTIVE_TO" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
+                    "<=ACTIVE_FROM" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
+                    ">=ACTIVE_TO" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
                     "COUPON" => ""
                     ),
                 false,
@@ -68,8 +69,8 @@ if($discount||$weekGoods||$topsale)
                 array(
                     "!ID" => $weekGoodsIDs,
                     "ACTIVE" => "Y",
-                    "!>ACTIVE_FROM" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
-                    "!<ACTIVE_TO" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
+                    "<=ACTIVE_FROM" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
+                    ">=ACTIVE_TO" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
                     "COUPON" => ""
                 ),
                 false,
@@ -96,7 +97,6 @@ if($discount||$weekGoods||$topsale)
     }
     $arrFilter["ID"] = $IDs;
 }
-
 // кол-во страниц товаров с текущем фильтром
 $newArr = $arrFilter;
 $newArr['IBLOCK_ID']='19';
