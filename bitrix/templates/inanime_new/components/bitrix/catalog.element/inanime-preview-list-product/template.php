@@ -17,6 +17,33 @@
                 <div class="additional-icon recommended"></div>
             <?endif?>
         </div>
+        <?
+        $arDiscounts = CCatalogDiscount::GetDiscountByProduct(intVal($arResult['ID']));
+        $discountData = array();
+        if(count($arDiscounts)>0)
+        {
+            foreach($arDiscounts as $arDiscount)
+            {
+                if(intVal($arDiscount['ID'])>=19 && intVal($arDiscount['ID'])<=28)
+                {
+                    if(!empty($discountData) && floatVal($discountData['VALUE'])>=floatVal($arDiscount['VALUE'])) continue;
+                    else $discountData = $arDiscount;
+                }
+            }
+        }
+        if($discountData)
+        {
+            $difference = strtotime($discountData["ACTIVE_TO"]) - strtotime("now");
+            $daysLeft = intVal($difference/86400);
+            $hoursLeft = intVal(($difference%86400)/3600);
+            ?>
+            <div class="week-good-icon-container">
+                <div class="week-good-icon">
+                    <span class="icon-title">Товар недели</span>
+                    <span class="time-left"><?=$daysLeft?> д. <?=$hoursLeft?> ч.</span>
+                </div>
+            </div>
+        <?}?>
     </div>
     <div class="data-container">
         <div class="price-container">
