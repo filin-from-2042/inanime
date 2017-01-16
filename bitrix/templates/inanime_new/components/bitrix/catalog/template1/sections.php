@@ -153,7 +153,8 @@ if(array_key_exists('filterOn',$_REQUEST) && trim($_REQUEST['filterOn']))
                 "COMPOSITE_FRAME_MODE" => "A",
                 "COMPOSITE_FRAME_TYPE" => "AUTO",
                 "COMPONENT_TEMPLATE" => "ajax-catalog",
-                "AJAX_OPTION_ADDITIONAL" => "undefined"
+                "AJAX_OPTION_ADDITIONAL" => "undefined",
+                "LAZY_LOAD"=>"N"
             ),
             false
         );?>

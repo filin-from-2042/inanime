@@ -214,7 +214,8 @@ $APPLICATION->IncludeComponent(
 		"COMPOSITE_FRAME_MODE" => "A",
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
 		"COMPONENT_TEMPLATE" => "ajax-catalog",
-		"AJAX_OPTION_ADDITIONAL" => "undefined"
+		"AJAX_OPTION_ADDITIONAL" => "undefined",
+        "LAZY_LOAD"=>"Y"
 	),
 	false
 );?>

@@ -1384,10 +1384,15 @@ footer .general-container{
     left: -17px;
 }
 .product-item-preview .week-good-icon-container{
+    display: inline-block;
     position:absolute;
-    top: 215px;
-    left: 0;
+    top: 170px;
+    left:0;
     right: 0;
+    text-align: center;
+}
+.short-products-carousel .product-item-preview .week-good-icon-container{
+    top: 215px;
 }
 .product-item-preview .week-good-icon-container .week-good-icon{
     color:#fff;
