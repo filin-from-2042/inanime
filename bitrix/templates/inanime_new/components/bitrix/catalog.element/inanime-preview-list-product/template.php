@@ -1,9 +1,13 @@
 <?
-//var_dump($arResult)
+//var_dump($arResult);
 ?>
 <div class="product-item-preview vertical" id="<?=$this->GetEditAreaId($arResult['ID']);?>">
     <div class="image-container">
-                    <img src="<?=$arResult["PREVIEW_PICTURE"]["SRC"]?>" />
+        <?if($arParams['LAZY_LOAD'] && $arParams['LAZY_LOAD']=='Y'){?>
+            <img data-original="<?=$arResult["PREVIEW_PICTURE"]["SRC"]?>"  class="lazy" />
+        <?}else{?>
+            <img src="<?=$arResult["PREVIEW_PICTURE"]["SRC"]?>" />
+        <?}?>
         <div class="icons-container">
             <?if($arResult["DATE_ACTIVE_FROM"]):?>
                 <?if(((strtotime("now")-strtotime($arResult["DATE_ACTIVE_FROM"]))/86400) <= 14):?>
