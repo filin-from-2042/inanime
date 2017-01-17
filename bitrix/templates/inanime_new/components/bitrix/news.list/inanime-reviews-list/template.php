@@ -176,3 +176,83 @@ $arJSParams['elementsPerPage'] = $arParams["NEWS_COUNT"];
         });
     });
 </script>
+<div class="container">
+    <div class="row main-carousel">
+        <div class="col-xs-24 col-sm-18 col-md-18 col-lg-18">
+            <?if (IsModuleInstalled("advertising")):?>
+                <? $APPLICATION->IncludeComponent(
+                    "bitrix:advertising.banner",
+                    "bootstrap",
+                    array(
+                        "COMPONENT_TEMPLATE" => "bootstrap",
+                        "TYPE" => "MAIN",
+                        "NOINDEX" => "Y",
+                        "QUANTITY" => "3",
+                        "BS_EFFECT" => "fade",
+                        "BS_CYCLING" => "N",
+                        "BS_WRAP" => "Y",
+                        "BS_PAUSE" => "Y",
+                        "BS_KEYBOARD" => "Y",
+                        "BS_ARROW_NAV" => "Y",
+                        "BS_BULLET_NAV" => "Y",
+                        "BS_HIDE_FOR_TABLETS" => "N",
+                        "BS_HIDE_FOR_PHONES" => "N",
+                        "CACHE_TYPE" => "A",
+                        "CACHE_TIME" => "36000000",
+                        "DEFAULT_TEMPLATE" => "-",
+                        "COMPOSITE_FRAME_MODE" => "A",
+                        "COMPOSITE_FRAME_TYPE" => "AUTO"
+                    ),
+                    false
+                );?>
+            <?endif?>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6">
+            <script>
+                $(document).ready(function(){
+                    inanime_new.init_custom_vertical_carousel('carousel-custom-vertical',2);
+                });
+            </script>
+            <? $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/css/jquery.bxslider.css');?>
+            <? $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.bxslider.min.js');?>
+            <?
+            CModule::IncludeModule("iblock");
+            CModule::IncludeModule("catalog");
+            $arSelect = Array("ID", "NAME", "DATE_ACTIVE_FROM", "PROPERTY_SHOW_MAIN_SLIDER", "PROPERTY_MAIN_SLIDER_PHOTO", "PREVIEW_PICTURE", "DETAIL_PICTURE", "PREVIEW_TEXT", "PROPERTY_IS_NEWPRODUCT", "DETAIL_PAGE_URL", "PROPERTY_DISCOUNT");
+            $arFilter = Array("IBLOCK_ID" => array(18, 19, 23, 24), "ACTIVE" => "Y", "!PROPERTY_SHOW_MAIN_SLIDER" => false);
+            $res = CIBlockElement::GetList(Array("ACTIVE_FROM" => "DESC", "SORT" => "ASC"), $arFilter, false, Array("nPageSize" => 15), $arSelect);
+            $arSlides = array();
+            while ($ob = $res->GetNextElement()) {
+                $arFields = $ob->GetFields();
+
+                $arFields["file"] = CFile::ResizeImageGet(($arFields["PROPERTY_MAIN_SLIDER_PHOTO_VALUE"])?$arFields["PROPERTY_MAIN_SLIDER_PHOTO_VALUE"] : (($arFields["DETAIL_PICTURE"]) ? $arFields["DETAIL_PICTURE"] : $arFields["PREVIEW_PICTURE"]), array('width' => '1800', 'height' => '1000'), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+
+                $arSlides[] = $arFields;
+            }
+
+            if (count($arSlides) > 0) {
+                ?>
+                <div id="carousel-custom-vertical" class="carousel-custom">
+                    <div class="prev button"><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></div>
+                    <ul>
+                        <?
+                        $counter = 0;
+                        foreach ($arSlides as $slide) {
+                            $counter++;
+                            $previewText = (strlen($slide["PREVIEW_TEXT"]) > 83) ? substr($slide["PREVIEW_TEXT"], 0, 60) . '...' : $slide["PREVIEW_TEXT"];
+                            $nameText = (strlen($slide["NAME"]) > 43) ? substr($slide["NAME"], 0, 40) . '...' : $slide["NAME"];
+                            ?>
+                            <li>
+                                <? if ($slide["file"]["src"]) { ?>
+                                    <img src="<?= $slide["file"]["src"]; ?>">
+                                <? } ?>
+                                <a href="<?= $slide["DETAIL_PAGE_URL"]; ?>" class="text"><?=($previewText)?htmlspecialchars($previewText):htmlspecialchars($nameText)?></a>
+                            </li>
+                        <? } ?>
+                    </ul>
+                    <div class="next button"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
+                </div>
+            <? } ?>
+        </div>
+    </div>
+</div>
