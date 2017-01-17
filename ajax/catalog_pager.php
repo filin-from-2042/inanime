@@ -36,7 +36,7 @@ foreach($filterData as $field)
 if($discount||$weekGoods||$topsale)
 {
     $IDs = array();
-    $weekGoodsIDs = array(19,20,21,22,23,24,25,26,27,28,29,30);
+    $weekGoodsIDs = array(19,20,21,22,23,24,25,26,27,28);
     if (CModule::IncludeModule("catalog"))
     {
         if($weekGoods)
@@ -48,7 +48,8 @@ if($discount||$weekGoods||$topsale)
                     "ACTIVE" => "Y",
                     "<=ACTIVE_FROM" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
                     ">=ACTIVE_TO" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
-                    "COUPON" => ""
+                    "COUPON" => "",
+                    "SITE_ID"=>SITE_ID
                     ),
                 false,
                 false,
@@ -64,14 +65,17 @@ if($discount||$weekGoods||$topsale)
         }
         if($discount)
         {
-            $dbProductDiscounts = CCatalogDiscount::GetList(
+            // 2 выборки, 1ая для активных скидок с указанным интервалом, вторая для активных без указанного интервала
+            $discountIntervalIDs = $weekGoodsIDs;
+            $dbProductIntervalDiscounts = CCatalogDiscount::GetList(
                 array("SORT" => "ASC"),
                 array(
                     "!ID" => $weekGoodsIDs,
                     "ACTIVE" => "Y",
                     "<=ACTIVE_FROM" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
                     ">=ACTIVE_TO" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
-                    "COUPON" => ""
+                    "COUPON" => "",
+                    "SITE_ID"=>SITE_ID
                 ),
                 false,
                 false,
@@ -79,7 +83,26 @@ if($discount||$weekGoods||$topsale)
                     "ID", "PRODUCT_ID", "SECTION_ID"
                 )
             );
+            while ($arProductIntervalDiscounts = $dbProductIntervalDiscounts->Fetch())
+            {
+                $discountIntervalIDs[] = $arProductIntervalDiscounts['ID'];
+                if($arProductIntervalDiscounts["PRODUCT_ID"]) $IDs[]=$arProductIntervalDiscounts["PRODUCT_ID"];
+            }
 
+            $dbProductDiscounts = CCatalogDiscount::GetList(
+                array("SORT" => "ASC"),
+                array(
+                    "!ID" => $discountIntervalIDs,
+                    "ACTIVE" => "Y",
+                    "COUPON" => "",
+                    "SITE_ID"=>SITE_ID
+                ),
+                false,
+                false,
+                array(
+                    "ID", "PRODUCT_ID", "SECTION_ID"
+                )
+            );
             while ($arProductDiscounts = $dbProductDiscounts->Fetch())
             {
                 if($arProductDiscounts["PRODUCT_ID"]) $IDs[]=$arProductDiscounts["PRODUCT_ID"];
@@ -98,6 +121,9 @@ if($discount||$weekGoods||$topsale)
     $arrFilter["ID"] = $IDs;
 }
 // кол-во страниц товаров с текущем фильтром
+
+//var_dump($arrFilter);
+if(array_key_exists('ID', $arrFilter) && !$arrFilter["ID"]) return;
 $newArr = $arrFilter;
 $newArr['IBLOCK_ID']='19';
 $newArr['SECTION_ID']=$_REQUEST["section_id"];
