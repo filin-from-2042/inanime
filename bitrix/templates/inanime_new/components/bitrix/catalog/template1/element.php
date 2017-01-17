@@ -95,7 +95,7 @@ if(CModule::IncludeModule("iblock") && CModule::IncludeModule("catalog"))
     if($ar_res = $res->GetNext())
         $sectionID = intval($ar_res['IBLOCK_SECTION_ID']);
 
-    $arFilter = Array("IBLOCK_ID" => 19,"SECTION_ID"=>$sectionID,'<=CATALOG_PRICE_1'=>floatval($arrPriceData['PRICE'])+$percentPrice,'>=CATALOG_PRICE_1'=>floatval($arrPriceData['PRICE'])-$percentPrice, "ACTIVE" => "Y");
+    $arFilter = Array("!ID"=>$ElementID,"IBLOCK_ID" => 19,"SECTION_ID"=>$sectionID,'<=CATALOG_PRICE_1'=>floatval($arrPriceData['PRICE'])+$percentPrice,'>=CATALOG_PRICE_1'=>floatval($arrPriceData['PRICE'])-$percentPrice, "ACTIVE" => "Y");
     $res = CIBlockElement::GetList(Array(), $arFilter, false, Array("nTopCount"=>20), array());
     $arProducts = array();
     while ($ob = $res->GetNextElement())
