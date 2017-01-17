@@ -25,6 +25,7 @@ if (!empty($arResult['ITEMS']))
     {?>
         <?
 ?>
+    <??>
         <div class="product-item-preview vertical" id="<?=$this->GetEditAreaId($arElement['ID']);?>">
             <div class="image-container">
                 <img src="<?=$arItem["PREVIEW_PICTURE"]["SRC"]?>" />
@@ -72,20 +73,18 @@ if (!empty($arResult['ITEMS']))
                         $arPrice['PRICE'] = $res["PRICE"];
                         $arPrice["DISCOUNT_PRICE"] = $discountPrice;
                     }
-                ?>
-                        <td>
-                            <?if(count($arPrice)>0){
-                                ?>
-                                <?if($arPrice["DISCOUNT_PRICE"] < $arPrice["PRICE"]):?>
-                                    <span class="price old"><?=$arPrice["PRICE"]?><span class="rub"></span></span>
-                                    <span class="price yellow-text"><?=$arPrice["DISCOUNT_PRICE"]?><span class="rub"></span></span>
-                                <?else:?>
-                                    <span class="price yellow-text"><?=$arPrice["PRICE"]?><span class="rub"></span></span>
-                                <?endif;?>
-                            <?}else{?>
-                                &nbsp;
-                            <?}?>
-                        </td>
+                    ?>
+                    <?if(count($arPrice)>0){
+                        ?>
+                        <?if($arPrice["DISCOUNT_PRICE"] < $arPrice["PRICE"]):?>
+                            <span class="price old"><?=$arPrice["PRICE"]?><span class="rub"></span></span>
+                            <span class="price yellow-text"><?=$arPrice["DISCOUNT_PRICE"]?><span class="rub"></span></span>
+                        <?else:?>
+                            <span class="price yellow-text"><?=$arPrice["PRICE"]?><span class="rub"></span></span>
+                        <?endif;?>
+                    <?}else{?>
+                        &nbsp;
+                    <?}?>
                 </div>
                 <div class="title-container">
                     <a href="<?=$arItem["DETAIL_PAGE_URL"]?>" class="link">
@@ -148,6 +147,8 @@ if (!empty($arResult['ITEMS']))
                 </div>
             </div>
         </div>
+        <??>
+
 <?
         $arJSParams = array(
             'PRODUCT_TYPE' => $arItem['CATALOG_TYPE'],

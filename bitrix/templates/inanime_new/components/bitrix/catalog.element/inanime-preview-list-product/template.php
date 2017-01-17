@@ -1,9 +1,11 @@
 <?
 //var_dump($arResult);
+$orientation = "vertical";
+if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $orientation='horizontal';
 ?>
-<div class="product-item-preview vertical" id="<?=$this->GetEditAreaId($arResult['ID']);?>">
+<div class="product-item-preview <?=$orientation?>" id="<?=$this->GetEditAreaId($arResult['ID']);?>">
     <div class="image-container">
-        <?if($arParams['LAZY_LOAD'] && $arParams['LAZY_LOAD']=='Y'){?>
+        <?if(array_key_exists('LAZY_LOAD', $arParams) && $arParams['LAZY_LOAD']=='Y'){?>
             <img data-original="<?=$arResult["PREVIEW_PICTURE"]["SRC"]?>"  class="lazy" />
         <?}else{?>
             <img src="<?=$arResult["PREVIEW_PICTURE"]["SRC"]?>" />
@@ -80,7 +82,10 @@
                 </div>
             </a>
         </div>
-        <?if($arParams['RATE_FIRS'] && $arParams['RATE_FIRS']=='Y'){?>
+        <?
+            //$buttons
+        ?>
+        <?if(array_key_exists('RATE_FIRS',$arParams) && $arParams['RATE_FIRS']=='Y'){?>
 
             <div class="rate-container first-block">
                 <?$APPLICATION->IncludeComponent(
@@ -102,77 +107,81 @@
                     array("HIDE_ICONS" => "Y")
                 );?>
             </div>
-            <div class="buttons-container last-block">
-                <?if($arResult["CAN_BUY"]){?>
-                    <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
+            <?if(!array_key_exists('HIDE_BUTTONS', $arParams) || $arParams['HIDE_BUTTONS']!='Y'){?>
+                <div class="buttons-container last-block">
+                    <?if($arResult["CAN_BUY"]){?>
+                        <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
+                            ,1
+                            ,'<?=$arResult["NAME"]?>'
+                            ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
+                            ,false)">
+                            <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" /></span>
+                            <span class="text-btn">В корзину</span>
+                        </button>
+                    <?
+                    }else{
+                        ?>
+                        <?$APPLICATION->IncludeComponent(
+                            "bitrix:catalog.product.subscribe",
+                            "inanime-subscribe",
+                            Array(
+                                "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
+                                "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
+                                "CACHE_TIME" => "3600",
+                                "CACHE_TYPE" => "A",
+                                "PRODUCT_ID" => $arResult['ID']
+                            )
+                        );?>
+                    <?
+                    }
+                    ?>
+                    <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
                         ,1
                         ,'<?=$arResult["NAME"]?>'
                         ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
-                        ,false)">
-                        <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" /></span>
-                        <span class="text-btn">В корзину</span>
+                        ,true)">
+                        <img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" />
                     </button>
-                <?
-                }else{
-                    ?>
-                    <?$APPLICATION->IncludeComponent(
-                        "bitrix:catalog.product.subscribe",
-                        "inanime-subscribe",
-                        Array(
-                            "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
-                            "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
-                            "CACHE_TIME" => "3600",
-                            "CACHE_TYPE" => "A",
-                            "PRODUCT_ID" => $arResult['ID']
-                        )
-                    );?>
-                <?
-                }
-                ?>
-                <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
-                    ,1
-                    ,'<?=$arResult["NAME"]?>'
-                    ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
-                    ,true)">
-                    <img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" />
-                </button>
-            </div>
+                </div>
+            <?}?>
         <?}else{?>
-            <div class="buttons-container">
-                <?if($arResult["CAN_BUY"]){?>
-                    <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
+            <?if(!array_key_exists('HIDE_BUTTONS', $arParams) || $arParams['HIDE_BUTTONS']!='Y'){?>
+                <div class="buttons-container">
+                    <?if($arResult["CAN_BUY"]){?>
+                        <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
+                            ,1
+                            ,'<?=$arResult["NAME"]?>'
+                            ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
+                            ,false)">
+                            <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" /></span>
+                            <span class="text-btn">В корзину</span>
+                        </button>
+                    <?
+                    }else{
+                        ?>
+                        <?$APPLICATION->IncludeComponent(
+                            "bitrix:catalog.product.subscribe",
+                            "inanime-subscribe",
+                            Array(
+                                "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
+                                "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
+                                "CACHE_TIME" => "3600",
+                                "CACHE_TYPE" => "A",
+                                "PRODUCT_ID" => $arResult['ID']
+                            )
+                        );?>
+                    <?
+                    }
+                    ?>
+                    <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
                         ,1
                         ,'<?=$arResult["NAME"]?>'
                         ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
-                        ,false)">
-                        <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" /></span>
-                        <span class="text-btn">В корзину</span>
+                        ,true)">
+                        <img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" />
                     </button>
-                <?
-                }else{
-                    ?>
-                    <?$APPLICATION->IncludeComponent(
-                        "bitrix:catalog.product.subscribe",
-                        "inanime-subscribe",
-                        Array(
-                            "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
-                            "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
-                            "CACHE_TIME" => "3600",
-                            "CACHE_TYPE" => "A",
-                            "PRODUCT_ID" => $arResult['ID']
-                        )
-                    );?>
-                <?
-                }
-                ?>
-                <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
-                    ,1
-                    ,'<?=$arResult["NAME"]?>'
-                    ,<?=($arPrice["DISCOUNT_VALUE"] < $arPrice["VALUE"])?$arPrice["DISCOUNT_VALUE"]:$arPrice["VALUE"]?>
-                    ,true)">
-                    <img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" />
-                </button>
-            </div>
+                </div>
+            <?}?>
             <div class="rate-container">
                 <?$APPLICATION->IncludeComponent(
                     "bitrix:iblock.vote",
