@@ -92,8 +92,10 @@ if($discount||$weekGoods||$topsale)
             $dbProductDiscounts = CCatalogDiscount::GetList(
                 array("SORT" => "ASC"),
                 array(
-                    "!ID" => $discountIntervalIDs,
+//                    "!ID" => $discountIntervalIDs,
                     "ACTIVE" => "Y",
+                    "ACTIVE_FROM" => false,
+                    "ACTIVE_TO" => false,
                     "COUPON" => "",
                     "SITE_ID"=>SITE_ID
                 ),
