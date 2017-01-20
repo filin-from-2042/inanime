@@ -52,7 +52,6 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
         <?}?>
 
         <?
-            //БЫСТРЫЙ ЗАКАЗ
             $qoModalID = 'quick-order-modal'.$arResult['ID'];
             $photoGalleryData = array();
             $arJSParams = array();
@@ -342,7 +341,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                 {?>
                     <div class="button-wrap in-cart" <?=(!$canBuy)?'style="display:none"':''?>>
                         <div class="btn-group ia-btn-group" role="group">
-                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" onclick="$('#<?=$qoModalID?>').modal()">
+                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
                                 <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                             </button>
                             <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
@@ -368,7 +367,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                 <?}else{?>
                     <?if($canBuy){?>
                         <div class="btn-group ia-btn-group" role="group">
-                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" onclick="$('#<?=$qoModalID?>').modal()">
+                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
                                 <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                             </button>
                             <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
@@ -411,7 +410,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                 {?>
                     <div class="button-wrap in-cart" <?=(!$canBuy)?'style="display:none"':''?>>
                         <div class="btn-group ia-btn-group" role="group">
-                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" onclick="$('#<?=$qoModalID?>').modal()">
+                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" >
                                 <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                             </button>
                             <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
@@ -438,7 +437,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
 
                     <?if($arResult["CAN_BUY"]){?>
                         <div class="btn-group ia-btn-group" role="group">
-                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" onclick="$('#<?=$qoModalID?>').modal()">
+                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
                                 <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                             </button>
                             <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
@@ -497,6 +496,9 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
         <?}?>
     </div>
     <?
+    //БЫСТРЫЙ ЗАКАЗ
+    //include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/quick-order-modal.php");
+
     $arJSParams['productID'] = $arResult['ID'];
     $arJSParams['sizesData'] = $sizesData;
     $arJSParams['startColorData'] = $JSStartColorData;
