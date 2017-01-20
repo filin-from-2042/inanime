@@ -127,6 +127,7 @@ function inanime_new() {
 
     /* Переменная-флаг для отслеживания того, происходит ли в данный момент ajax-запрос. В самом начале даем ей значение false, т.е. запрос не в процессе выполнения */
     this.inProgress = false;
+    this.pagenCounter = 1;
     this.getSectionPage = function( filterData, sortData, pageNumber, withReplace = false)
     {
         var postData = {
@@ -143,16 +144,15 @@ function inanime_new() {
             data: postData,
             beforeSend: function() {
                 window.inanime_new.inProgress = true;
-                $(".items-section").append('<div id="overlay-load"></div>');
             }
         }).done(function(data){
 
-            $('.items-section #overlay-load').remove();
             window.scrollLoadMaxPages = $(data).find('#maxPages').text();
             var parsedData = $(data).find('.product-item-preview');
             // манипуляции с классом new для добавления lazyload новым элементам
             parsedData.find('img.lazy').addClass('new');
             if(withReplace) $(".items-section .items-container .product-item-preview").remove();
+            $(".items-section .items-container").append('<hr><div style="text-align: center; color:#ccc;display:block;padding:5px">Страница '+pageNumber+'</div>');
             $(".items-section .items-container").append(parsedData);
 
             $(".items-section .items-container .product-item-preview img.lazy.new").lazyload({effect : "fadeIn"});
@@ -238,8 +238,16 @@ function inanime_new() {
             var sortData = {sortField:splittedVal[0], sortType:splittedVal[1]};
             if(scrollChange)
             {
-                window.inanime_new.getSectionPage(filterData, sortData, window.scrollLoadStartFrom, false );
-                window.scrollLoadStartFrom ++;
+                if(window.inanime_new.pagenCounter>2){
+                    if(!$('#continue-section-btn')[0])
+                        $(".items-section .items-container")
+                            .append('<div id="continue-section-btn" style="display:block;text-align:center;" ' +
+                                'onclick="window.inanime_new.pagenCounter=0;window.inanime_new.changeViewHandler(true);$(\'#continue-section-btn\').remove()"><div class="show-below-btn">Далее</div></div>');
+                } else{
+                    window.inanime_new.pagenCounter++;
+                    window.inanime_new.getSectionPage(filterData, sortData, window.scrollLoadStartFrom, false );
+                    window.scrollLoadStartFrom ++;
+                }
             }
             else{
                 window.inanime_new.getSectionPage(filterData, sortData, 1, true );
