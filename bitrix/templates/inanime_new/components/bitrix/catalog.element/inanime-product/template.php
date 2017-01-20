@@ -17,12 +17,12 @@ if($arElement["DATE_ACTIVE_FROM"]){
 }
 $isBestseller = (bool)$arResult["PROPERTIES"]["IS_BESTSELLER"]["VALUE"];
 
+$arJSParams = array();
 if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
 {
-    $canBuy = $arResult['OFFERS'][$arResult['OFFERS_SELECTED']]['CAN_BUY'];
-
-
-    $availableColors = array();
+    // массив соответсвия 'цвет'=>'путь к изображению'
+    $availableColors = array('not-set'=>'');
+    // массив цветов по размеру ('размер'=>array('цвет1','цвет2'))
     $availableSizes = array();
     foreach ($arResult['SKU_PROPS'] as &$arProp)
     {
@@ -34,8 +34,8 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
             {
                 foreach ($arProp['VALUES'] as $arOneValue)
                 {
-
                     $arOneValue['XML_ID'] = htmlspecialcharsbx($arOneValue['XML_ID']);
+                    if(empty($arOneValue['XML_ID']) || $arOneValue['XML_ID']=='') continue;
                     $availableColors[$arOneValue['XML_ID']] = $arOneValue['PICT']['SRC'];
                 }
             }
@@ -52,17 +52,11 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
     unset($arProp);
 
     // идентификатор активного предложения при первом заходе на страницу
-    $activeOfferID = $arResult['OFFERS'][0]['ID'];
-    $minPriceBuff=$arResult['OFFERS'][0]["MIN_PRICE"]["DISCOUNT_VALUE"];
+    $activeOfferID = $arResult['OFFERS'][$arResult['OFFERS_SELECTED']]['ID'];
     // данные по всем предложениям
     $offersData = array();
     foreach($arResult['OFFERS'] as $offer)
     {
-        if($minPriceBuff>0 && $offer["MIN_PRICE"]["DISCOUNT_VALUE"]<$minPriceBuff)
-        {
-            $minPriceBuff=$offer["MIN_PRICE"]["DISCOUNT_VALUE"];
-            $activeOfferID = $offer["ID"];
-        }
         $offerPhotos = array();
         if($offer["PROPERTIES"]["GALLERY_PHOTO"]["VALUE"])
         {
@@ -86,14 +80,13 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
             $prices[]=$offer["MIN_PRICE"]["VALUE"];
         }
         $offersData[$offer["ID"]] = array(
-            'color'=>$offer["PROPERTIES"]["COLOR_REF"]["VALUE"],
+            'color'=>(empty($offer["PROPERTIES"]["COLOR_REF"]["VALUE"])||$offer["PROPERTIES"]["COLOR_REF"]["VALUE"]=='') ? 'not-set' : $offer["PROPERTIES"]["COLOR_REF"]["VALUE"],
             'price'=>$prices,
             'size'=>$offer["PROPERTIES"]["SIZE_GLK"]["VALUE"],
             'photo'=>$offerPhotos,
             'can_buy'=>$offer["CAN_BUY"]
             );
-        //if(!empty($offer["PROPERTIES"]["COLOR_REF"]["VALUE"]))
-            $availableSizes[$offer["PROPERTIES"]["SIZE_GLK"]["VALUE"]][] = $offer["PROPERTIES"]["COLOR_REF"]["VALUE"];
+            $availableSizes[$offer["PROPERTIES"]["SIZE_GLK"]["VALUE"]][] = (empty($offer["PROPERTIES"]["COLOR_REF"]["VALUE"])||$offer["PROPERTIES"]["COLOR_REF"]["VALUE"]=='') ? 'not-set' : $offer["PROPERTIES"]["COLOR_REF"]["VALUE"];
 
         foreach($offerPhotos as $offerPhoto)
         {
@@ -119,9 +112,12 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
             }
         }
     }
+    $canBuy = $offersData[$activeOfferID]['can_buy'];
+    $arJSParams['hasOffers'] = true;
 }
 else
 {
+    $arJSParams['hasOffers'] = false;
     $canBuy = $arResult['CAN_BUY'];
     if($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"])
     {
@@ -278,8 +274,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                         </div>
 
                         <div class="visible-xs">
-                            <?
-                            if(!empty($photoGalleryData))
+                            <?if(!empty($photoGalleryData))
                             {
                                 foreach($photoGalleryData as $galleryID=>$galleryPhoto)
                                 {
@@ -292,8 +287,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                     else
                                     {
                                         if($arResult['ID']==$galleryID) $showGallery = true;
-                                    }
-                                    ?>
+                                    }?>
                                     <div class="general-container photo-container" id="photo_gallery_xs_<?=$galleryID?>"  <?=($showGallery)?'':'style="display:none;"'?>>
                                         <div class="photo-big-container">
                                             <div class="img-wrap">
@@ -312,8 +306,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                         <div class="photo-carousel-container">
                                             <div id="<?=$carouselID;?>" class="preview-photo-carousel">
                                                 <ul>
-                                                    <?
-                                                    if($galleryPhoto)
+                                                    <?if($galleryPhoto)
                                                     {
                                                         foreach($galleryPhoto as $photoSRC)
                                                         {?>
@@ -324,8 +317,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                                             </li>
                                                         <?
                                                         }
-                                                    }
-                                                    ?>
+                                                    }?>
                                                 </ul>
                                             </div>
                                             <div class="nav-container">
@@ -345,25 +337,27 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                             ?>
                         </div>
 
-
                         <div class="price-container">
-                            <?
-                            if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
-                            {
-                            ?>
+                            <?if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
+                            {?>
                                 <div class="price">
                                     <?
                                     $currOfferPrice = $offersData[$activeOfferID]["price"];
-                                    $boolDiscountShow = count($currOfferPrice)>1;
+                                    $oldPrice;
+                                    $currentPrice;
+                                    if(isset($currOfferPrice[1]) && (floatVal($currOfferPrice[1]) > floatVal($currOfferPrice[0])))
+                                    {
+                                        $oldPrice=$currOfferPrice[0];
+                                        $currentPrice=$currOfferPrice[1];
+                                    } else $currentPrice = $currOfferPrice[0];
+
                                     if ($arParams['SHOW_OLD_PRICE'] == 'Y')
                                     {
-                                        if($boolDiscountShow){?>
-                                        <span class="price old"><?=$currOfferPrice[0]?> ₽</span>
+                                        if($oldPrice){?>
+                                        <span class="price old"><?=$oldPrice?> ₽</span>
                                         <?}?>
-                                    <?
-                                    }
-                                    ?>
-                                    <span class="price yellow-text"><? echo $currOfferPrice[1]; ?> ₽</span>
+                                    <?}?>
+                                    <span class="price yellow-text"><? echo $currentPrice; ?> ₽</span>
                                 </div>
                                 <?if($boolDiscountShow){?>
                                     <div class="discount">
@@ -380,8 +374,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                         }
                                         ?>
                                     </div>
-                            <?
-                                }
+                            <?}
                             }else{?>
                                     <div class="price">
                                         <?
@@ -392,9 +385,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                             if($boolDiscountShow){?>
                                                 <span class="price old"><?=$minPrice['VALUE']?> ₽</span>
                                             <?}?>
-                                        <?
-                                        }
-                                        ?>
+                                        <?}?>
                                         <span class="price yellow-text"><? echo $minPrice['DISCOUNT_VALUE']; ?> <span class="rub"></span></span>
                                     </div>
                                     <div class="discount">
@@ -421,16 +412,29 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                 <div class="size-container radio-container">
                                     <input type="hidden" name="size-radio" class="ia-radio-value" />
                                     <?
+                                    // заполнение данных по размерам из данных по предложениям
+                                    /* массив с данными по предложениям, распределнных по существующим цветам
+                                    'размер'=>array(
+                                                'id предложения'=> array(
+                                                                        'color'=>'purple',
+                                                                        'price'=>$prices,
+                                                                        'size'=>'xl',
+                                                                        'photo'=>array(),
+                                                                        'can_buy'=>true
+                                                                        )
+                                                )
+                                    )
+                                    */
                                     $sizesData = array();
                                     $JSStartColorData = array();
                                     foreach ($availableSizes as $sizeName=>$sizeColors)
-                                    {?>
-                                        <?
+                                    {
                                         foreach($offersData as $offerID=>$offerData )
                                         {
                                             if($offerData['size']!=$sizeName) continue;
 
                                             $currOfferColor = $offerData['color'];
+                                            // из данных размера вытаскиваем и сохраняем данные для первоначально выбраного цвета
                                             if($offersData[$activeOfferID]['size']==$sizeName)
                                                 $JSStartColorData[$currOfferColor] = array('price'=>$offerData['price'], 'id'=>$offerID, 'can_buy'=>$offerData['can_buy']);
                                             $sizesData[$sizeName][$offerID] = $offerData;
@@ -442,17 +446,6 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                             </div>
                                         <?}?>
                                     <?}?>
-                                    <script>
-                                        $(document).ready(function(){
-                                            $('.ia-radio-button,.radio-button-container .button-title').click(inanime_new.radioClick);
-                                            $('.color-container .ia-radio-button,.color-container.radio-button-container .button-title').click(
-                                                function(event){InAnimeCatalogElement<?=$strMainID;?>.colorClick(event)}
-                                            );
-                                            $('.size-container .ia-radio-button,.size-container.radio-button-container .button-title').click(
-                                                function(event){InAnimeCatalogElement<?=$strMainID;?>.sizeClick(event)}
-                                            );
-                                        });
-                                    </script>
                                 </div>
 
                                 <div class="color-container radio-container" >
@@ -463,21 +456,28 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                         $showColor = true;
                                         $currSize = $offersData[$activeOfferID]["size"];
                                         $currColor = $offersData[$activeOfferID]["color"];
-                                        $showColor = in_array($colorName,$availableSizes[$currSize]);
-                                        $prices = implode('-',$offersData[$activeOfferID]['price']);
+                                        $showColor = in_array($colorName,$availableSizes[$currSize]) && $colorName!='not-set';
 
                                         ?>
-                                            <div class="image-radio ia-radio-button <?= $currColor==$colorName ? 'active' : ''?>" <?=!$showColor?'style="display:none;"':''?>>
-                                                <span class="value hidden"><?= $colorName;?></span>
-                                                <span class="offer-data hidden"><?=$prices?>;<?=$activeOfferID?></span>
-                                                <img src="<?=$colorSRC;?>" />
-                                            </div>
+                                        <div class="image-radio ia-radio-button <?= $currColor==$colorName ? 'active' : ''?>" <?=!$showColor?'style="display:none;"':''?>>
+                                            <span class="value hidden"><?= $colorName;?></span>
+                                            <img src="<?=$colorSRC;?>" />
+                                        </div>
                                     <?}?>
                             </div>
+                            <script>
+                                $(document).ready(function(){
+                                    $('.ia-radio-button,.radio-button-container .button-title').click(inanime_new.radioClick);
+                                    $('.color-container .ia-radio-button,.color-container.radio-button-container .button-title').click(
+                                        function(event){InAnimeCatalogElement<?=$strMainID;?>.colorClick(event)}
+                                    );
+                                    $('.size-container .ia-radio-button,.size-container.radio-button-container .button-title').click(
+                                        function(event){InAnimeCatalogElement<?=$strMainID;?>.sizeClick(event)}
+                                    );
+                                });
+                            </script>
                         </div>
-                        <?
-                        }
-                        ?>
+                        <?}?>
 
                         <div class="counter-button-container">
                             <div class="ia-counter-container">
@@ -487,21 +487,25 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                             </div>
                             <span class="gray-text count-text">шт.</span>
                             <div class="buttons-container">
+
                                     <div class="button-wrap in-cart" <?=(!$canBuy)?'style="display:none"':''?>>
-                                        <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart"
-                                            onclick="
-                                                    inanime_new.addToCart(
+                                        <div class="btn-group ia-btn-group" role="group">
+                                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order" >
+                                                <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
+                                            </button>
+                                            <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
+                                                    onclick="inanime_new.addToCart(
                                                         parseInt($(this).find('.hidden.value').text())
                                                         ,parseInt($('.ia-counter-container input.counter-value').val())
                                                         ,'<?=$arResult["NAME"]?>'
                                                         ,parseInt($('.price-container .price.yellow-text').text())
-                                                        ,false)
-                                                ">
-                                            <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
-                                            <span class="icon-btn"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" width="17"/></span>
-                                            <span class="text-btn">В корзину</span>
-                                        </button>
+                                                        ,false)">
+                                                <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
+                                                В корзину
+                                            </button>
+                                        </div>
                                     </div>
+
                                     <div class="button-wrap subscribe" <?=($canBuy)?'style="display:none"':''?>>
                                         <?$APPLICATION->IncludeComponent(
                                             "bitrix:catalog.product.subscribe",
@@ -515,6 +519,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                             )
                                         );?>
                                     </div>
+
                                 <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite hidden-sm hidden-xs"
                                     onclick="inanime_new.addToCart(parseInt($(this).find('.hidden.value').text())
                                         ,parseInt($('.ia-counter-container input.counter-value').val())
@@ -843,7 +848,6 @@ $arJSParams['sizesData'] = $sizesData;
 $arJSParams['startColorData'] = $JSStartColorData;
 ?>
 <script>
-    console.log('InAnimeCatalogElement<?=$strMainID;?>');
     var InAnimeCatalogElement<?=$strMainID;?> = new window.InAnimeCatalogElement(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
     $(document).ready(function(){
         $('.general-container.photo-container .photo-big-container img').click(function(){

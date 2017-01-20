@@ -43,12 +43,13 @@
                 if(that.currentColorConfig[colorValue]!=undefined)
                 {
                     if(!firstActiveButton) firstActiveButton = radioButton;
-                    radioButton.css('display','inline-block');
+                    if(colorValue!='not-set') radioButton.css('display','inline-block');
+                    else radioButton.css('display','none');
                 }
                 else radioButton.css('display','none');
             }
         );
-        firstActiveButton.trigger('click');
+        if(firstActiveButton) firstActiveButton.trigger('click');
     };
 
     window.InAnimeCatalogElement.prototype.colorClick = function(event)

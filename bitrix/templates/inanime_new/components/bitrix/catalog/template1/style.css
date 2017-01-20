@@ -15,6 +15,9 @@
     display: inline-block;
     margin: 0 10px 25px 0;
 }
+.section-catalog .items-container > div{
+    display: inline-block;
+}
 /* Mobile */
 @media (max-width: 760px) {
 
