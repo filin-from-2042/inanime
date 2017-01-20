@@ -366,7 +366,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                         );?>
                     </div>
                 <?}else{?>
-                    <?if($arResult["CAN_BUY"]){?>
+                    <?if($canBuy){?>
                         <div class="btn-group ia-btn-group" role="group">
                             <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" onclick="$('#<?=$qoModalID?>').modal()">
                                 <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>

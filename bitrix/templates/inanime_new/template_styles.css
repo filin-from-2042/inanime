@@ -1330,11 +1330,16 @@ footer .general-container{
 .product-item-preview.vertical .data-container{
     display:block;
 }
-.product-item-preview.vertical .image-container ,
 .product-item-preview.vertical .image-container .quick-order-overlay {
-    /*width:275px;*/
     width:100%;
-    /*height:200px;*/
+    height:200px;
+    border-radius:0;
+    border-top-left-radius: 8px;
+    border-top-right-radius: 8px;
+}
+.product-item-preview.vertical .image-container {
+    width:275px;
+    height:200px;
     border-radius:0;
     border-top-left-radius: 8px;
     border-top-right-radius: 8px;
@@ -2107,7 +2112,7 @@ footer .general-container{
     /******************* PRODUCT ITEM ************************/
     .product-item-preview.vertical .image-container,
     .product-item-preview.horizontal .image-container ,
-    .product-item-preview .image-container .quick-order-overlay {
+    .product-item-preview.vertical .image-container .quick-order-overlay {
         width:135px;
         height: 100px;
     }
