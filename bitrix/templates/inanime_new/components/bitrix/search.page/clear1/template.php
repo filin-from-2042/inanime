@@ -91,7 +91,7 @@
                 if($currIBLOCK_ID==0 || $currSECTION_ID==0) continue;
                 ?>
                 <?$APPLICATION->IncludeComponent(
-                "bitrix:catalog.element",
+                "inanime:catalog.element",
                 "inanime-preview-list-product",
                 Array(
                     "TEMPLATE_THEME" => "blue",

@@ -28,7 +28,7 @@ $itemCounter = 0;
             <?if($itemCounter==0):?><li><?endif?>
 
                 <?$APPLICATION->IncludeComponent(
-                    "bitrix:catalog.element",
+                    "inanime:catalog.element",
                     "inanime-preview-list-product",
                     Array(
                         "TEMPLATE_THEME" => "blue",

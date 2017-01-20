@@ -26,7 +26,7 @@ $carouselID = 'carousel-custom-horizontal-'.$arResult["ID"];
         <?foreach($arResult["ITEMS"] as $arElement):?>
             <li>
                 <?$APPLICATION->IncludeComponent(
-                    "bitrix:catalog.element",
+                    "inanime:catalog.element",
                     "inanime-preview-list-product",
                     Array(
                         "TEMPLATE_THEME" => "blue",

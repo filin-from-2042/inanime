@@ -54,7 +54,7 @@ $this->setFrameMode(true);
             $this->AddDeleteAction($arElement['ID'], $arElement['DELETE_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BCS_ELEMENT_DELETE_CONFIRM')));
             ?>
             <?$APPLICATION->IncludeComponent(
-                "bitrix:catalog.element",
+                "inanime:catalog.element",
                 "inanime-preview-list-product",
                 Array(
                     "TEMPLATE_THEME" => "blue",
