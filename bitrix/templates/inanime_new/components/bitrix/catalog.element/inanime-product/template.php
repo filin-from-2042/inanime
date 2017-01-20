@@ -156,7 +156,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
 </div>
 <div class="product-card">
     <div class="container">
-        <div class="row product-info">
+        <div class="row product-info" id="<?=$strMainID?>">
             <div class="hidden-xs col-sm-10 col-md-10 col-lg-10 photo-column">
                 <?
                     if(!empty($photoGalleryData))
