@@ -367,8 +367,8 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                             if (0 < $currOfferPrice[3])
                                             {
                                                 ?>
-                                                <span class="discount-amount">Экономия <? echo $currOfferPrice[2]; ?>% -<?=$currOfferPrice[3]?>р</span>
-                                                <span class="found-cheaper">Нашли дешевле</span>
+                                                <span class="discount-amount">Экономия <? echo $currOfferPrice[2]; ?>% -<?=$currOfferPrice[3]?> <span class="rub"></span></span>
+                                                <span class="found-cheaper">Нашли дешевле?</span>
                                             <?
                                             }
                                         }
@@ -395,8 +395,8 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                             if (0 < $arResult['MIN_PRICE']['DISCOUNT_DIFF'])
                                             {
                                                 ?>
-                                                <span class="discount-amount">Экономия <? echo $arResult['MIN_PRICE']['DISCOUNT_DIFF_PERCENT']; ?>% -<?=$minPrice['PRINT_DISCOUNT_DIFF']?>  ₽</span>
-                                                <span class="found-cheaper">Нашли дешевле</span>
+                                                <span class="discount-amount">Экономия <? echo $arResult['MIN_PRICE']['DISCOUNT_DIFF_PERCENT']; ?>% -<?=$minPrice['PRINT_DISCOUNT_DIFF']?></span>
+                                                <span class="found-cheaper">Нашли дешевле?</span>
                                             <?
                                             }
                                         }
