@@ -1,5 +1,5 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
-<div>
+
 <?$ElementID = $APPLICATION->IncludeComponent(
 	"bitrix:catalog.element",
 	"inanime-product",
@@ -80,7 +80,6 @@
 global $elementIAName;
 $APPLICATION->AddChainItem($elementIAName);
 ?>
-</div>
 
 <? $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/css/jquery.bxslider.css');?>
 <? $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.bxslider.min.js');?>
