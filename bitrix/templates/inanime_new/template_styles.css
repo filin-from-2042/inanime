@@ -1364,6 +1364,13 @@ footer .general-container{
 .product-item-preview.vertical .image-container > img {
     width:277px;
 }
+.product-item-preview.vertical .image-container .link{
+    display: inline-block;
+    width: 100%;
+    height:200px;
+    background-color: transparent;
+    position: absolute;
+}
 .product-item-preview.vertical .data-container{
     text-align:center;
 }
