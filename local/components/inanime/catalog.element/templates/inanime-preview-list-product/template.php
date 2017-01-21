@@ -5,6 +5,8 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
 ?>
 <div class="product-item-preview <?=$orientation?> product-item-preview-<?=$arResult['ID']?>" id="<?=$this->GetEditAreaId($arResult['ID']);?>">
     <div class="image-container">
+        <a href="<?=$arResult["DETAIL_PAGE_URL"]?>" class="link">
+        </a>
         <?if(array_key_exists('LAZY_LOAD', $arParams) && $arParams['LAZY_LOAD']=='Y'){?>
             <img data-original="<?=$arResult["PREVIEW_PICTURE"]["SRC"]?>"  class="lazy" />
         <?}else{?>
