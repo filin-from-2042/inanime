@@ -22,7 +22,7 @@
                 <a type="button" class="link_profile btn btn-default ia-btn text-btn yellow-btn" href="<?=$arParams['PATH_TO_REGISTER']?>?register=yes"><?=GetMessage('TSB1_REGISTER')?></a>
             </div>
             <div class="col-sm-12 col-md-14 col-lg-12 right-button-container col-xs-12 profile">
-                <a type="button" class="link_profile btn btn-default ia-btn text-btn blue-btn" href="<?=$arParams['PATH_TO_REGISTER']?>?login=yes"><?=GetMessage('TSB1_LOGIN')?></a>
+                <a type="button" class="link_profile btn btn-default ia-btn text-btn blue-btn" href="<?=$arParams['PATH_TO_REGISTER']?>?login=yes" onclick="$('#autorization-modal').modal();return false;"><?=GetMessage('TSB1_LOGIN')?></a>
             </div>
         <?endif?>
         </div>

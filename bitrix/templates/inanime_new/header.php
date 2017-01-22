@@ -256,6 +256,32 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
 
         </div>
     </div>
+    <div class="modal fade ia-modal" id="autorization-modal" tabindex="-1" role="dialog" aria-labelledby="modalAutorization">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="clearfix ">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </span>
+                    </button>
+
+                    <h4 class="modal-title">Авторизация</h4>
+                </div>
+                <div class="modal-body">
+                    <?$APPLICATION->IncludeComponent(
+                        "bitrix:system.auth.form",
+                        "template1",
+                        Array(
+                            "REGISTER_URL" => "/auth/",
+                            "REGISTER_URL" => "/auth/",
+                            "PROFILE_URL" => "/personal/profile/"
+                        )
+                    );?>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
     <?$APPLICATION->IncludeComponent("inanime:menu",
         "horizontal_multilevel1",
