@@ -282,6 +282,37 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
             </div>
         </div>
     </div>
+    <div class="modal fade ia-modal" id="registration-modal" tabindex="-1" role="dialog" aria-labelledby="modalRegistration">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="clearfix ">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </span>
+                    </button>
+
+                    <h4 class="modal-title">Регистрация</h4>
+                </div>
+                <div class="modal-body">
+                    <?$APPLICATION->IncludeComponent("bitrix:main.register","template1",Array(
+                            "USER_PROPERTY_NAME" => "",
+                            "SEF_MODE" => "Y",
+                            "SHOW_FIELDS" => Array(),
+                            "REQUIRED_FIELDS" => Array(),
+                            "AUTH" => "Y",
+                            "USE_BACKURL" => "Y",
+                            "SUCCESS_PAGE" => "",
+                            "SET_TITLE" => "Y",
+                            "USER_PROPERTY" => Array(),
+                            "SEF_FOLDER" => "/",
+                            "VARIABLE_ALIASES" => Array()
+                        )
+                    );?>
+                </div>
+            </div>
+        </div>
+    </div>
 </header>
     <?$APPLICATION->IncludeComponent("inanime:menu",
         "horizontal_multilevel1",

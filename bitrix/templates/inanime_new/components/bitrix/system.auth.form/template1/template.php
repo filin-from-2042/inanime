@@ -1,6 +1,6 @@
 
 <?
-if (strlen($_POST['ajax_key']) && $_POST['ajax_key']==md5('ajax_'.LICENSE_KEY)) {
+if (strlen($_POST['ajax_key']) && $_POST['ajax_key']==md5('ajax_'.LICENSE_KEY) && $_POST['typeAction']=='authentification') {
     $APPLICATION->RestartBuffer();
     if (!defined('PUBLIC_AJAX_MODE')) {
         define('PUBLIC_AJAX_MODE', true);
@@ -29,6 +29,9 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
 ?>
 <?if($arResult["FORM_TYPE"] == "login"){?>
     <form name="system_auth_form<?=$arResult["RND"]?>" method="post" target="_top" action="<?=$arResult["AUTH_URL"]?>" id="login-area">
+
+        <input type="hidden" name="typeAction" value="authentification" />
+
         <?if($arResult["BACKURL"] <> ''):?>
             <input type="hidden" name="backurl" value="<?=$arResult["BACKURL"]?>" />
         <?endif?>
@@ -55,11 +58,10 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
         </div>
         <div class="row registration-social">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 registration-column">
-                <div class="autorization-btn-container">
-                    <noindex><a class="autorization-btn brown-dotted-text" href="<?=$arResult["AUTH_REGISTER_URL"]?>" rel="nofollow">Регистрация</a></noindex>
+                <div class="autorization-btn-container" >
+                    <span class="autorization-btn brown-dotted-text">Регистрация</span>
                 </div>
             </div>
-
             <?if($arResult["AUTH_SERVICES"]):?>
                 <?
                 $APPLICATION->IncludeComponent("bitrix:socserv.auth.form", "flat1",
@@ -76,12 +78,18 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
         </div>
         <div class="button-container">
             <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="Login" value="<?=GetMessage("AUTH_LOGIN_BUTTON")?>">
-                <span>Отправить</span>
+                <span>Войти</span>
             </button>
         </div>
         <script type="text/javascript">
             $(document).on('ready', function(){
-                $('#login-area .registration-social').click(function(){ $(this).closest('.ia-modal').modal('toggle')});
+                $('#login-area .registration-social').click(function(){ $("#autorization-modal").modal('hide');});
+
+                $('#login-area .autorization-btn').click(function(){
+                    $("#autorization-modal").modal('hide');
+                    $("#registration-modal").modal('show');
+                });
+
                 $('#login-area').submit(function(){
                     var $this = $(this);
                     var $form = {

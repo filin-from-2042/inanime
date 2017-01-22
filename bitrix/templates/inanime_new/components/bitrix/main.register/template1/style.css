@@ -1,0 +1,40 @@
+div.bx-auth-reg input.bx-auth-input {vertical-align:middle;}
+div.bx-auth-reg span.bx-auth-secure {background-color:#FFFAE3; border:1px solid #DEDBC8; padding:2px; display:inline-block; vertical-align:middle;}
+div.bx-auth-reg div.bx-auth-secure-icon {background-image:url(images/sec.png); background-repeat:no-repeat; background-position:center; width:19px; height:18px;}
+div.bx-auth-reg div.bx-auth-secure-unlock {background-image:url(images/sec-unlocked.png);}
+
+
+/********** REGISTRATION ************/
+#registration-modal .row.autoriazation-social {
+
+}
+#registration-modal .row.captcha-input-image {
+    padding-top: 10px;
+}
+#registration-modal .captcha-image-column {
+    padding-left: 5px;
+}
+#registration-modal .captcha-input-column {
+    padding-right: 0;
+}
+#registration-modal .captcha-input-column .input-container{
+    text-align: right;
+    padding-right: 10px;
+}
+#registration-modal .captcha-input-column .captcha-symbols-input {
+    width: 138px;
+    display: inline-block;
+}
+#registration-modal .captcha-image-column .captcha {
+    width:187px;
+    height:32px;
+}
+#registration-modal .autorization-column,
+#registration-modal .social-column,
+#autorization-modal .registration-column,
+#autorization-modal .social-column{
+    text-align:center;
+}
+#registration-modal .autorization-social {
+    margin-top:40px;
+}
