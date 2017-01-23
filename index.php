@@ -105,6 +105,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
         false,
         Array('HIDE_ICONS' => 'Y')
     );?>
+    <hr>
 </div>
 <div class="container">
 <div class="row sections-carousel">

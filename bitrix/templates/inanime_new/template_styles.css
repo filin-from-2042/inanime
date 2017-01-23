@@ -1019,10 +1019,11 @@ nav.navigation .contacts{
     font-weight: bold;
     font-size: 23px;
     letter-spacing: -0.4px;
-    background: url(images/phone.png) no-repeat #fff;
+    background: url(images/phone.png) no-repeat #fff 0% 50%;
     padding-left: 31px;
     display: inline-block;
-    height: 24px;
+    /*height: 24px;*/
+    height: 35px;
 }
 header .social-container{
     margin-left: -13px;
@@ -1052,6 +1053,14 @@ header .text-btn.yellow-btn.location-btn{
 
 header .text-btn.blue-btn{
     min-width: 80px;
+}
+
+header .cart-container .btn{
+    height: 54px;
+}
+header .cart-container .btn.yellow-btn .icon.cart-icon{
+    margin-top: -1px;
+    margin-left: -1px;
 }
 header .cart-container .text-container{
     display: inline-block;
@@ -1254,6 +1263,10 @@ footer .general-container{
 }
 .row.articles-links{
     margin-top:25px;
+}
+.row.articles-links + hr{
+    border-top: 2px solid #eee;
+    margin-right: -7px;
 }
 .row.articles-links > div {
     /*padding-left: 10px;*/
@@ -1531,7 +1544,8 @@ footer .general-container{
 }
 
 .sections-carousel{
-    margin-top: 50px;
+    /*margin-top: 50px;*/
+    margin-top: 7px;
     position: relative;
     margin-bottom: 34px;
 }
@@ -1556,6 +1570,7 @@ footer .general-container{
     text-transform: uppercase;
     font-weight: bold;
     margin-bottom: 29px;
+    padding-left: 20px;
 }
 .sections-carousel .column{
     padding: 0;
@@ -2871,6 +2886,12 @@ footer .general-container{
         margin-top: -92px;
     }
 
+    header .cart-container .btn {
+        height: 49px;
+    }
+    header .cart-container .fa-long-arrow-right {
+        padding: 0px ;
+    }
 }
 /* (desktops, 992px and up) */
 @media (min-width: 992px) {
