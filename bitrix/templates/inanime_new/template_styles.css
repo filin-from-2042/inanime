@@ -15,6 +15,9 @@ body{
     border-radius: 10px;
 }
 /* BUTTONS */
+.btn:focus{
+    outline: none !important;
+}
 .ia-btn{
     border-radius: 7px;
     color: #fff;
@@ -1031,7 +1034,7 @@ header .user-controls-container{
     padding-left: 20px;
 }
 header .user-controls-container .text-btn.blue-btn{
-    margin-left: 7px;
+    /*margin-left: 7px;*/
 }
 header .text-btn.blue-btn,
 header .text-btn.yellow-btn{
@@ -1176,6 +1179,10 @@ footer .general-container{
 .content .main-carousel{
     padding-top: 20px;
 }
+.content .main-carousel .general-banner-column{
+    /*width: 77%;*/
+    padding-right: 10px;
+}
 .content .bx-advertisingbanner-content{
     max-width: 390px !important;
 }
@@ -1186,7 +1193,7 @@ footer .general-container{
 .carousel-custom{
     overflow:hidden;
     z-index:100;
-    height:380px;
+    height:382px;
 }
 .carousel-custom,
 .carousel-custom .button{
@@ -1221,16 +1228,20 @@ footer .general-container{
 }
 .carousel-custom ul li{
     list-style:none;
-    text-align: center;
-    padding:0 0 10px 0;
+    /*text-align: center;*/
+    text-align: left;
+    /*padding:0 0 10px 0;*/
+    padding:0 0 20px 0;
     position:relative;
 }
 .carousel-custom ul li img{
-    height:180px;
+    /*height:180px;*/
+    height:181px;
 }
 .carousel-custom li .text{
     position: absolute;
     top: 42%;
+    /*bottom:10px;*/
     left: 0;
     color: #fff;
     background: rgba(0,0,0,0.5);
@@ -1242,14 +1253,19 @@ footer .general-container{
     text-align: left;
 }
 .row.articles-links{
-    margin-top:20px;
+    margin-top:25px;
 }
 .row.articles-links > div {
-    padding-left: 10px;
+    /*padding-left: 10px;*/
+    padding-left: 15px;
+}
+.row.articles-links > div:nth-child(n+2) {
+    /*padding-left: 30px;*/
 }
 .row.articles-links .article-container{
     display:inline-block;
-    width:280px;
+    /*width:280px;*/
+    width:285px;
     text-align: left;
     overflow: hidden;
     padding:0 15px 0 100px;
@@ -1364,7 +1380,7 @@ footer .general-container{
 .product-item-preview.vertical .image-container > img {
     width:277px;
 }
-.product-item-preview.vertical .image-container .link{
+.product-item-preview .image-container .link{
     display: inline-block;
     width: 100%;
     height:200px;
@@ -2102,6 +2118,9 @@ footer .general-container{
     footer {
         padding-top: 16px;
     }
+    .content .main-carousel .general-banner-column{
+        width: 100%;
+    }
     .mobile-collapsed{
         display:none;
     }
@@ -2547,10 +2566,12 @@ footer .general-container{
     }
 
     .carousel-custom ul li img{
-        height:110px;
+        /*height:110px;*/
+        height:111px;
     }
     .carousel-custom{
-        height:230px;
+        /*height:230px;*/
+        height:232px;
     }
     .carousel-custom,
     .carousel-custom .prev,
@@ -2893,10 +2914,15 @@ footer .general-container{
         left: 238px;
     }
     .carousel-custom ul li img{
-        height:140px;
+        /*height:140px;*/
+        height:148px;
     }
     .carousel-custom{
-        height:295px;
+        /*height:295px;*/
+        height:305px;
+    }
+    .row.articles-links > div:nth-child(n+2) {
+        /*padding-left: 24px;*/
     }
     .carousel-custom,
     .carousel-custom .prev,
@@ -2933,6 +2959,10 @@ footer .general-container{
     /****************** PERSONAL - PROFILE *********************/
     .section-personal .menu-container {
         width: 100%;
+    }
+
+    .content .main-carousel .general-banner-column {
+        padding-right: 0;
     }
 
 }

@@ -4,9 +4,17 @@ $APPLICATION->SetPageProperty("description", "Мы предлагаем широ
 $APPLICATION->SetPageProperty("keywords", "аниме одежда, аниме берелоки, кулоны");
 $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксессуаров\"");
 ?>
+<style>
+    @media (min-width: 1230px){
+    .container{
+        padding: 0;
+    }
+    }
+
+</style>
 <div class="container">
     <div class="row main-carousel">
-        <div class="col-xs-24 col-sm-18 col-md-18 col-lg-18">
+        <div class="col-xs-24 col-sm-18 col-md-18 col-lg-18 general-banner-column">
             <?if (IsModuleInstalled("advertising")):?>
                 <? $APPLICATION->IncludeComponent(
                     "bitrix:advertising.banner",
@@ -35,7 +43,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
                 );?>
             <?endif?>
         </div>
-        <div class="col-sm-6 col-md-6 col-lg-6">
+        <div class="col-sm-6 col-md-6 col-lg-6 custom-carousel-column">
             <script>
                 $(document).ready(function(){
                     inanime_new.init_custom_vertical_carousel('carousel-custom-vertical',2);
@@ -67,7 +75,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
                     $counter = 0;
                     foreach ($arSlides as $slide) {
                         $counter++;
-                        $previewText = (strlen($slide["PREVIEW_TEXT"]) > 83) ? substr($slide["PREVIEW_TEXT"], 0, 60) . '...' : $slide["PREVIEW_TEXT"];
+                        $previewText = (strlen($slide["PREVIEW_TEXT"]) > 83) ? substr($slide["PREVIEW_TEXT"], 0, 40) . '...' : $slide["PREVIEW_TEXT"];
                         $nameText = (strlen($slide["NAME"]) > 43) ? substr($slide["NAME"], 0, 40) . '...' : $slide["NAME"];
                         ?>
                         <li>
