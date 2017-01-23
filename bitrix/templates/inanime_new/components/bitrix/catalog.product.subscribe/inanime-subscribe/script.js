@@ -131,7 +131,8 @@
                     this.elemPopupWin.setContent(form);
                     this.elemPopupWin.setButtons([
                         new subscribeButton({
-                            text: BX.message('CPST_SUBSCRIBE_BUTTON_NAME'),
+                            //text: BX.message('CPST_SUBSCRIBE_BUTTON_NAME'),
+                            text: 'Уведомить',
                             className : 'btn btn-primary',
                             events: {
                                 click : BX.delegate(function() {
