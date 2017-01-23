@@ -928,8 +928,8 @@ span.rub:before{
 .short-products-carousel{
     position: relative;
     overflow: hidden;
-    /*margin-left: -25px;
-    padding-left: 25px;*/
+    margin-left: -15px;
+    padding-left: 15px;
     display: inline-block;
 }
 .short-products-carousel ul{

@@ -72,10 +72,3 @@
         ?>
     </div>
 </div>
-<div class="row">
-    <?$APPLICATION->IncludeFile(
-        $APPLICATION->GetTemplatePath("include_areas/qualities.php"),
-        Array(),
-        Array("MODE"=>"html")
-    );?>
-</div>

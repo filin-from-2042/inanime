@@ -50,9 +50,6 @@
 <?// ЛИДЕРЫ ПРОДАЖ
 if(CModule::IncludeModule("iblock") && CModule::IncludeModule("catalog"))
 {
-
-     $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/css/jquery.bxslider.css');
-     $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.bxslider.min.js');
     $productIds = array();
     $productIterator = CSaleProduct::GetBestSellerList(
         'AMOUNT',
@@ -62,11 +59,7 @@ if(CModule::IncludeModule("iblock") && CModule::IncludeModule("catalog"))
     );
     while($product = $productIterator->fetch())
     {
-        /*
-         * $db_old_groups = CIBlockElement::GetElementGroups($product['PRODUCT_ID'], true);
-            while($ar_group = $db_old_groups->Fetch())
-                var_dump($ar_group["ID"]);
-         * */
+        // если торговое предложение, то сперва найти ид товара
         if(CIBlockElement::GetIBlockByID((int)$product['PRODUCT_ID'])==20)
         {
             $mxResult = CCatalogSku::GetProductInfo((int)$product['PRODUCT_ID']);
@@ -76,10 +69,27 @@ if(CModule::IncludeModule("iblock") && CModule::IncludeModule("catalog"))
             }
         } else $productIds[] = $product['PRODUCT_ID'];
     }
+    // ФИЛЬТРАЦИЯ ТОВАРОВ НЕ ИЗ ТЕКУЩЕЙ ИЛИ ВЛОЖЕННЫХ КАТЕГОРИЙ
+    foreach($productIds as $key => $productID)
+    {
+        $productGroups =  array();
+        $db_old_groups = CIBlockElement::GetByID($productID);
+        while($ar_group = $db_old_groups->Fetch())
+        {
+            $nav = CIBlockSection::GetNavChain(false, $ar_group['IBLOCK_SECTION_ID']);
+            while($sect = $nav->Fetch()){
+                $productGroups[]= $sect['ID'];
+            }
+        }
+        if(!in_array($catalog_section_id, $productGroups)) unset($productIds[$key]);
+    }
 
     $carouselID = 'short-list-carousel-'.$ElementID;
     if(count($productIds)>0)
-    {?>
+    {
+        $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/css/jquery.bxslider.css');
+        $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.bxslider.min.js');
+        ?>
     <div class="section-bestseller">
         <div class="short-list-carousel-row">
             <div class="container">
@@ -217,6 +227,14 @@ if(CModule::IncludeModule("iblock") && CModule::IncludeModule("catalog"))
 ?>
 
 <div class="container">
+    <?if($arResult["VARIABLES"]["SECTION_CODE"]=="kategorii" || $arResult["VARIABLES"]["SECTION_CODE"]=="po-filmam-igram")
+    {?>
+        <?$APPLICATION->IncludeFile(
+            $APPLICATION->GetTemplatePath("include_areas/qualities.php"),
+            Array(),
+            Array("MODE"=>"html")
+        );?>
+    <?}?>
     <div class="row section-description">
         <div class="text">
             <?
