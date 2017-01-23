@@ -1,0 +1,81 @@
+div.bx-auth input.bx-auth-input {vertical-align:middle;}
+div.bx-auth span.bx-auth-secure {background-color:#FFFAE3; border:1px solid #DEDBC8; padding:2px; display:inline-block; vertical-align:middle;}
+div.bx-auth div.bx-auth-secure-icon {background-image:url(images/sec.png); background-repeat:no-repeat; background-position:center; width:19px; height:18px;}
+div.bx-auth div.bx-auth-secure-unlock {background-image:url(images/sec-unlocked.png);}
+
+.changepasswd-container{
+    text-align: center;
+}
+.changepasswd-container .row{
+    padding: 10px;
+}
+.changepasswd-container .row .submit-btn{
+    padding: 10px 47px;
+    font-size: 14px;
+}
+
+.bx-breadcrumb {
+    margin: 10px 0;
+    color:#79828b;
+    text-align: center;
+}
+.bx-breadcrumb i {
+    line-height: 13px;
+    font-size: 12px;
+    vertical-align: middle;
+    margin-right: 5px;
+}
+.bx-breadcrumb .bx-breadcrumb-item {
+    /*float: left;*/
+    display: inline-block;
+    margin-bottom: 10px;
+    white-space: nowrap;
+    line-height: 13px;
+    vertical-align: middle;
+    /*margin-right: 10px;*/
+}
+.bx-breadcrumb .bx-breadcrumb-item span {
+    font-family: "Open Sans", Arial, "Helvetica Neue", Helvetica, sans-serif;
+    font-size: 11px;
+}
+.bx-breadcrumb .bx-breadcrumb-item a {
+    color:#79828b;
+    border-bottom: none;
+}
+.bx-breadcrumb .bx-breadcrumb-item a:hover {
+    color:#79828b;
+}
+
+
+
+/* Mobile */
+@media (max-width: 760px) {
+    .changepasswd-container .row .submit-btn{
+        padding: 10px 47px;
+        font-size: 14px;
+    }
+    .changepasswd-container .row .form-control{
+        width: 100%;
+    }
+}
+/* Tablet */
+@media (min-width: 760px) and (max-width:992px) {
+    .changepasswd-container .row .submit-btn{
+        padding: 10px 47px;
+        font-size: 14px;
+    }
+}
+
+@media (min-width: 992px) and (max-width: 1230px){
+    .changepasswd-container .row .submit-btn{
+        padding: 10px 47px;
+        font-size: 14px;
+    }
+}
+/* Large devices (large desktops, 1200px and up) */
+@media (min-width: 1230px){
+    .changepasswd-container .row .submit-btn{
+        padding: 10px 47px;
+        font-size: 14px;
+    }
+}
