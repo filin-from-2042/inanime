@@ -54,7 +54,7 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
             </div>
         </div>
         <div class="reset-link-container">
-            <noindex><a href="<?=$arResult["AUTH_FORGOT_PASSWORD_URL"]?>" rel="nofollow" class="yellow-text-underline reset-link">Забыли пароль?</a></noindex>
+            <span class="yellow-text-underline reset-link">Забыли пароль?</span>
         </div>
         <div class="row registration-social">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 registration-column">
@@ -88,6 +88,11 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
                 $('#login-area .autorization-btn').click(function(){
                     $("#autorization-modal").modal('hide');
                     $("#registration-modal").modal('show');
+                });
+
+                $('#login-area .reset-link').click(function(){
+                    $("#autorization-modal").modal('hide');
+                    $("#password-reset-modal").modal('show');
                 });
 
                 $('#login-area').submit(function(){
