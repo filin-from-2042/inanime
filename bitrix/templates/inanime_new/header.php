@@ -42,7 +42,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
             <div class="hidden-xs hidden-sm col-md-10 col-lg-11 container">
                 <!-- contacts -->
                 <div class="row">
-                    <div class="col-md-17 col-lg-17">
+                    <div class="col-md-24 col-lg-17">
                         <?$APPLICATION->IncludeFile(
                             $APPLICATION->GetTemplatePath("include_areas/contacts.php"),
                             Array(),
@@ -50,7 +50,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                         );?>
 
                     </div>
-                    <div class="col-md-7 col-lg-7">
+                    <div class="hidden-md col-lg-7">
                         <?$APPLICATION->IncludeFile(
                             $APPLICATION->GetTemplatePath("include_areas/socials-buttons.php"),
                             Array(),
@@ -199,7 +199,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                                     false
                                 );?>
                             </div>
-                            <div class="col-sm-12">
+                            <div class="col-sm-12 search-button-column">
 
                                 <?$APPLICATION->IncludeComponent(
                                     "bitrix:search.form",

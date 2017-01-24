@@ -11,7 +11,7 @@
             if (strlen($name) > 15)
                 $name = substr($name, 0, 12).'...';
             ?>
-            <div class="col-sm-12 col-md-14 col-lg-12 left-button-container col-xs-12 registration-container">
+            <div class="col-sm-12 col-md-12 col-lg-11 left-button-container col-xs-12 registration-container">
                 <a type="button" class="link_profile btn btn-default ia-btn text-btn blue-btn" href="<?=$arParams['PATH_TO_PROFILE']?>"><?=$name?></a>
             </div>
             <div class="col-sm-12 col-md-10 col-lg-11 right-button-container  col-xs-12 profile">

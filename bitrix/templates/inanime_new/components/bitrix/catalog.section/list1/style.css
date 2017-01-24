@@ -18,10 +18,12 @@
 .carousel-products ul li{
     /*display: inline-block;*/
     float: left;
-    padding-right: 15px;
+    /*padding-right: 15px;*/
+    padding-right: 20px;
 }
 .carousel-products .title-container{
-    padding: 6px 17px;
+    /*padding: 6px 17px;*/
+    padding: 6px 21px 6px 22px;
     border-radius: 10px;
 }
 .carousel-products .title-container .title{
@@ -35,17 +37,28 @@
 .carousel-products .title-container .title a:focus{
     color:#333;
     text-decoration: none;
+    cursor: pointer;
 }
 .carousel-products .title-container .button{
     float: right;
     color:#68422e;
     cursor: pointer;
+    padding-top: 4px;
 }
 .carousel-products .title-container .button.prev{
     margin-right: 15px;
 }
 .carousel-products .title-container .button i{
     line-height: 38px;
-    font-size: 16px;
+    font-size: 18px;
     font-weight: bold;
+}
+
+/* Tablet */
+@media (min-width: 760px) and (max-width:992px) {
+
+    .carousel-products ul li{
+        padding-right: 15px;
+        /*padding-right: 20px;*/
+    }
 }

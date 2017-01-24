@@ -10,7 +10,7 @@
             </a>
         </div>
         <div class="new-content">
-            <?=$arItem["PREVIEW_TEXT"];?>
+            <?=substr($arItem["PREVIEW_TEXT"], 0, 240). '...'?>
         </div>
     </div>
     <?endforeach;?>

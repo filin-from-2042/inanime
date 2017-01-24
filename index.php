@@ -61,7 +61,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
             while ($ob = $res->GetNextElement()) {
                 $arFields = $ob->GetFields();
 
-                $arFields["file"] = CFile::ResizeImageGet(($arFields["PROPERTY_MAIN_SLIDER_PHOTO_VALUE"])?$arFields["PROPERTY_MAIN_SLIDER_PHOTO_VALUE"] : (($arFields["DETAIL_PICTURE"]) ? $arFields["DETAIL_PICTURE"] : $arFields["PREVIEW_PICTURE"]), array('width' => '1800', 'height' => '1000'), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+                $arFields["file"] = CFile::ResizeImageGet(($arFields["PROPERTY_MAIN_SLIDER_PHOTO_VALUE"])?$arFields["PROPERTY_MAIN_SLIDER_PHOTO_VALUE"] : (($arFields["PREVIEW_PICTURE"]) ? $arFields["PREVIEW_PICTURE"] :$arFields["DETAIL_PICTURE"] ), array('width' => '1800', 'height' => '1000'), BX_RESIZE_IMAGE_PROPORTIONAL, true);
 
                 $arSlides[] = $arFields;
             }
@@ -90,6 +90,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
                 </div>
             <? } ?>
         </div>
+        <div class="carousel-icon-hearts"></div>
     </div>
 </div>
 <div class="container">
@@ -126,9 +127,9 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
                         0 => "",
                         1 => "",
                     ),
-                    "ELEMENT_SORT_FIELD" => "sort",	// По какому полю сортируем элементы
+                    "ELEMENT_SORT_FIELD" => "active_from",	// По какому полю сортируем элементы
                     "ELEMENT_SORT_ORDER" => "desc",	// Порядок сортировки элементов
-                    "ELEMENT_SORT_FIELD2" => "id",	// Поле для второй сортировки элементов
+                    "ELEMENT_SORT_FIELD2" => "sort",	// Поле для второй сортировки элементов
                     "ELEMENT_SORT_ORDER2" => "desc",	// Порядок второй сортировки элементов
                     "FILTER_NAME" => "arrFilter",	// Имя массива со значениями фильтра для фильтрации элементов
                     "INCLUDE_SUBSECTIONS" => "Y",	// Показывать элементы подразделов раздела
@@ -247,9 +248,9 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
                         0 => "",
                         1 => "",
                     ),
-                    "ELEMENT_SORT_FIELD" => "sort",	// По какому полю сортируем элементы
+                    "ELEMENT_SORT_FIELD" => "active_from",	// По какому полю сортируем элементы
                     "ELEMENT_SORT_ORDER" => "desc",	// Порядок сортировки элементов
-                    "ELEMENT_SORT_FIELD2" => "id",	// Поле для второй сортировки элементов
+                    "ELEMENT_SORT_FIELD2" => "sort",	// Поле для второй сортировки элементов
                     "ELEMENT_SORT_ORDER2" => "desc",	// Порядок второй сортировки элементов
                     "FILTER_NAME" => "arrFilter",	// Имя массива со значениями фильтра для фильтрации элементов
                     "INCLUDE_SUBSECTIONS" => "Y",	// Показывать элементы подразделов раздела
@@ -356,7 +357,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
             );?>
         </div>
     </div>
-    <div class="col-xs-24 col-sm-24 col-md-18 col-md-offset-3 col-lg-offset-0 col-lg-6 column">
+    <div class="col-xs-24 col-sm-24 col-md-18 col-md-offset-3 col-lg-offset-0 col-lg-6 column vertical-column">
         <div class="col-xs-24 col-sm-12 col-md-12 col-lg-24">
             <div class="carousel-container ">
                 <?$APPLICATION->IncludeComponent(
@@ -374,9 +375,9 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
 			0 => "",
 			1 => "",
 		),
-		"ELEMENT_SORT_FIELD" => "sort",
+		"ELEMENT_SORT_FIELD" => "active_from",
 		"ELEMENT_SORT_ORDER" => "desc",
-		"ELEMENT_SORT_FIELD2" => "id",
+		"ELEMENT_SORT_FIELD2" => "sort",
 		"ELEMENT_SORT_ORDER2" => "desc",
 		"FILTER_NAME" => "arrFilter",
 		"INCLUDE_SUBSECTIONS" => "Y",
@@ -501,9 +502,9 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
 			0 => "",
 			1 => "",
 		),
-		"ELEMENT_SORT_FIELD" => "sort",
+		"ELEMENT_SORT_FIELD" => "active_from",
 		"ELEMENT_SORT_ORDER" => "desc",
-		"ELEMENT_SORT_FIELD2" => "id",
+		"ELEMENT_SORT_FIELD2" => "sort",
 		"ELEMENT_SORT_ORDER2" => "desc",
 		"FILTER_NAME" => "arrFilter",
 		"INCLUDE_SUBSECTIONS" => "Y",
@@ -789,7 +790,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
 
 <div class="container">
     <div class="row section-reviews-news">
-        <div class="col-xs-24 col-sm-24 col-md-18 col-lg-18 reviews-list">
+        <div class="col-xs-24 col-sm-24 col-md-18 col-lg-18 reviews-list main">
             <div class="hidden-xs reveiew-icon-fox"></div>
             <div class="title-container clearfix">
                 <div class="btn btn-default ia-btn text-btn blue-dark-btn view-all-btn"><a href="/reviews">Все обзоры</a></div>

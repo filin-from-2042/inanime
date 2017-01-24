@@ -1083,6 +1083,7 @@ header .cart-container{
 /******************************** FOOTER **************************************/
 footer{
     padding-top: 35px;
+    margin-bottom: 40px;
 }
 footer .about .row{
     padding-left: 18px;
@@ -1137,7 +1138,13 @@ footer .join .social-container{
 footer .general-container{
     background-image: url(images/hare-footer.png);
     background-repeat: no-repeat;
-    background-position: 97% 76%;
+    background-position: 99% 70%;
+}
+footer hr{
+    margin-top: 22px;
+    margin-bottom: 3px;
+    margin-left: -11px;
+    border-top: 2px solid #eee;
 }
 
 /******************************* 404 ******************************************/
@@ -1266,7 +1273,7 @@ footer .general-container{
 }
 .row.articles-links + hr{
     border-top: 2px solid #eee;
-    margin-right: -7px;
+    /*margin-right: -7px;*/
 }
 .row.articles-links > div {
     /*padding-left: 10px;*/
@@ -1435,7 +1442,8 @@ footer .general-container{
     border-bottom-left-radius: 8px;
 }
 .product-item-preview.horizontal .data-container {
-    width:159px;
+    /*width:159px;*/
+    width:164px;
 }
 .product-item-preview.horizontal .data-container {
     padding: 30px 5px 5px 15px;
@@ -1517,6 +1525,9 @@ footer .general-container{
     width: 170px;
     text-align: left;
 }
+.product-item-preview.horizontal .week-good-icon {
+    display: none;
+}
 .product-item-preview .week-good-icon span{
     display: inline-block;
 }
@@ -1569,14 +1580,21 @@ footer .general-container{
     font-size: 21px;
     text-transform: uppercase;
     font-weight: bold;
-    margin-bottom: 29px;
+    /*margin-bottom: 29px;*/
+    margin-bottom: 25px;
     padding-left: 20px;
 }
 .sections-carousel .column{
     padding: 0;
 }
 .sections-carousel .carousel-container{
-    margin-bottom: 25px;
+    margin-bottom: 22px;
+}
+.sections-carousel .vertical-column .carousel-container{
+    margin-bottom: 24px;
+}
+.sections-carousel .vertical-column{
+    margin-left: -5px;
 }
 #fox-icon-bottom{
     position: absolute;
@@ -1613,6 +1631,16 @@ footer .general-container{
     position: absolute;
     margin-left: 260px;
     margin-top: 25px;
+    z-index: 100;
+}
+.main-carousel .carousel-icon-hearts{
+    display: none;
+    background: url(images/sections-banner-heart.png) no-repeat;
+    width: 85px;
+    height: 115px;
+    position: absolute;
+    margin-left: -72px;
+    margin-top: 311px;
     z-index: 100;
 }
 .section-reviews-news .reviews-list{
@@ -2531,7 +2559,8 @@ footer .general-container{
     }
     header .contacts-container{
         text-align: right;
-        padding:0 8px 10px 0;
+        /*padding:0 8px 10px 0;*/
+        padding:0 8px 2px 0;
     }
     header .contacts-container .contacts{
         letter-spacing: -1.4px;
@@ -2569,6 +2598,9 @@ footer .general-container{
     }
     header .search-button-container{
         padding-top: 5px;
+    }
+    header .search-button-container .search-button-column{
+        padding-left: 8px;
     }
 
     footer {
@@ -2892,6 +2924,10 @@ footer .general-container{
     header .cart-container .fa-long-arrow-right {
         padding: 0px ;
     }
+
+    .product-item-preview .week-good-icon-container {
+        top: 130px;
+    }
 }
 /* (desktops, 992px and up) */
 @media (min-width: 992px) {
@@ -2901,9 +2937,7 @@ footer .general-container{
     .text-btn.blue-btn{
         padding:6px 30px;
     }
-    header .right-button-container{
 
-    }
     header .left-button-container{
 
     }
@@ -2986,6 +3020,11 @@ footer .general-container{
         padding-right: 0;
     }
 
+    .product-item-preview.horizontal .data-container {
+        width:159px;
+        /*width:164px;*/
+    }
+
 }
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1230px){
@@ -3004,6 +3043,92 @@ footer .general-container{
     .section-reviews-news .reveiew-icon-hearts{
         display: inline-block;
     }
+
+    .row.articles-links > div:nth-child(2){
+        padding-left: 11px;
+    }
+    .row.articles-links > div:nth-child(3){
+        padding-left: 6px;
+    }
+    .row.articles-links > div:nth-child(3) .article-container{
+        width: 290px;
+    }
+    .row.articles-links > div:nth-child(4){
+        padding-left: 7px;
+    }
+    .content .main-carousel .custom-carousel-column{
+        padding-left: 7px;
+    }
+    .sections-carousel {
+        margin-bottom: 28px;
+    }
+    .sections-carousel .fox-icon.bottom {
+        bottom: -28px;
+        right: -75px;
+    }
+
+    .short-products-carousel .product-item-preview.vertical .image-container {
+        width: 285px;
+    }
+    .short-products-carousel .product-item-preview.vertical .image-container > img{
+        width: 287px;
+    }
+    .short-list-carousel-row {
+        padding-bottom: 50px;
+    }
+    .section-reviews-news {
+        padding-top: 32px;
+        padding-bottom: 27px;
+    }
+    .main .reviews-list-container {
+        margin-top: 25px;
+    }
+    .main .reviews-list .title-container h2 {
+        padding-top: 5px;
+        padding-left: 17px;
+    }
+    .main .reviews-list-container {
+        padding-left: 14px;
+    }
+    .section-reviews-news .reveiew-icon-fox {
+        margin-top: 130px;
+        margin-left: -63px;
+    }
+    .section-reviews-news .news {
+        margin-left: -10px;
+        padding-right: 7px;
+    }
+    .news-list .title-container h2 {
+        padding-top: 4px;
+    }
+    .news-list .title-container {
+        margin-bottom: 25px;
+    }
+    .main-carousel .carousel-icon-hearts{
+        display: block;
+    }
+
+    header .right-button-container{
+        padding-left: 3px;
+    }
+    .carousel-custom ul li img{
+        height:183px;
+    }
+    .carousel-custom, .carousel-custom .button {
+        width: 284px;
+    }
+    .new-container .new-content {
+        height: 118px;
+        overflow: hidden;
+    }
+    .new-container .new-title .title {
+        height: 66px;
+        overflow: hidden;
+    }
+    .first-section .carousel-products .title-container {
+        margin-right: 5px;
+    }
+
 }
 @media (min-width: 1400px){
     .sections-carousel .fox-icon.bottom{
