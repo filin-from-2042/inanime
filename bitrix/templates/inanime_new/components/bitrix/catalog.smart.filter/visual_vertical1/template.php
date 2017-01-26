@@ -123,7 +123,7 @@ $templateData = array(
 
 			//not prices
 			foreach($arResult["ITEMS"] as $key=>$arItem)
-			{
+			{//var_dump($arItem);
 				if(
 					empty($arItem["VALUES"])
 					|| isset($arItem["PRICE"])
@@ -140,7 +140,7 @@ $templateData = array(
 				?>
 				<div class="bx_filter_parameters_box  <?if ($arItem["DISPLAY_EXPANDED"]== "Y"):?>active<?endif?>">
 					<span class="bx_filter_container_modef"></span>
-					<div class="bx_filter_parameters_box_title"><?=$arItem["NAME"]?></div>
+					<div class="bx_filter_parameters_box_title"><?=($arItem["CODE"]=='BRAND_REF1')?'Тайтл':$arItem["NAME"]?></div>
 					<div class="bx_filter_block">
 						<div class="bx_filter_parameters_box_container">
 						<?
@@ -527,6 +527,33 @@ $templateData = array(
 			<?
 			}
 			?>
+
+            <?// в наличии?>
+            <div class="bx_filter_parameters_box active">
+                <?/*?>
+                <span class="bx_filter_container_modef"></span>
+                <div class="bx_filter_parameters_box_title">В наличии</div>
+                <?*/?>
+                <div class="bx_filter_block">
+                    <div class="bx_filter_parameters_box_container">
+                        <?$inStockID = 'in-stock-checkbox-filter';?>
+                        <label data-role="label_<?=$inStockID?>" class="bx_filter_param_label" for="<? echo $inStockID?>">
+										<span class="bx_filter_input_checkbox ia-checkbox">
+											<input
+                                                type="checkbox"
+                                                value="Да"
+                                                name="<? echo $inStockID.'-code' ?>"
+                                                id="<?=$inStockID ?>"
+                                                onclick="inanime_new.changeViewHandler()"
+                                                />
+                                            <label for="<?=$inStockID ?>" >В наличии</label>
+										</span>
+                        </label>
+
+                    </div>
+                    <div class="clb"></div>
+                </div>
+            </div>
 		</form>
 		<div style="clear: both;"></div>
 	</div>

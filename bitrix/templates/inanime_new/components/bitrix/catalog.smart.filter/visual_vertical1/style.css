@@ -20,7 +20,7 @@
 /*bx_filter_container => bx_filter_parameters_box*/
 .bx_filter .bx_filter_button_box,
 .bx_filter .bx_filter_parameters_box{
-	margin-bottom:20px;
+	margin-bottom:22px;
 	padding:0 6px;
 }
 .bx_filter .bx_filter_button_box{clear: both;}
@@ -81,7 +81,7 @@
 	padding-bottom: 3px;
 }
 /*bx_filter_param_area => bx_filter_parameters_box_container*/
-.bx_filter .bx_filter_parameters_box_container{/*margin-bottom:20px;*/}
+    .bx_filter .bx_filter_parameters_box_container{/*margin-bottom:20px;*/}
 /*bx_filter_param_area_block => bx_filter_parameters_box_container_block*/
 .bx_filter .bx_filter_parameters_box_container_block{
 	font-size:11px;
@@ -861,6 +861,21 @@
 .bx_filter .bx_filter_popup_result a{color:#0073a3;}
 .bx_filter .bx_filter_popup_result a:hover{text-decoration:none;}
 .bx_filter .bx_filter_popup_result_close{display:none;}
+
+
+.bx_filter .bx_filter_input_checkbox.ia-checkbox {
+    padding-bottom: 25px;
+}
+.bx_filter .bx_filter_input_checkbox.ia-checkbox label{
+    line-height: 27px;
+    font-size: 14px;
+}
+ .bx_filter .bx_filter_input_checkbox.ia-checkbox input[type=checkbox]{
+     position: absolute;
+ }
+span.bx_filter_input_checkbox.ia-checkbox{
+    /*position: absolute;*/
+}
 
 @media (max-width:530px){
 	.bx-touch .bx_filter .bx_filter_popup_result{
