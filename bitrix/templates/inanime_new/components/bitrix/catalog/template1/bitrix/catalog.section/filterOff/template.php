@@ -2,7 +2,7 @@
 $this->setFrameMode(true);
 ?>
 <?if($arParams["DISPLAY_TOP_PAGER"]):?>
-    <p><?=$arResult["NAV_STRING"]?></p>
+    <?=$arResult["NAV_STRING"]?>
 <?endif?>
 
 <div class="items-section">
@@ -17,16 +17,12 @@ $this->setFrameMode(true);
                 if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='desc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-bottom"></span><span class="sort-value hidden">'.$val[0].';desc</span>';
                 if($arParams["ELEMENT_SORT_FIELD"]==$val[0] && $arParams["ELEMENT_SORT_ORDER"]=='asc') $currSort=GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-top"></span><span class="sort-value hidden">'.$val[0].';asc</span>';
                 $strList .= '<li>
-                                <span onclick="inanime_new.ddSetSelectedCatalogFilter(this);">
-                                    '.GetMessage('SECT_SORT_' . $key).'
-                                    <span class="glyphicon glyphicon-triangle-bottom"></span>
+                                <span onclick="inanime_new.ddSetSelectedCatalogFilter(this);">'.GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-bottom"></span>
                                     <span class="sort-value hidden">'.$val[0].';desc</span>
                                 </span>
                             </li>'."\n\r";
                 $strList .= '<li>
-                                <span onclick="inanime_new.ddSetSelectedCatalogFilter(this);">
-                                    '.GetMessage('SECT_SORT_' . $key).'
-                                    <span class="glyphicon glyphicon-triangle-top"></span>
+                                <span onclick="inanime_new.ddSetSelectedCatalogFilter(this);">'.GetMessage('SECT_SORT_' . $key).'<span class="glyphicon glyphicon-triangle-top"></span>
                                     <span class="sort-value hidden">'.$val[0].';asc</span>
                                 </span>
                             </li>'."\n\r";
@@ -46,14 +42,10 @@ $this->setFrameMode(true);
         </div>
     </div>
     <hr>
-    <div class="items-container">
-
-        <?foreach($arResult["ITEMS"] as $arElement):?>
-            <?
-            $this->AddEditAction($arElement['ID'], $arElement['EDIT_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
-            $this->AddDeleteAction($arElement['ID'], $arElement['DELETE_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BCS_ELEMENT_DELETE_CONFIRM')));
-            ?>
-            <?$APPLICATION->IncludeComponent(
+    <div class="items-container"><?foreach($arResult["ITEMS"] as $arElement):?><?
+//            $this->AddEditAction($arElement['ID'], $arElement['EDIT_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
+//            $this->AddDeleteAction($arElement['ID'], $arElement['DELETE_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BCS_ELEMENT_DELETE_CONFIRM')));
+            ?><?$APPLICATION->IncludeComponent(
                 "inanime:catalog.element",
                 "inanime-preview-list-product",
                 Array(
@@ -154,8 +146,7 @@ $this->setFrameMode(true);
                     "LAZY_LOAD"=>'Y'
                 ),
                 false
-            );?>
-            <?/*?>
+            );?><?/*?>
             <div class="product-item-preview vertical" id="<?=$this->GetEditAreaId($arElement['ID']);?>">
                 <div class="image-container">
                     <img data-original="<?=$arElement["PREVIEW_PICTURE"]["SRC"]?>" class="lazy" />
@@ -258,10 +249,9 @@ $this->setFrameMode(true);
                     </div>
                 </div>
             </div>
-            <?*/?>
-        <?endforeach?>
+            <?*/?><?endforeach?>
     </div>
 </div>
 <?if($arParams["DISPLAY_BOTTOM_PAGER"]):?>
-    <p><?=$arResult["NAV_STRING"]?></p>
+    <?=$arResult["NAV_STRING"]?>
 <?endif?>
