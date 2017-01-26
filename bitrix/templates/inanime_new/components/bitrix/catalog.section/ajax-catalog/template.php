@@ -1,11 +1,5 @@
 
-<?foreach($arResult["ITEMS"] as $arElement):?>
-    <?
-    $this->AddEditAction($arElement['ID'], $arElement['EDIT_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));
-    $this->AddDeleteAction($arElement['ID'], $arElement['DELETE_LINK'], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BCS_ELEMENT_DELETE_CONFIRM')));
-    //var_dump($arElement);
-    ?>
-    <?$APPLICATION->IncludeComponent(
+<?foreach($arResult["ITEMS"] as $arElement):?><?$APPLICATION->IncludeComponent(
         "inanime:catalog.element",
         "inanime-preview-list-product",
         Array(
