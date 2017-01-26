@@ -18,10 +18,27 @@
 .section-catalog .items-container > div{
     display: inline-block;
 }
+
+.row.main-carousel.catalog{
+    padding-top: 35px;
+}
+
 /* Mobile */
 @media (max-width: 760px) {
 
     .sections-catalog .product-item-preview {
         margin: 0 2px 25px 0;
+    }
+}
+
+@media (min-width: 1230px){
+    .section-catalog hr{
+        width: 847px;
+        margin-right: 0;
+        margin-left: 0;
+        border-top: 2px solid #eee;
+    }
+    .with-filter-row hr{
+        width: 1154px;
     }
 }

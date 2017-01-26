@@ -1,12 +1,15 @@
 <?require_once($_SERVER['DOCUMENT_ROOT']. "/bitrix/modules/main/include/prolog_before.php");
 ?>
 <?
+CModule::IncludeModule('highloadblock');
+CModule::IncludeModule("catalog");
+use Bitrix\Highloadblock as HL;
+use Bitrix\Main\Entity;
+
 // парсинг полей для сортировки и фильтрации
 $sortData = json_decode($_REQUEST["sort_data"], true);
 $filterData = json_decode($_REQUEST["filter_data"], true);
-//$arrFilter = array();
 global $arrFilter;
-$arrFilter["PROPERTY_IS_EIGHTEEN"] = false;
 foreach($filterData as $field)
 {
     switch($field["name"])
@@ -25,14 +28,51 @@ foreach($filterData as $field)
         case 'MATERIAL1':{
             $arrFilter["PROPERTY_MATERIAL1"] = $field["value"];
         };break;
-        case 'IS_EIGHTEEN':{
-            unset($arrFilter["PROPERTY_IS_EIGHTEEN"]);
+        case 'COLOR1':{
+
+            $hlblock = HL\HighloadBlockTable::getById(1)->fetch();
+
+            $entity = HL\HighloadBlockTable::compileEntity($hlblock = HL\HighloadBlockTable::getById(1)->fetch());
+            $entity_data_class = $entity->getDataClass();
+            $entity_table_name = $hlblock['TABLE_NAME'];
+
+            $arFilter = array('UF_NAME'=>$field["value"]); //задаете фильтр по вашим полям
+
+            $sTableID = 'tbl_'.$entity_table_name;
+            $rsData = $entity_data_class::getList(array(
+                "select" => array('*'), //выбираем все поля
+                "filter" => $arFilter,
+                "order" => array("UF_SORT"=>"ASC") // сортировка по полю UF_SORT, будет работать только, если вы завели такое поле в hl'блоке
+            ));
+            $rsData = new CDBResult($rsData, $sTableID);
+            while($arRes = $rsData->Fetch()){
+                $arrFilter["PROPERTY_COLOR1"] =$arRes['UF_XML_ID'];
+            }
+
+        };break;
+        case 'SIZE1':{
+            $arrFilter["PROPERTY_SIZE1"] = $field["value"];
+        };break;
+        case 'in-stock-checkbox-filter-code':{
+            $arSubQuery = array("=CATALOG_AVAILABLE" => "Y");
+            $arrFilter[] = array(
+                'LOGIC' => 'OR',
+                array(
+                    'ID' => CIBlockElement::SubQuery('PROPERTY_CML2_LINK', $arSubQuery),
+                ),
+                array(
+                    "LOGIC" => "AND",
+                    array('OFFERS' => NULL),
+                    array('=CATALOG_AVAILABLE' => "Y"),
+                ),
+            );
         };break;
         case 'discount': $discount = ($field["value"]=='false')?false:true;break;
         case 'week-goods': $weekGoods = ($field["value"]=='false')?false:true;break;
         case 'topsale': $topsale = ($field["value"]=='false')?false:true;break;
     }
 }
+
 if($discount||$weekGoods||$topsale)
 {
     $IDs = array();
@@ -125,7 +165,7 @@ if($discount||$weekGoods||$topsale)
 // кол-во страниц товаров с текущем фильтром
 
 //var_dump($arrFilter);
-if(array_key_exists('ID', $arrFilter) && !$arrFilter["ID"]) return;
+if($arrFilter && array_key_exists('ID', $arrFilter) && !$arrFilter["ID"]) return;
 $newArr = $arrFilter;
 $newArr['IBLOCK_ID']='19';
 $newArr['SECTION_ID']=$_REQUEST["section_id"];
@@ -149,7 +189,7 @@ echo '<span class="hidden" id="maxPages">'.$max_pages.'</span>';
 <?
 $APPLICATION->IncludeComponent(
 	"bitrix:catalog.section",
-	"ajax-catalog", 
+	"ajax-catalog",
 	array(
 		"SEF_MODE" => "N",
         "SHOW_ALL_WO_SECTION" => "Y",
@@ -165,6 +205,13 @@ $APPLICATION->IncludeComponent(
 		),
 		"ELEMENT_SORT_FIELD" => $sortData["sortField"],
 		"ELEMENT_SORT_ORDER" => $sortData["sortType"],
+
+
+        "OFFERS_SORT_FIELD" => $sortData["sortField"],
+        "OFFERS_SORT_ORDER" => $sortData["sortType"],
+        "OFFERS_SORT_FIELD2" => "id",
+        "OFFERS_SORT_ORDER2" => "desc",
+
 		"FILTER_NAME" => "arrFilter",
 		"INCLUDE_SUBSECTIONS" => "Y",
 		"SHOW_ALL_WO_SECTION" => "Y",
@@ -195,10 +242,6 @@ $APPLICATION->IncludeComponent(
 			0 => "",
 			1 => "",
 		),
-		"OFFERS_SORT_FIELD" => "sort",
-		"OFFERS_SORT_ORDER" => "asc",
-		"OFFERS_SORT_FIELD2" => "id",
-		"OFFERS_SORT_ORDER2" => "desc",
 		"OFFERS_LIMIT" => "5",
 		"PRICE_CODE" => json_decode($_REQUEST["price_code"]),
 		"USE_PRICE_COUNT" => "N",
