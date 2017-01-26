@@ -128,6 +128,7 @@ function inanime_new() {
     /* Переменная-флаг для отслеживания того, происходит ли в данный момент ajax-запрос. В самом начале даем ей значение false, т.е. запрос не в процессе выполнения */
     this.inProgress = false;
     this.pagenCounter = 1;
+    this.sonicLoader = null;
     this.getSectionPage = function( filterData, sortData, pageNumber, withReplace = false)
     {
         var postData = {
@@ -144,15 +145,49 @@ function inanime_new() {
             data: postData,
             beforeSend: function() {
                 window.inanime_new.inProgress = true;
+                if(!this.sonicLoader)
+                {
+                    this.sonicLoader = new Sonic(
+                        {
+                            width: 100,
+                            height: 50,
+                            padding: 10,
+                            stepsPerFrame: 2,
+                            trailLength: 1,
+                            pointDistance: .03,
+                            strokeColor: '#FF7B24',
+
+                            step: 'fader',
+                            multiplier: 2,
+                            setup: function() {
+                                this._.lineWidth = 5;
+                            },
+                            path: [
+
+                                ['arc', 10, 10, 10, -270, -90],
+                                ['bezier', 10, 0, 40, 20, 20, 0, 30, 20],
+                                ['arc', 40, 10, 10, 90, -90],
+                                ['bezier', 40, 0, 10, 20, 30, 0, 20, 20]
+                            ]
+                        }
+                    );
+                }
+                $('.items-section .items-container').append($('<div id="sonic-loader-container" style="text-align: center;display:block;"></div>').append(this.sonicLoader.canvas));
+                this.sonicLoader.play();
             }
         }).done(function(data){
-
+            $('#sonic-loader-container').remove();
             window.scrollLoadMaxPages = $(data).find('#maxPages').text();
             var parsedData = $(data).find('.product-item-preview');
             // манипуляции с классом new для добавления lazyload новым элементам
             parsedData.find('img.lazy').addClass('new');
             if(withReplace) $(".items-section .items-container .product-item-preview").remove();
-            $(".items-section .items-container").append('<hr><div style="text-align: center; color:#ccc;display:block;padding:5px">Страница '+pageNumber+'</div>');
+            if(pageNumber> 1)
+            {
+                $(".items-section .items-container").append('<div class="catalog-page-delimiter" style=" display:block;" >' +
+                    '<hr><div style="text-align: center; color:#ccc;display:block;padding:5px">Страница '+pageNumber+'</div></div>');
+            }
+
             $(".items-section .items-container").append(parsedData);
 
             $(".items-section .items-container .product-item-preview img.lazy.new").lazyload({effect : "fadeIn"});
@@ -160,6 +195,8 @@ function inanime_new() {
             window.inanime_new.inProgress = false;
         });
     };
+
+
     this.ddSetSelectedText = function (element)
     {
         var inputElement = $(element).closest(".dropdown").find(".btn.dropdown-toggle input[type='hidden']");
@@ -175,6 +212,7 @@ function inanime_new() {
     this.ddSetSelectedCatalogFilter = function (element)
     {
         this.ddSetSelectedText(element);
+        $('.catalog-page-delimiter').remove();
         this.changeViewHandler();
     };
 
@@ -241,7 +279,7 @@ function inanime_new() {
                 if(window.inanime_new.pagenCounter>2){
                     if(!$('#continue-section-btn')[0])
                         $(".items-section .items-container")
-                            .append('<div id="continue-section-btn" style="display:block;text-align:center;" ' +
+                            .append('<div id="continue-section-btn" style="display:block;text-align:center;padding-bottom:15px;" ' +
                                 'onclick="window.inanime_new.pagenCounter=0;window.inanime_new.changeViewHandler(true);$(\'#continue-section-btn\').remove()"><div class="show-below-btn">Далее</div></div>');
                 } else{
                     window.inanime_new.pagenCounter++;
@@ -250,6 +288,9 @@ function inanime_new() {
                 }
             }
             else{
+                $('.catalog-page-delimiter').remove();
+                $('#continue-section-btn').remove();
+                window.inanime_new.pagenCounter=1;
                 window.inanime_new.getSectionPage(filterData, sortData, 1, true );
                 window.scrollLoadStartFrom =2;
             }
