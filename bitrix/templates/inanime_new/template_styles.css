@@ -3129,6 +3129,11 @@ footer hr{
         margin-right: 5px;
     }
 
+    .container{
+        padding-left: 0;
+        padding-right: 0;
+    }
+
 }
 @media (min-width: 1400px){
     .sections-carousel .fox-icon.bottom{
