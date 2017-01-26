@@ -71,7 +71,8 @@
                         <?$columnItems++?>
                     <?else:?>
                         </ul>
-                        <ul>
+                        <div class="third-level-container">
+                            <ul>
                             <li><a href="<?=$arItem["LINK"]?>"><?=$arItem["TEXT"]?></a></li>
                         <?$columnItems=1?>
                         <?$columnsCount++?>
