@@ -2,18 +2,20 @@ $(window).ready(function()
 {
     $('.section-description .show-below-btn').click(function(){
         var textElement = $(this).closest('.section-description').find('.text');
-        var currHeight = textElement.css('height');
-        if(parseInt(currHeight)>70)
+		var textContent = textElement.find('.text-content');
+       var descContainer = $(this).closest('.section-description');
+	   
+        if(descContainer.hasClass('opened'))
         {
             $(this).closest('.section-description').find('.text').animate({height:70},'fast');
 			$(this).find('i').removeClass('fa-angle-double-up').addClass('fa-angle-double-down');
+            descContainer.removeClass('opened');
         }
         else
         {
-            var heightAuto = textElement.css('height','auto').height();
-            textElement.css('height', currHeight);
-            textElement.animate({height:heightAuto},'fast');
+            textElement.animate({'height':textContent.height()},'fast');
 			$(this).find('i').removeClass('fa-angle-double-down').addClass('fa-angle-double-up');
+            descContainer.addClass('opened');
         }
     });
 });

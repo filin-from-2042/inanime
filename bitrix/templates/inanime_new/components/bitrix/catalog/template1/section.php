@@ -1,6 +1,7 @@
 <? if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true) die(); ?>
 
 <?$APPLICATION->AddHeadScript($this->GetFolder()."/jquery.lazyload.min.js");?>
+<?$APPLICATION->AddHeadScript($this->GetFolder()."/sonic.js");?>
 <div class="container section-catalog">
 
     <?$APPLICATION->IncludeComponent(
@@ -235,46 +236,102 @@ if(CModule::IncludeModule("iblock") && CModule::IncludeModule("catalog"))
             Array("MODE"=>"html")
         );?>
     <?}?>
-    <div class="row section-description">
-        <div class="text">
+
+    <?// описание категории
+    $res = CIBlockSection::GetByID($catalog_section_id);
+    $ar_res=$res->GetNext();
+    if($ar_res['DESCRIPTION'])
+    {?>
+        <div class="row section-description">
+            <div class="text">
+                <div class="text-content">
+                <?=$ar_res['DESCRIPTION']?>
+                </div>
+            </div>
+            <?if(strlen(trim($ar_res['DESCRIPTION']))>546){?>
+            <div class="show-below-btn">
+                <i class="fa fa-angle-double-down" aria-hidden="true"></i>
+            </div>
+            <?}?>
+        </div>
+    <?}?>
+    <div class="row main-carousel catalog">
+        <div class="col-xs-24 col-sm-18 col-md-18 col-lg-18 general-banner-column">
+            <?if (IsModuleInstalled("advertising")):?>
+                <? $APPLICATION->IncludeComponent(
+                    "bitrix:advertising.banner",
+                    "bootstrap",
+                    array(
+                        "COMPONENT_TEMPLATE" => "bootstrap",
+                        "TYPE" => "MAIN",
+                        "NOINDEX" => "Y",
+                        "QUANTITY" => "3",
+                        "BS_EFFECT" => "fade",
+                        "BS_CYCLING" => "N",
+                        "BS_WRAP" => "Y",
+                        "BS_PAUSE" => "Y",
+                        "BS_KEYBOARD" => "Y",
+                        "BS_ARROW_NAV" => "Y",
+                        "BS_BULLET_NAV" => "Y",
+                        "BS_HIDE_FOR_TABLETS" => "N",
+                        "BS_HIDE_FOR_PHONES" => "N",
+                        "CACHE_TYPE" => "A",
+                        "CACHE_TIME" => "36000000",
+                        "DEFAULT_TEMPLATE" => "-",
+                        "COMPOSITE_FRAME_MODE" => "A",
+                        "COMPOSITE_FRAME_TYPE" => "AUTO"
+                    ),
+                    false
+                );?>
+            <?endif?>
+        </div>
+        <div class="col-sm-6 col-md-6 col-lg-6 custom-carousel-column">
+            <script>
+                $(document).ready(function(){
+                    inanime_new.init_custom_vertical_carousel('carousel-custom-vertical',2);
+                });
+            </script>
+            <? $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/css/jquery.bxslider.css');?>
+            <? $APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH.'/js/jquery.bxslider.min.js');?>
             <?
-            $res = CIBlockSection::GetByID($catalog_section_id);
-            $ar_res=$res->GetNext();
-            echo $ar_res['DESCRIPTION'];
-            ?>
+            CModule::IncludeModule("iblock");
+            CModule::IncludeModule("catalog");
+            $arSelect = Array("ID", "NAME", "DATE_ACTIVE_FROM", "PROPERTY_SHOW_MAIN_SLIDER", "PROPERTY_MAIN_SLIDER_PHOTO", "PREVIEW_PICTURE", "DETAIL_PICTURE", "PREVIEW_TEXT", "PROPERTY_IS_NEWPRODUCT", "DETAIL_PAGE_URL", "PROPERTY_DISCOUNT");
+            $arFilter = Array("IBLOCK_ID" => array(18, 19, 23, 24), "ACTIVE" => "Y", "!PROPERTY_SHOW_MAIN_SLIDER" => false);
+            $res = CIBlockElement::GetList(Array("ACTIVE_FROM" => "DESC", "SORT" => "ASC"), $arFilter, false, Array("nPageSize" => 15), $arSelect);
+            $arSlides = array();
+            while ($ob = $res->GetNextElement()) {
+                $arFields = $ob->GetFields();
+
+                $arFields["file"] = CFile::ResizeImageGet(($arFields["PROPERTY_MAIN_SLIDER_PHOTO_VALUE"])?$arFields["PROPERTY_MAIN_SLIDER_PHOTO_VALUE"] : (($arFields["PREVIEW_PICTURE"]) ? $arFields["PREVIEW_PICTURE"] :$arFields["DETAIL_PICTURE"] ), array('width' => '1800', 'height' => '1000'), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+
+                $arSlides[] = $arFields;
+            }
+
+            if (count($arSlides) > 0) {
+                ?>
+                <div id="carousel-custom-vertical" class="carousel-custom">
+                    <div class="prev button"><i class="fa fa-chevron-circle-up" aria-hidden="true"></i></div>
+                    <ul>
+                        <?
+                        $counter = 0;
+                        foreach ($arSlides as $slide) {
+                            $counter++;
+                            $previewText = (strlen($slide["PREVIEW_TEXT"]) > 83) ? substr($slide["PREVIEW_TEXT"], 0, 40) . '...' : $slide["PREVIEW_TEXT"];
+                            $nameText = (strlen($slide["NAME"]) > 43) ? substr($slide["NAME"], 0, 40) . '...' : $slide["NAME"];
+                            ?>
+                            <li>
+                                <? if ($slide["file"]["src"]) { ?>
+                                    <img src="<?= $slide["file"]["src"]; ?>">
+                                <? } ?>
+                                <a href="<?= $slide["DETAIL_PAGE_URL"]; ?>" class="text"><?=($previewText)?htmlspecialchars($previewText):htmlspecialchars($nameText)?></a>
+                            </li>
+                        <? } ?>
+                    </ul>
+                    <div class="next button"><i class="fa fa-chevron-circle-down" aria-hidden="true"></i></div>
+                </div>
+            <? } ?>
         </div>
-        <div class="show-below-btn">
-            <i class="fa fa-angle-double-down" aria-hidden="true"></i>
-        </div>
-    </div>
-    <div class="row section-main-banner">
-        <?if (IsModuleInstalled("advertising")):?>
-            <? $APPLICATION->IncludeComponent(
-                "bitrix:advertising.banner",
-                "bootstrap",
-                array(
-                    "COMPONENT_TEMPLATE" => "bootstrap",
-                    "TYPE" => "MAIN",
-                    "NOINDEX" => "Y",
-                    "QUANTITY" => "3",
-                    "BS_EFFECT" => "fade",
-                    "BS_CYCLING" => "N",
-                    "BS_WRAP" => "Y",
-                    "BS_PAUSE" => "Y",
-                    "BS_KEYBOARD" => "Y",
-                    "BS_ARROW_NAV" => "Y",
-                    "BS_BULLET_NAV" => "Y",
-                    "BS_HIDE_FOR_TABLETS" => "N",
-                    "BS_HIDE_FOR_PHONES" => "N",
-                    "CACHE_TYPE" => "A",
-                    "CACHE_TIME" => "36000000",
-                    "DEFAULT_TEMPLATE" => "-",
-                    "COMPOSITE_FRAME_MODE" => "A",
-                    "COMPOSITE_FRAME_TYPE" => "AUTO"
-                ),
-                false
-            );?>
-        <?endif?>
     </div>
     <script>
         /*AJAX прогрузка*/
@@ -311,7 +368,7 @@ if(CModule::IncludeModule("iblock") && CModule::IncludeModule("catalog"))
                 /*если количество элементов на странице < количества элементов в разделе*/
                 if (window.scrollLoadMaxPages < window.scrollLoadStartFrom) inanime_new.inProgress = true;
                 /* Если высота окна + высота прокрутки больше или равна высоте всего документа и ajax-запрос в настоящий момент не выполняется, то запускаем ajax-запрос. 600 - это высота подвала в пикселях */
-                if($(window).scrollTop() + $(window).height() >= $(document).height() - 600 && !inanime_new.inProgress)
+                if($(window).scrollTop() + $(window).height() >= $(document).height() - 1800 && !inanime_new.inProgress)
                 {
                     inanime_new.changeViewHandler(true);
                 }
