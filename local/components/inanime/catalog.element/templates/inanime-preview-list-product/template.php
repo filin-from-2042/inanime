@@ -1,9 +1,20 @@
+
+<?
+$arButtons = CIBlock::GetPanelButtons(
+    $arResult["IBLOCK_ID"],
+    $arResult["ID"],
+    0,
+    array("SECTION_BUTTONS"=>false, "SESSID"=>false)
+);
+?>
 <?
 //var_dump($arResult['EDIT_LINK']);
 $orientation = "vertical";
 if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $orientation='horizontal';
-?>
-<div class="product-item-preview <?=$orientation?> product-item-preview-<?=$arResult['ID']?>" id="<?=$this->GetEditAreaId($arResult['ID']);?>">
+?><div class="product-item-preview <?=$orientation?> product-item-preview-<?=$arResult['ID']?>" id="<?=$this->GetEditAreaId($arResult['ID']);?>">
+<?$this->AddEditAction($arResult['ID'], $arButtons["edit"]["edit_element"]["ACTION_URL"], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));?>
+<?$this->AddDeleteAction($arResult['ID'], $arButtons["edit"]["delete_element"]["ACTION_URL"], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BCS_ELEMENT_DELETE_CONFIRM')));?>
+
     <div class="image-container">
         <a href="<?=$arResult["DETAIL_PAGE_URL"]?>" class="link">
         </a>
