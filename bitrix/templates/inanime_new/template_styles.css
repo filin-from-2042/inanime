@@ -1663,8 +1663,23 @@ footer hr{
 .reviews-list{
     margin-top: 0px;
 }
-.reviews-list .title-container .view-all-btn{
+.reviews-list .title-container .view-all-btn,
+.news-list .title-container .view-all-btn{
     float:right;
+    padding: 0;
+}
+.reviews-list .title-container .view-all-btn:hover,
+.news-list .title-container .view-all-btn:hover{
+    background-color: #f5ad5b;
+}
+.reviews-list .title-container .view-all-btn:hover a,
+.news-list .title-container .view-all-btn:hover a{
+    color:#fff;
+}
+.reviews-list .title-container .view-all-btn a,
+.news-list .title-container .view-all-btn a{
+    padding: 6px 24px;
+    display: inline-block;
 }
 .reviews-list .title-container{
     padding-right: 25px;

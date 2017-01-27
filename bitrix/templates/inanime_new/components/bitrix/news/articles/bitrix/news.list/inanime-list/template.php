@@ -26,7 +26,7 @@
                                             />
                             </div>
                         <?endif?>
-                        <div class="col-xs-24  col-sm-18 col-md-20 col-lg-20 text-column">
+                        <div class="col-xs-24  col-sm-18 col-md-20 col-lg-20 text-column"<?=($arParams["DISPLAY_PICTURE"]!="N" && is_array($arItem["PREVIEW_PICTURE"]))?'':' style="padding-left:15px;"'?>>
                             <div class="title-container clearfix">
                                 <?if($arParams["DISPLAY_NAME"]!="N" && $arItem["NAME"]):?>
                                     <?if(!$arParams["HIDE_LINK_WHEN_NO_DETAIL"] || ($arItem["DETAIL_TEXT"] && $arResult["USER_HAVE_ACCESS"])):?>
