@@ -72,10 +72,18 @@
             priceNew.text(colorData.price[0]+' ₽');
             discountContainer.hide();
         }
-
-        $('.general-container.photo-container').css('display','none');
-        $('.general-container.photo-container#photo_gallery_'+colorData.id+',' +
-            '.general-container.photo-container#photo_gallery_xs_'+colorData.id).css('display','block');
+        
+        // показываем галерею предложения, если отсутсвует то товара
+        if($('.general-container.photo-container#photo_gallery_'+colorData.id).length > 0)
+        {
+            $('.general-container.photo-container').css('display','none');
+            $('.general-container.photo-container#photo_gallery_'+colorData.id+',' +
+                '.general-container.photo-container#photo_gallery_xs_'+colorData.id).css('display','block');
+        }
+        else
+        {
+            $('.general-container.photo-container#photo_gallery_'+this.productID).css('display','block');
+        }
 
         $('.title-container').css('display','none');
         $('.title-container#title-container-'+colorData.id).css('display','block');

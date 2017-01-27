@@ -58,6 +58,10 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
     foreach($arResult['OFFERS'] as $offer)
     {
         $offerPhotos = array();
+        if($offer["DETAIL_PICTURE"] && $offer["DETAIL_PICTURE"]["SRC"])
+        {
+            $offerPhotos[]= $offer["DETAIL_PICTURE"]["SRC"];
+        }
         if($offer["PROPERTIES"]["GALLERY_PHOTO"]["VALUE"])
         {
             foreach($offer["PROPERTIES"]["GALLERY_PHOTO"]["VALUE"] as $photoID)
