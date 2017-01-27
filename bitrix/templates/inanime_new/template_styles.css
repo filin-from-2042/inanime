@@ -457,7 +457,8 @@ span.rub:before{
     text-align:center;
 }
 .size-radio span {
-    line-height:28px;
+    /*line-height:28px;*/
+    line-height:25px;
     color:rgb(121,130,139);
 }
 /********************************* COUNTER TEXT INPUT ****************************************/
