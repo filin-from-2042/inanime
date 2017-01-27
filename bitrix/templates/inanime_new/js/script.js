@@ -184,8 +184,8 @@ function inanime_new() {
             if(withReplace) $(".items-section .items-container .product-item-preview").remove();
             if(pageNumber> 1)
             {
-                $(".items-section .items-container").append('<div class="catalog-page-delimiter" style=" display:block;" >' +
-                    '<hr><div style="text-align: center; color:#ccc;display:block;padding:5px">Страница '+pageNumber+'</div></div>');
+                $(".items-section .items-container").append('<span class="catalog-page-delimiter" style=" display:block;" >' +
+                    '<hr><span style="text-align: center; color:#ccc;display:block;padding:5px">Страница '+pageNumber+'</span></span>');
             }
 
             $(".items-section .items-container").append(parsedData);
