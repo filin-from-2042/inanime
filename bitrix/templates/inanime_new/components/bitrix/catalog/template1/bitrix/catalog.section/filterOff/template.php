@@ -142,7 +142,7 @@ $this->setFrameMode(true);
                     "MESSAGE_404" => "",
                     "COMPOSITE_FRAME_MODE" => "A",
                     "COMPOSITE_FRAME_TYPE" => "AUTO",
-                    "RATE_FIRS"=>"N",
+                    "RATE_FIRS"=>"Y",
                     "LAZY_LOAD"=>'Y'
                 ),
                 false

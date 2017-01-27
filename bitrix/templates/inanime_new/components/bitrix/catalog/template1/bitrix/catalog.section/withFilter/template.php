@@ -2,7 +2,7 @@
 $this->setFrameMode(true);
 ?>
 <div class="row with-filter-row">
-    <div class="col-md-24 col-lg-24">
+    <div class="col-md-24 col-lg-24 with-filter-filter-column">
         <div class="sort-container clearfix">
             <div class="select-title"><?= GetMessage('SECT_SORT_LABEL'); ?>:</div>
             <div class="dropdown select-container order">
@@ -41,13 +41,13 @@ $this->setFrameMode(true);
         <hr>
     </div>
 </div>
-<div class="row">
-    <div class="hidden-xs hidden-sm col-md-6 col-lg-6">
+<div class="row"><?//var_dump($arParams);?>
+    <div class="hidden-xs hidden-sm col-md-6 col-lg-6 with-filter-smart-filter-column">
         <?$APPLICATION->IncludeComponent(
             "bitrix:catalog.smart.filter", "visual_vertical1", Array(
                 "IBLOCK_TYPE" => $arParams["IBLOCK_TYPE"],
                 "IBLOCK_ID" => $arParams["IBLOCK_ID"],
-                "SECTION_ID" => $arCurSection['ID'],
+                "SECTION_ID" => $arParams["SECTION_ID"],
                 "FILTER_NAME" => $arParams["FILTER_NAME"],
                 "PRICE_CODE" => $arParams["PRICE_CODE"],
                 "CACHE_TYPE" => "A",
@@ -57,12 +57,13 @@ $this->setFrameMode(true);
                 "SAVE_IN_SESSION" => "N",
                 "XML_EXPORT" => "Y",
                 "SECTION_TITLE" => "NAME",
-                "SECTION_DESCRIPTION" => "DESCRIPTION"
+                "SECTION_DESCRIPTION" => "DESCRIPTION",
+                "HIDE_NOT_AVAILABLE"=>'N'
             ), $component, array('HIDE_ICONS' => 'Y')
         );
         ?>
     </div>
-    <div class="col-xs-24 col-sm-24 col-md-18 col-lg-18">
+    <div class="col-xs-24 col-sm-24 col-md-18 col-lg-18 with-filter-items-column">
         <?if($arParams["DISPLAY_TOP_PAGER"]):?>
             <?=$arResult["NAV_STRING"]?>
         <?endif?>
@@ -161,7 +162,7 @@ $this->setFrameMode(true);
                             'OFFER_ADD_PICT_PROP' => $arParams['OFFER_ADD_PICT_PROP'],
                             'OFFER_TREE_PROPS' => array("COLOR_REF","SIZE_GLK",""),
 
-                            "RATE_FIRS"=>"N",
+                            "RATE_FIRS"=>"Y",
                             "LAZY_LOAD"=>'Y'
                         ),
                         false

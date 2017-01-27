@@ -375,7 +375,20 @@ span.rub:before{
     background-repeat:no-repeat;
     z-index: 98;
 }
-
+.additional-icon.discount{
+    background-image:url(images/product-icon-discount-desktop.png);
+    background-repeat:no-repeat;
+    z-index: 97;
+}
+.discount-container{
+    position: relative;
+}
+.discount-container .discount-text{
+    position: absolute;
+    right: 6px;
+    top: 8px;
+    z-index: 98;
+}
 
 .fox-icon.bottom{
     background: url(images/sections-new-fox-bottom.png) no-repeat;
@@ -1773,7 +1786,7 @@ footer hr{
     vertical-align: top;
 }
 .section-catalog .product-item-preview{
-    margin: 0 5px 25px 0;
+    margin: 0 3px 25px 0;
 }
 .section-catalog .product-item-preview.vertical .data-container{
     max-width: 275px;
@@ -1836,6 +1849,13 @@ footer hr{
 .section-catalog .type-buttons .type-btn.discount{
      border-color:#3baeda;
 }
+.section-catalog .product-item-preview.vertical .image-container{
+    height: 235px;
+}
+.section-catalog .product-item-preview.vertical .week-good-icon-container {
+    top: 215px;
+}
+
 /********************* SECTION DESCRIPTION *******************************/
 .section-description{
     position: relative;
@@ -2114,6 +2134,12 @@ footer hr{
         background-repeat:no-repeat;
         z-index: 98;
     }
+    .additional-icon.discount{
+        background-image:url(images/product-icon-discount-tablet.png);
+        background-repeat:no-repeat;
+        z-index: 97;
+    }
+
 
     header{
         padding-top:20px;
@@ -2392,6 +2418,9 @@ footer hr{
     .section-catalog .product-item-preview:nth-child(even){
         margin: 0 0 0 8px;
     }
+    .section-catalog .product-item-preview.vertical .image-container{
+        height: 100px;
+    }
 
     /******************************** COMMENTS ***********************/
     #comments .comment-main {
@@ -2549,6 +2578,16 @@ footer hr{
         background-repeat:no-repeat;
         z-index: 98;
     }
+    .additional-icon.discount{
+        background-image:url(images/product-icon-discount-tablet.png);
+        background-repeat:no-repeat;
+        z-index: 97;
+    }
+    .discount-container .discount-text {
+        right: 28px;
+        top: 0px;
+        font-size: 12px;
+    }
 
     header{
         padding-top: 18px;
@@ -2705,7 +2744,7 @@ footer hr{
         height: 168px;
     }
     .product-item-preview .icons-container .additional-icon{
-        margin-top: -30px;
+        /*margin-top: -30px;*/
     }
     .product-item-preview .splitted-btn.in-cart span.text-btn {
         font-size: 11px;
@@ -2928,6 +2967,10 @@ footer hr{
     .product-item-preview .week-good-icon-container {
         top: 130px;
     }
+
+    .section-catalog .product-item-preview.vertical .image-container{
+        height: 200px;
+    }
 }
 /* (desktops, 992px and up) */
 @media (min-width: 992px) {
@@ -3134,6 +3177,48 @@ footer hr{
         padding-right: 0;
     }
 
+    .section-catalog .product-item-preview{
+        margin: 0 0px 25px;
+    }
+    .section-catalog .product-item-preview:nth-of-type(3n+2){
+        margin: 0 14px 25px;
+    }
+
+    .section-catalog  .with-filter-items-column,
+    .section-catalog .with-filter-row .with-filter-filter-column,
+    .section-catalog .with-filter-smart-filter-column{
+        padding-left: 30px;
+        padding-right: 0;
+    }
+    .section-catalog  .with-filter-items-column{
+        min-height:945px;
+    }
+    .with-filter-row hr {
+        width: 1196px;
+    }
+    .section-catalog .product-item-preview.vertical .image-container{
+        width: 282px;
+    }
+    .section-catalog .product-item-preview.vertical .image-container > img{
+        width: 285px;
+    }
+    .section-catalog .product-item-preview.vertical .image-container {
+        height: 245px;
+    }
+    .section-catalog .product-item-preview .data-container {
+        padding: 15px 10px 6px;
+    }
+    .product-item-preview .price-container .price{
+        color:#fc9a00;
+    }
+    .product-item-preview .price-container .price {
+        font-size: 24px;
+    }
+
+    .product-item-preview .price-container .price.old{
+        color:#1a2228;
+    }
+
 }
 @media (min-width: 1400px){
     .sections-carousel .fox-icon.bottom{
@@ -3146,9 +3231,3 @@ footer hr{
         width: 100%;
     }
 }
-
-/*@media (min-width: 1240px){*/
-    /*.container{*/
-        /*width: 1240px;*/
-    /*}*/
-/*}*/
