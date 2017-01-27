@@ -1604,7 +1604,8 @@ footer hr{
     margin-bottom: 22px;
 }
 .sections-carousel .vertical-column .carousel-container{
-    margin-bottom: 24px;
+    /*margin-bottom: 24px;*/
+    margin-bottom: 29px;
 }
 .sections-carousel .vertical-column{
     margin-left: -5px;
