@@ -96,19 +96,19 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
 
     if(empty($photoGalleryData))
     {
+        if($arResult['MORE_PHOTO'])
+        {
+            foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
+            {
+                $photoGalleryData[$arResult['ID']][] = $arOnePhoto['SRC'];
+            }
+        }
+
         if($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"])
         {
             foreach($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"] as $photoID)
             {
                 $photoGalleryData[$arResult['ID']][] = CFile::GetFileArray($photoID)['SRC'];
-            }
-        }
-
-        if(empty($photoGalleryData))
-        {
-            foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
-            {
-                $photoGalleryData[$arResult['ID']][] = $arOnePhoto['SRC'];
             }
         }
     }
@@ -119,19 +119,20 @@ else
 {
     $arJSParams['hasOffers'] = false;
     $canBuy = $arResult['CAN_BUY'];
+
+    if($arResult['MORE_PHOTO'])
+    {
+        foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
+        {
+            $photoGalleryData[$arResult['ID']][] = $arOnePhoto['SRC'];
+        }
+    }
+
     if($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"])
     {
         foreach($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"] as $photoID)
         {
             $photoGalleryData[$arResult['ID']][] = CFile::GetFileArray($photoID)['SRC'];
-        }
-    }
-
-    if(empty($photoGalleryData))
-    {
-        foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
-        {
-            $photoGalleryData[$arResult['ID']][] = $arOnePhoto['SRC'];
         }
     }
 }
