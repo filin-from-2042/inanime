@@ -76,6 +76,10 @@
         $('.general-container.photo-container').css('display','none');
         $('.general-container.photo-container#photo_gallery_'+colorData.id+',' +
             '.general-container.photo-container#photo_gallery_xs_'+colorData.id).css('display','block');
+
+        $('.title-container').css('display','none');
+        $('.title-container#title-container-'+colorData.id).css('display','block');
+
         $('button.in-cart span.value, button.in-favorite span.value').each(function()
         {
             $(this).text(colorData.id);
@@ -95,7 +99,6 @@
             $('.product-info .buttons-container .button-wrap.in-cart').hide();
             $('.product-info .buttons-container .button-wrap.subscribe').show();
         }
-
     };
 
     window.InAnimeCatalogElement.prototype.addQuestion = function(event)

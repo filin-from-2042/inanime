@@ -80,6 +80,7 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
             $prices[]=$offer["MIN_PRICE"]["VALUE"];
         }
         $offersData[$offer["ID"]] = array(
+            'title'=>$offer['NAME'],
             'color'=>(empty($offer["PROPERTIES"]["COLOR_REF"]["VALUE"])||$offer["PROPERTIES"]["COLOR_REF"]["VALUE"]=='') ? 'not-set' : $offer["PROPERTIES"]["COLOR_REF"]["VALUE"],
             'price'=>$prices,
             'size'=>$offer["PROPERTIES"]["SIZE_GLK"]["VALUE"],
@@ -246,13 +247,26 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
 
 
                         </div>
-                        <div class="title-container">
-                            <?echo (
+                            <?
+                            if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
+                            {
+                                foreach($offersData as $offerID => $offer)
+                                {?>
+                                    <div class="title-container" id="title-container-<?=$offerID?>" <?=($activeOfferID==$offerID)?'':'style="display:none;"'?>><?=$offer['title']?></div>
+                                <?}
+                            }else
+                            {?>
+                                <div class="title-container">
+                                <?
+                                echo (
                                 isset($arResult["IPROPERTY_VALUES"]["ELEMENT_PAGE_TITLE"]) && $arResult["IPROPERTY_VALUES"]["ELEMENT_PAGE_TITLE"] != ''
-                                ? $arResult["IPROPERTY_VALUES"]["ELEMENT_PAGE_TITLE"]
-                                : $arResult["NAME"]
-                            ); ?>
-                        </div>
+                                    ? $arResult["IPROPERTY_VALUES"]["ELEMENT_PAGE_TITLE"]
+                                    : $arResult["NAME"]
+                                );
+                                ?>
+                                </div>
+                            <?
+                            }?>
                         <div class="rate-container">
                             <?$APPLICATION->IncludeComponent(
                                 "bitrix:iblock.vote",
