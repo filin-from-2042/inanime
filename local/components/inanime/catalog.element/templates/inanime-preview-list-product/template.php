@@ -35,6 +35,16 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
             <?if($arResult["PROPERTIES"]["IS_RECOMMEND"]["VALUE"]=="Да"):?>
                 <div class="additional-icon recommended"></div>
             <?endif?>
+
+            <?
+            if($arResult["PRICES"]['BASE']['DISCOUNT_DIFF_PERCENT']){?>
+                <div class="discount-container">
+                    <div class="additional-icon  discount"></div>
+                    <div class="discount-text">Скидка <?=$arResult["PRICES"]['BASE']['DISCOUNT_DIFF_PERCENT'];?> %</div>
+                </div>
+            <?}
+            ?>
+
         </div>
         <?
         $arDiscounts = CCatalogDiscount::GetDiscountByProduct(intVal($arResult['ID']));
