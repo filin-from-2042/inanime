@@ -1,6 +1,6 @@
 /* absolute path to images is required to make crm-sale proxy work */
 
-.header-location .bx-sls .dropdown-block {
+.header-location.bx-sls .dropdown-block {
 	border: 2px solid #5d3d1d;
 	border-radius: 10px;
 	-webkit-box-shadow: inset 0 1px 2px #ebebeb;
@@ -13,7 +13,7 @@
     position: absolute;
 }
 
-.header-location .bx-sls .dropdown-arrow {
+.header-location.bx-sls .dropdown-arrow {
 	background: url(/bitrix/components/bitrix/sale.location.selector.search/templates/.default/images/dropdown-errow.png) no-repeat center center;
 	height: 100%;
 	top: 0;
@@ -22,8 +22,8 @@
 	width: 22px;
 }
 
-.header-location .bx-sls .bx-ui-sls-fake,
-.header-location .bx-sls .bx-ui-sls-route {
+.header-location.bx-sls .bx-ui-sls-fake,
+.header-location.bx-sls .bx-ui-sls-route {
 	background: transparent !important;
 	border: none !important;
 	-webkit-box-shadow: none !important;
@@ -37,11 +37,11 @@
 	outline: none;
 	padding: 0;
 }
-.header-location .bx-sls .bx-ui-sls-container {
+.header-location.bx-sls .bx-ui-sls-container {
 	overflow: hidden;
 }
 
-.header-location .bx-sls .bx-ui-sls-pane {
+.header-location.bx-sls .bx-ui-sls-pane {
 	border: 1px solid #bdbdbd;
 	border-radius: 2px;
 	-webkit-box-shadow: 0 2px 3px #c7c7c7;
@@ -59,28 +59,28 @@
 	width: 100%;
 }
 
-.header-location .bx-sls .dropdown-active .bx-ui-sls-pane {
+.header-location.bx-sls .dropdown-active .bx-ui-sls-pane {
 	display: block;
 }
 
-.header-location .bx-sls .bx-ui-sls-variants {
+.header-location.bx-sls .bx-ui-sls-variants {
 	list-style: none;
 	margin: 0;
 	padding: 0;
 }
 
-.header-location .bx-sls .dropdown-item {
+.header-location.bx-sls .dropdown-item {
 	border-radius: 2px;
 	padding: 7px 4px 7px 10px;
 	margin-bottom: 2px;
 }
 
-.header-location .bx-sls .dropdown-item:hover {
+.header-location.bx-sls .dropdown-item:hover {
 	background-color: #f1f3f5;
 	cursor: pointer;
 }
 
-.header-location .bx-sls .dropdown-img {
+.header-location.bx-sls .dropdown-img {
 	border: none;
 	display: inline-block;
 	height: 12px;
@@ -89,7 +89,7 @@
 	width: 16px;
 }
 
-.header-location .bx-sls .dropdown-item-text {
+.header-location.bx-sls .dropdown-item-text {
 	/*makeup:color: #212121;*/
 	color: #aba8ac;
 	display: inline-block;
@@ -97,18 +97,18 @@
 	vertical-align: top;
 }
 
-.header-location .bx-sls .dropdown-item-text span{
+.header-location.bx-sls .dropdown-item-text span{
 	color: #25282c;
 }
 
-.header-location .bx-sls .dropdown-list-title {
+.header-location.bx-sls .dropdown-list-title {
 	border-bottom: 1px solid #e5e5e5;
 	height: 37px;
 	line-height: 37px;
 	padding-left: 8px;
 }
 
-.header-location .bx-sls .dropdown-icon {
+.header-location.bx-sls .dropdown-icon {
 	background: url(/bitrix/components/bitrix/sale.location.selector.search/templates/.default/images/lens.png) no-repeat center center;
 	height: 14px;
 	left: 10px;
@@ -117,10 +117,10 @@
 	width: 14px;
 }
 
-.header-location .bx-sls .quick-locations{
+.header-location.bx-sls .quick-locations{
 	margin-bottom: 5px;
 }
-.header-location .bx-sls .quick-location-tag {
+.header-location.bx-sls .quick-location-tag {
 	background-color: #f2f5f8;
 	border: 1px solid #cad3dc;
 	border-radius: 3px;
@@ -134,11 +134,11 @@
 	text-decoration: none;
 	margin-bottom: 10px;
 }
-.header-location .bx-sls .quick-location-tag:hover{
+.header-location.bx-sls .quick-location-tag:hover{
 	background-color: #fafafa;
 }
 
-.header-location .bx-sls .dropdown-fade2white{
+.header-location.bx-sls .dropdown-fade2white{
 	width: 46px;
 	height: 31px;
 	position: absolute;
@@ -154,7 +154,7 @@
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=1 );
 }
 
-.header-location .bx-sls .bx-ui-sls-clear{
+.header-location.bx-sls .bx-ui-sls-clear{
 	/*background: url(/bitrix/panel/main/images/bx-admin-sprite-small.png) 6px -3386px no-repeat scroll;*/
 	width: 30px;
 	height: 27px;
@@ -175,16 +175,16 @@
     width: 17px;
     color: #555;
 }
-.header-location .bx-sls .bx-ui-sls-clear:hover{
+.header-location.bx-sls .bx-ui-sls-clear:hover{
 	background-position: 6px -3418px;
 }
-.header-location .bx-sls .bx-ui-sls-clear:before{
+.header-location.bx-sls .bx-ui-sls-clear:before{
 content: "\f05e";
 }
-.header-location .bx-sls .bx-ui-sls-clear{
+.header-location.bx-sls .bx-ui-sls-clear{
     display: block !important;
 }
-.header-location .bx-sls .bx-ui-sls-loader{
+.header-location.bx-sls .bx-ui-sls-loader{
 	background-image: url(/bitrix/panel/main/images/waiter-white.gif) !important;
 	background-repeat: no-repeat !important;
 	background-position: right -1px !important;
@@ -198,23 +198,23 @@ content: "\f05e";
 	display: none;
 }
 
-.header-location .bx-sls .bx-ui-sls-go-edit{
+.header-location.bx-sls .bx-ui-sls-go-edit{
 	display: none;
 }
 
-.header-location .bx-sls .bx-ui-sls-pane{
+.header-location.bx-sls .bx-ui-sls-pane{
 	max-height: 300px;
 }
 
-.header-location .bx-sls input::-ms-clear {
+.header-location.bx-sls input::-ms-clear {
 	display: none;
 }
 
-.header-location .bx-sls input[type="text"]{
+.header-location.bx-sls input[type="text"]{
 	position: relative;
 }
 
-.header-location .bx-sls .bx-ui-sls-route{
+.header-location.bx-sls .bx-ui-sls-route{
 	position: absolute !important;
 	top: 0;
 	left: 0;
@@ -229,22 +229,22 @@ content: "\f05e";
 	background-repeat: no-repeat;
 }
 
-.header-location .bx-sls .bx-ui-sls-pane{
+.header-location.bx-sls .bx-ui-sls-pane{
 	background-color: #fff;
 	z-index: 999;
 	border: 1px solid #87919c;
 }
 
-.header-location .bx-sls .bx-ui-sls-variants .bx-ui-sls-variant,
-.header-location .bx-sls .bx-ui-sls-error{
+.header-location.bx-sls .bx-ui-sls-variants .bx-ui-sls-variant,
+.header-location.bx-sls .bx-ui-sls-error{
 	padding: 10px 10px;
 }
-.header-location .bx-sls .bx-ui-sls-error{
+.header-location.bx-sls .bx-ui-sls-error{
 	color: #ff2222;
 	padding-left: 30px;
 	position: relative;
 }
-.header-location .bx-sls .bx-ui-sls-error div{
+.header-location.bx-sls .bx-ui-sls-error div{
 	position: absolute;
 	top: 0px;
 	left: 0px;
@@ -252,8 +252,8 @@ content: "\f05e";
 	height: 25px;
 	background: url(/bitrix/panel/main/images/bx-admin-sprite-small.png) 6px -2895px no-repeat scroll;
 }
-.header-location .bx-sls .bx-ui-sls-variants .bx-ui-sls-variant:hover,
-.header-location .bx-sls .bx-ui-sls-variant-active{
+.header-location.bx-sls .bx-ui-sls-variants .bx-ui-sls-variant:hover,
+.header-location.bx-sls .bx-ui-sls-variant-active{
 	background-color: #E0E8EA;
 }
 
@@ -275,8 +275,8 @@ content: "\f05e";
 	height: 25px;
 }
 
-.header-location .bx-sls.bx-admin-mode .bx-ui-sls-fake,
-.header-location .bx-sls.bx-admin-mode .bx-ui-sls-route {
+.header-location.bx-sls.bx-admin-mode .bx-ui-sls-fake,
+.header-location.bx-sls.bx-admin-mode .bx-ui-sls-route {
 	height: 25px;
 }
 
@@ -320,17 +320,17 @@ content: "\f05e";
     .text-btn.yellow-btn.location-btn i.fa-chevron-down{
         display: none;
     }
-    .header-location .bx-sls .bx-ui-sls-fake,
-    .header-location .bx-sls .bx-ui-sls-route {
+    .header-location.bx-sls .bx-ui-sls-fake,
+    .header-location.bx-sls .bx-ui-sls-route {
         height: 23px;
     }
-    .header-location .bx-sls .bx-ui-sls-container {
+    .header-location.bx-sls .bx-ui-sls-container {
         line-height: 22px;
     }
-    .header-location .bx-sls .bx-ui-sls-clear {
+    .header-location.bx-sls .bx-ui-sls-clear {
         line-height: 22px;
     }
-    .header-location .bx-sls .dropdown-block {
+    .header-location.bx-sls .dropdown-block {
         position: relative;
     }
 }
@@ -339,14 +339,14 @@ content: "\f05e";
     .text-btn.yellow-btn.location-btn i.fa-chevron-down{
         display: none;
     }
-    .header-location .bx-sls .bx-ui-sls-fake,
-    .header-location .bx-sls .bx-ui-sls-route {
+    .header-location.bx-sls .bx-ui-sls-fake,
+    .header-location.bx-sls .bx-ui-sls-route {
         height: 19px;
     }
-    .header-location .bx-sls .bx-ui-sls-container {
+    .header-location.bx-sls .bx-ui-sls-container {
         line-height: 18px;
     }
-    .header-location .bx-sls .bx-ui-sls-clear {
+    .header-location.bx-sls .bx-ui-sls-clear {
         line-height: 18px;
     }
 }
