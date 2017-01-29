@@ -246,10 +246,12 @@
 }
 .product-tabs .characteristic-list li {
     margin-bottom: 6px;
-    background-image:radial-gradient(#79828b 1px, white 0px);
+    /*background-image:radial-gradient(#79828b 1px, white 0px);*/
+    background-image:radial-gradient(#d9d9d9 1px, white 0px);
     background-size: 8px 8px;
     background-repeat:repeat-x;
-    background-position: left bottom;
+    /*background-position: left bottom;*/
+    background-position: 100% 85%;
 }
 .product-tabs .characteristic-list li > span {
     background-color:#fff;
@@ -257,9 +259,10 @@
 .product-tabs .characteristic-list li > span.char-value {
     float:right;
     min-width: 224px;
+    padding-left: 8px;
 }
 .product-tabs .characteristic-list .char-name {
-
+    padding-right: 8px;
 }
 .product-tabs .characteristic-list .bottom-line{
     background-image:radial-gradient(black 1px, white 0px);
@@ -598,4 +601,20 @@
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1230px){
 
+    .product-info .rate-container{
+        margin-top: 7px;
+    }
+    .photo-carousel-container .button {
+        margin-top: -70px;
+        font-size: 19px;
+    }
+    .photo-carousel-container .prev.button {
+        left: 5px;
+    }
+    .photo-carousel-container .next.button {
+        right: 3px;
+    }
+    .photo-carousel-container {
+         padding-left: 10px;
+    }
 }
