@@ -56,6 +56,7 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
         <div class="reset-link-container">
             <span class="yellow-text-underline reset-link">Забыли пароль?</span>
         </div>
+    </form>
         <div class="row registration-social">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 registration-column">
                 <div class="autorization-btn-container" >
@@ -77,7 +78,7 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
 
         </div>
         <div class="button-container">
-            <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="Login" value="<?=GetMessage("AUTH_LOGIN_BUTTON")?>">
+            <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="Login" value="<?=GetMessage("AUTH_LOGIN_BUTTON")?>" onclick="$('#login-area').submit()">
                 <span>Войти</span>
             </button>
         </div>
@@ -118,7 +119,6 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
                 });
             })
         </script>
-    </form>
 <?}else if($arResult["FORM_TYPE"] == "otp"){?>
 <?}else{?>
 <?}?>

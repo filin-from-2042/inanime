@@ -40,7 +40,8 @@ function BxSocServPopup(id)
 			closeByEsc: true,
 			angle: {offset: 24},
 			content: content,
-			offsetTop: 3
+			offsetTop: 3,
+            zIndex:1051
 		});
 
 		popup.show();
