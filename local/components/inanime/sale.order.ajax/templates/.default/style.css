@@ -183,6 +183,63 @@
     margin-top: 17px;
     /*display: none;*/
 }
+.order-drawing-up .order-login{
+
+}
+.order-drawing-up .nav-tabs.order-login > li{
+    float: none;
+}
+.order-drawing-up .order-login.nav-tabs>li>a,
+.order-drawing-up .order-login.nav-tabs>li.active>a,
+.order-drawing-up .order-login.nav-tabs>li.active>a:hover,
+.order-drawing-up .order-login.nav-tabs>li.active>a:focus {
+    color: #555;
+    background-color: #fff;
+    border: none;
+    border-bottom-color: transparent;
+    cursor: default;
+}
+.order-drawing-up .row.new-user-radio{
+    margin-bottom: 10px;
+}
+
+.order-drawing-up.auth-forms .order-drawing-up-header {
+    margin-top: 40px;
+}
+.order-drawing-up.auth-forms .button-container button[type="submit"]{
+    font-size: 14px;
+    padding: 11px 26px;
+}
+.order-drawing-up.auth-forms  .radio-tabs-container{
+    min-height: 385px;
+}
+.order-drawing-up.auth-forms  .radio-tabs-container .input-container{
+    margin-bottom: 15px;
+}
+.order-drawing-up.auth-forms  .radio-tabs-container .captchaWrap,
+.order-drawing-up.auth-forms  .radio-tabs-container .inputWrap{
+    display: inline-block;
+}
+.order-drawing-up.auth-forms  .radio-tabs-container .inputWrap #captcha{
+    width: 187px;
+}
+.order-drawing-up.auth-forms .radio-button-container{
+    margin-bottom: 10px;
+}
+.order-drawing-up.auth-forms .error-container{
+    text-align: left;
+}
+.order-drawing-up .error-container,
+.order-drawing-up.auth-forms .error-container{
+    color: red;
+}
+
+.radio-tab-control-wrap .radio-tabs-container .radio-content{
+    display: none;
+}
+.radio-tab-control-wrap .radio-tabs-container .radio-content.active{
+    display: block;
+}
 
 /******************************** DRAWING-UP-COMPLETE **********************************/
 .order-drawing-up-complete{}
@@ -238,7 +295,6 @@
     font-size: 15px;
     padding: 10px 30px;
 }
-
 
 /* Mobile */
 @media (max-width: 760px) {
@@ -314,6 +370,9 @@
         text-align: right;
         margin-right: -30px;
     }
+    .order-drawing-up.auth-forms .input-container .form-control{
+        width: 100%;
+    }
 
     /******************************** DRAWING-UP-COMPLETE **********************************/
     .order-drawing-up-complete .data-container {
@@ -387,6 +446,15 @@
     .order-drawing-up .ia-page-title{
         margin-bottom: 13px;
     }
+    .order-drawing-up.auth-forms .input-container .form-control{
+        width: 270px;
+    }
+    .order-drawing-up.auth-forms .radio-button-container .button-title{
+        width: 120px;
+    }
+    .order-drawing-up.auth-forms .radio-tabs-container .inputWrap #captcha {
+        width: 270px;
+    }
 
     /******************************** DRAWING-UP-COMPLETE **********************************/
     .order-drawing-up-complete .message-container {
@@ -413,6 +481,11 @@
     }
     .order-drawing-up .order-comment-container .order-comment-textarea {
         width: 815px;
+    }
+
+
+    .order-drawing-up.auth-forms .input-container .form-control{
+        width: 330px;
     }
 
 }

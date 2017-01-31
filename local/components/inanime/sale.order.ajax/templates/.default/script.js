@@ -5,8 +5,9 @@
 (function(window)
 {
    window.InAnimeOrderAjax = function(params)
-   {console.log(params);
+   {
         this.saleProfiles = params.saleProfiles;
+
    };
 
     window.InAnimeOrderAjax.prototype.changeSaleProfile = function(event)
@@ -51,5 +52,19 @@
 
         var fullAddr = 'ул. '+$streetInputVal.replace(',',' ').trim()+', д. '+$houseNumberInputVal.replace(',',' ').trim()+', кв. '+$apartmentInputVal.replace(',',' ').trim();
         $('.order-drawing-up .address-container .full-address').val(fullAddr);
+    };
+
+    window.InAnimeOrderAjax.prototype.changeUserType = function(event)
+    {
+        event.stopPropagation();
+        if ($(event.currentTarget).hasClass('ia-radio-button')) var radioButton = $(event.currentTarget);
+        else var radioButton = $(event.currentTarget).closest('.radio-button-container').find('.ia-radio-button');
+        radioButton.closest('.radio-container').find('input.ia-radio-value').val(radioButton.find('span.value.hidden').text());
+        radioButton.closest('.radio-container').find('.ia-radio-button').removeClass('active');
+        radioButton.addClass('active');
+
+        var contentID = radioButton.attr('data-contentid');
+        radioButton.closest('.radio-tab-control-wrap').find('.radio-tabs-container .active').removeClass('active');
+        radioButton.closest('.radio-tab-control-wrap').find('.radio-tabs-container #'+contentID).addClass('active');
     }
 })(window);

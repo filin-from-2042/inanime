@@ -113,6 +113,13 @@ if ($_SERVER["REQUEST_METHOD"] == "POST" && $_REQUEST["new-address"]<>'' && chec
 
         foreach ($PROPS as $prop)
             CSaleOrderUserPropsValue::Add($prop);
+
+        // установка активного профиля
+        $newUser = new CUser;
+        $fields = Array(
+            "UF_CUSTOMER_PROFILE" => $newProfileID,
+        );
+        $newUser->Update($USER->GetID(), $fields);
     }
 }
 

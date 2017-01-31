@@ -45,6 +45,38 @@ $arJSParams = array();
         submitForm("Y");
         return false;
     });
+    $(document).on("click", "#orderWithoutReg", function() {
+        order_values = {};
+        order_values["page"] = "order";
+        order_values["ALLOW_AUTO_REGISTER"] = "Y";
+        setSessionValues(order_values, function() {location.reload()});
+    });
+
+    $(document).on("click", "#orderWithReg", function() {
+        order_values = {};
+        order_values["page"] = "order";
+        order_values["ALLOW_AUTO_REGISTER"] = "N";
+        setSessionValues(order_values, function() {location.reload()});
+    });
+    function setSessionValues(values, callback) {
+
+        $.ajax({
+            url: "/include/session.php",
+            type: 'post',
+            contentType: "application/x-www-form-urlencoded",
+            dataType: "json",
+            data: {values: values},
+            success: function(data, status) {
+                if (data.success)
+                    if (typeof callback === 'function')
+                        callback();
+            },
+            error: function(xhr, desc, err) {
+
+            }
+        });
+
+    }
 </script>
 <a name="order_form"></a>
 <div id="order_form_div" class="order-checkout">
@@ -147,30 +179,26 @@ else
                 <?
                 if (!$USER->IsAuthorized()) {
                     ?>
-                    <div class="choise-user">
-                        <div class="radioWrap">
-                            <input type="radio" name="choise_user" id="choise_user_new" checked="checked" />
-                            <label for="choise_user_new">
-                                Я &mdash; новый пользователь на сайте (заказ без регистрации)
-                            </label>
+                        <div class="row new-user-radio">
+                            <div class="col-md-offset-3 col-lg-offset-3  col-sm-24 col-md-21 col-lg-21">
+                                <div class="radio-button-container user-type">
+                                    <div class="ia-radio-button small active" data-contentid="user-new-data">
+                                        <span class="value hidden">choise_user</span>
+                                        <div class="radio-dot"></div>
+                                    </div>
+                                    <div class="button-title">Я &mdash; новый пользователь</div>
+                                </div>
+
+                                <? if ($_SESSION["USER_VALUES"]["order"]["ALLOW_AUTO_REGISTER"] == "Y") { ?>
+                                    <a href="javascript:void(0);" class="yellow-text-underline" id="orderWithReg">Заказ с регистрацией</a>
+                                <? } else { ?>
+                                    <a href="javascript:void(0);"  class="yellow-text-underline" id="orderWithoutReg">Заказ без регистрации</a>
+                                <? } ?>
+
+                            </div>
                         </div>
-                        <? /*
-                                        <div class="radioWrap">
-                                            <input type="radio" name="choise_user" id="choise_user_old" />
-                                            <label for="choise_user_old">
-                                                У меня уже есть аккаунт тут
-                                            </label>
-                                        </div>
-									*/ ?>
-                        <? if ($_SESSION["USER_VALUES"]["order"]["ALLOW_AUTO_REGISTER"] == "Y") { ?>
-                            <a href="javascript:void(0);" id="orderWithReg">Заказ с регистрацией</a>
-                        <? } else { ?>
-                            <a href="javascript:void(0);" id="orderWithoutReg">Заказ без регистрации</a>
-                        <? } ?>
                     </div>
                 <? }
-                else
-                {
                     $arFields = array();
                     foreach($arResult["ORDER_PROP"]["USER_PROPS_Y"] as $arProperties)
                     {
@@ -181,7 +209,7 @@ else
                     <div class="row">
                         <div class="col-md-offset-3 col-lg-offset-3 col-sm-12 col-md-8 col-lg-8 fio-column">
                             <div class="input-container">
-                                <input type="text" name="<?=$arFields['FIO']['FIELD_NAME']?>" value="<?=$arFields['FIO']['VALUE']?>" placeholder="Анатлоий" class="form-control first-name-input">
+                                <input type="text" name="<?=$arFields['FIO']['FIELD_NAME']?>" value="<?=$arFields['FIO']['VALUE']?>" placeholder="Имя" class="form-control first-name-input">
                             </div>
                             <?/*?>
                             <div class="input-container">
@@ -194,21 +222,24 @@ else
                             </div>
                             <?*/?>
                             <div class="input-container">
-                                <input type="text" name="<?=$arFields['EMAIL']['FIELD_NAME']?>" value="<?=$arFields['EMAIL']['VALUE']?>" placeholder="anatoly@mail.ru" class="form-control email-input">
+                                <input type="text" name="<?=$arFields['EMAIL']['FIELD_NAME']?>" value="<?=$arFields['EMAIL']['VALUE']?>" placeholder="Email" class="form-control email-input">
                             </div>
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 address-column">
                             <?
-                            $rsUser = CUser::GetList(($by="ID"), ($order="desc"), array("ID"=>$USER->GetID()),array("SELECT"=>array("UF_CUSTOMER_PROFILE")));
-                            $userData = $rsUser->Fetch();
-                            $currentProfileID = intval($userData['UF_CUSTOMER_PROFILE']);
+                            $profilesCount = 0;
+                            if($USER->IsAuthorized())
+                            {
+                                $rsUser = CUser::GetList(($by="ID"), ($order="desc"), array("ID"=>$USER->GetID()),array("SELECT"=>array("UF_CUSTOMER_PROFILE")));
+                                $userData = $rsUser->Fetch();
+                                $currentProfileID = intval($userData['UF_CUSTOMER_PROFILE']);
 
-                            $profiles = CSaleOrderUserProps::GetList(
-                                array("DATE_UPDATE" => "DESC"),
-                                array("USER_ID" => $USER->GetID())
-                            );
-                            $profilesCount = $profiles->SelectedRowsCount();
-
+                                $profiles = CSaleOrderUserProps::GetList(
+                                    array("DATE_UPDATE" => "DESC"),
+                                    array("USER_ID" => $USER->GetID())
+                                );
+                                $profilesCount = $profiles->SelectedRowsCount();
+                            }
                             if($profilesCount>0)
                             {
                             ?>
@@ -298,38 +329,6 @@ else
                                     <div class="address-container">
 
                                         <div class="input-container">
-                                            <?/*
-                                            $db_props = CSaleOrderProps::GetList(
-                                                array("SORT" => "ASC"), array(
-                                                    "PERSON_TYPE_ID" => $arResult["USER_VALS"]["PERSON_TYPE_ID"], "CODE" => "LOCATION"
-                                                ), false, false, array()
-                                            );
-
-                                            if ($props = $db_props->Fetch())
-                                                $locationProp = $arResult["ORDER_PROP"]["USER_PROPS_Y"][$props["ID"]];
-                                            else
-                                                $locationProp = false;
-                                            ?>
-                                            <?$APPLICATION->IncludeComponent("bitrix:sale.location.selector.search", "template1", Array(
-                                                    "COMPONENT_TEMPLATE" => ".default",
-                                                    "ID" => $currLocationID,	// ID местоположения
-                                                    "CODE" => "",	// Символьный код местоположения
-                                                    "INPUT_NAME" => $locationProp["FIELD_NAME"],	// Имя поля ввода
-                                                    "PROVIDE_LINK_BY" => "id",	// Сохранять связь через
-                                                    "JS_CONTROL_GLOBAL_ID" => "addressLocationSelector",
-                                                    "JS_CALLBACK" => "",	// Javascript-функция обратного вызова
-                                                    "AJAX_MODE" => "Y",
-                                                    "FILTER_BY_SITE" => "Y",	// Фильтровать по сайту
-                                                    "SHOW_DEFAULT_LOCATIONS" => "Y",	// Отображать местоположения по-умолчанию
-                                                    "CACHE_TYPE" => "A",	// Тип кеширования
-                                                    "CACHE_TIME" => "36000000",	// Время кеширования (сек.)
-                                                    "FILTER_SITE_ID" => SITE_ID,	// Cайт
-                                                    "INITIALIZE_BY_GLOBAL_EVENT" => "",	// Инициализировать компонент только при наступлении указанного javascript-события на объекте window.document
-                                                    "SUPPRESS_ERRORS" => "N",	// Не показывать ошибки, если они возникли при загрузке компонента
-                                                ),
-                                                false
-                                            );*/?>
-
                                             <?
                                             $db_props = CSaleOrderProps::GetList(
                                                 array("SORT" => "ASC"), array(
@@ -405,7 +404,59 @@ else
                                     <div class="address-container">
                                         <input type="hidden" name="<?=$arFields['ADDRESS']['FIELD_NAME']?>" value="<?=$arFields['ADDRESS']["VALUE"]?>" id="<?=$arFields['ADDRESS']['FIELD_NAME'] ?>" class="full-address" />
                                         <div class="input-container">
-                                            <input type="text" name="city" value="" placeholder="Город1" class="form-control city-input">
+
+                                            <?
+                                            $db_props = CSaleOrderProps::GetList(
+                                                array("SORT" => "ASC"), array(
+                                                    "PERSON_TYPE_ID" => $arResult["USER_VALS"]["PERSON_TYPE_ID"], "CODE" => "LOCATION"
+                                                ), false, false, array()
+                                            );
+
+                                            if ($props = $db_props->Fetch())
+                                                $locationProp = $arResult["ORDER_PROP"]["USER_PROPS_Y"][$props["ID"]];
+                                            else
+                                                $locationProp = false;
+
+                                            //var_dump(CSaleLocation::GetByID($_SESSION['SESS_CITY_ID']));
+
+                                       $cityObj = new CCity();
+                                       $arThisCity = $cityObj ->GetFullInfo();
+                                       print_r($arThisCity);
+
+                                            $zipCode = $arFields['ZIP']["VALUE"];
+                                            $db_zip = CSaleLocation::GetLocationZIP($locationProp['VALUE']);
+                                            if($zipProp = $db_zip->Fetch())
+                                            {
+                                                $zipCode = $zipProp['ZIP'];
+                                            }
+
+                                            $value = 0;
+                                            if ($locationProp) {
+                                                if (is_array($locationProp["VARIANTS"]) && count($locationProp["VARIANTS"]) > 0) {
+                                                    foreach ($locationProp["VARIANTS"] as $arVariant) {
+                                                        if ($arVariant["SELECTED"] == "Y") {
+                                                            $value = $arVariant["ID"];
+                                                            break;
+                                                        }
+                                                    }
+                                                }
+                                                $GLOBALS["APPLICATION"]->IncludeComponent(
+                                                    "bitrix:sale.ajax.locations", "popup", array(
+                                                        "AJAX_CALL" => "N",
+                                                        "COUNTRY_INPUT_NAME" => "COUNTRY",
+                                                        "REGION_INPUT_NAME" => "REGION",
+                                                        "CITY_INPUT_NAME" => $locationProp["FIELD_NAME"],
+                                                        "CITY_OUT_LOCATION" => "Y",
+                                                        "LOCATION_VALUE" => $_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID'],
+                                                        "ORDER_PROPS_ID" => $locationProp["ID"],
+                                                        "ONCITYCHANGE" => ($locationProp["IS_LOCATION"] == "Y" || $locationProp["IS_LOCATION4TAX"] == "Y") ? "submitForm()" : "",
+                                                        "SIZE1" => $locationProp["SIZE1"],
+                                                    ), null, array('HIDE_ICONS' => 'Y')
+                                                );
+                                            }
+                                            ?>
+
+                                            <?/*?><input type="text" name="city" value="" placeholder="Город1" class="form-control city-input"><?*/?>
                                         </div>
                                         <div class="street-data-fields">
                                             <div class="input-container">
@@ -431,7 +482,6 @@ else
                             <?}?>
                         </div>
                     </div>
-                    <?}?>
                     <div class="row radio-row">
                         <div class="col-md-offset-3 col-lg-offset-3 col-sm-12 col-md-8 col-lg-8 shipping-column">
                             <?include($_SERVER["DOCUMENT_ROOT"] . $templateFolder . "/delivery.php");?>
@@ -592,7 +642,6 @@ else
                     <script>
                         $(document).ready(function(){
 
-                            var inAnimeOrderAjax = new InAnimeOrderAjax(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
                             $('body').on('change','.order-drawing-up .address-container .form-control', inAnimeOrderAjax.changeAddressData);
 
                             $('body').on('click','.radio-values-container .ia-radio-button,.radio-values-container .radio-button-container .button-title',
@@ -629,6 +678,9 @@ else
                         top.BX('profile_change').value = 'N';
                     </script>
 
+                    <script>
+                        var inAnimeOrderAjax = new InAnimeOrderAjax(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
+                    </script>
                     <?
                     die();
                 }
@@ -641,3 +693,8 @@ else
 
     <?}?>
 <?}?>
+
+
+<script>
+    var inAnimeOrderAjax = new InAnimeOrderAjax(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
+</script>
