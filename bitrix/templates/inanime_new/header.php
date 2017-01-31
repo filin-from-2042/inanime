@@ -73,7 +73,6 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                             {
                                 $cityObj = new CCity();
                                 $arThisCity = $cityObj ->GetFullInfo();
-//                                var_dump($cityObj->GetCityID());
 
                                 $db_vars = CSaleLocation::GetList(
                                     array(
@@ -81,9 +80,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                                         "COUNTRY_NAME_LANG" => "ASC",
                                         "CITY_NAME_LANG" => "ASC"
                                     ),
-//                                    array("CITY_NAME" => 'Новомосковск', "LID" => LANGUAGE_ID, 'COUNTRY_ID'=>19),
                                     array("CITY_NAME" => $arThisCity['CITY_NAME']['VALUE'], "LID" => LANGUAGE_ID, 'COUNTRY_ID'=>19),
-//                                    array( "LID" => LANGUAGE_ID, 'COUNTRY_ID'=>19),
                                     false,
                                     false,
                                     array()

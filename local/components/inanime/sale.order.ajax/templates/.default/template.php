@@ -109,6 +109,30 @@ $arJSParams = array();
     ?>
 <?
 if (!$USER->IsAuthorized() && $arParams["ALLOW_AUTO_REGISTER"] == "N") {
+
+    $arBasketItems = array();
+    $dbBasketItems = CSaleBasket::GetList(
+        array(
+            "NAME" => "ASC",
+            "ID" => "ASC"
+        ),
+        array(
+            "FUSER_ID" => CSaleBasket::GetBasketUserID(),
+            "LID" => SITE_ID,
+            "ORDER_ID" => "NULL"
+        ),
+        false,
+        false,
+        array("ID", "CALLBACK_FUNC", "MODULE",
+            "PRODUCT_ID", "QUANTITY", "DELAY",
+            "CAN_BUY", "PRICE", "WEIGHT")
+    );
+    while ($arItems = $dbBasketItems->Fetch())
+    {
+        $arBasketItems[] = $arItems;
+    }
+    if(count($arBasketItems)<=0)  LocalRedirect('/');
+
     include($_SERVER["DOCUMENT_ROOT"] . $templateFolder . "/auth.php");
 }
 else
@@ -197,7 +221,6 @@ else
 
                             </div>
                         </div>
-                    </div>
                 <? }
                     $arFields = array();
                     foreach($arResult["ORDER_PROP"]["USER_PROPS_Y"] as $arProperties)
@@ -416,12 +439,6 @@ else
                                                 $locationProp = $arResult["ORDER_PROP"]["USER_PROPS_Y"][$props["ID"]];
                                             else
                                                 $locationProp = false;
-
-                                            //var_dump(CSaleLocation::GetByID($_SESSION['SESS_CITY_ID']));
-
-                                       $cityObj = new CCity();
-                                       $arThisCity = $cityObj ->GetFullInfo();
-                                       print_r($arThisCity);
 
                                             $zipCode = $arFields['ZIP']["VALUE"];
                                             $db_zip = CSaleLocation::GetLocationZIP($locationProp['VALUE']);
@@ -678,9 +695,6 @@ else
                         top.BX('profile_change').value = 'N';
                     </script>
 
-                    <script>
-                        var inAnimeOrderAjax = new InAnimeOrderAjax(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
-                    </script>
                     <?
                     die();
                 }
@@ -693,8 +707,7 @@ else
 
     <?}?>
 <?}?>
-
-
 <script>
+
     var inAnimeOrderAjax = new InAnimeOrderAjax(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
 </script>
