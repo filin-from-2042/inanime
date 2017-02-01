@@ -222,6 +222,7 @@ else
                             </div>
                         </div>
                 <? }
+
                     $arFields = array();
                     foreach($arResult["ORDER_PROP"]["USER_PROPS_Y"] as $arProperties)
                     {
@@ -234,16 +235,6 @@ else
                             <div class="input-container">
                                 <input type="text" name="<?=$arFields['FIO']['FIELD_NAME']?>" value="<?=$arFields['FIO']['VALUE']?>" placeholder="Имя" class="form-control first-name-input">
                             </div>
-                            <?/*?>
-                            <div class="input-container">
-                                <input type="text" name="second-name" value="" placeholder="Корягин" class="form-control second-name-input">
-                            </div>
-                            <?*/?>
-                            <?/*?>
-                            <div class="input-container">
-                                <input type="text" name="<?=$arFields['PHONE']['FIELD_NAME']?>" value="<?=$arFields['PHONE']['VALUE']?>" placeholder="89238138434" class="form-control phone-input">
-                            </div>
-                            <?*/?>
                             <div class="input-container">
                                 <input type="text" name="<?=$arFields['EMAIL']['FIELD_NAME']?>" value="<?=$arFields['EMAIL']['VALUE']?>" placeholder="Email" class="form-control email-input">
                             </div>
@@ -337,7 +328,7 @@ else
                                         <?$addressCounter++;?>
                                     <?}?>
                                     <input type="hidden" name="addresProfile" value="<?=$currentProfileID?>" id="addreesProfile" />
-                                    <input type="hidden" name="<?=$arFields['ADDRESS']['FIELD_NAME']?>" value="<?=$currFullAdress?>" id="<?=$arFields['ADDRESS']['FIELD_NAME'] ?>" class="ia-radio-value">
+                                    <input type="hidden" name="<?=$arFields['ADDRESS']['FIELD_NAME']?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['ADDRESS']['VALUE'] : $currFullAdress?>" id="<?=$arFields['ADDRESS']['FIELD_NAME'] ?>" class="ia-radio-value full-address">
                                 </div>
                                     <?
                                         $streetDataString = '';
@@ -364,7 +355,6 @@ else
                                             else
                                                 $locationProp = false;
 
-                                            //var_dump(CSaleLocation::GetByID($locationProp['VALUE']));
                                             $zipCode = $arFields['ZIP']["VALUE"];
                                             $db_zip = CSaleLocation::GetLocationZIP($locationProp['VALUE']);
                                             if($zipProp = $db_zip->Fetch())
@@ -400,20 +390,37 @@ else
                                         </div>
                                         <div class="street-data-fields">
                                             <div class="input-container">
-                                                <input type="text" name="street" value="<?=str_replace('ул.','',$streetDataString)?>" placeholder="Улица" class="form-control street-input">
+                                                <input type="text" name="street" value="<?if($_POST["is_ajax_post"] == "Y"){
+                                                                                            echo ($arResult['TEMPORARY_FIELDS_DATA'] && $arResult['TEMPORARY_FIELDS_DATA']['street'])?$arResult['TEMPORARY_FIELDS_DATA']['street']:'';
+                                                                                        }else{
+                                                                                            echo str_replace('ул.','',$streetDataString);
+                                                                                        }
+                                                                                        ?>"
+                                                       placeholder="Улица" class="form-control street-input">
                                             </div>
                                             <div class="input-container">
-                                                <input type="text" name="house-number" value="<?=str_replace('д.','',$houseNumberString)?>" placeholder="Дом" class="form-control house-number-input">
+                                                <input type="text" name="house-number" value="<?if($_POST["is_ajax_post"] == "Y"){
+                                                                                                    echo ($arResult['TEMPORARY_FIELDS_DATA'] && $arResult['TEMPORARY_FIELDS_DATA']['house-number'])?$arResult['TEMPORARY_FIELDS_DATA']['house-number']:'';
+                                                                                                }else{
+                                                                                                    echo str_replace('д.','',$houseNumberString);
+                                                                                                }
+                                                                                                ?>"
+                                                       placeholder="Дом" class="form-control house-number-input">
                                             </div>
                                             <div class="input-container apartment-container">
-                                                <input type="text" name="apartment" value="<?=str_replace('кв.','',$apartmentString)?>" placeholder="Квартира" class="form-control apartment-input">
+                                                <input type="text" name="apartment" value="<?if($_POST["is_ajax_post"] == "Y"){
+                                                                                                echo ($arResult['TEMPORARY_FIELDS_DATA'] && $arResult['TEMPORARY_FIELDS_DATA']['apartment'])?$arResult['TEMPORARY_FIELDS_DATA']['apartment']:'';
+                                                                                            }else{
+                                                                                                echo str_replace('кв.','',$apartmentString);
+                                                                                            }?>"
+                                                       placeholder="Квартира" class="form-control apartment-input">
                                             </div>
                                             <div class="input-container">
-                                                <input type="text" name="<?=$arFields['ZIP']["FIELD_NAME"]?>" value="<?= $currZip ?>" placeholder="Индекс" class="form-control zip-input">
+                                                <input type="text" name="<?=$arFields['ZIP']["FIELD_NAME"]?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['ZIP']['VALUE'] : $currZip ?>" placeholder="Индекс" class="form-control zip-input">
                                             </div>
                                             <div>
                                                 <div class="input-container">
-                                                    <input type="text" name="<?=$arFields['PHONE']['FIELD_NAME']?>" value="<?=$currPhone?>" placeholder="Телефон" class="form-control phone-input">
+                                                    <input type="text" name="<?=$arFields['PHONE']['FIELD_NAME']?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['PHONE']['VALUE'] :$currPhone?>" placeholder="Телефон" class="form-control phone-input">
                                                 </div>
                                             </div>
                                         </div>
@@ -472,25 +479,23 @@ else
                                                 );
                                             }
                                             ?>
-
-                                            <?/*?><input type="text" name="city" value="" placeholder="Город1" class="form-control city-input"><?*/?>
                                         </div>
                                         <div class="street-data-fields">
                                             <div class="input-container">
-                                                <input type="text" name="street" value="" placeholder="Улица1" class="form-control street-input">
+                                                <input type="text" name="street" value="<?=($arResult['TEMPORARY_FIELDS_DATA'] && $arResult['TEMPORARY_FIELDS_DATA']['street'])?$arResult['TEMPORARY_FIELDS_DATA']['street']:''?>" placeholder="Улица1" class="form-control street-input">
                                             </div>
                                             <div class="input-container">
-                                                <input type="text" name="house-number" value="" placeholder="Дом1" class="form-control house-number-input">
+                                                <input type="text" name="house-number" value="<?=($arResult['TEMPORARY_FIELDS_DATA'] && $arResult['TEMPORARY_FIELDS_DATA']['house-number'])?$arResult['TEMPORARY_FIELDS_DATA']['house-number']:''?>" placeholder="Дом1" class="form-control house-number-input">
                                             </div>
                                             <div class="input-container apartment-container">
-                                                <input type="text" name="apartment" value="" placeholder="Квартира1" class="form-control apartment-input">
+                                                <input type="text" name="apartment" value="<?=($arResult['TEMPORARY_FIELDS_DATA'] && $arResult['TEMPORARY_FIELDS_DATA']['apartment'])?$arResult['TEMPORARY_FIELDS_DATA']['apartment']:''?>" placeholder="Квартира1" class="form-control apartment-input">
                                             </div>
                                             <div class="input-container">
-                                                <input type="text" name="<?=$arFields['ZIP']["FIELD_NAME"]?>" value="" placeholder="Индекс" class="form-control zip-input">
+                                                <input type="text" name="<?=$arFields['ZIP']["FIELD_NAME"]?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['ZIP']['VALUE'] : $currZip ?>" placeholder="Индекс" class="form-control zip-input">
                                             </div>
                                             <div>
                                                 <div class="input-container">
-                                                    <input type="text" name="<?=$arFields['PHONE']['FIELD_NAME']?>" value="" placeholder="Телефон" class="form-control phone-input">
+                                                    <input type="text" name="<?=$arFields['PHONE']['FIELD_NAME']?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['PHONE']['VALUE'] :$currPhone?>" placeholder="Телефон" class="form-control phone-input">
                                                 </div>
                                             </div>
                                         </div>

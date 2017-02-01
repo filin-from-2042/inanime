@@ -51,7 +51,7 @@
         if(!$apartmentInputVal) return;
 
         var fullAddr = 'ул. '+$streetInputVal.replace(',',' ').trim()+', д. '+$houseNumberInputVal.replace(',',' ').trim()+', кв. '+$apartmentInputVal.replace(',',' ').trim();
-        $('.order-drawing-up .address-container .full-address').val(fullAddr);
+        $('.order-drawing-up .full-address').val(fullAddr);
     };
 
     window.InAnimeOrderAjax.prototype.changeUserType = function(event)

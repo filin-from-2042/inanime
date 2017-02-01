@@ -625,6 +625,10 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
                 $newUser->Update($USER->GetID(), $fields);
             }
 
+            if(isset($_POST['street'])) $arResult['TEMPORARY_FIELDS_DATA']['street'] = $_POST['street'];
+            if(isset($_POST['house-number'])) $arResult['TEMPORARY_FIELDS_DATA']['house-number'] = $_POST['house-number'];
+            if(isset($_POST['apartment'])) $arResult['TEMPORARY_FIELDS_DATA']['apartment'] = $_POST['apartment'];
+
             if (IntVal($_POST["PERSON_TYPE"]) > 0)
                 $arUserResult["PERSON_TYPE_ID"] = IntVal($_POST["PERSON_TYPE"]);
             if (IntVal($_POST["PERSON_TYPE_OLD"]) == $arUserResult["PERSON_TYPE_ID"]) {
@@ -950,11 +954,44 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
             ExecuteModuleEventEx($arEvent, Array(&$arResult, &$arUserResult, &$arParams));
         /* Order Props End */
 
-
         //delete prop for text location
         if (count($arDeleteFieldLocation) > 0) {
             foreach ($arDeleteFieldLocation as $fieldId)
                 unset($arResult["ORDER_PROP"]["USER_PROPS_Y"][$fieldId]);
+        }
+
+        // Установанка location_id для авторизованного из профиля и для неавторизованного из определенного местонахождения по умолчанию
+        // При аяксе запросе выставляем переданное значение в посте
+        $db_props_location = CSaleOrderProps::GetList(
+            array("SORT" => "ASC"), array(
+                "PERSON_TYPE_ID" => $arResult["USER_VALS"]["PERSON_TYPE_ID"], "CODE" => "LOCATION"
+            ), false, false, array()
+        );
+        if ($props_location = $db_props_location->Fetch())
+            $locationPropData = $arResult["ORDER_PROP"]["USER_PROPS_Y"][$props_location["ID"]];
+        else
+            $locationPropData = false;
+        if($locationPropData)
+        {
+            if($_SERVER["REQUEST_METHOD"] == "POST"){
+                //$arUserResult["DELIVERY_LOCATION"] = $_POST[$locationPropData["FIELD_NAME"]];
+            }else{
+                if($USER->IsAuthorized() )
+                {
+                    /*$profiles = CSaleOrderUserProps::GetList(
+                        array("DATE_UPDATE" => "DESC"),
+                        array("USER_ID" => $USER->GetID())
+                    );
+                    $profilesCount = $profiles->SelectedRowsCount();
+                    if($profilesCount>0)
+                    {
+                        while ($profile = $profiles->Fetch())
+                        {
+
+                        }
+                    }*/
+                }
+            }
         }
 
         /* Delivery Begin */
