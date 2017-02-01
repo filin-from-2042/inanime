@@ -123,15 +123,14 @@ if (!$USER->IsAuthorized() && $arParams["ALLOW_AUTO_REGISTER"] == "N") {
         ),
         false,
         false,
-        array("ID", "CALLBACK_FUNC", "MODULE",
-            "PRODUCT_ID", "QUANTITY", "DELAY",
-            "CAN_BUY", "PRICE", "WEIGHT")
+        array("ID")
     );
     while ($arItems = $dbBasketItems->Fetch())
     {
-        $arBasketItems[] = $arItems;
+//        $arBasketItems[] = $arItems;
+        LocalRedirect('/');
     }
-    if(count($arBasketItems)<=0)  LocalRedirect('/');
+//    if(count($arBasketItems)<=0)  LocalRedirect('/');
 
     include($_SERVER["DOCUMENT_ROOT"] . $templateFolder . "/auth.php");
 }
@@ -223,6 +222,7 @@ else
                         </div>
                 <? }
 
+                  // поля в удободоступном виде $arFields['имя поля']
                     $arFields = array();
                     foreach($arResult["ORDER_PROP"]["USER_PROPS_Y"] as $arProperties)
                     {
