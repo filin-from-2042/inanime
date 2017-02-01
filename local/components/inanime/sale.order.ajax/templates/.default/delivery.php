@@ -10,10 +10,11 @@ if (!empty($arResult["DELIVERY"])) {
     ?>
 
 <div class="radio-container">
-    <input type="hidden" name="<?=current($arResult["DELIVERY"])['FIELD_NAME']?>" class="ia-radio-value">
     <?
+    $activeDelivery = 0;
     foreach ($arResult["DELIVERY"] as $delivery_id => $arDelivery)
     {
+        if(($arDelivery["CHECKED"] == "Y")) $activeDelivery = $arDelivery['ID'];
         ?>
         <div class="radio-button-container">
             <div class="ia-radio-button small<?=($arDelivery["CHECKED"] == "Y")?' active':''?>">
@@ -30,8 +31,9 @@ if (!empty($arResult["DELIVERY"])) {
                 <?endif;?>
             </div>
         </div>
-    <?}
+    <?}reset($arResult["DELIVERY"]);
     ?>
+    <input type="hidden" name="<?=current($arResult["DELIVERY"])['FIELD_NAME']?>" class="ia-radio-value" <?=($activeDelivery)?'value="'.$activeDelivery.'"':''?>>
 </div>
 <script>
     $(document).ready(function(){

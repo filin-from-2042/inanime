@@ -188,21 +188,7 @@
             </div>
         </div>
         <script>
-            $(document).ready(function()
-            {/*
-                $('.radio-tab-control-wrap .radio-control').click(function(event)
-                {
-                    var $this = $(this);
-                    if(!$this.hasClass('active'))
-                    {
-                        var contentID = $(this).attr('data-contentid');
-                        $this.closest('.radio-tab-control-wrap').find('.radio-control.active').removeClass('active');
-                        $this.addClass('active');
-                        $this.closest('.radio-tab-control-wrap').find('.radio-tabs-container .active').removeClass('active');
-                        $this.closest('.radio-tab-control-wrap').find('.radio-tabs-container #'+contentID).addClass('active');
-                    }
-                });*/
-            });
+            var inAnimeOrderAjax = new InAnimeOrderAjax(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
         </script>
 
     </div>

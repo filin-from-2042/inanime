@@ -73,7 +73,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                             {
                                 $cityObj = new CCity();
                                 $arThisCity = $cityObj ->GetFullInfo();
-
+// TODO: сейчас только для России, сделать универсально
                                 $db_vars = CSaleLocation::GetList(
                                     array(
                                         "SORT" => "ASC",

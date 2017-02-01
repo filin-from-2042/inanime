@@ -658,7 +658,7 @@ else
 
                     <script>
                         $(document).ready(function(){
-
+                            var inAnimeOrderAjax = new InAnimeOrderAjax(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
                             $('body').on('change','.order-drawing-up .address-container .form-control', inAnimeOrderAjax.changeAddressData);
 
                             $('body').on('click','.radio-values-container .ia-radio-button,.radio-values-container .radio-button-container .button-title',
@@ -707,7 +707,3 @@ else
 
     <?}?>
 <?}?>
-<script>
-
-    var inAnimeOrderAjax = new InAnimeOrderAjax(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
-</script>

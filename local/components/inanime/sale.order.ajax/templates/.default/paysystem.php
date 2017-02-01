@@ -83,13 +83,13 @@ if ($arResult["PAY_FROM_ACCOUNT"] == "Y" && false) {
 ?>
 <h3>Способ оплаты</h3>
 <div class="radio-container">
-    <input type="hidden" name="PAY_SYSTEM_ID" class="ia-radio-value">
     <?
     uasort($arResult["PAY_SYSTEM"], "cmpBySort"); // resort arrays according to SORT value
-
+    $activePaysystem = 0;
     foreach ($arResult["PAY_SYSTEM"] as $arPaySystem)
-    {?>
-
+    {
+        if($arPaySystem["CHECKED"] == "Y") $activePaysystem = $arPaySystem['ID'];
+        ?>
         <div class="radio-button-container">
             <div class="ia-radio-button small<?=($arPaySystem["CHECKED"] == "Y" && !($arParams["ONLY_FULL_PAY_FROM_ACCOUNT"] == "Y" && $arResult["USER_VALS"]["PAY_CURRENT_ACCOUNT"] == "Y"))?' active':''?>">
                 <span class="value hidden"><?= $arPaySystem["ID"] ?></span>
@@ -104,6 +104,7 @@ if ($arResult["PAY_FROM_ACCOUNT"] == "Y" && false) {
     <?
     }
     ?>
+    <input type="hidden" name="PAY_SYSTEM_ID" class="ia-radio-value" <?=($activePaysystem)?'value="'.$activePaysystem.'"':''?> >
 </div>
 <script>
     $(document).ready(function(){

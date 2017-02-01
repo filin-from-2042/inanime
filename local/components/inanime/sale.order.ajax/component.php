@@ -1839,6 +1839,15 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
                         $arResult['ORDER_PROPS_DATA'][$arVals['CODE']] = $arVals['VALUE'];
                 }
             }
+        }
+
+       /* if ($arOrderData = CSaleOrder::GetByID(intval($arResult["ORDER_ID"])))
+        {
+            $arResult['ORDER_DATA']=$arOrderData;
+            echo "Заказ с кодом ".$ORDER_ID." не найден";
+        }
+        */
+
         if ($arOrder) {
             foreach (GetModuleEvents("sale", "OnSaleComponentOrderOneStepFinal", true) as $arEvent)
                 ExecuteModuleEventEx($arEvent, Array($arResult["ORDER_ID"], &$arOrder, &$arParams));
