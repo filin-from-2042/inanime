@@ -364,7 +364,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                     $currOfferPrice = $offersData[$activeOfferID]["price"];
                                     $oldPrice;
                                     $currentPrice;
-                                    if(isset($currOfferPrice[1]) && (floatVal($currOfferPrice[1]) > floatVal($currOfferPrice[0])))
+                                    if(isset($currOfferPrice[1]) && (floatVal($currOfferPrice[1]) < floatVal($currOfferPrice[0])))
                                     {
                                         $oldPrice=$currOfferPrice[0];
                                         $currentPrice=$currOfferPrice[1];
@@ -378,18 +378,15 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                     <?}?>
                                     <span class="price yellow-text"><? echo $currentPrice; ?> ₽</span>
                                 </div>
-                                <?if($boolDiscountShow){?>
+                                <?if('Y' == $arParams['SHOW_DISCOUNT_PERCENT']){?>
                                     <div class="discount">
                                         <?
-                                        if ('Y' == $arParams['SHOW_DISCOUNT_PERCENT'])
+                                        if (0 < $currOfferPrice[3])
                                         {
-                                            if (0 < $currOfferPrice[3])
-                                            {
-                                                ?>
-                                                <span class="discount-amount">Экономия <? echo $currOfferPrice[2]; ?>% -<?=$currOfferPrice[3]?> <span class="rub"></span></span>
-                                                <span class="found-cheaper">Нашли дешевле?</span>
-                                            <?
-                                            }
+                                            ?>
+                                            <span class="discount-amount">Экономия <? echo $currOfferPrice[2]; ?>% -<?=$currOfferPrice[3]?> <span class="rub"></span></span>
+                                            <span class="found-cheaper">Нашли дешевле?</span>
+                                        <?
                                         }
                                         ?>
                                     </div>
