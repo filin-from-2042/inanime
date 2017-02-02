@@ -183,15 +183,17 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                             <div class="general-container photo-container" id="photo_gallery_<?=$galleryID?>" <?=($showGallery)?'':'style="display:none;"'?>>
                                 <div class="photo-big-container">
                                     <div class="img-wrap">
-                                        <?if($isNew):?>
-                                            <div class="additional-icon new"></div>
-                                        <?endif?>
-                                        <?if($isBestseller):?>
-                                            <div class="additional-icon bestseller"></div>
-                                        <?endif?>
-                                        <?if($isRecommended):?>
-                                            <div class="additional-icon recommended"></div>
-                                        <?endif?>
+                                        <div class="icons-container">
+                                            <?if($isNew):?>
+                                                <div class="additional-icon new"></div>
+                                            <?endif?>
+                                            <?if($isBestseller):?>
+                                                <div class="additional-icon bestseller"></div>
+                                            <?endif?>
+                                            <?if($isRecommended):?>
+                                                <div class="additional-icon recommended"></div>
+                                            <?endif?>
+                                        </div>
                                         <img src="<?=$galleryPhoto[0];?>" class="photo-big">
                                     </div>
                                 </div>

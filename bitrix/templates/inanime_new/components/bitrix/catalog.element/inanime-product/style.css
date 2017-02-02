@@ -81,10 +81,19 @@
     display: inline-block;
     position: relative;
 }
-.product-info .photo-big-container .img-wrap .additional-icon {
+/*.product-info .photo-big-container .img-wrap .additional-icon {
     position: absolute;
     top: -15px;
     left: -15px;
+}*/
+.product-info .photo-big-container .img-wrap .icons-container{
+    width: 131px;
+    position: absolute;
+    top: 8px;
+    left: -17px;
+}
+.product-info .photo-big-container .icons-container  .additional-icon {
+    margin-top: -23px;
 }
 .product-info .photo-big-container img{
     cursor: zoom-in;
