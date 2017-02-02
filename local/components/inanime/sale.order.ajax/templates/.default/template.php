@@ -37,7 +37,6 @@ $APPLICATION->SetAdditionalCSS($templateFolder . "/style.css");
 $APPLICATION->AddHeadScript($templateFolder . "/script.js");
 
 CJSCore::Init(array('fx', 'popup', 'window', 'ajax'));
-$arJSParams = array();
 ?>
 <script type="text/javascript">
     var ajaxPages = ajaxPages || {};
@@ -109,28 +108,6 @@ $arJSParams = array();
     ?>
 <?
 if (!$USER->IsAuthorized() && $arParams["ALLOW_AUTO_REGISTER"] == "N") {
-
-    $arBasketItems = array();
-    $dbBasketItems = CSaleBasket::GetList(
-        array(
-            "NAME" => "ASC",
-            "ID" => "ASC"
-        ),
-        array(
-            "FUSER_ID" => CSaleBasket::GetBasketUserID(),
-            "LID" => SITE_ID,
-            "ORDER_ID" => "NULL"
-        ),
-        false,
-        false,
-        array("ID")
-    );
-    while ($arItems = $dbBasketItems->Fetch())
-    {
-//        $arBasketItems[] = $arItems;
-        LocalRedirect('/');
-    }
-//    if(count($arBasketItems)<=0)  LocalRedirect('/');
 
     include($_SERVER["DOCUMENT_ROOT"] . $templateFolder . "/auth.php");
 }
@@ -241,137 +218,40 @@ else
                         </div>
                         <div class="col-sm-12 col-md-12 col-lg-12 address-column">
                             <?
-                            $profilesCount = 0;
-                            if($USER->IsAuthorized())
+                            // профили пользователей
+                            if(isset($arResult['USER_PROFILES']) && count($arResult['USER_PROFILES'])>0)
                             {
-                                $rsUser = CUser::GetList(($by="ID"), ($order="desc"), array("ID"=>$USER->GetID()),array("SELECT"=>array("UF_CUSTOMER_PROFILE")));
-                                $userData = $rsUser->Fetch();
-                                $currentProfileID = intval($userData['UF_CUSTOMER_PROFILE']);
-
-                                $profiles = CSaleOrderUserProps::GetList(
-                                    array("DATE_UPDATE" => "DESC"),
-                                    array("USER_ID" => $USER->GetID())
-                                );
-                                $profilesCount = $profiles->SelectedRowsCount();
-                            }
-                            if($profilesCount>0)
-                            {
+                                $currentUserProfileID = intval($arResult['USER_HELPFULL_VALUES']['CURRENT_PROFILE_ID']);
                             ?>
                                 <div class="radio-values-container">
                                 <div class="radio-container">
                                     <?
-                                    $currFullAdress='';
-                                    $currLocationID = 0;
-                                    $currPhone = '';
-                                    $currZip = '';
                                     $addressCounter = 1;
-                                    while ($profile = $profiles->Fetch())
-                                    {
-                                        $profileID = $profile['ID'];
-                                        $profileVals = CSaleOrderUserPropsValue::GetList(array("ID" => "ASC"), Array("USER_PROPS_ID"=>$profileID));
-
-                                        $location = 0;
-                                        $address = '';
-                                        $phone = '';
-                                        while ($profileVal = $profileVals->Fetch())
-                                        {
-                                            if($profileVal['PROP_CODE']=='LOCATION') $location = $profileVal["VALUE"];
-                                            if($profileVal['PROP_CODE']=='ADDRESS') $address = $profileVal["VALUE"];
-                                            if($profileVal['PROP_CODE']=='PHONE') $phone = $profileVal["VALUE"];
-                                        }
-
-                                        $addressData = array();
-                                        $addressData = parseFullAddress($address);
-                                        $locationTextData=CSaleLocation::GetByID($location);
-                                        $addressData['locationFullName'] = $locationTextData['CITY_NAME_LANG'].', '.$locationTextData['REGION_NAME_LANG'].', '.$locationTextData['COUNTRY_NAME_LANG'];
-
-                                        $db_props = CSaleOrderProps::GetList(
-                                            array("SORT" => "ASC"), array(
-                                                "PERSON_TYPE_ID" => $arResult["USER_VALS"]["PERSON_TYPE_ID"], "CODE" => "LOCATION"
-                                            ), false, false, array()
-                                        );
-
-                                        $addressData['currFullCityName'] = $locationTextData['CITY_NAME_LANG'];
-
-                                        $addressData['locationID'] = $location;
-                                        if ($props = $db_props->Fetch())
-                                            $locationProp = $arResult["ORDER_PROP"]["USER_PROPS_Y"][$props["ID"]];
-                                        $addressData['locationPropID'] = 'ORDER_PROP_'.$locationProp["ID"];
-
-                                        $addressData['phone'] = $phone;
-
-                                        $zipCode = $arFields['ZIP']["VALUE"];
-                                        $db_zip = CSaleLocation::GetLocationZIP($location);
-                                        if($zipProp = $db_zip->Fetch())
-                                        {
-                                            $zipCode = $zipProp['ZIP'];
-                                        }
-                                        $addressData['zipCode'] = $zipCode;
-
-                                        $arJSParams['saleProfiles'][$profileID] = $addressData;
-
-                                        if(intval($profileID)==intval($currentProfileID))
-                                        {
-                                            $currLocationID = $location;
-                                            $currFullAdress = $address;
-                                            $currPhone = $phone;
-                                            $currZip = $zipCode;
-                                        }
-                                        ?>
-                                    <div class="radio-button-container" id="<?=$profileID?>">
-                                        <div class="ia-radio-button small<?=(intval($profileID)==intval($currentProfileID))?' active':''?>">
-                                            <span class="value hidden"><?=$address?></span>
-                                            <div class="radio-dot"></div>
+                                    foreach($arResult['USER_PROFILES'] as $profileID => $profile)
+                                    {?>
+                                        <div class="radio-button-container" id="<?=$profileID?>">
+                                            <div class="ia-radio-button small<?=(intval($profileID)==$currentUserProfileID)?' active':''?>">
+                                                <span class="value hidden"><?=$profile['PROPS']['ADDRESS']?></span>
+                                                <div class="radio-dot"></div>
+                                            </div>
+                                            <div class="button-title">Сохраненный адрес <?=$addressCounter?></div>
                                         </div>
-                                        <div class="button-title">Сохраненный адрес <?=$addressCounter?></div>
-                                    </div>
                                         <?$addressCounter++;?>
                                     <?}?>
-                                    <input type="hidden" name="addresProfile" value="<?=$currentProfileID?>" id="addreesProfile" />
-                                    <input type="hidden" name="<?=$arFields['ADDRESS']['FIELD_NAME']?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['ADDRESS']['VALUE'] : $currFullAdress?>" id="<?=$arFields['ADDRESS']['FIELD_NAME'] ?>" class="ia-radio-value full-address">
+                                    <?// поле для хранение ид выбранного профайла для дальнейшего сохранения при изменении активного профиля?>
+                                    <input type="hidden" name="addresProfile" value="<?=$arResult['USER_HELPFULL_VALUES']['CURRENT_PROFILE_ID']?>" id="addreesProfile" />
+                                    <input type="hidden" name="<?=$arFields['ADDRESS']['FIELD_NAME']?>"
+                                           value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['ADDRESS']['VALUE'] : $arResult['USER_PROFILES'][$currentUserProfileID]['PROPS']['ADDRESS']?>"
+                                           id="<?=$arFields['ADDRESS']['FIELD_NAME'] ?>" class="ia-radio-value full-address">
                                 </div>
-                                    <?
-                                        $streetDataString = '';
-                                        $houseNumberString = '';
-                                        $apartmentString = '';
-                                        $currAddressData = parseFullAddress($currFullAdress);
-                                        $streetDataString = $currAddressData['street'];
-                                        $houseNumberString = $currAddressData['house'];
-                                        $apartmentString = $currAddressData['apartment'];
-                                    ?>
                                 <div class="values-container">
                                     <div class="address-container">
 
                                         <div class="input-container">
                                             <?
-                                            $db_props = CSaleOrderProps::GetList(
-                                                array("SORT" => "ASC"), array(
-                                                    "PERSON_TYPE_ID" => $arResult["USER_VALS"]["PERSON_TYPE_ID"], "CODE" => "LOCATION"
-                                                ), false, false, array()
-                                            );
-
-                                            if ($props = $db_props->Fetch())
-                                                $locationProp = $arResult["ORDER_PROP"]["USER_PROPS_Y"][$props["ID"]];
-                                            else
-                                                $locationProp = false;
-
-                                            $zipCode = $arFields['ZIP']["VALUE"];
-                                            $db_zip = CSaleLocation::GetLocationZIP($locationProp['VALUE']);
-                                            if($zipProp = $db_zip->Fetch())
+                                            if (isset($arResult['USER_HELPFULL_VALUES']) && isset($arResult['USER_HELPFULL_VALUES']['LOCATION_PROP']) && $arResult['USER_HELPFULL_VALUES']['LOCATION_PROP'])
                                             {
-                                                $zipCode = $zipProp['ZIP'];
-                                            }
-
-                                            $value = 0;
-                                            if ($locationProp) {
-                                                if (is_array($locationProp["VARIANTS"]) && count($locationProp["VARIANTS"]) > 0) {
-                                                    foreach ($locationProp["VARIANTS"] as $arVariant) {
-                                                        if ($arVariant["SELECTED"] == "Y") {
-                                                            $value = $arVariant["ID"];
-                                                            break;
-                                                        }
-                                                    }
-                                                }
+                                                $locationProp = $arResult['USER_HELPFULL_VALUES']['LOCATION_PROP'];
                                                 $GLOBALS["APPLICATION"]->IncludeComponent(
                                                     "bitrix:sale.ajax.locations", "popup", array(
                                                         "AJAX_CALL" => "N",
@@ -379,7 +259,7 @@ else
                                                         "REGION_INPUT_NAME" => "REGION",
                                                         "CITY_INPUT_NAME" => $locationProp["FIELD_NAME"],
                                                         "CITY_OUT_LOCATION" => "Y",
-                                                        "LOCATION_VALUE" => $currLocationID,
+                                                        "LOCATION_VALUE" => ($_POST["is_ajax_post"] == "Y") ? $arResult['TEMPORARY_FIELDS_DATA'][$locationProp['FIELD_NAME']] : $arResult['USER_PROFILES'][$currentUserProfileID]['PROPS']['LOCATION'],
                                                         "ORDER_PROPS_ID" => $locationProp["ID"],
                                                         "ONCITYCHANGE" => ($locationProp["IS_LOCATION"] == "Y" || $locationProp["IS_LOCATION4TAX"] == "Y") ? "submitForm()" : "",
                                                         "SIZE1" => $locationProp["SIZE1"],
@@ -393,7 +273,7 @@ else
                                                 <input type="text" name="street" value="<?if($_POST["is_ajax_post"] == "Y"){
                                                                                             echo ($arResult['TEMPORARY_FIELDS_DATA'] && $arResult['TEMPORARY_FIELDS_DATA']['street'])?$arResult['TEMPORARY_FIELDS_DATA']['street']:'';
                                                                                         }else{
-                                                                                            echo str_replace('ул.','',$streetDataString);
+                                                                                            echo str_replace('ул.','',$arResult['USER_PROFILES'][$currentUserProfileID]['parsedAddressText']['street']);
                                                                                         }
                                                                                         ?>"
                                                        placeholder="Улица" class="form-control street-input">
@@ -402,7 +282,7 @@ else
                                                 <input type="text" name="house-number" value="<?if($_POST["is_ajax_post"] == "Y"){
                                                                                                     echo ($arResult['TEMPORARY_FIELDS_DATA'] && $arResult['TEMPORARY_FIELDS_DATA']['house-number'])?$arResult['TEMPORARY_FIELDS_DATA']['house-number']:'';
                                                                                                 }else{
-                                                                                                    echo str_replace('д.','',$houseNumberString);
+                                                                                                    echo str_replace('д.','',$arResult['USER_PROFILES'][$currentUserProfileID]['parsedAddressText']['house']);
                                                                                                 }
                                                                                                 ?>"
                                                        placeholder="Дом" class="form-control house-number-input">
@@ -411,16 +291,16 @@ else
                                                 <input type="text" name="apartment" value="<?if($_POST["is_ajax_post"] == "Y"){
                                                                                                 echo ($arResult['TEMPORARY_FIELDS_DATA'] && $arResult['TEMPORARY_FIELDS_DATA']['apartment'])?$arResult['TEMPORARY_FIELDS_DATA']['apartment']:'';
                                                                                             }else{
-                                                                                                echo str_replace('кв.','',$apartmentString);
+                                                                                                echo str_replace('кв.','',$arResult['USER_PROFILES'][$currentUserProfileID]['parsedAddressText']['apartment']);
                                                                                             }?>"
                                                        placeholder="Квартира" class="form-control apartment-input">
                                             </div>
                                             <div class="input-container">
-                                                <input type="text" name="<?=$arFields['ZIP']["FIELD_NAME"]?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['ZIP']['VALUE'] : $currZip ?>" placeholder="Индекс" class="form-control zip-input">
+                                                <input type="text" name="<?=$arFields['ZIP']["FIELD_NAME"]?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['ZIP']['VALUE'] : $arResult['USER_PROFILES'][$currentUserProfileID]['PROPS']['ZIP_CODE'] ?>" placeholder="Индекс" class="form-control zip-input">
                                             </div>
                                             <div>
                                                 <div class="input-container">
-                                                    <input type="text" name="<?=$arFields['PHONE']['FIELD_NAME']?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['PHONE']['VALUE'] :$currPhone?>" placeholder="Телефон" class="form-control phone-input">
+                                                    <input type="text" name="<?=$arFields['PHONE']['FIELD_NAME']?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['PHONE']['VALUE'] :$arResult['USER_PROFILES'][$currentUserProfileID]['PROPS']['PHONE']?>" placeholder="Телефон" class="form-control phone-input">
                                                 </div>
                                             </div>
                                         </div>
@@ -434,36 +314,10 @@ else
                                     <div class="address-container">
                                         <input type="hidden" name="<?=$arFields['ADDRESS']['FIELD_NAME']?>" value="<?=$arFields['ADDRESS']["VALUE"]?>" id="<?=$arFields['ADDRESS']['FIELD_NAME'] ?>" class="full-address" />
                                         <div class="input-container">
-
                                             <?
-                                            $db_props = CSaleOrderProps::GetList(
-                                                array("SORT" => "ASC"), array(
-                                                    "PERSON_TYPE_ID" => $arResult["USER_VALS"]["PERSON_TYPE_ID"], "CODE" => "LOCATION"
-                                                ), false, false, array()
-                                            );
-
-                                            if ($props = $db_props->Fetch())
-                                                $locationProp = $arResult["ORDER_PROP"]["USER_PROPS_Y"][$props["ID"]];
-                                            else
-                                                $locationProp = false;
-
-                                            $zipCode = $arFields['ZIP']["VALUE"];
-                                            $db_zip = CSaleLocation::GetLocationZIP($locationProp['VALUE']);
-                                            if($zipProp = $db_zip->Fetch())
+                                            if (isset($arResult['USER_HELPFULL_VALUES']) && isset($arResult['USER_HELPFULL_VALUES']['LOCATION_PROP']) && $arResult['USER_HELPFULL_VALUES']['LOCATION_PROP'])
                                             {
-                                                $zipCode = $zipProp['ZIP'];
-                                            }
-
-                                            $value = 0;
-                                            if ($locationProp) {
-                                                if (is_array($locationProp["VARIANTS"]) && count($locationProp["VARIANTS"]) > 0) {
-                                                    foreach ($locationProp["VARIANTS"] as $arVariant) {
-                                                        if ($arVariant["SELECTED"] == "Y") {
-                                                            $value = $arVariant["ID"];
-                                                            break;
-                                                        }
-                                                    }
-                                                }
+                                                $locationProp = $arResult['USER_HELPFULL_VALUES']['LOCATION_PROP'];
                                                 $GLOBALS["APPLICATION"]->IncludeComponent(
                                                     "bitrix:sale.ajax.locations", "popup", array(
                                                         "AJAX_CALL" => "N",
@@ -471,7 +325,7 @@ else
                                                         "REGION_INPUT_NAME" => "REGION",
                                                         "CITY_INPUT_NAME" => $locationProp["FIELD_NAME"],
                                                         "CITY_OUT_LOCATION" => "Y",
-                                                        "LOCATION_VALUE" => $_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID'],
+                                                        "LOCATION_VALUE" => ($_POST["is_ajax_post"] == "Y") ? $arResult['TEMPORARY_FIELDS_DATA'][$locationProp['FIELD_NAME']] : $_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID'],
                                                         "ORDER_PROPS_ID" => $locationProp["ID"],
                                                         "ONCITYCHANGE" => ($locationProp["IS_LOCATION"] == "Y" || $locationProp["IS_LOCATION4TAX"] == "Y") ? "submitForm()" : "",
                                                         "SIZE1" => $locationProp["SIZE1"],
@@ -491,11 +345,24 @@ else
                                                 <input type="text" name="apartment" value="<?=($arResult['TEMPORARY_FIELDS_DATA'] && $arResult['TEMPORARY_FIELDS_DATA']['apartment'])?$arResult['TEMPORARY_FIELDS_DATA']['apartment']:''?>" placeholder="Квартира1" class="form-control apartment-input">
                                             </div>
                                             <div class="input-container">
-                                                <input type="text" name="<?=$arFields['ZIP']["FIELD_NAME"]?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['ZIP']['VALUE'] : $currZip ?>" placeholder="Индекс" class="form-control zip-input">
+                                                <input type="text" name="<?=$arFields['ZIP']["FIELD_NAME"]?>"
+                                                       value="<?
+                                                                if($_POST["is_ajax_post"] == "Y")
+                                                                {
+                                                                    echo $arFields['ZIP']['VALUE'];
+                                                                }
+                                                                else
+                                                                {
+                                                                    $db_zip = CSaleLocation::GetLocationZIP($_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID']);
+                                                                    if($zipProp = $db_zip->Fetch())
+                                                                        echo $zipProp['ZIP'];
+                                                                }
+                                                                ?>"
+                                                       placeholder="Индекс" class="form-control zip-input">
                                             </div>
                                             <div>
                                                 <div class="input-container">
-                                                    <input type="text" name="<?=$arFields['PHONE']['FIELD_NAME']?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['PHONE']['VALUE'] :$currPhone?>" placeholder="Телефон" class="form-control phone-input">
+                                                    <input type="text" name="<?=$arFields['PHONE']['FIELD_NAME']?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['PHONE']['VALUE'] : ''?>" placeholder="Телефон" class="form-control phone-input">
                                                 </div>
                                             </div>
                                         </div>
@@ -663,7 +530,7 @@ else
 
                     <script>
                         $(document).ready(function(){
-                            var inAnimeOrderAjax = new InAnimeOrderAjax(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
+                            var inAnimeOrderAjax = new InAnimeOrderAjax(<? echo CUtil::PhpToJSObject($arResult['arJSParams'], false, true);?>);
                             $('body').on('change','.order-drawing-up .address-container .form-control', inAnimeOrderAjax.changeAddressData);
 
                             $('body').on('click','.radio-values-container .ia-radio-button,.radio-values-container .radio-button-container .button-title',
@@ -693,7 +560,7 @@ else
 
                     <?
                 } else {
-                //$APPLICATION->ShowHead();
+                    //$APPLICATION->ShowHead();
                 ?>
                     <script type="text/javascript">
                         top.BX('confirmorder').value = 'Y';

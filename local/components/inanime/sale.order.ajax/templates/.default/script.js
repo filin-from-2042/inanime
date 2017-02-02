@@ -13,6 +13,7 @@
     window.InAnimeOrderAjax.prototype.changeSaleProfile = function(event)
     {
         event.stopPropagation();
+        // установка радиокнопок
         if ($(event.currentTarget).hasClass('ia-radio-button')) var radioButton = $(event.currentTarget);
         else var radioButton = $(event.currentTarget).closest('.radio-button-container').find('.ia-radio-button');
         radioButton.closest('.radio-container').find('input.ia-radio-value').val(radioButton.find('span.value.hidden').text());

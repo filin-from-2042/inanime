@@ -5,6 +5,29 @@ if (!CModule::IncludeModule("sale")) {
     ShowError(GetMessage("SOA_MODULE_NOT_INSTALL"));
     return;
 }
+
+// не пускать если нет товаров в корзине
+$arCheckBasketItems = array();
+$dbBasketItems = CSaleBasket::GetList(
+    array(
+        "NAME" => "ASC",
+        "ID" => "ASC"
+    ),
+    array(
+        "FUSER_ID" => CSaleBasket::GetBasketUserID(),
+        "LID" => SITE_ID,
+        "ORDER_ID" => "NULL"
+    ),
+    false,
+    false,
+    array("ID")
+);
+while ($arItems = $dbBasketItems->Fetch())
+{
+    $arCheckBasketItems[] = $arItems;
+}
+if(count($arCheckBasketItems)<=0)  LocalRedirect('/');
+
 use Bitrix\Sale\DiscountCouponsManager;
 
 $bUseCatalog = CModule::IncludeModule("catalog");
@@ -960,14 +983,31 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
                 unset($arResult["ORDER_PROP"]["USER_PROPS_Y"][$fieldId]);
         }
 
+
+
+        // name для LOCATION_ID
+        $db_props = CSaleOrderProps::GetList(
+            array("SORT" => "ASC"), array(
+                "PERSON_TYPE_ID" => $arUserResult["PERSON_TYPE_ID"], "CODE" => "LOCATION"
+            ), false, false, array()
+        );
+        if ($props = $db_props->Fetch())
+            $locationProp = $arResult["ORDER_PROP"]["USER_PROPS_Y"][$props["ID"]];
+        if($locationProp) $arResult['USER_HELPFULL_VALUES']['LOCATION_PROP'] = $locationProp;
+
+        // сохранение выбраного местанахождения из поста
+        if($_SERVER["REQUEST_METHOD"] == "POST")
+            if($locationProp && isset($_POST[$locationProp['FIELD_NAME']])) $arResult['TEMPORARY_FIELDS_DATA'][$locationProp['FIELD_NAME']] = $_POST[$locationProp['FIELD_NAME']];
+
+
         // получение данных по профилям пользователя
-       /* if($USER->IsAuthorized())
+        if($USER->IsAuthorized())
         {
             $rsUser = CUser::GetList(($by="ID"), ($order="desc"), array("ID"=>$USER->GetID()),array("SELECT"=>array("UF_CUSTOMER_PROFILE")));
             $userData = $rsUser->Fetch();
             // текущий активный профиль пользователя
             $currentProfileID = intval($userData['UF_CUSTOMER_PROFILE']);
-            $arResult['CURRENT_USER_PROFILE'] = $currentProfileID;
+            $arResult['USER_HELPFULL_VALUES']['CURRENT_PROFILE_ID'] = $currentProfileID;
 
             $profiles = CSaleOrderUserProps::GetList(
                 array("DATE_UPDATE" => "DESC"),
@@ -976,17 +1016,24 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
 
             if($profiles->SelectedRowsCount()>0)
             {
+                /*
+                 * массив вида 'profile_id'=>array('PROPS'=>array(
+                 *                                                  'LOCATION'=>1125,
+                 *                                                  'ADDRESS'=>'...',
+                 *                                                 ......
+                 *                                                  )
+                 *                                 )
+                 * */
                 $arResult['USER_PROFILES'] = array();
                 while ($profile = $profiles->Fetch())
                 {
-                    $profileVals = CSaleOrderUserPropsValue::GetList(array("ID" => "ASC"), Array("USER_PROPS_ID"=>$profileID));
+                    $profileVals = CSaleOrderUserPropsValue::GetList(array("ID" => "ASC"), Array("USER_PROPS_ID"=>$profile['ID']));
                     while ($profileVal = $profileVals->Fetch())
                     {
                         $arResult['USER_PROFILES'][$profile['ID']]['PROPS'][$profileVal['PROP_CODE']] = $profileVal['VALUE'];
                     }
 
-
-                    // текстовые распарсенные данные по профилям для js
+                    // текстовые распарсенные данные по профилю для js
                     $addressData = array();
 
                     $db_zip = CSaleLocation::GetLocationZIP($arResult['USER_PROFILES'][$profile['ID']]['PROPS']['LOCATION']);
@@ -1004,39 +1051,33 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
                         if(array_key_exists(1,$fullAddressArray)) $resultArray['house'] = $fullAddressArray[1];
                         if(array_key_exists(2,$fullAddressArray)) $resultArray['apartment'] = $fullAddressArray[2];
                     }
-                    $addressData = $resultArray;
+                    $addressData = $arResult['USER_PROFILES'][$profile['ID']]['parsedAddressText'] = $resultArray;
 
                     // текстовые данные по текущему местонахождению
-                    $locationTextData=CSaleLocation::GetByID($location);
+                    $locationTextData=CSaleLocation::GetByID($arResult['USER_PROFILES'][$profile['ID']]['PROPS']['LOCATION']);
                     $addressData['locationFullName'] = $locationTextData['CITY_NAME_LANG'].', '.$locationTextData['REGION_NAME_LANG'].', '.$locationTextData['COUNTRY_NAME_LANG'];
-                    $addressData['currFullCityName'] = $locationTextData['CITY_NAME_LANG'];
 
                     $addressData['phone'] = $arResult['USER_PROFILES'][$profile['ID']]['PROPS']['PHONE'];
+                    $addressData['locationID'] = $arResult['USER_PROFILES'][$profile['ID']]['PROPS']['LOCATION'];
 
-                    $arResult['arJSParams']['saleProfiles'][$profileID] = $addressData;
+                    $arResult['arJSParams']['saleProfiles'][$profile['ID']] = $addressData;
                 }
             }
-        }*/
+        }
 
-        // Установанка location_id для авторизованного из профиля и для неавторизованного из определенного местонахождения по умолчанию
+        // Для доставки
+        // Установка location_id для авторизованного из профиля и для неавторизованного из определенного местонахождения по умолчанию
         // При аяксе запросе выставляем переданное значение в посте
         if($_SERVER["REQUEST_METHOD"] == "POST"){
-            //$arUserResult["DELIVERY_LOCATION"] = $_POST[$locationPropData["FIELD_NAME"]];
+            $arUserResult["DELIVERY_LOCATION"] = $arResult['TEMPORARY_FIELDS_DATA'][$locationProp['FIELD_NAME']];
         }else{
-            if($USER->IsAuthorized() )
+            if($USER->IsAuthorized())
             {
-                /*$profiles = CSaleOrderUserProps::GetList(
-                    array("DATE_UPDATE" => "DESC"),
-                    array("USER_ID" => $USER->GetID())
-                );
-                $profilesCount = $profiles->SelectedRowsCount();
-                if($profilesCount>0)
-                {
-                    while ($profile = $profiles->Fetch())
-                    {
-
-                    }
-                }*/
+                $currentProfileID = $arResult['USER_HELPFULL_VALUES']['CURRENT_PROFILE_ID'];
+                $arUserResult["DELIVERY_LOCATION"] = $arResult['USER_PROFILES'][$currentProfileID]['PROPS']['LOCATION'];
+            }
+            else{
+                $arUserResult["DELIVERY_LOCATION"] =$_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID'];
             }
         }
 
@@ -1854,6 +1895,7 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
 
         $arResult["USER_VALS"] = $arUserResult;
         $arResult['arCoupons'] = DiscountCouponsManager::get(true, array(), true, true);
+
     } else {
         $arOrder = false;
         $arResult["USER_VALS"]["CONFIRM_ORDER"] = "Y";
