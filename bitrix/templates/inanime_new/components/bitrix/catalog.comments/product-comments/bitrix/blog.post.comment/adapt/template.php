@@ -539,7 +539,7 @@ else
 {
 	$APPLICATION->RestartBuffer();
 	?><script>window.BX = top.BX;
-		<?if($arResult["use_captcha"]===true)
+		<?/*if($arResult["use_captcha"]===true)
 		{
 			?>
 				var cc;
@@ -552,7 +552,7 @@ else
 				BX('captcha_code').value = cc;
 				BX('captcha_word').value = "";
 			<?
-		}
+		}*/
 	?>
 	if(!top.arImages)
 		top.arImages = [];
@@ -771,7 +771,7 @@ else
                 </div>
 
 			<?
-			if($arResult["use_captcha"]===true)
+			/*if($arResult["use_captcha"]===true)
 			{
 				?>
 				<div id="captcha_del">
@@ -781,7 +781,7 @@ else
 					</script>
 				</div>
 				<?
-			}
+			}*/
 		}
 		?>
 		<?
