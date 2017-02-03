@@ -223,7 +223,7 @@
 .product-tabs {
     margin-top: 55px;
     /*padding: 0 17px;*/
-    min-height: 355px;
+    /*min-height: 355px;*/
 }
 .product-tabs .nav.nav-tabs {
     text-transform:uppercase;
@@ -627,5 +627,10 @@
     }
     .photo-carousel-container {
          padding-left: 10px;
+    }
+    .product-tabs.row{
+        margin-left: 0;
+        margin-right: 0;
+        padding-bottom: 48px;
     }
 }

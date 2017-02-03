@@ -18,7 +18,7 @@ if(!is_array($css) || !in_array("/bitrix/css/main/font-awesome.css", $css))
 {
 	$strReturn .= '<link href="'.CUtil::GetAdditionalFileURL("/bitrix/css/main/font-awesome.css").'" type="text/css" rel="stylesheet" />'."\n";
 }
-$strReturn .= '<div class="row"><div class="col-sm-offset-0 col-md-offset-10 col-lg-offset-10  col-md-14 col-lg-14">';
+$strReturn .= '<div class="row"><div class="col-sm-offset-0 col-md-offset-10 col-lg-offset-8  col-md-14 col-lg-14">';
 $strReturn .= '<div class="bx-breadcrumb">';
 
 $itemSize = count($arResult);
