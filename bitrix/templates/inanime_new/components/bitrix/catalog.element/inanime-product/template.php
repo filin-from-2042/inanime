@@ -93,10 +93,11 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
             );
             $availableSizes[$offer["PROPERTIES"]["SIZE_GLK"]["VALUE"]][] = (empty($offer["PROPERTIES"]["COLOR_REF"]["VALUE"])||$offer["PROPERTIES"]["COLOR_REF"]["VALUE"]=='') ? 'not-set' : $offer["PROPERTIES"]["COLOR_REF"]["VALUE"];
 
-        foreach($offerPhotos as $offerPhoto)
+        $photoGalleryData[$offer["ID"]] = $offerPhotos;
+        /*foreach($offerPhotos as $offerPhoto)
         {
             $photoGalleryData[$offer["ID"]][] = $offerPhoto;
-        }
+        }*/
     }
 
     if(empty($photoGalleryData))
@@ -193,6 +194,23 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                             <?if($isRecommended):?>
                                                 <div class="additional-icon recommended"></div>
                                             <?endif?>
+                                            <?
+                                            $discountPercentData = 0 ;
+                                            if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS'])){
+                                                $currGalleryPrices = $offersData[$galleryID]['price'];
+                                                if(isset($currGalleryPrices[2])) $discountPercentData = $currGalleryPrices[2];
+                                            }
+                                            else
+                                                $discountPercentData = $arResult["PRICES"]['BASE']['DISCOUNT_DIFF_PERCENT'];
+                                            if($discountPercentData)
+                                            {?>
+                                                <div class="discount-container">
+                                                    <div class="additional-icon  discount"></div>
+                                                    <div class="discount-text">Скидка <?=$discountPercentData;?> %</div>
+                                                </div>
+                                            <?}
+                                            ?>
+
                                         </div>
                                         <img src="<?=$galleryPhoto[0];?>" class="photo-big">
                                     </div>
@@ -397,10 +415,9 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                     <div class="price">
                                         <?
                                         $minPrice = (isset($arResult['RATIO_PRICE']) ? $arResult['RATIO_PRICE'] : $arResult['MIN_PRICE']);
-                                        $boolDiscountShow = (0 < $minPrice['DISCOUNT_DIFF']);
                                         if ($arParams['SHOW_OLD_PRICE'] == 'Y')
                                         {
-                                            if($boolDiscountShow){?>
+                                            if(0 < $minPrice['DISCOUNT_DIFF']){?>
                                                 <span class="price old"><?=$minPrice['VALUE']?> ₽</span>
                                             <?}?>
                                         <?}?>
