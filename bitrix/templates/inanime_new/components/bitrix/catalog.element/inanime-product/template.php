@@ -221,9 +221,9 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                             <?
                                             if($galleryPhoto)
                                             {
-                                                foreach($galleryPhoto as $photoSRC)
+                                                foreach($galleryPhoto as $key=>$photoSRC)
                                                 {?>
-                                                    <li>
+                                                    <li<?=($key==0)?' class="active"':''?>>
                                                         <div class="photo-container">
                                                             <img src="<?=$photoSRC?>">
                                                         </div>
@@ -347,9 +347,9 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                                 <ul>
                                                     <?if($galleryPhoto)
                                                     {
-                                                        foreach($galleryPhoto as $photoSRC)
+                                                        foreach($galleryPhoto as $key=>$photoSRC)
                                                         {?>
-                                                            <li>
+                                                            <li<?=($key==0)?' class="active"':''?>>
                                                                 <div class="photo-container">
                                                                     <img src="<?=$photoSRC?>">
                                                                 </div>
@@ -908,8 +908,11 @@ $arJSParams['startColorData'] = $JSStartColorData;
         });
 
         $('.general-container.photo-container .photo-container img').click(function(){
-            var newSRC = $(this).attr('src');
-            $(this).closest('.general-container.photo-container').find('.photo-big-container img').attr('src',newSRC);
+            var $this = $(this);
+            var newSRC = $this.attr('src');
+            $this.closest('.general-container.photo-container').find('li.active').removeClass('active');
+            $this.closest('li').addClass('active');
+            $this.closest('.general-container.photo-container').find('.photo-big-container img').attr('src',newSRC);
         });
 
 

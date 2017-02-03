@@ -65,7 +65,8 @@
     cursor:pointer;
     overflow: hidden;
 }
-.preview-photo-carousel ul li:hover .photo-container {
+.preview-photo-carousel ul li:hover .photo-container ,
+.preview-photo-carousel ul li.active .photo-container {
     padding:4px;
     border:1px solid rgb(235,235,235);
 }
@@ -126,10 +127,11 @@
     font-weight: bold;
     font-size: 39px;
     letter-spacing: 1.1px;
+    color:#fc9a00;
 }
 .product-info .price-container .price.old{
     text-decoration: line-through;
-    color: #000;
+    color: #1a2228;
     font-size: 30px;
     margin-right: 6px;
 }
