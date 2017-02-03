@@ -645,6 +645,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                                 <?
                                 foreach ($arResult['DISPLAY_PROPERTIES'] as &$arOneProp)
                                 {
+                                    if(!$arOneProp['DISPLAY_VALUE']) continue;
                                     ?>
                                     <li>
                                         <span class="char-name"><? echo $arOneProp['NAME']; ?></span>
