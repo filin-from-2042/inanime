@@ -9,7 +9,9 @@ use Bitrix\Main\Entity;
 // парсинг полей для сортировки и фильтрации
 $sortData = json_decode($_REQUEST["sort_data"], true);
 $filterData = json_decode($_REQUEST["filter_data"], true);
+//$arrFilter = array();
 global $arrFilter;
+//$arrFilter["PROPERTY_IS_EIGHTEEN"] = false;
 foreach($filterData as $field)
 {
     switch($field["name"])
@@ -23,7 +25,27 @@ foreach($filterData as $field)
             $arrFilter["><CATALOG_PRICE_1"]=array($minPrice,$maxPrice);
         };break;
         case 'BRAND_REF1':{
-            $arrFilter["PROPERTY_BRAND_REF1"]=$field["value"];
+//            $arrFilter["PROPERTY_BRAND_REF1_VALUE"]=$field["value"];
+
+            $hlblock = HL\HighloadBlockTable::getById(7)->fetch();
+
+            $entity = HL\HighloadBlockTable::compileEntity($hlblock = HL\HighloadBlockTable::getById(7)->fetch());
+            $entity_data_class = $entity->getDataClass();
+            $entity_table_name = $hlblock['TABLE_NAME'];
+
+            $arFilter = array('UF_NAME'=>$field["value"]); //задаете фильтр по вашим полям
+
+            $sTableID = 'tbl_'.$entity_table_name;
+            $rsData = $entity_data_class::getList(array(
+                "select" => array('*'), //выбираем все поля
+                "filter" => $arFilter,
+                "order" => array("UF_SORT"=>"ASC") // сортировка по полю UF_SORT, будет работать только, если вы завели такое поле в hl'блоке
+            ));
+            $rsData = new CDBResult($rsData, $sTableID);
+            while($arRes = $rsData->Fetch()){
+                $arrFilter["PROPERTY_BRAND_REF1"] =$arRes['UF_XML_ID'];
+            }
+
         };break;
         case 'MATERIAL1':{
             $arrFilter["PROPERTY_MATERIAL1"] = $field["value"];
@@ -54,6 +76,18 @@ foreach($filterData as $field)
             $arrFilter["PROPERTY_SIZE1"] = $field["value"];
         };break;
         case 'in-stock-checkbox-filter-code':{
+            /*
+            $storesIDs = array();
+            $rsStores = CCatalogStore::GetList(array(), array('SITE_ID' =>SITE_ID));
+            if ($arStore = $rsStores->Fetch()){   $storesIDs[] = $arStore['ID'];}
+            if($storesIDs)
+            {
+                foreach($storesIDs as $storesID)
+                {
+                    $arrFilter[">CATALOG_STORE_AMOUNT_".$storesID] = 0;
+                }
+            }
+*/
             $arSubQuery = array("=CATALOG_AVAILABLE" => "Y");
             $arrFilter[] = array(
                 'LOGIC' => 'OR',
@@ -66,6 +100,7 @@ foreach($filterData as $field)
                     array('=CATALOG_AVAILABLE' => "Y"),
                 ),
             );
+
         };break;
         case 'discount': $discount = ($field["value"]=='false')?false:true;break;
         case 'week-goods': $weekGoods = ($field["value"]=='false')?false:true;break;
