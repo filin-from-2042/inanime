@@ -260,7 +260,7 @@ $templateData = array(
 										type="checkbox"
 										name="<?=$ar["CONTROL_NAME"]?>"
 										id="<?=$ar["CONTROL_ID"]?>"
-										value="<?=$ar["HTML_VALUE"]?>"
+										value="<?=$ar["VALUE"]?>"
 										<? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
 									/>
 									<?
@@ -271,9 +271,9 @@ $templateData = array(
 										$class.= " disabled";
 									?>
 									<label for="<?=$ar["CONTROL_ID"]?>" data-role="label_<?=$ar["CONTROL_ID"]?>" class="bx_filter_param_label dib<?=$class?>" onclick="inanime_new.changeViewHandler(); BX.toggleClass(this, 'active');">
-										<span class="bx_filter_param_btn bx_color_sl">
+										<span class="bx_filter_param_btn bx_color_sl with-pictures">
 											<?if (isset($ar["FILE"]) && !empty($ar["FILE"]["SRC"])):?>
-											<span class="bx_filter_btn_color_icon" style="background-image:url('<?=$ar["FILE"]["SRC"]?>');"></span>
+											    <span class="bx_filter_btn_color_icon" style="background-image:url('<?=$ar["FILE"]["SRC"]?>');"></span>
 											<?endif?>
 										</span>
 									</label>
@@ -288,7 +288,7 @@ $templateData = array(
 										type="checkbox"
 										name="<?=$ar["CONTROL_NAME"]?>"
 										id="<?=$ar["CONTROL_ID"]?>"
-										value="<?=$ar["HTML_VALUE"]?>"
+										value="<?=$ar["VALUE"]?>"
 										<? echo $ar["CHECKED"]? 'checked="checked"': '' ?>
 									/>
 									<?
@@ -298,16 +298,13 @@ $templateData = array(
 									if ($ar["DISABLED"])
 										$class.= " disabled";
 									?>
-									<label for="<?=$ar["CONTROL_ID"]?>" data-role="label_<?=$ar["CONTROL_ID"]?>" class="bx_filter_param_label<?=$class?>" onclick="inanime_new.changeViewHandler(); BX.toggleClass(this, 'active');">
-										<span class="bx_filter_param_btn bx_color_sl">
+									<label for="<?=$ar["CONTROL_ID"]?>" data-role="label_<?=$ar["CONTROL_ID"]?>" class="with-labels bx_filter_param_label<?=$class?>" onclick="inanime_new.changeViewHandler(); BX.toggleClass(this, 'active');">
+										<span class="bx_filter_param_btn bx_color_sl with-labels">
 											<?if (isset($ar["FILE"]) && !empty($ar["FILE"]["SRC"])):?>
 												<span class="bx_filter_btn_color_icon" style="background-image:url('<?=$ar["FILE"]["SRC"]?>');"></span>
 											<?endif?>
+                                            <span class="bx_filter_param_text" title="<?=$ar["VALUE"];?>"><?=$ar["VALUE"];?></span>
 										</span>
-										<span class="bx_filter_param_text" title="<?=$ar["VALUE"];?>"><?=$ar["VALUE"];?><?
-										if ($arParams["DISPLAY_ELEMENT_COUNT"] !== "N" && isset($ar["ELEMENT_COUNT"])):
-											?> (<span data-role="count_<?=$ar["CONTROL_ID"]?>"><? echo $ar["ELEMENT_COUNT"]; ?></span>)<?
-										endif;?></span>
 									</label>
 								<?endforeach?>
 								<?

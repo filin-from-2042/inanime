@@ -50,44 +50,7 @@ foreach($filterData as $field)
         case 'MATERIAL1':{
             $arrFilter["PROPERTY_MATERIAL1"] = $field["value"];
         };break;
-        case 'COLOR1':{
-
-            $hlblock = HL\HighloadBlockTable::getById(1)->fetch();
-
-            $entity = HL\HighloadBlockTable::compileEntity($hlblock = HL\HighloadBlockTable::getById(1)->fetch());
-            $entity_data_class = $entity->getDataClass();
-            $entity_table_name = $hlblock['TABLE_NAME'];
-
-            $arFilter = array('UF_NAME'=>$field["value"]); //задаете фильтр по вашим полям
-
-            $sTableID = 'tbl_'.$entity_table_name;
-            $rsData = $entity_data_class::getList(array(
-                "select" => array('*'), //выбираем все поля
-                "filter" => $arFilter,
-                "order" => array("UF_SORT"=>"ASC") // сортировка по полю UF_SORT, будет работать только, если вы завели такое поле в hl'блоке
-            ));
-            $rsData = new CDBResult($rsData, $sTableID);
-            while($arRes = $rsData->Fetch()){
-                $arrFilter["PROPERTY_COLOR1"] =$arRes['UF_XML_ID'];
-            }
-
-        };break;
-        case 'SIZE1':{
-            $arrFilter["PROPERTY_SIZE1"] = $field["value"];
-        };break;
         case 'in-stock-checkbox-filter-code':{
-            /*
-            $storesIDs = array();
-            $rsStores = CCatalogStore::GetList(array(), array('SITE_ID' =>SITE_ID));
-            if ($arStore = $rsStores->Fetch()){   $storesIDs[] = $arStore['ID'];}
-            if($storesIDs)
-            {
-                foreach($storesIDs as $storesID)
-                {
-                    $arrFilter[">CATALOG_STORE_AMOUNT_".$storesID] = 0;
-                }
-            }
-*/
             $arSubQuery = array("=CATALOG_AVAILABLE" => "Y");
             $arrFilter[] = array(
                 'LOGIC' => 'OR',
@@ -105,6 +68,58 @@ foreach($filterData as $field)
         case 'discount': $discount = ($field["value"]=='false')?false:true;break;
         case 'week-goods': $weekGoods = ($field["value"]=='false')?false:true;break;
         case 'topsale': $topsale = ($field["value"]=='false')?false:true;break;
+        default:
+        {
+            // филтрация по свойствам типа чекбокс с каритной или текстом
+            $filterNameExploded = explode('_',$field["name"]);
+            if(count($filterNameExploded)>2 && !is_nan($filterNameExploded[1]))
+            {
+                // цвет
+                if(intval($filterNameExploded[1])==167)
+                {
+                    $hlblock = HL\HighloadBlockTable::getById(1)->fetch();
+
+                    $entity = HL\HighloadBlockTable::compileEntity($hlblock = HL\HighloadBlockTable::getById(1)->fetch());
+                    $entity_data_class = $entity->getDataClass();
+                    $entity_table_name = $hlblock['TABLE_NAME'];
+
+                    $arFilter = array('UF_NAME'=>$field["value"]); //задаете фильтр по вашим полям
+
+                    $sTableID = 'tbl_'.$entity_table_name;
+                    $rsData = $entity_data_class::getList(array(
+                        "select" => array('*'), //выбираем все поля
+                        "filter" => $arFilter,
+                        "order" => array("UF_SORT"=>"ASC") // сортировка по полю UF_SORT, будет работать только, если вы завели такое поле в hl'блоке
+                    ));
+                    $rsData = new CDBResult($rsData, $sTableID);
+                    while($arRes = $rsData->Fetch()){
+                        $arrFilter["PROPERTY_COLOR1"][] =$arRes['UF_XML_ID'];
+                    }
+                }
+                // размер
+                if(intval($filterNameExploded[1])==208)
+                {
+                    $hlblock = HL\HighloadBlockTable::getById(5)->fetch();
+
+                    $entity = HL\HighloadBlockTable::compileEntity($hlblock = HL\HighloadBlockTable::getById(5)->fetch());
+                    $entity_data_class = $entity->getDataClass();
+                    $entity_table_name = $hlblock['TABLE_NAME'];
+
+                    $arFilter = array('UF_NAME'=>$field["value"]); //задаете фильтр по вашим полям
+
+                    $sTableID = 'tbl_'.$entity_table_name;
+                    $rsData = $entity_data_class::getList(array(
+                        "select" => array('*'), //выбираем все поля
+                        "filter" => $arFilter,
+                        "order" => array("UF_SORT"=>"ASC") // сортировка по полю UF_SORT, будет работать только, если вы завели такое поле в hl'блоке
+                    ));
+                    $rsData = new CDBResult($rsData, $sTableID);
+                    while($arRes = $rsData->Fetch()){
+                        $arrFilter["PROPERTY_SIZE1"][] =$arRes['UF_XML_ID'];
+                    }
+                }
+            }
+        }
     }
 }
 
