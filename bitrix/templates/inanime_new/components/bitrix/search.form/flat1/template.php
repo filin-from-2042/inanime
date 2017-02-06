@@ -27,6 +27,6 @@ $this->setFrameMode(true);?>
         );?><?else:?>
             <input type="text" name="q" value="" size="15" maxlength="50" placeholder="Поиск" class="form-control search-input" />
         <?endif;?>
-        <i class="fa fa-search" aria-hidden="true" onclick="searchForm.submit()"></i>
+        <i class="fa fa-search" aria-hidden="true" onclick="$(this).closest('form').submit()"></i>
     </div>
 </form>
