@@ -54,6 +54,7 @@ $APPLICATION->SetTitle("Личный кабинет");
                     );?>
                 </div>
             </div>
+            <hr class="general-content-bottom-line">
         </div>
     </div>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
