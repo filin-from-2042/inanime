@@ -27,4 +27,5 @@
             <?echo $arResult["PREVIEW_TEXT"];?>
         <?endif?>
     </div>
+    <hr class="general-content-bottom-line">
 </div>

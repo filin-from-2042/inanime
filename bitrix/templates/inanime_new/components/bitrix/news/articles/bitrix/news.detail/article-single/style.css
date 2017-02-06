@@ -22,7 +22,10 @@
 .ia-news-single .text-container img{
      border-radius:10px;
  }
-
+.ia-news-single .general-content-bottom-line{
+    margin-top: 88px;
+    margin-bottom: 0;
+}
 
 
 /* Mobile */

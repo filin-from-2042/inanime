@@ -65,6 +65,7 @@ $this->setFrameMode(true);
         ),
         $component
     );?>
+<?/*?>
 <div class="container">
     <?if($arParams["USE_RATING"]=="Y" && $ElementID):?>
     <?$APPLICATION->IncludeComponent(
@@ -165,3 +166,4 @@ $this->setFrameMode(true);
     );?>
     <?endif?>
 </div>
+<?*/?>
