@@ -52,6 +52,7 @@ $APPLICATION->SetTitle("Мои заказы");
                     );?>
                 </div>
             </div>
+            <hr class="general-content-bottom-line">
         </div>
     </div>
 

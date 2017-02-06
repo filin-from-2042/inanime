@@ -3266,6 +3266,9 @@ footer hr{
         margin-top: 95px;
         margin-left: -3px;
      }
+    .section-personal.orders hr.general-content-bottom-line{
+        margin-top: 94px;
+    }
 
 }
 @media (min-width: 1400px){
