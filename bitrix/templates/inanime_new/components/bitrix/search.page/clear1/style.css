@@ -91,6 +91,11 @@ div.search-sorting b { background: #e8e9ec; }
     margin-right: 10px;
     margin-bottom: 10px;
 }
+.ia-search-page .general-content-bottom-line{
+    margin-bottom: 0;
+    margin-top: 93px;
+}
+
 
 /* Mobile */
 @media (max-width: 760px) {

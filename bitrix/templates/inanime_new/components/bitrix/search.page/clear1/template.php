@@ -53,9 +53,11 @@
 
                 </div>
             </div>
+            <?if($arResult["NAV_RESULT"]):?>
             <div class="search-info-wrap">
                 <div class="align-wrap">По Вашему запросу найдено : <?echo $arResult["NAV_RESULT"]->SelectedRowsCount()?></div>
             </div>
+            <?endif;?>
         </div>
     </form>
 
@@ -213,4 +215,5 @@
 
         <?if($arParams["DISPLAY_BOTTOM_PAGER"] != "N") echo $arResult["NAV_STRING"]?>
     <?endif;?>
+    <hr class="general-content-bottom-line">
 </div>
