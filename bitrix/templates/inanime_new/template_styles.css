@@ -3254,6 +3254,9 @@ footer hr{
         margin-top: 72px;
         margin-bottom: 0px;
     }
+    .section-personal.change-password hr.general-content-bottom-line{
+        margin-top: 102px;
+    }
 
 }
 @media (min-width: 1400px){
