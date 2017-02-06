@@ -143,6 +143,13 @@ else
     }
 }
 $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
+// данные для админских кнопок битрикса
+$arDataButtons = CIBlock::GetPanelButtons(
+    $arResult["IBLOCK_ID"],
+    $arResult["ID"],
+    0,
+    array("SECTION_BUTTONS"=>false, "SESSID"=>false)
+);
 ?>
 <div class="container">
     <?$APPLICATION->IncludeComponent(
@@ -158,13 +165,15 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
 	),
 	false
 );
-
     ?>
 </div>
 <div class="product-card">
     <div class="container">
-        <div class="row product-info" id="<?=$strMainID?>">
-            <div class="hidden-xs col-sm-10 col-md-10 col-lg-10 photo-column">
+        <div class="row product-info" id="<?=$strMainID;?>">
+        <?$this->AddEditAction($arResult['ID'], $arDataButtons["edit"]["edit_element"]["ACTION_URL"], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_EDIT"));?>
+        <?$this->AddDeleteAction($arResult['ID'], $arDataButtons["edit"]["delete_element"]["ACTION_URL"], CIBlock::GetArrayByID($arParams["IBLOCK_ID"], "ELEMENT_DELETE"), array("CONFIRM" => GetMessage('CT_BCS_ELEMENT_DELETE_CONFIRM')));?>
+
+        <div class="hidden-xs col-sm-10 col-md-10 col-lg-10 photo-column">
                 <?
                     if(!empty($photoGalleryData))
                     {
@@ -636,11 +645,8 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                     <?
                     if (!empty($arResult['DISPLAY_PROPERTIES']) || $arResult['SHOW_OFFERS_PROPS'])
                     {
-                    ?>
-                        <?
                         if (!empty($arResult['DISPLAY_PROPERTIES']))
-                        {
-                            ?>
+                        {?>
                             <ul class="characteristic-list gray-text">
                                 <?
                                 foreach ($arResult['DISPLAY_PROPERTIES'] as &$arOneProp)
@@ -663,8 +669,7 @@ $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
                             </ul>
                         <?
                         }
-                    }
-                    ?>
+                    }?>
                 </div>
                 <div role="tabpanel" class="tab-pane" id="comments">
 
@@ -925,7 +930,7 @@ $arJSParams['startColorData'] = $JSStartColorData;
             var modal = $(this);
             modal.find('.status-container').hide();
             modal.find('input,textarea').val('');
-        })
+        });
 
         $('.product-info .discount .found-cheaper').click(function(){
             $('#found-cheaper-popup').modal();
