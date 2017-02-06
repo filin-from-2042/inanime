@@ -34,6 +34,7 @@ $APPLICATION->SetTitle("Активация дисконтной карты");
                     <?$APPLICATION->IncludeComponent("inanime:user.card", "", array(), false, array('HIDE_ICONS'=>'Y')); ?>
                 </div>
             </div>
+            <hr class="general-content-bottom-line">
         </div>
     </div>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
