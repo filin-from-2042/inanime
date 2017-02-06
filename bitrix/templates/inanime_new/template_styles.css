@@ -336,7 +336,11 @@ textarea.form-control {
     text-align: center;
     display: inline-block;
 }
-
+hr.general-content-bottom-line{
+    border-top: 2px solid #eee;
+    margin-top: 40px;
+    margin-left: -11px;
+}
 /************* CUSTOM ICONS ***************/
 i.ai-icon-bs {
     font-family: 'Glyphicons Halflings';
@@ -1155,7 +1159,7 @@ footer .general-container{
     background-position: 99% 70%;
 }
 footer hr{
-    margin-top: 22px;
+    margin-top: 29px;
     margin-bottom: 3px;
     margin-left: -11px;
     border-top: 2px solid #eee;

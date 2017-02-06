@@ -93,6 +93,7 @@ $arUrls = array(
                             </form>
                         </div>
                     </div>
+                    <hr class="general-content-bottom-line">
                 </div>
             </div>
         <?
@@ -102,5 +103,6 @@ $arUrls = array(
             ShowError($arResult["ERROR_MESSAGE"]);
         }
         ?>
+
     </div>
 </div>
