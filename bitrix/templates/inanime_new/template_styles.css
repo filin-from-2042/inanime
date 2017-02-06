@@ -1964,11 +1964,11 @@ footer hr{
 }
 .section-personal {
     padding-top: 15px;
-    padding-bottom: 100px;
+    /*padding-bottom: 100px;*/
 
 }
 .section-personal .menu-column {
-    padding-left:0;
+    padding-left:15px;
 }
 .section-personal .fields-column {
     padding-top:13px;
@@ -3247,6 +3247,12 @@ footer hr{
     }
     .product-info .splitted-btn span.text-btn{
         padding: 11px 32px 9px 32px;
+    }
+
+
+    .section-personal hr.general-content-bottom-line{
+        margin-top: 72px;
+        margin-bottom: 0px;
     }
 
 }

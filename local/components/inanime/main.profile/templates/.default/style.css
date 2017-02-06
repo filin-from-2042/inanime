@@ -11,7 +11,8 @@
 }
 
 .section-personal .address-column {
-    padding-left:27px;
+    /*padding-left:27px;*/
+    padding-left:13px;
 }
 
 .section-personal .address-column input.street-input {

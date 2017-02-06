@@ -117,8 +117,9 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
                     <input type="hidden" name="customer-profile-radio" class="ia-radio-value" <?=($currentProfileID)?' value="'.$currentProfileID.'"':''?> />
                     <?
                     while ($profile = $profiles->Fetch())
-                    {
-                    echo '<div class="radio-button-container">';
+                    {?>
+                        <div class="radio-button-container">
+                            <?
                             $profileID = $profile['ID'];
                             $profileVals = CSaleOrderUserPropsValue::GetList(array("ID" => "ASC"), Array("USER_PROPS_ID"=>$profileID));
                             ?>
@@ -138,7 +139,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
                             }
                             $arLocs = CSaleLocation::GetByID($location, LANGUAGE_ID);
                             $fullAddress = 'г. '.$arLocs["CITY_NAME"].', '.$address;
-                        ?>
+                            ?>
                             <div class="button-title">
                                 <div class="input-container">
                                     <input type="text" name="full-address" value="<?=$fullAddress?>" placeholder="Дом" class="form-control full-address-input" disabled="disabled">
@@ -206,7 +207,7 @@ if (!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED !== true)
                 </div>
             </div>
         </div>
-    </div>
+
     <script>
         var profileData = new profilePersonalData();
     </script>
