@@ -120,4 +120,8 @@
     .ia-reviews-list.reviews-list .review-container .review-info {
         margin-bottom: 78px;
     }
+
+    .ia-reviews-list.reviews-list .row.main-carousel > div:last-child{
+        padding-left: 6px;
+    }
 }
