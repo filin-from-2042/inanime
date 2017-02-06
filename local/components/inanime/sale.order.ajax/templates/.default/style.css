@@ -2,7 +2,8 @@
 .order-drawing-up{
     /*padding-top: 138px;*/
 }
-.order-drawing-up .order-drawing-up-header{
+.order-drawing-up .order-drawing-up-header,
+.order-drawing-up-complete  .order-drawing-up-header{
     margin-top: 18px;
 }
 .order-drawing-up h2{
@@ -260,7 +261,7 @@
     letter-spacing: 0.4px;
 }
 .order-drawing-up-complete .message-container{
-    margin-top: 45px;
+    margin-top: 10px;
 }
 .order-drawing-up-complete .general-message{
     font-size: 21px;
@@ -296,6 +297,10 @@
     font-size: 15px;
     padding: 10px 30px;
 }
+.order-drawing-up-complete .general-content-bottom-line{
+    margin-bottom: 0;
+}
+
 
 /* Mobile */
 @media (max-width: 760px) {
@@ -459,7 +464,7 @@
 
     /******************************** DRAWING-UP-COMPLETE **********************************/
     .order-drawing-up-complete .message-container {
-        margin-top: 31px;
+        margin-top: 10px;
     }
     .order-drawing-up-complete .data-container {
         margin-top: 30px;

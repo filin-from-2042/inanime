@@ -5,6 +5,19 @@ if (!empty($arResult["ORDER"]))
         if($arResult['ORDER_PROPS_DATA'])
         {?>
             <div class="order-drawing-up-complete">
+                <div class="order-drawing-up-header">
+                    <?$APPLICATION->IncludeComponent(
+                        "bitrix:breadcrumb",
+                        "catalog-chain",
+                        Array(
+                            "START_FROM" => "0",
+                            "PATH" => "",
+                            "SITE_ID" => SITE_ID
+                        )
+                    );
+                    ?>
+                    <h1 class="ia-page-title">Оформление заказа</h1>
+                </div>
                 <div class="container">
                     <div class="row message-container">
                         <div class="general-message">Спасибо за покупку!</div>
@@ -20,6 +33,7 @@ if (!empty($arResult["ORDER"]))
                     <div class="button-container">
                         <a href="/catalog/kategorii/" class="btn btn-default ia-btn text-btn blue-btn">В каталог</a>
                     </div>
+                    <hr class="general-content-bottom-line">
                 </div>
             </div>
 <?      }
