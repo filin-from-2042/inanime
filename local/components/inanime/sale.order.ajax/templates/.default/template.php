@@ -572,8 +572,8 @@ else
                 }
                     ?>
 
+                <hr class="general-content-bottom-line">
                 </div>
-
             </div>
     </div>
 

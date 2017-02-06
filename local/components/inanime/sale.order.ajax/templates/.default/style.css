@@ -172,7 +172,8 @@
 }
 .order-drawing-up .costs-row .button-container{
     margin-top: 54px;
-    margin-bottom: 110px;
+    margin-bottom: 36px;
+    /*margin-bottom: 110px;*/
 }
 .order-drawing-up .costs-row .button-container button{
     font-size: 14px;
@@ -491,5 +492,8 @@
 }
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1230px){
-
+    .order-drawing-up .general-content-bottom-line{
+        margin-bottom: 0px;
+        margin-top: 41px;
+    }
 }
