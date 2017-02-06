@@ -13,7 +13,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
     $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/css/bootstrap.min.css');
     $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/css/font-awesome.min.css');
     $APPLICATION->SetAdditionalCSS(SITE_TEMPLATE_PATH.'/styles.css');
-    $APPLICATION->SetAdditionalCSS('http://fonts.googleapis.com/css?family=Oswald:400,300');
+    $APPLICATION->SetAdditionalCSS('https://fonts.googleapis.com/css?family=Oswald:400,300');
     ?>
     <?$APPLICATION->AddHeadScript("https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js");?>
     <?$APPLICATION->AddHeadScript(SITE_TEMPLATE_PATH."/js/bootstrap.min.js");?>
@@ -73,14 +73,16 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                             {
                                 $cityObj = new CCity();
                                 $arThisCity = $cityObj ->GetFullInfo();
-// TODO: сейчас только для России, сделать универсально
+//var_dump($arThisCity);
                                 $db_vars = CSaleLocation::GetList(
                                     array(
                                         "SORT" => "ASC",
                                         "COUNTRY_NAME_LANG" => "ASC",
                                         "CITY_NAME_LANG" => "ASC"
                                     ),
+//                                    array("CITY_NAME" => 'Новомосковск', "LID" => LANGUAGE_ID, 'COUNTRY_ID'=>19),
                                     array("CITY_NAME" => $arThisCity['CITY_NAME']['VALUE'], "LID" => LANGUAGE_ID, 'COUNTRY_ID'=>19),
+//                                    array( "LID" => LANGUAGE_ID, 'COUNTRY_ID'=>19),
                                     false,
                                     false,
                                     array()

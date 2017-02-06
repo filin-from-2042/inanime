@@ -63,9 +63,9 @@
                             </p>
                         </div>
                         <div class="social-container visible-xs-block">
-                            <a href="http://www.facebook.com" class="social-link facebook"></a>
-                            <a href="http://www.twitter.com" class="social-link twitter"></a>
-                            <a href="http://vimeo.com" class="social-link vimeo"></a>
+                            <a href="https://www.facebook.com" class="social-link facebook"></a>
+                            <a href="https://www.twitter.com" class="social-link twitter"></a>
+                            <a href="https://vimeo.com" class="social-link vimeo"></a>
                         </div>
                     </div>
                     <div class="hidden-xs col-sm-10 col-md-6 col-lg-6 join">
@@ -92,5 +92,21 @@
             <script type="text/javascript"> (function (d, w, c) { (w[c] = w[c] || []).push(function() { try { w.yaCounter40606800 = new Ya.Metrika({ id:40606800, clickmap:true, trackLinks:true, accurateTrackBounce:true }); } catch(e) { } }); var n = d.getElementsByTagName("script")[0], s = d.createElement("script"), f = function () { n.parentNode.insertBefore(s, n); }; s.type = "text/javascript"; s.async = true; s.src = "https://mc.yandex.ru/metrika/watch.js"; if (w.opera == "[object Opera]") { d.addEventListener("DOMContentLoaded", f, false); } else { f(); } })(document, window, "yandex_metrika_callbacks"); </script> <noscript><div><img src="https://mc.yandex.ru/watch/40606800" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
 
         </footer>
+<!-- Begin Me-Talk -->
+<script type='text/javascript'>
+	(function(d, w, m) {
+		window.supportAPIMethod = m;
+		var s = d.createElement('script');
+		s.type ='text/javascript'; s.id = 'supportScript'; s.charset = 'utf-8';
+		s.async = true;
+		var id = 'd181ee90b346985ec12d5797bea7677e';
+		s.src = '//me-talk.ru/support/support.js?h='+id;
+		var sc = d.getElementsByTagName('script')[0];
+		w[m] = w[m] || function() { (w[m].q = w[m].q || []).push(arguments); };
+		if (sc) sc.parentNode.insertBefore(s, sc); 
+		else d.documentElement.firstChild.appendChild(s);
+	})(document, window, 'MeTalk');
+</script>
+<!-- End Me-Talk -->
     </body>
 </html>
