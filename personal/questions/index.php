@@ -80,6 +80,7 @@ $APPLICATION->SetTitle("Мои вопросы и ответы");
                     <?}?>
                     </div>
                 </div>
+                <hr class="general-content-bottom-line">
             </div>
         </div>
     </div>
