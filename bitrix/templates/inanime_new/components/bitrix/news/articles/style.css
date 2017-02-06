@@ -23,5 +23,9 @@
 }
 /* Large devices (large desktops, 1200px and up) */
 @media (min-width: 1230px){
+    .ia-articles-list-container .main-carousel.row{
+        padding-top: 52px;
+        padding-bottom: 10px;
+    }
 
 }
