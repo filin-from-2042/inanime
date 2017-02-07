@@ -58,10 +58,6 @@ $APPLICATION->SetTitle("Контакты");
                 </div>
             </div>
         </div>
-        <div class="addresses-list-container">
-            <div class="fox-icon bottom hidden visible-md visible-lg"></div>
-            <hr>
-        </div>
         <?/*?>
         <div class="addresses-list-container">
             <hr>
@@ -125,5 +121,23 @@ $APPLICATION->SetTitle("Контакты");
             </div>
         </div>
         <?*/?>
+
+
+        <?$APPLICATION->IncludeComponent(
+	"bitrix:catalog.store.list", 
+	"template1", 
+	array(
+		"PHONE" => "Y",
+		"SCHEDULE" => "Y",
+		"PATH_TO_ELEMENT" => "store/#store_id#",
+		"MAP_TYPE" => "1",
+		"SET_TITLE" => "Y",
+		"CACHE_TYPE" => "A",
+		"CACHE_TIME" => "36000000",
+		"COMPONENT_TEMPLATE" => "template1"
+	),
+	false
+);?>
+
     </div>
 <?require($_SERVER["DOCUMENT_ROOT"]."/bitrix/footer.php");?>
