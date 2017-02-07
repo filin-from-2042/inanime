@@ -17,6 +17,7 @@ body{
 /* BUTTONS */
 .btn:focus{
     outline: none !important;
+    color: #fff;
 }
 .ia-btn{
     border-radius: 7px;
@@ -28,13 +29,16 @@ body{
 .ia-general-title{
     color:#333;
 }
-.yellow-btn{
+.yellow-btn,
+.yellow-btn:focus{
     background-color:rgb(245,173,91);
 }
+.blue-btn:focus,
 .blue-btn{
     background-color:rgb(99,186,196);
     padding:6px 30px;
 }
+.red-btn:focus,
 .red-btn{
     background-color:#d24354;
     padding:6px 30px;
@@ -49,10 +53,12 @@ body{
     border-radius: 8px;
     border:none;
 }
+.gray-btn:focus,
 .gray-btn{
     background-color:#bdbec5;
     padding:6px 30px;
 }
+.blue-dark-btn:focus,
 .blue-dark-btn{
     background-color:#39acd8;
 }
