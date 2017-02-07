@@ -12,6 +12,9 @@ $filterData = json_decode($_REQUEST["filter_data"], true);
 //$arrFilter = array();
 global $arrFilter;
 //$arrFilter["PROPERTY_IS_EIGHTEEN"] = false;
+
+$arrSizes = array();
+$arrColors = array();
 foreach($filterData as $field)
 {
     switch($field["name"])
@@ -75,7 +78,7 @@ foreach($filterData as $field)
             if(count($filterNameExploded)>2 && !is_nan($filterNameExploded[1]))
             {
                 // цвет
-                if(intval($filterNameExploded[1])==167)
+                if(intval($filterNameExploded[1])==167 || intval($filterNameExploded[1])==188)
                 {
                     $hlblock = HL\HighloadBlockTable::getById(1)->fetch();
 
@@ -93,11 +96,31 @@ foreach($filterData as $field)
                     ));
                     $rsData = new CDBResult($rsData, $sTableID);
                     while($arRes = $rsData->Fetch()){
-                        $arrFilter["PROPERTY_COLOR1"][] =$arRes['UF_XML_ID'];
+                        $arrColors[] =$arRes['UF_XML_ID'];
                     }
+
+                    /*
+                    $hlblock = HL\HighloadBlockTable::getById(1)->fetch();
+
+                    $entity = HL\HighloadBlockTable::compileEntity($hlblock = HL\HighloadBlockTable::getById(1)->fetch());
+                    $entity_data_class = $entity->getDataClass();
+                    $entity_table_name = $hlblock['TABLE_NAME'];
+
+                    $arFilter = array('UF_NAME'=>$field["value"]); //задаете фильтр по вашим полям
+
+                    $sTableID = 'tbl_'.$entity_table_name;
+                    $rsData = $entity_data_class::getList(array(
+                        "select" => array('*'), //выбираем все поля
+                        "filter" => $arFilter,
+                        "order" => array("UF_SORT"=>"ASC") // сортировка по полю UF_SORT, будет работать только, если вы завели такое поле в hl'блоке
+                    ));
+                    $rsData = new CDBResult($rsData, $sTableID);
+                    while($arRes = $rsData->Fetch()){
+                        $arrFilter["PROPERTY_COLOR1"][] =$arRes['UF_XML_ID'];
+                    }*/
                 }
                 // размер
-                if(intval($filterNameExploded[1])==208)
+                if(intval($filterNameExploded[1])==208 || intval($filterNameExploded[1])==219)
                 {
                     $hlblock = HL\HighloadBlockTable::getById(5)->fetch();
 
@@ -115,14 +138,47 @@ foreach($filterData as $field)
                     ));
                     $rsData = new CDBResult($rsData, $sTableID);
                     while($arRes = $rsData->Fetch()){
-                        $arrFilter["PROPERTY_SIZE1"][] =$arRes['UF_XML_ID'];
+                        $arrSizes[]=$arRes['UF_XML_ID'];
+                        /*
+                        $arrFilter['ID'] = CIBlockElement::SubQuery('PROPERTY_CML2_LINK', array(
+                            'IBLOCK_ID' => 20,
+                            'PROPERTY_SIZE_GLK' => $arRes['UF_XML_ID']
+                        ));*/
                     }
+                    /*
+                    $hlblock = HL\HighloadBlockTable::getById(5)->fetch();
+
+                    $entity = HL\HighloadBlockTable::compileEntity($hlblock = HL\HighloadBlockTable::getById(5)->fetch());
+                    $entity_data_class = $entity->getDataClass();
+                    $entity_table_name = $hlblock['TABLE_NAME'];
+
+                    $arFilter = array('UF_NAME'=>$field["value"]); //задаете фильтр по вашим полям
+
+                    $sTableID = 'tbl_'.$entity_table_name;
+                    $rsData = $entity_data_class::getList(array(
+                        "select" => array('*'), //выбираем все поля
+                        "filter" => $arFilter,
+                        "order" => array("UF_SORT"=>"ASC") // сортировка по полю UF_SORT, будет работать только, если вы завели такое поле в hl'блоке
+                    ));
+                    $rsData = new CDBResult($rsData, $sTableID);
+                    while($arRes = $rsData->Fetch()){
+                        $arrFilter["PROPERTY_SIZE1"][] =$arRes['UF_XML_ID'];
+                    }*/
                 }
             }
         }
     }
 }
+$arrSubFields = array();
+if($arrSizes) $arrSubFields['PROPERTY_SIZE_GLK']=$arrSizes;
+if($arrColors) $arrSubFields['PROPERTY_COLOR_REF']=$arrColors;
 
+if(count($arrSubFields)>0)
+{
+    $arrSubFields['IBLOCK_ID']=20;
+    $arrFilter['ID'] = CIBlockElement::SubQuery('PROPERTY_CML2_LINK', $arrSubFields);
+}
+//var_dump($arrFilter);
 if($discount||$weekGoods||$topsale)
 {
     $IDs = array();
@@ -214,7 +270,6 @@ if($discount||$weekGoods||$topsale)
 }
 // кол-во страниц товаров с текущем фильтром
 
-//var_dump($arrFilter);
 if($arrFilter && array_key_exists('ID', $arrFilter) && !$arrFilter["ID"]) return;
 $newArr = $arrFilter;
 $newArr['IBLOCK_ID']='19';
