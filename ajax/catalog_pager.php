@@ -1,20 +1,29 @@
 <?require_once($_SERVER['DOCUMENT_ROOT']. "/bitrix/modules/main/include/prolog_before.php");
 ?>
 <?
-CModule::IncludeModule('highloadblock');
-CModule::IncludeModule("catalog");
 use Bitrix\Highloadblock as HL;
 use Bitrix\Main\Entity;
+
+CModule::IncludeModule('highloadblock');
+CModule::IncludeModule("catalog");
+CModule::IncludeModule("iblock");
 
 // парсинг полей для сортировки и фильтрации
 $sortData = json_decode($_REQUEST["sort_data"], true);
 $filterData = json_decode($_REQUEST["filter_data"], true);
-//$arrFilter = array();
-global $arrFilter;
-//$arrFilter["PROPERTY_IS_EIGHTEEN"] = false;
 
-$arrSizes = array();
-$arrColors = array();
+global $arrFilter;
+
+// массив с данными для фильтрации ТП по размерам и цветам
+$arrColorsSizesSubFields = array();
+
+// ИДшники товаров, отфильтрованных по кнопкам "Товар недели", "Со скидкой", "Хит продаж"
+$arrButtonsIDs = array();
+$weekGoodsIDs = array(19,20,21,22,23,24,25,26,27,28);
+
+// Данные для фильтрации по наличию на складе
+$arrStockFilter = array();
+
 foreach($filterData as $field)
 {
     switch($field["name"])
@@ -23,13 +32,13 @@ foreach($filterData as $field)
          $minPrice = $field["value"];
 
         }; break;
+
         case 'arrFilter_P1_MAX': {
             $maxPrice = $field["value"];
             $arrFilter["><CATALOG_PRICE_1"]=array($minPrice,$maxPrice);
         };break;
-        case 'BRAND_REF1':{
-//            $arrFilter["PROPERTY_BRAND_REF1_VALUE"]=$field["value"];
 
+        case 'BRAND_REF1':{
             $hlblock = HL\HighloadBlockTable::getById(7)->fetch();
 
             $entity = HL\HighloadBlockTable::compileEntity($hlblock = HL\HighloadBlockTable::getById(7)->fetch());
@@ -50,15 +59,16 @@ foreach($filterData as $field)
             }
 
         };break;
+
         case 'MATERIAL1':{
             $arrFilter["PROPERTY_MATERIAL1"] = $field["value"];
         };break;
+
         case 'in-stock-checkbox-filter-code':{
-            $arSubQuery = array("=CATALOG_AVAILABLE" => "Y");
-            $arrFilter[] = array(
+            $arrStockFilter = array(
                 'LOGIC' => 'OR',
                 array(
-                    'ID' => CIBlockElement::SubQuery('PROPERTY_CML2_LINK', $arSubQuery),
+                    'ID' => CIBlockElement::SubQuery('PROPERTY_CML2_LINK', array("=CATALOG_AVAILABLE" => "Y")),
                 ),
                 array(
                     "LOGIC" => "AND",
@@ -68,12 +78,99 @@ foreach($filterData as $field)
             );
 
         };break;
-        case 'discount': $discount = ($field["value"]=='false')?false:true;break;
-        case 'week-goods': $weekGoods = ($field["value"]=='false')?false:true;break;
-        case 'topsale': $topsale = ($field["value"]=='false')?false:true;break;
+
+        case 'discount':{
+            if($field["value"]=='true')
+            {
+                // 2 выборки, 1ая для активных скидок с указанным интервалом, вторая для активных без указанного интервала
+                $discountIntervalIDs = $weekGoodsIDs;
+                $dbProductIntervalDiscounts = CCatalogDiscount::GetList(
+                    array("SORT" => "ASC"),
+                    array(
+                        "!ID" => $weekGoodsIDs,
+                        "ACTIVE" => "Y",
+                        "<=ACTIVE_FROM" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
+                        ">=ACTIVE_TO" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
+                        "COUPON" => "",
+                        "SITE_ID"=>SITE_ID
+                    ),
+                    false,
+                    false,
+                    array(
+                        "ID", "PRODUCT_ID", "SECTION_ID"
+                    )
+                );
+                while ($arProductIntervalDiscounts = $dbProductIntervalDiscounts->Fetch())
+                {
+                    $discountIntervalIDs[] = $arProductIntervalDiscounts['ID'];
+                    if($arProductIntervalDiscounts["PRODUCT_ID"]) $arrButtonsIDs[]=$arProductIntervalDiscounts["PRODUCT_ID"];
+                }
+
+                $dbProductDiscounts = CCatalogDiscount::GetList(
+                    array("SORT" => "ASC"),
+                    array(
+                        "ACTIVE" => "Y",
+                        "ACTIVE_FROM" => false,
+                        "ACTIVE_TO" => false,
+                        "COUPON" => "",
+                        "SITE_ID"=>SITE_ID
+                    ),
+                    false,
+                    false,
+                    array(
+                        "ID", "PRODUCT_ID", "SECTION_ID"
+                    )
+                );
+                while ($arProductDiscounts = $dbProductDiscounts->Fetch())
+                {
+                    if($arProductDiscounts["PRODUCT_ID"]) $arrButtonsIDs[]=$arProductDiscounts["PRODUCT_ID"];
+                }
+            }
+        };break;
+
+        case 'week-goods':
+        {
+            if($field["value"]=='true')
+            {
+                $dbProductDiscounts = CCatalogDiscount::GetList(
+                    array("SORT" => "ASC"),
+                    array(
+                        "ID" => $weekGoodsIDs,
+                        "ACTIVE" => "Y",
+                        "<=ACTIVE_FROM" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
+                        ">=ACTIVE_TO" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
+                        "COUPON" => "",
+                        "SITE_ID"=>SITE_ID
+                    ),
+                    false,
+                    false,
+                    array(
+                        "ID", "PRODUCT_ID", "SECTION_ID"
+                    )
+                );
+
+                while ($arProductDiscounts = $dbProductDiscounts->Fetch())
+                {
+                    if($arProductDiscounts["PRODUCT_ID"]) $arrButtonsIDs[]=$arProductDiscounts["PRODUCT_ID"];
+                }
+            }
+        };break;
+
+        case 'topsale':
+        {
+            if($field["value"]=='true')
+            {
+                $res = CIBlockElement::GetList(Array("SORT"=>"ASC"), array('!PROPERTY_IS_BESTSELLER'=>false), Array("ID"));
+                while($ar_fields = $res->GetNext())
+                {
+                    if($ar_fields["ID"]) $arrButtonsIDs[]=$ar_fields["ID"];
+                }
+            }
+        };break;
+
         default:
         {
-            // филтрация по свойствам типа чекбокс с каритной или текстом
+            // фильтрация по свойствам типа чекбокс с картинкой или текстом
             $filterNameExploded = explode('_',$field["name"]);
             if(count($filterNameExploded)>2 && !is_nan($filterNameExploded[1]))
             {
@@ -95,29 +192,12 @@ foreach($filterData as $field)
                         "order" => array("UF_SORT"=>"ASC") // сортировка по полю UF_SORT, будет работать только, если вы завели такое поле в hl'блоке
                     ));
                     $rsData = new CDBResult($rsData, $sTableID);
+
+                    $arrColors = array();
                     while($arRes = $rsData->Fetch()){
                         $arrColors[] =$arRes['UF_XML_ID'];
                     }
-
-                    /*
-                    $hlblock = HL\HighloadBlockTable::getById(1)->fetch();
-
-                    $entity = HL\HighloadBlockTable::compileEntity($hlblock = HL\HighloadBlockTable::getById(1)->fetch());
-                    $entity_data_class = $entity->getDataClass();
-                    $entity_table_name = $hlblock['TABLE_NAME'];
-
-                    $arFilter = array('UF_NAME'=>$field["value"]); //задаете фильтр по вашим полям
-
-                    $sTableID = 'tbl_'.$entity_table_name;
-                    $rsData = $entity_data_class::getList(array(
-                        "select" => array('*'), //выбираем все поля
-                        "filter" => $arFilter,
-                        "order" => array("UF_SORT"=>"ASC") // сортировка по полю UF_SORT, будет работать только, если вы завели такое поле в hl'блоке
-                    ));
-                    $rsData = new CDBResult($rsData, $sTableID);
-                    while($arRes = $rsData->Fetch()){
-                        $arrFilter["PROPERTY_COLOR1"][] =$arRes['UF_XML_ID'];
-                    }*/
+                    if($arrColors) $arrColorsSizesSubFields['PROPERTY_COLOR_REF']=$arrColors;
                 }
                 // размер
                 if(intval($filterNameExploded[1])==208 || intval($filterNameExploded[1])==219)
@@ -137,139 +217,32 @@ foreach($filterData as $field)
                         "order" => array("UF_SORT"=>"ASC") // сортировка по полю UF_SORT, будет работать только, если вы завели такое поле в hl'блоке
                     ));
                     $rsData = new CDBResult($rsData, $sTableID);
+
+                    $arrSizes = array();
                     while($arRes = $rsData->Fetch()){
                         $arrSizes[]=$arRes['UF_XML_ID'];
-                        /*
-                        $arrFilter['ID'] = CIBlockElement::SubQuery('PROPERTY_CML2_LINK', array(
-                            'IBLOCK_ID' => 20,
-                            'PROPERTY_SIZE_GLK' => $arRes['UF_XML_ID']
-                        ));*/
                     }
-                    /*
-                    $hlblock = HL\HighloadBlockTable::getById(5)->fetch();
 
-                    $entity = HL\HighloadBlockTable::compileEntity($hlblock = HL\HighloadBlockTable::getById(5)->fetch());
-                    $entity_data_class = $entity->getDataClass();
-                    $entity_table_name = $hlblock['TABLE_NAME'];
-
-                    $arFilter = array('UF_NAME'=>$field["value"]); //задаете фильтр по вашим полям
-
-                    $sTableID = 'tbl_'.$entity_table_name;
-                    $rsData = $entity_data_class::getList(array(
-                        "select" => array('*'), //выбираем все поля
-                        "filter" => $arFilter,
-                        "order" => array("UF_SORT"=>"ASC") // сортировка по полю UF_SORT, будет работать только, если вы завели такое поле в hl'блоке
-                    ));
-                    $rsData = new CDBResult($rsData, $sTableID);
-                    while($arRes = $rsData->Fetch()){
-                        $arrFilter["PROPERTY_SIZE1"][] =$arRes['UF_XML_ID'];
-                    }*/
+                    if($arrSizes) $arrColorsSizesSubFields['PROPERTY_SIZE_GLK']=$arrSizes;
                 }
             }
         }
     }
 }
-$arrSubFields = array();
-if($arrSizes) $arrSubFields['PROPERTY_SIZE_GLK']=$arrSizes;
-if($arrColors) $arrSubFields['PROPERTY_COLOR_REF']=$arrColors;
 
-if(count($arrSubFields)>0)
+if($arrColorsSizesSubFields || $arrButtonsIDs || $arrStockFilter)
 {
-    $arrSubFields['IBLOCK_ID']=20;
-    $arrFilter['ID'] = CIBlockElement::SubQuery('PROPERTY_CML2_LINK', $arrSubFields);
+    $additionalFilterData = array('LOGIC'=>'AND');
+    // по цветам и размерам ТП
+    if($arrColorsSizesSubFields) $additionalFilterData[] = array('ID'=>CIBlockElement::SubQuery('PROPERTY_CML2_LINK', $arrColorsSizesSubFields));
+    // по кнопкам "Товар недели", "Со скидкой", "Рекомендуем"
+    if($arrButtonsIDs) $additionalFilterData[] = array('ID'=>$arrButtonsIDs);
+    // по наличию
+    if($arrStockFilter) $additionalFilterData[] = $arrStockFilter;
+    $arrFilter[]=$additionalFilterData;
 }
-//var_dump($arrFilter);
-if($discount||$weekGoods||$topsale)
-{
-    $IDs = array();
-    $weekGoodsIDs = array(19,20,21,22,23,24,25,26,27,28);
-    if (CModule::IncludeModule("catalog"))
-    {
-        if($weekGoods)
-        {
-            $dbProductDiscounts = CCatalogDiscount::GetList(
-                array("SORT" => "ASC"),
-                array(
-                    "ID" => $weekGoodsIDs,
-                    "ACTIVE" => "Y",
-                    "<=ACTIVE_FROM" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
-                    ">=ACTIVE_TO" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
-                    "COUPON" => "",
-                    "SITE_ID"=>SITE_ID
-                    ),
-                false,
-                false,
-                array(
-                    "ID", "PRODUCT_ID", "SECTION_ID"
-                )
-            );
 
-            while ($arProductDiscounts = $dbProductDiscounts->Fetch())
-            {
-                if($arProductDiscounts["PRODUCT_ID"]) $IDs[]=$arProductDiscounts["PRODUCT_ID"];
-            }
-        }
-        if($discount)
-        {
-            // 2 выборки, 1ая для активных скидок с указанным интервалом, вторая для активных без указанного интервала
-            $discountIntervalIDs = $weekGoodsIDs;
-            $dbProductIntervalDiscounts = CCatalogDiscount::GetList(
-                array("SORT" => "ASC"),
-                array(
-                    "!ID" => $weekGoodsIDs,
-                    "ACTIVE" => "Y",
-                    "<=ACTIVE_FROM" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
-                    ">=ACTIVE_TO" => $DB->FormatDate(date("Y-m-d H:i:s"),"YYYY-MM-DD HH:MI:SS",CSite::GetDateFormat("FULL")),
-                    "COUPON" => "",
-                    "SITE_ID"=>SITE_ID
-                ),
-                false,
-                false,
-                array(
-                    "ID", "PRODUCT_ID", "SECTION_ID"
-                )
-            );
-            while ($arProductIntervalDiscounts = $dbProductIntervalDiscounts->Fetch())
-            {
-                $discountIntervalIDs[] = $arProductIntervalDiscounts['ID'];
-                if($arProductIntervalDiscounts["PRODUCT_ID"]) $IDs[]=$arProductIntervalDiscounts["PRODUCT_ID"];
-            }
-
-            $dbProductDiscounts = CCatalogDiscount::GetList(
-                array("SORT" => "ASC"),
-                array(
-//                    "!ID" => $discountIntervalIDs,
-                    "ACTIVE" => "Y",
-                    "ACTIVE_FROM" => false,
-                    "ACTIVE_TO" => false,
-                    "COUPON" => "",
-                    "SITE_ID"=>SITE_ID
-                ),
-                false,
-                false,
-                array(
-                    "ID", "PRODUCT_ID", "SECTION_ID"
-                )
-            );
-            while ($arProductDiscounts = $dbProductDiscounts->Fetch())
-            {
-                if($arProductDiscounts["PRODUCT_ID"]) $IDs[]=$arProductDiscounts["PRODUCT_ID"];
-            }
-        }
-        if($topsale)
-        {
-            $res = CIBlockElement::GetList(Array("SORT"=>"ASC"), array('!PROPERTY_IS_BESTSELLER'=>false), Array("ID"));
-            while($ar_fields = $res->GetNext())
-            {
-                if($ar_fields["ID"]) $IDs[]=$ar_fields["ID"];
-            }
-            //$arrFilter['!PROPERTY_IS_BESTSELLER'] = false;
-        }
-    }
-    $arrFilter["ID"] = $IDs;
-}
 // кол-во страниц товаров с текущем фильтром
-
 if($arrFilter && array_key_exists('ID', $arrFilter) && !$arrFilter["ID"]) return;
 $newArr = $arrFilter;
 $newArr['IBLOCK_ID']='19';
@@ -278,7 +251,6 @@ $newArr['ACTIVE']='Y';
 $newArr['INCLUDE_SUBSECTIONS']='Y';
 
 $elem_per_page = $_REQUEST["page_element_count"];
-CModule::IncludeModule("iblock");
 $max_elements = CIBlockElement::GetList( array(),
     $newArr,
     array(),
@@ -287,7 +259,7 @@ $max_elements = CIBlockElement::GetList( array(),
         'NAME')
 );
 $max_pages = ceil($max_elements/$elem_per_page);
-
+//var_dump($arrFilter);
 echo '<div>';
 echo '<span class="hidden" id="maxPages">'.$max_pages.'</span>';
 ?>
