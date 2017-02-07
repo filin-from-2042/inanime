@@ -73,16 +73,14 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                             {
                                 $cityObj = new CCity();
                                 $arThisCity = $cityObj ->GetFullInfo();
-//var_dump($arThisCity);
+
                                 $db_vars = CSaleLocation::GetList(
                                     array(
                                         "SORT" => "ASC",
                                         "COUNTRY_NAME_LANG" => "ASC",
                                         "CITY_NAME_LANG" => "ASC"
                                     ),
-//                                    array("CITY_NAME" => 'Новомосковск', "LID" => LANGUAGE_ID, 'COUNTRY_ID'=>19),
                                     array("CITY_NAME" => $arThisCity['CITY_NAME']['VALUE'], "LID" => LANGUAGE_ID, 'COUNTRY_ID'=>19),
-//                                    array( "LID" => LANGUAGE_ID, 'COUNTRY_ID'=>19),
                                     false,
                                     false,
                                     array()
@@ -336,6 +334,22 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
 //                        "",
                         Array()
                     );?>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade ia-modal" id="item-added-modal" tabindex="-1" role="dialog" aria-labelledby="modalItemAdded">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true" class="clearfix ">
+                <i class="fa fa-times" aria-hidden="true"></i>
+              </span>
+                    </button>
+                    <div class="modal-title" style="color:rgb(99,186,196);text-align: center;font-size:15px"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Товар добавлен в корзину</div>
+                </div>
+                <div class="modal-body">
                 </div>
             </div>
         </div>
