@@ -2014,10 +2014,14 @@ footer hr{
 .contacts-data .section-personal-header {
     margin-bottom: 45px;
 }
-.contacts-data .map-column .map-container iframe{
+.contacts-data .map-column .map-container > div{
     width: 100%;
-    height: 360px;
+    /*height: 360px;*/
     border:2px solid #5d3d1d;
+    border-radius: 10px;
+    overflow: hidden;
+}
+.contacts-data .map-column .map-container ymaps{
     border-radius: 10px;
 }
 .contacts-data .map-container{
@@ -2083,6 +2087,8 @@ footer hr{
 }
 .contacts-data .store-address-container .text-wrap{
     letter-spacing: 1px;
+    vertical-align: top;
+    line-height: 30px;
 }
 .contacts-data .store-address-container .button-wrap{
     /*float: right;*/
@@ -2107,6 +2113,9 @@ footer hr{
 }
 .contacts-data .store-address-container .full-content .work-hours{
     margin-top: 10px;
+}
+.contacts-data .store-address-container .option-btn .glyphicon{
+    top: 3px;
 }
 .contacts-data .addresses-list-container{
     position: relative;
