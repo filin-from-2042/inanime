@@ -314,7 +314,7 @@ function inanime_new() {
             success: function(data){
                 $('header .content-container.cart-container').contents().remove();
                 $('header .content-container.cart-container').append($(data).find('.content-container.cart-container').contents());
-                $('#item-added-modal').modal()
+                $('#item-added-modal').modal();
             },
             error: function( xhr, textStatus ) {
                 alert( [ xhr.status, textStatus ] );
