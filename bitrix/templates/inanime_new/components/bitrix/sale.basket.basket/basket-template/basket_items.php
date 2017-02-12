@@ -299,7 +299,7 @@ if ($normalCount > 0):
                 <span class="total-value yellow-text"><?=$arResult["allSum_FORMATED"]?> </span>
             </div>
             <div class="action-button-container">
-                <button type="button" class="btn btn-default ia-btn text-btn gray-btn clear-btn" onclick="iaBasket.clearAll()">Очистить корзину</button>
+                <button type="button" class="btn btn-default ia-btn text-btn gray-btn clear-btn" onclick="$('#confirm-modal').modal('show')">Очистить корзину</button>
                 <button type="button" class="btn btn-default ia-btn text-btn yellow-btn checkout-btn" onclick="iaBasket.checkOut()">Оформить заказ</button>
             </div>
         </div>
@@ -312,6 +312,43 @@ if ($normalCount > 0):
         плановых заданий требуют определения и уточнения направлений прогрессивного развития.
     </div>
     <?*/?>
+
+
+
+    <div class="modal fade ia-modal" id="confirm-modal" tabindex="-1" role="dialog" aria-labelledby="modalconfirm">
+        <div class="modal-dialog" role="document">
+            <div class="icon-hearts"></div>
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true" class="clearfix ">
+                                        <i class="fa fa-times" aria-hidden="true"></i>
+                                      </span>
+                    </button>
+                    <h4 class="modal-title">Очистить корзину</h4>
+                </div>
+                <div class="modal-body">
+                    <div class="text-container">
+                        <div class="question-text">Вы уверены?</div>
+                    </div>
+                    <div class="buttons-container row">
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 confirm-column">
+                            <button class="btn btn-default ia-btn text-btn blue-btn" type="button" name="send_account_info" value="Да" onclick="iaBasket.clearAll()">
+                                <span>Да</span>
+                            </button>
+                        </div>
+                        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cancel-column">
+                            <button class="btn btn-default ia-btn text-btn yellow-btn" type="button" name="send_account_info" value="Нет" onclick="$('#confirm-modal').modal('hide')">
+                                <span>Нет</span>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         $(document).ready(function() {
 

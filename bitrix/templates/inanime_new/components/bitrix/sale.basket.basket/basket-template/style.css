@@ -257,6 +257,38 @@ color:#59a62a
     margin-bottom: 25px;
 }
 
+
+/*****************************************  MODAL CONFIRM **********************/
+#confirm-modal .icon-hearts{
+    background: url(./images/icon-hearts.png) no-repeat;
+    width: 85px;
+    height: 115px;
+    position: absolute;
+    z-index: 100;
+    left: -32px;
+    top: -19px;
+}
+#confirm-modal .text-container,
+#confirm-modal .buttons-container{
+    text-align: center;
+}
+#confirm-modal .buttons-container{
+    margin-top: 35px;
+    margin-bottom: 40px;
+}
+#confirm-modal .buttons-container button{
+    font-size: 14px;
+    padding: 11px 74px;
+}
+#confirm-modal .confirm-column{
+    text-align: right;
+}
+
+#confirm-modal .cancel-column{
+text-align: left;
+}
+
+
 /* Mobile */
 @media (max-width: 760px) {
     /*************************** BASKET ***************************/
@@ -318,6 +350,20 @@ color:#59a62a
     }
     #my-basket .basket-action-column .action-button-container {
         text-align: center;
+    }
+
+    #confirm-modal .modal-header{
+        padding-top: 35px;
+        padding-bottom: 0;
+    }
+    #confirm-modal .buttons-container {
+        margin-top: 20px;
+    }
+    #confirm-modal .buttons-container button {
+        padding: 11px 60px;
+    }
+    #confirm-modal .cancel-column {
+        padding-left: 5px;
     }
 
 }
