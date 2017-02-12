@@ -218,6 +218,7 @@ textarea.form-control {
     top: 7px;
     left: 320px;
     font-size: 15px;
+    cursor: pointer;
 }
 .icon{
     display: inline-block;
