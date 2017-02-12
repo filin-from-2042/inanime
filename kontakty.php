@@ -48,11 +48,7 @@ function ia_getHtmlDataColumn($arrData)
             $currCityStores = array();
             $rsProps= CCatalogStore::GetList(array('SORT'=>'ASC'),array('SITE_ID'=>SITE_ID));
             while ($arProp = $rsProps->Fetch())
-            {
-                $arUF = $GLOBALS["USER_FIELD_MANAGER"]->GetUserFields("CAT_STORE", $arProp['ID']);
-                if(intval($arUF['UF_LOCATION_ID']["VALUE"])===intval($_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID']))
                     $currCityStores[$arProp['ID']] = $arProp;
-            }
 
             $arPlacemarks = array();
             $gpsN = '';
@@ -69,56 +65,80 @@ function ia_getHtmlDataColumn($arrData)
                     $storesData[$storeID]['GPS_N'] = $store["GPS_N"];
                     $storesData[$storeID]['GPS_S'] = $store["GPS_S"];
                 }
-            }
-            else
-            {
-                $currZipCode;
-                $db_zip = CSaleLocation::GetLocationZIP(intval($_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID']));
-                if($zipProp = $db_zip->Fetch())
+                // конент по колонкам
+                $counter=1;
+                $ownfirstColumnData='';
+                $ownsecondColumnData='';
+                foreach($storesData as $store)
                 {
-                    $currZipCode = $zipProp['ZIP'];
+                    $data = ia_getHtmlDataColumn($store);
+
+                    if($counter%2==0)
+                    {
+                        $ownsecondColumnData.=$data;
+                    }else{
+                        $ownfirstColumnData.=$data;
+                    }
+                    $counter++;
+                    if($store["GPS_S"]!=0 && $store["GPS_N"]!=0)
+                    {
+                        $gpsN=substr(doubleval($store["GPS_N"]),0,15);
+                        $gpsS=substr(doubleval($store["GPS_S"]),0,15);
+                        $arPlacemarks[]=array("LON"=>$gpsS,"LAT"=>$gpsN,"TEXT"=>$store["Address"]);
+                    }
                 }
-                if($currZipCode)
-                {
-                    $xml = simplexml_load_file("http://int.cdek.ru/pvzlist.php?citypostcode=".$currZipCode);
-                    if($xml->count()>0){
-                        $storesData = array();
-                        $counter = 0;
-                        foreach($xml->Pvz  as $key => $pvz)
+            }
+
+            // данные по СДЭК
+            $currZipCode;
+            $db_zip = CSaleLocation::GetLocationZIP(intval($_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID']));
+            if($zipProp = $db_zip->Fetch())
+            {
+                $currZipCode = $zipProp['ZIP'];
+            }
+//var_dump($currZipCode);
+            if($currZipCode)
+            {
+                $xml = simplexml_load_file("https://int.cdek.ru/pvzlist.php?citypostcode=".$currZipCode);
+                if($xml->count>0){
+                    $counter = 0;
+                    foreach($xml->Pvz  as $key => $pvz)
+                    {
+                        foreach($pvz->attributes() as $name => $value)
                         {
-                            foreach($pvz->attributes() as $name => $value)
-                            {
-                                if($name=='coordX') $storesData[$counter]['GPS_S'] = (string)$value;
-                                else if($name=='coordY') $storesData[$counter]['GPS_N'] = (string)$value;
-                                else $storesData[$counter][$name]=(string)$value;
-                            }
-                            $counter++;
+                            if($name=='coordX') $storesData[$counter]['GPS_S'] = (string)$value;
+                            else if($name=='coordY') $storesData[$counter]['GPS_N'] = (string)$value;
+                            else $storesData[$counter][$name]=(string)$value;
+                        }
+                        $counter++;
+                    }
+
+                    // конент по колонкам
+                    $counter=1;
+                    $sdekfirstColumnData='';
+                    $sdeksecondColumnData='';
+                    $data='';
+                    foreach($storesData as $store)
+                    {
+                        $data = ia_getHtmlDataColumn($store);
+
+                        if($counter%2==0)
+                        {
+                            $sdeksecondColumnData.=$data;
+                        }else{
+                            $sdekfirstColumnData.=$data;
+                        }
+                        $counter++;
+                        if($store["GPS_S"]!=0 && $store["GPS_N"]!=0)
+                        {
+                            $gpsN=substr(doubleval($store["GPS_N"]),0,15);
+                            $gpsS=substr(doubleval($store["GPS_S"]),0,15);
+                            $arPlacemarks[]=array("LON"=>$gpsS,"LAT"=>$gpsN,"TEXT"=>$store["Address"]);
                         }
                     }
                 }
             }
 
-            $counter=1;
-            $firstColumnData='';
-            $secondColumnData='';
-            foreach($storesData as $store)
-            {
-                $data = ia_getHtmlDataColumn($store);
-
-                if($counter%2==0)
-                {
-                    $secondColumnData.=$data;
-                }else{
-                    $firstColumnData.=$data;
-                }
-                $counter++;
-                if($store["GPS_S"]!=0 && $store["GPS_N"]!=0)
-                {
-                    $gpsN=substr(doubleval($store["GPS_N"]),0,15);
-                    $gpsS=substr(doubleval($store["GPS_S"]),0,15);
-                    $arPlacemarks[]=array("LON"=>$gpsS,"LAT"=>$gpsN,"TEXT"=>$store["Address"]);
-                }
-            }
             ?>
 
     <div class="row">
@@ -185,33 +205,28 @@ function ia_getHtmlDataColumn($arrData)
             );?>
         </div>
     </div>
-    <?if($firstColumnData):?>
+    <?if($ownfirstColumnData):?>
         <div class="addresses-list-container">
             <div class="fox-icon bottom hidden visible-md visible-lg"></div>
             <hr>
             <h2>Наши магазины</h2>
             <div class="row">
-                <div class="col-sm-12 col-md-12 col-lg-12 column"><?=$firstColumnData?></div>
-                <div class="col-sm-12 col-md-12 col-lg-12 column"><?=$secondColumnData?></div>
+                <div class="col-sm-12 col-md-12 col-lg-12 column"><?=$ownfirstColumnData?></div>
+                <div class="col-sm-12 col-md-12 col-lg-12 column"><?=$ownsecondColumnData?></div>
             </div>
         </div>
     <?endif;?>
-
-        <?/*$APPLICATION->IncludeComponent(
-            "bitrix:catalog.store.list",
-            "template1",
-            array(
-                "PHONE" => "Y",
-                "SCHEDULE" => "Y",
-                "PATH_TO_ELEMENT" => "store/#store_id#",
-                "MAP_TYPE" => "0",
-                "SET_TITLE" => "Y",
-                "CACHE_TYPE" => "A",
-                "CACHE_TIME" => "36000000",
-                "COMPONENT_TEMPLATE" => "template1"
-            ),
-            false
-        );*/?>
+    <?if($sdekfirstColumnData):?>
+        <div class="addresses-list-container">
+            <div class="fox-icon bottom hidden visible-md visible-lg"></div>
+            <hr>
+            <h2>Пункты самовывоза</h2>
+            <div class="row">
+                <div class="col-sm-12 col-md-12 col-lg-12 column"><?=$sdekfirstColumnData?></div>
+                <div class="col-sm-12 col-md-12 col-lg-12 column"><?=$sdeksecondColumnData?></div>
+            </div>
+        </div>
+    <?endif;?>
 
         <hr class="general-content-bottom-line">
     </div>
