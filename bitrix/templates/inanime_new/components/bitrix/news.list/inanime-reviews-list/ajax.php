@@ -5,7 +5,7 @@ if (check_bitrix_sessid())
     $sortData = json_decode($_REQUEST["sort_data"], true);
     $filterData = json_decode($_REQUEST["filter_data"], true);
     $elPerPage = $_REQUEST["page_element_count"];
-    if(!empty($filterData['tag'])) $GLOBALS['arrFilter']=array("?TAGS" => $filterData['tag'], "IBLOCK_ID" => '24');
+    if(!empty($filterData['tag']) && $filterData['tag']!='Все') $GLOBALS['arrFilter']=array("?TAGS" => $filterData['tag'], "IBLOCK_ID" => '24');
     ?>
     <?$APPLICATION->IncludeComponent("bitrix:news.list",
         "inanime-reviews-list",
@@ -23,7 +23,7 @@ if (check_bitrix_sessid())
             "SORT_BY2" => "SORT",
             "SORT_ORDER2" => "ASC",
             "FILTER_NAME" => "arrFilter",
-            "FIELD_CODE" => Array("ID"),
+            "FIELD_CODE" => array('TAGS'),
             "PROPERTY_CODE" => Array("DESCRIPTION"),
             "CHECK_DATES" => "Y",
             "DETAIL_URL" => "",
@@ -67,7 +67,9 @@ if (check_bitrix_sessid())
                                     "news" =>  "",
                                     "section"=> "",
                                     "detail"=> "#ELEMENT_CODE#/"
-                                    )
+                                    ),
+            'LIST_FIELD_CODE'=>array('TAGS'),
+            'DETAIL_FIELD_CODE'=>array('TAGS')
         )
     );?>
 <?

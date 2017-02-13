@@ -33,12 +33,12 @@ $arEnding = Array(
                         <ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             <li>
                                 <span onclick="iaReviewList.ddSelectFilter(this);">
-                                    &nbsp
+                                    Все
                                     <span class="sort-value hidden"></span>
                                 </span>
                             </li>
                             <?
-                            $currFlter;
+                            $currFlter='Все';
                             if($GLOBALS['arrFilter'] && !empty($GLOBALS['arrFilter']['?TAGS'])) $currFlter = $GLOBALS['arrFilter']['?TAGS'];
                             $res = CIBlockElement::GetList(Array(), Array("ACTIVE"=>"Y", "IBLOCK_ID" => $arParams["IBLOCK_ID"]), false, false, Array("NAME", "TAGS"));
                             while ($el = $res->Fetch())
@@ -237,7 +237,7 @@ $arJSParams['elementsPerPage'] = $arParams["NEWS_COUNT"];
                             $counter = 0;
                             foreach ($arSlides as $slide) {
                                 $counter++;
-                                $previewText = (strlen($slide["PREVIEW_TEXT"]) > 83) ? substr($slide["PREVIEW_TEXT"], 0, 60) . '...' : $slide["PREVIEW_TEXT"];
+                                $previewText = (strlen($slide["PREVIEW_TEXT"]) > 83) ? substr($slide["PREVIEW_TEXT"], 0, 40) . '...' : $slide["PREVIEW_TEXT"];
                                 $nameText = (strlen($slide["NAME"]) > 43) ? substr($slide["NAME"], 0, 40) . '...' : $slide["NAME"];
                                 ?>
                                 <li>
