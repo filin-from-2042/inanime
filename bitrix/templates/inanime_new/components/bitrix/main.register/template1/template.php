@@ -6,13 +6,24 @@ if (strlen($_POST['ajax_key']) && $_POST['ajax_key']==md5('ajax_'.LICENSE_KEY) &
     }
     header('Content-type: application/json');
 
-    if ($arResult['ERROR']) {
+    if ($arResult['ERRORS']) {
+        $message='';
+        foreach($arResult['ERRORS'] as $fieldCode => $fieldMessage)
+        {
+            if(strval($fieldCode) === '0') $message.=$fieldMessage."\n";
+            if($fieldCode === 'CONFIRM_PASSWORD') $message.= str_replace('#FIELD_NAME#','подтверждение пароля',$fieldMessage)."\n";
+            if($fieldCode === 'EMAIL') $message.= str_replace('#FIELD_NAME#','email',$fieldMessage)."\n";
+            if($fieldCode === 'LOGIN') $message.= str_replace('#FIELD_NAME#','логин',$fieldMessage)."\n";
+            if($fieldCode === 'PASSWORD') $message.= str_replace('#FIELD_NAME#','пароль',$fieldMessage)."\n";
+        }
+        $message = str_replace('<br>',"\n",$message);
         echo json_encode(array(
             'type' => 'error',
-            'message' => strip_tags($arResult['ERROR_MESSAGE']['MESSAGE']),
+            'message' => $message,
+            'newCaptcha'=>$arResult['CAPTCHA_CODE']
         ));
     } else {
-        echo json_encode(array('type' => 'ok'));
+        echo json_encode(array('type' => 'ok','err'=>$arResult, 'newCaptcha'=>$arResult['CAPTCHA_CODE']));
     }
 
     //var_dump($arResult['ERROR']);
@@ -141,11 +152,12 @@ elseif($arResult["USE_EMAIL_CONFIRMATION"] === "Y"):
             </div>
         </div>
     </div>
+</form>
     <div class="status-container">
         <div class="success">Ответ на Ваш вопрос можно будет прочитать в личном кабинете</div>
     </div>
     <div class="button-container">
-        <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="register_submit_button" value="Зарегистрироваться">
+        <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="register_submit_button" value="Зарегистрироваться" onclick="$('#registr-area').submit()">
             <span>Зарегистрироваться</span>
         </button>
     </div>
@@ -155,7 +167,7 @@ elseif($arResult["USE_EMAIL_CONFIRMATION"] === "Y"):
                 $("#registration-modal").modal('hide');
                 $("#autorization-modal").modal('show');
             });
-            //$('#login-area .registration-social').click(function(){ $(this).closest('.ia-modal').modal('toggle')});
+            
             $('#registr-area').submit(function(){
                 var $this = $(this);
                 var $form = {
@@ -167,12 +179,15 @@ elseif($arResult["USE_EMAIL_CONFIRMATION"] === "Y"):
                         $form.post[$(this).attr('name')] = $(this).val();
                     }
                 });
+                BX.showWait();
                 $.post($form.action, $form.post, function(data){
                     $('input', $this).removeAttr('disabled');
-
-                    console.log(data);
                     if (data.type == 'error') {
+                        BX.closeWait();
                         alert(data.message);
+                        $('#registr-area img.captcha').attr('src','/bitrix/tools/captcha.php?captcha_sid='+data.newCaptcha);
+                        $('#registr-area input[name="captcha_sid"]').val(data.newCaptcha);
+                        $('#registr-area input[name="captcha_word"]').val('');
                     } else {
                         window.location = window.location;
                     }
@@ -181,4 +196,3 @@ elseif($arResult["USE_EMAIL_CONFIRMATION"] === "Y"):
             });
         });
     </script>
-</form>

@@ -59,7 +59,7 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
     </form>
         <div class="row registration-social">
             <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 registration-column">
-                <div class="autorization-btn-container" >
+                <div class="autorization-btn-container login-area" >
                     <span class="autorization-btn brown-dotted-text">Регистрация</span>
                 </div>
             </div>
@@ -91,7 +91,7 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
                     $("#registration-modal").modal('show');
                 });
 
-                $('#login-area .reset-link').click(function(){
+                $('.login-area .reset-link').click(function(){
                     $("#autorization-modal").modal('hide');
                     $("#password-reset-modal").modal('show');
                 });
@@ -107,9 +107,11 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
                             $form.post[$(this).attr('name')] = $(this).val();
                         }
                     });
+                    BX.showWait();
                     $.post($form.action, $form.post, function(data){
                         $('input', $this).removeAttr('disabled');
                         if (data.type == 'error') {
+                            BX.closeWait();
                             alert(data.message);
                         } else {
                             window.location = window.location;
