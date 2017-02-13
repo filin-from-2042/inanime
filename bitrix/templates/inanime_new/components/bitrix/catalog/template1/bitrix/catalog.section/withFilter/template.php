@@ -163,7 +163,7 @@ $this->setFrameMode(true);
                             'OFFER_TREE_PROPS' => array("COLOR_REF","SIZE_GLK",""),
 
                             "RATE_FIRS"=>"Y",
-                            "LAZY_LOAD"=>'Y'
+                            "LAZY_LOAD"=>'N'
                         ),
                         false
                     );?><?/*?>

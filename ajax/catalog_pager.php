@@ -363,7 +363,7 @@ $APPLICATION->IncludeComponent(
 		"COMPOSITE_FRAME_TYPE" => "AUTO",
 		"COMPONENT_TEMPLATE" => "ajax-catalog",
 		"AJAX_OPTION_ADDITIONAL" => "undefined",
-        "LAZY_LOAD"=>"Y"
+        "LAZY_LOAD"=>"N"
 	),
 	false
 );?>

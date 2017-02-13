@@ -143,7 +143,7 @@ $this->setFrameMode(true);
                     "COMPOSITE_FRAME_MODE" => "A",
                     "COMPOSITE_FRAME_TYPE" => "AUTO",
                     "RATE_FIRS"=>"Y",
-                    "LAZY_LOAD"=>'Y'
+                    "LAZY_LOAD"=>'N'
                 ),
                 false
             );?><?/*?>

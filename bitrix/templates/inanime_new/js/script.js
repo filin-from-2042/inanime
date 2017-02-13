@@ -190,7 +190,7 @@ function inanime_new() {
 
             $(".items-section .items-container").append(parsedData);
 
-            $(".items-section .items-container .product-item-preview img.lazy.new").lazyload({effect : "fadeIn"});
+//            $(".items-section .items-container .product-item-preview img.lazy.new").lazyload({effect : "fadeIn"});
             $(".items-section .items-container .product-item-preview img.lazy.new").removeClass('new');
             window.inanime_new.inProgress = false;
         });
