@@ -16,3 +16,6 @@
 .news-list-content .select-container.dropdown.order .btn > span.text {
     width: 115px;
 }
+.news-list-content .select-container.dropdown.order .btn > span.text > .glyphicon{
+    vertical-align: middle;
+}
