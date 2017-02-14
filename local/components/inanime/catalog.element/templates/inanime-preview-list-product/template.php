@@ -336,6 +336,8 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
         ?>
         <?if(array_key_exists('RATE_FIRS',$arParams) && $arParams['RATE_FIRS']=='Y'){?>
 
+
+
             <div class="rate-container first-block">
                 <?$APPLICATION->IncludeComponent(
                     "bitrix:iblock.vote",
@@ -356,64 +358,117 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                     array("HIDE_ICONS" => "Y")
                 );?>
             </div>
+
             <?// показывать кнопки или нет?>
             <?if(!array_key_exists('HIDE_BUTTONS', $arParams) || $arParams['HIDE_BUTTONS']!='Y'){?>
                 <div class="buttons-container last-block">
+
                     <?// для предложений отобразить две кнопки, иначе по одной?>
-                <?if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
-                {?>
-                    <div class="button-wrap in-cart" <?=(!$canBuy)?'style="display:none"':''?>>
-                        <div class="btn-group ia-btn-group" role="group">
-                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
-                                <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
-                            </button>
-                            <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
-                                    onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
-                                <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
-                                В корзину
-                            </button>
-                        </div>
-                    </div>
-                    <div class="button-wrap subscribe" <?=($canBuy)?'style="display:none"':''?>>
-                        <?$APPLICATION->IncludeComponent(
-                            "bitrix:catalog.product.subscribe",
-                            "inanime-subscribe",
-                            Array(
-                                "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
-                                "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
-                                "CACHE_TIME" => "3600",
-                                "CACHE_TYPE" => "A",
-                                "PRODUCT_ID" => (isset($arResult['OFFERS']) && !empty($arResult['OFFERS'])) ? $activeOfferID : $arResult['ID']
-                            )
-                        );?>
-                    </div>
-                <?}else{?>
-                    <?if($canBuy){?>
-                        <div class="btn-group ia-btn-group" role="group">
-                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
-                                <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
-                            </button>
-                            <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
-                                    onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
-                                <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
-                                В корзину
-                            </button>
-                        </div>
+                    <?if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
+                    {?>
+                        <?// для страницы с подписками?>
+                        <?if(array_key_exists('SUBSCRIBED',$arParams) && $arParams['SUBSCRIBED']=='Y'){?>
+                            <?if($canBuy){?>
+                                <div class="button-wrap in-cart">
+                                    <div class="btn-group ia-btn-group" role="group">
+                                        <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" >
+                                            <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
+                                        </button>
+                                        <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
+                                                onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
+                                            <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
+                                            В корзину
+                                        </button>
+                                    </div>
+                                </div>
+                            <?}else{?>
+                                <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="<?=$this->GetEditAreaId($arItem['ID']);?>.deleteSubscribe()">
+                                    <span class="icon-btn"><i class="fa fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>
+                                    <span class="text-btn">Отписаться</span>
+                                </button>
+                            <?}?>
+                        <?}else{?>
+                            <?// для обычных страниц?>
+                            <div class="button-wrap in-cart" <?=(!$canBuy)?'style="display:none"':''?>>
+                                <div class="btn-group ia-btn-group" role="group">
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" >
+                                        <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
+                                    </button>
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
+                                            onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
+                                        <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
+                                        В корзину
+                                    </button>
+                                </div>
+                            </div>
+                            <div class="button-wrap subscribe" <?=($canBuy)?'style="display:none"':''?>>
+                                <?$APPLICATION->IncludeComponent(
+                                    "bitrix:catalog.product.subscribe",
+                                    "inanime-subscribe",
+                                    Array(
+                                        "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
+                                        "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
+                                        "CACHE_TIME" => "3600",
+                                        "CACHE_TYPE" => "A",
+                                        "PRODUCT_ID" => (isset($arResult['OFFERS']) && !empty($arResult['OFFERS'])) ? $activeOfferID : $arResult['ID']
+                                    )
+                                );?>
+                            </div>
+                        <?}?>
                     <?}else{?>
-                        <?$APPLICATION->IncludeComponent(
-                            "bitrix:catalog.product.subscribe",
-                            "inanime-subscribe",
-                            Array(
-                                "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
-                                "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
-                                "CACHE_TIME" => "3600",
-                                "CACHE_TYPE" => "A",
-                                "PRODUCT_ID" => (isset($arResult['OFFERS']) && !empty($arResult['OFFERS'])) ? $activeOfferID : $arResult['ID']
-                            )
-                        );?>
-                    <?
-                    }
-                }?>
+                        <?// для страницы с подписками?>
+                        <?if(array_key_exists('SUBSCRIBED',$arParams) && $arParams['SUBSCRIBED']=='Y'){?>
+                            <?if($arResult["CAN_BUY"]){?>
+                                <div class="btn-group ia-btn-group" role="group">
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
+                                        <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
+                                    </button>
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
+                                            onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
+                                        <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
+                                        В корзину
+                                    </button>
+                                </div>
+                            <?
+                            }else{
+                                ?>
+                                <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="<?=$this->GetEditAreaId($arItem['ID']);?>.deleteSubscribe()">
+                                    <span class="icon-btn"><i class="fa fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>
+                                    <span class="text-btn">Отписаться</span>
+                                </button>
+                            <?
+                            }?>
+                        <?}else{?>
+                            <?// для обычных страниц?>
+                            <?if($arResult["CAN_BUY"]){?>
+                                <div class="btn-group ia-btn-group" role="group">
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
+                                        <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
+                                    </button>
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
+                                            onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
+                                        <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
+                                        В корзину
+                                    </button>
+                                </div>
+                            <?
+                            }else{
+                                ?>
+                                <?$APPLICATION->IncludeComponent(
+                                    "bitrix:catalog.product.subscribe",
+                                    "inanime-subscribe",
+                                    Array(
+                                        "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
+                                        "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
+                                        "CACHE_TIME" => "3600",
+                                        "CACHE_TYPE" => "A",
+                                        "PRODUCT_ID" => (isset($arResult['OFFERS']) && !empty($arResult['OFFERS'])) ? $activeOfferID : $arResult['ID']
+                                    )
+                                );?>
+                            <?
+                            }
+                        }
+                    }?>
                     <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
                         ,1
                         ,'<?=$arResult["NAME"]?>'
@@ -423,7 +478,12 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                     </button>
                 </div>
             <?}?>
+
+
+
         <?}else{?>
+
+
             <?// показывать кнопки или нет?>
             <?if(!array_key_exists('HIDE_BUTTONS', $arParams) || $arParams['HIDE_BUTTONS']!='Y'){?>
                 <div class="buttons-container">
@@ -431,59 +491,107 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                 <?// для предложений отобразить две кнопки, иначе по одной?>
                 <?if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
                 {?>
-                    <div class="button-wrap in-cart" <?=(!$canBuy)?'style="display:none"':''?>>
-                        <div class="btn-group ia-btn-group" role="group">
-                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" >
-                                <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
+                    <?// для страницы с подписками?>
+                    <?if(array_key_exists('SUBSCRIBED',$arParams) && $arParams['SUBSCRIBED']=='Y'){?>
+                        <?if($canBuy){?>
+                            <div class="button-wrap in-cart">
+                                <div class="btn-group ia-btn-group" role="group">
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" >
+                                        <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
+                                    </button>
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
+                                            onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
+                                        <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
+                                        В корзину
+                                    </button>
+                                </div>
+                            </div>
+                        <?}else{?>
+                            <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="<?=$this->GetEditAreaId($arItem['ID']);?>.deleteSubscribe()">
+                                <span class="icon-btn"><i class="fa fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>
+                                <span class="text-btn">Отписаться</span>
                             </button>
-                            <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
-                                    onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
-                                <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
-                                В корзину
-                            </button>
+                        <?}?>
+                    <?}else{?>
+                    <?// для обычных страниц?>
+                        <div class="button-wrap in-cart" <?=(!$canBuy)?'style="display:none"':''?>>
+                            <div class="btn-group ia-btn-group" role="group">
+                                <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" >
+                                    <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
+                                </button>
+                                <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
+                                        onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
+                                    <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
+                                    В корзину
+                                </button>
+                            </div>
                         </div>
-                    </div>
-                    <div class="button-wrap subscribe" <?=($canBuy)?'style="display:none"':''?>>
-                        <?$APPLICATION->IncludeComponent(
-                            "bitrix:catalog.product.subscribe",
-                            "inanime-subscribe",
-                            Array(
-                                "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
-                                "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
-                                "CACHE_TIME" => "3600",
-                                "CACHE_TYPE" => "A",
-                                "PRODUCT_ID" => (isset($arResult['OFFERS']) && !empty($arResult['OFFERS'])) ? $activeOfferID : $arResult['ID']
-                            )
-                        );?>
-                    </div>
+                        <div class="button-wrap subscribe" <?=($canBuy)?'style="display:none"':''?>>
+                            <?$APPLICATION->IncludeComponent(
+                                "bitrix:catalog.product.subscribe",
+                                "inanime-subscribe",
+                                Array(
+                                    "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
+                                    "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
+                                    "CACHE_TIME" => "3600",
+                                    "CACHE_TYPE" => "A",
+                                    "PRODUCT_ID" => (isset($arResult['OFFERS']) && !empty($arResult['OFFERS'])) ? $activeOfferID : $arResult['ID']
+                                )
+                            );?>
+                        </div>
+                    <?}?>
                 <?}else{?>
-
-                    <?if($arResult["CAN_BUY"]){?>
-                        <div class="btn-group ia-btn-group" role="group">
-                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
-                                <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
+                    <?// для страницы с подписками?>
+                    <?if(array_key_exists('SUBSCRIBED',$arParams) && $arParams['SUBSCRIBED']=='Y'){?>
+                        <?if($arResult["CAN_BUY"]){?>
+                            <div class="btn-group ia-btn-group" role="group">
+                                <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
+                                    <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
+                                </button>
+                                <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
+                                        onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
+                                    <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
+                                    В корзину
+                                </button>
+                            </div>
+                        <?
+                        }else{
+                            ?>
+                            <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="<?=$this->GetEditAreaId($arItem['ID']);?>.deleteSubscribe()">
+                                <span class="icon-btn"><i class="fa fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>
+                                <span class="text-btn">Отписаться</span>
                             </button>
-                            <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
-                                    onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
-                                <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
-                                В корзину
-                            </button>
-                        </div>
-                    <?
-                    }else{
-                        ?>
-                        <?$APPLICATION->IncludeComponent(
-                            "bitrix:catalog.product.subscribe",
-                            "inanime-subscribe",
-                            Array(
-                                "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
-                                "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
-                                "CACHE_TIME" => "3600",
-                                "CACHE_TYPE" => "A",
-                                "PRODUCT_ID" => (isset($arResult['OFFERS']) && !empty($arResult['OFFERS'])) ? $activeOfferID : $arResult['ID']
-                            )
-                        );?>
-                    <?
+                        <?
+                        }?>
+                    <?}else{?>
+                        <?// для обычных страниц?>
+                        <?if($arResult["CAN_BUY"]){?>
+                            <div class="btn-group ia-btn-group" role="group">
+                                <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
+                                    <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
+                                </button>
+                                <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
+                                        onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
+                                    <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
+                                    В корзину
+                                </button>
+                            </div>
+                        <?
+                        }else{
+                            ?>
+                            <?$APPLICATION->IncludeComponent(
+                                "bitrix:catalog.product.subscribe",
+                                "inanime-subscribe",
+                                Array(
+                                    "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
+                                    "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
+                                    "CACHE_TIME" => "3600",
+                                    "CACHE_TYPE" => "A",
+                                    "PRODUCT_ID" => (isset($arResult['OFFERS']) && !empty($arResult['OFFERS'])) ? $activeOfferID : $arResult['ID']
+                                )
+                            );?>
+                        <?
+                        }
                     }
                 }?>
                     <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite" onclick="inanime_new.addToCart(<?=$arResult['ID']?>
@@ -495,6 +603,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                     </button>
                 </div>
             <?}?>
+
             <div class="rate-container">
                 <?$APPLICATION->IncludeComponent(
                     "bitrix:iblock.vote",
