@@ -7,6 +7,7 @@
    window.InAnimeOrderAjax = function(params)
    {
         this.saleProfiles = params.saleProfiles;
+       this.locationPropID = params.locationPropID;
 
    };
 
@@ -24,10 +25,10 @@
         var profileID = $container.closest('.radio-button-container').attr('id');
         $container.closest('.radio-container').find('#addreesProfile').val(profileID);
         var currProfileData = this.saleProfiles[profileID];
-
-        $('.address-container #'+currProfileData.locationPropID).val(currProfileData.locationID);
-        $('.address-container #'+currProfileData.locationPropID).attr('value',currProfileData.locationID);
-        $('.address-container #'+currProfileData.locationPropID+'_val').val(currProfileData.locationFullName);
+        console.log(profileID);
+        $('.address-container #'+this.locationPropID).val(currProfileData.locationID);
+        $('.address-container #'+this.locationPropID).attr('value',currProfileData.locationID);
+        $('.address-container #'+this.locationPropID+'_val').val(currProfileData.locationFullName);
 
         $('.address-container .form-control.zip-input').val(currProfileData.zipCode);
 

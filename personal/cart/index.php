@@ -1,9 +1,11 @@
 <?
 require($_SERVER["DOCUMENT_ROOT"]."/bitrix/header.php");
-//$APPLICATION->SetTitle("Корзина");
+$APPLICATION->SetTitle("Корзина");
 ?> <?$APPLICATION->IncludeComponent(
-	"bitrix:sale.basket.basket", 
-	"basket-template", 
+    "inanime:sale.basket.basket",
+    "",
+//    "bitrix:sale.basket.basket",
+//	"basket-template",
 	array(
 		"TEMPLATE_THEME" => "site",
 		"OFFERS_PROPS" => array(

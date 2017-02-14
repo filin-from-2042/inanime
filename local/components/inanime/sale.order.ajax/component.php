@@ -993,7 +993,10 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
         );
         if ($props = $db_props->Fetch())
             $locationProp = $arResult["ORDER_PROP"]["USER_PROPS_Y"][$props["ID"]];
-        if($locationProp) $arResult['USER_HELPFULL_VALUES']['LOCATION_PROP'] = $locationProp;
+        if($locationProp){
+            $arResult['USER_HELPFULL_VALUES']['LOCATION_PROP'] = $locationProp;
+            $arResult['arJSParams']['locationPropID'] = $locationProp['FIELD_NAME'];
+        }
 
         // сохранение выбраного местанахождения из поста
         if($_SERVER["REQUEST_METHOD"] == "POST")
@@ -1618,6 +1621,10 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
         $orderTotalSum = $arResult["ORDER_PRICE"] + $arResult["DELIVERY_PRICE"] + $arResult["TAX_PRICE"] - $arResult["DISCOUNT_PRICE"];
 
         if ($arUserResult["CONFIRM_ORDER"] == "Y" && empty($arResult["ERROR"])) {
+
+
+            $arResult['arCoupons'] = DiscountCouponsManager::get(true, array(), true, true);
+
             if (!$USER->IsAuthorized() && $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
                 if (strlen($arUserResult["USER_EMAIL"]) > 0) {
                     $NEW_LOGIN = $arUserResult["USER_EMAIL"];
@@ -1757,6 +1764,18 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
 
                 $arResult["ORDER_ID"] = CSaleOrder::DoSaveOrder($arOrderDat, $arFields, 0, $arResult["ERROR"]);
 
+                foreach($arResult['arCoupons'] as $coupon)
+                {
+                    if($coupon['COUPON']=='SL-G1U7R-TSTZM8W')
+                    {
+                        $newUser = new CUser;
+                        $fields = Array(
+                            "UF_404_COUPON_USED" => true,
+                        );
+                        $newUser->Update($USER->GetID(), $fields);
+                    }
+                }
+
                 $arResult["ORDER_ID"] = IntVal($arResult["ORDER_ID"]);
 
                 if ($arResult["ORDER_ID"] > 0 && empty($arResult["ERROR"])) {
@@ -1894,7 +1913,6 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
         }
 
         $arResult["USER_VALS"] = $arUserResult;
-        $arResult['arCoupons'] = DiscountCouponsManager::get(true, array(), true, true);
 
     } else {
         $arOrder = false;
