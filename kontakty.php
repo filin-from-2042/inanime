@@ -100,8 +100,9 @@ function ia_getHtmlDataColumn($arrData)
             if($currZipCode)
             {
                 $xml = simplexml_load_file("https://int.cdek.ru/pvzlist.php?citypostcode=".$currZipCode);
-                if($xml->count>0){
+                if($xml && $xml->count()>0){
                     $counter = 0;
+                    $storesData = array();
                     foreach($xml->Pvz  as $key => $pvz)
                     {
                         foreach($pvz->attributes() as $name => $value)
@@ -218,8 +219,6 @@ function ia_getHtmlDataColumn($arrData)
     <?endif;?>
     <?if($sdekfirstColumnData):?>
         <div class="addresses-list-container">
-            <div class="fox-icon bottom hidden visible-md visible-lg"></div>
-            <hr>
             <h2>Пункты самовывоза</h2>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 column"><?=$sdekfirstColumnData?></div>
