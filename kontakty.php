@@ -219,7 +219,7 @@ function ia_getHtmlDataColumn($arrData)
     <?endif;?>
     <?if($sdekfirstColumnData):?>
         <div class="addresses-list-container">
-            <h2>Пункты самовывоза</h2>
+            <h2>Пункты самовывоза СДЭК</h2>
             <div class="row">
                 <div class="col-sm-12 col-md-12 col-lg-12 column"><?=$sdekfirstColumnData?></div>
                 <div class="col-sm-12 col-md-12 col-lg-12 column"><?=$sdeksecondColumnData?></div>
