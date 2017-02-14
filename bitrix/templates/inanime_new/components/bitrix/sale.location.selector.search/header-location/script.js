@@ -295,10 +295,14 @@ if(typeof BX.Sale.component.location.selector.search == 'undefined' && typeof BX
 		},
         clearSelected: function(){
             //this.setValue('');
-            //console.log(this);
-            $(this.ctrls.scope).hide().siblings('button')
-                .show();
-            this.setValueByLocationId(this.prevValue);
+            console.log(this);
+            $scope = $(this.ctrls.scope);
+            if($scope.hasClass('header-location'))
+            {
+                $(this.ctrls.scope).hide().siblings('button').show();
+                this.setValueByLocationId(this.prevValue);
+            }
+            else this.setValue('')
             //this.setInitialValue();
         },
 

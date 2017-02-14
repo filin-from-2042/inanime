@@ -36,7 +36,7 @@ Loc::loadMessages(__FILE__);
 
 		<div class="dropdown-block bx-ui-sls-input-block">
 
-			<input type="text" autocomplete="off" name="<?=$arParams['INPUT_NAME']?>" value="<?=$arResult['VALUE']?>" class="dropdown-field" placeholder="<?=Loc::getMessage('SALE_SLS_INPUT_SOME')?> ..." />
+			<input type="text" autocomplete="off" name="<?=$arParams['INPUT_NAME']?>" value="<?=$arResult['VALUE']?>" class="dropdown-field" placeholder="Город..." />
 
 			<div class="bx-ui-sls-loader"></div>
 			<div class="bx-ui-sls-pane"></div>
