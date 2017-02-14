@@ -36,6 +36,8 @@ body{
 .blue-btn:focus,
 .blue-btn{
     background-color:rgb(99,186,196);
+}
+.blue-btn{
     padding:6px 30px;
 }
 .red-btn:focus,
