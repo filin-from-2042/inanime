@@ -127,9 +127,9 @@
 
     };
     // удаление подписки на товар для страницы подписки
-    window.InAnimePreviewCatalogElement.prototype.deleteSubscribe = function()
+    window.InAnimePreviewCatalogElement.prototype.deleteSubscribe = function(bShowMessage)
     {
-
+        bShowMessage = typeof bShowMessage !== 'undefined' ? bShowMessage : true;
         if(!this.productID || !this.params.LIST_SUBSCRIPTIONS.hasOwnProperty(this.productID))
             return;
 
@@ -146,12 +146,12 @@
             onsuccess: BX.delegate(function (result) {
                 if(result.success)
                 {
-                    this.showWindowWithAnswer({status: 'success'});
+                    if(bShowMessage) this.showWindowWithAnswer({status: 'success'});
                     location.reload();
                 }
                 else
                 {
-                    this.showWindowWithAnswer({status: 'error', message: result.message});
+                    if(bShowMessage) this.showWindowWithAnswer({status: 'error', message: result.message});
                 }
             }, this)
         });
