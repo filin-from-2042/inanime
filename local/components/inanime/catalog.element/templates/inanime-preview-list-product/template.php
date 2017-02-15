@@ -1,5 +1,7 @@
 
 <?
+
+use Bitrix\Catalog;
 $arButtons = CIBlock::GetPanelButtons(
     $arResult["IBLOCK_ID"],
     $arResult["ID"],
@@ -332,6 +334,51 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
             </a>
         </div>
         <?
+        // получение данных по подпискам
+        CModule::IncludeModule("catalog");
+        global $USER, $DB;
+        if(is_object($USER) && $USER->isAuthorized())
+            $userId = $USER->getId();
+
+        $filter = array(
+            '=SITE_ID' => SITE_ID,
+            array(
+                'LOGIC' => 'OR',
+                array('=DATE_TO' => false),
+                array('>DATE_TO' => date($DB->dateFormatToPHP(\CLang::getDateFormat('FULL')), time()))
+            )
+        );
+        if($userId)
+        {
+            $filter['USER_ID'] = $userId;
+        }
+        else
+        {
+            if(!empty($_SESSION['SUBSCRIBE_PRODUCT']['TOKEN']) && !empty($_SESSION['SUBSCRIBE_PRODUCT']['USER_CONTACT']))
+            {
+                $filter['=Bitrix\Catalog\SubscribeAccessTable:SUBSCRIBE.TOKEN'] =
+                    $_SESSION['SUBSCRIBE_PRODUCT']['TOKEN'];
+                $filter['=Bitrix\Catalog\SubscribeAccessTable:SUBSCRIBE.USER_CONTACT'] =
+                    $_SESSION['SUBSCRIBE_PRODUCT']['USER_CONTACT'];
+            }
+        }
+
+        $resultObject = Catalog\SubscribeTable::getList(
+            array(
+                'select' => array(
+                    'ID',
+                    'ITEM_ID',
+                    'TYPE' => 'PRODUCT.TYPE',
+                    'IBLOCK_ID' => 'IBLOCK_ELEMENT.IBLOCK_ID',
+                ),
+                'filter' => $filter,
+            )
+        );
+        while($item = $resultObject->fetch())
+        {
+            $arJSParams['LIST_SUBSCRIPTIONS'][$item['ITEM_ID']][] = $item['ID'];
+        }
+
             // сперва рейтинг, потом кнопки, иначе наоборот
         ?>
         <?if(array_key_exists('RATE_FIRS',$arParams) && $arParams['RATE_FIRS']=='Y'){?>
@@ -382,7 +429,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                                     </div>
                                 </div>
                             <?}else{?>
-                                <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="<?=$this->GetEditAreaId($arItem['ID']);?>.deleteSubscribe()">
+                                <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.deleteSubscribe()">
                                     <span class="icon-btn"><i class="fa fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>
                                     <span class="text-btn">Отписаться</span>
                                 </button>
@@ -432,7 +479,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                             <?
                             }else{
                                 ?>
-                                <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="<?=$this->GetEditAreaId($arItem['ID']);?>.deleteSubscribe()">
+                                <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.deleteSubscribe()">
                                     <span class="icon-btn"><i class="fa fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>
                                     <span class="text-btn">Отписаться</span>
                                 </button>
@@ -507,7 +554,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                                 </div>
                             </div>
                         <?}else{?>
-                            <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="<?=$this->GetEditAreaId($arItem['ID']);?>.deleteSubscribe()">
+                            <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.deleteSubscribe()">
                                 <span class="icon-btn"><i class="fa fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>
                                 <span class="text-btn">Отписаться</span>
                             </button>
@@ -557,7 +604,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                         <?
                         }else{
                             ?>
-                            <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="<?=$this->GetEditAreaId($arItem['ID']);?>.deleteSubscribe()">
+                            <button type="button" class="btn btn-default ia-btn yellow-btn splitted-btn in-cart" onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.deleteSubscribe()">
                                 <span class="icon-btn"><i class="fa fa-2x fa-exclamation-circle" aria-hidden="true"></i></span>
                                 <span class="text-btn">Отписаться</span>
                             </button>

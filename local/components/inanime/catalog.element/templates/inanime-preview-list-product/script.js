@@ -126,6 +126,109 @@
         }
 
     };
+    // удаление подписки на товар для страницы подписки
+    window.InAnimePreviewCatalogElement.prototype.deleteSubscribe = function()
+    {
+
+        if(!this.productID || !this.params.LIST_SUBSCRIPTIONS.hasOwnProperty(this.productID))
+            return;
+
+        BX.ajax({
+            method: 'POST',
+            dataType: 'json',
+            url: '/bitrix/components/bitrix/catalog.product.subscribe.list/ajax.php',
+            data: {
+                sessid: BX.bitrix_sessid(),
+                deleteSubscribe: 'Y',
+                itemId: this.productID,
+                listSubscribeId: this.params.LIST_SUBSCRIPTIONS[this.productID]
+            },
+            onsuccess: BX.delegate(function (result) {
+                if(result.success)
+                {
+                    this.showWindowWithAnswer({status: 'success'});
+                    location.reload();
+                }
+                else
+                {
+                    this.showWindowWithAnswer({status: 'error', message: result.message});
+                }
+            }, this)
+        });
+    };
+
+
+    window.InAnimePreviewCatalogElement.prototype.showWindowWithAnswer = function(answer)
+    {
+        answer = answer || {};
+        if (!answer.message) {
+            if (answer.status == 'success') {
+                answer.message = BX.message('CPSL_STATUS_SUCCESS');
+            } else {
+                answer.message = BX.message('CPSL_STATUS_ERROR');
+            }
+        }
+        var messageBox = BX.create('div', {
+            props: {
+                className: 'bx-catalog-subscribe-alert'
+            },
+            children: [
+                BX.create('span', {
+                    props: {
+                        className: 'bx-catalog-subscribe-aligner'
+                    }
+                }),
+                BX.create('span', {
+                    props: {
+                        className: 'bx-catalog-subscribe-alert-text'
+                    },
+                    text: answer.message
+                }),
+                BX.create('div', {
+                    props: {
+                        className: 'bx-catalog-subscribe-alert-footer'
+                    }
+                })
+            ]
+        });
+        var currentPopup = BX.PopupWindowManager.getCurrentPopup();
+        if(currentPopup) {
+            currentPopup.destroy();
+        }
+        var idTimeout = setTimeout(function () {
+            var w = BX.PopupWindowManager.getCurrentPopup();
+            if (!w || w.uniquePopupId != 'bx-catalog-subscribe-status-action') {
+                return;
+            }
+            w.close();
+            w.destroy();
+        }, 3500);
+        var popupConfirm = BX.PopupWindowManager.create('bx-catalog-subscribe-status-action', null, {
+            content: messageBox,
+            onPopupClose: function () {
+                this.destroy();
+                clearTimeout(idTimeout);
+            },
+            autoHide: true,
+            zIndex: 2000,
+            className: 'bx-catalog-subscribe-alert-popup'
+        });
+        popupConfirm.show();
+        BX('bx-catalog-subscribe-status-action').onmouseover = function (e) {
+            clearTimeout(idTimeout);
+        };
+        BX('bx-catalog-subscribe-status-action').onmouseout = function (e) {
+            idTimeout = setTimeout(function () {
+                var w = BX.PopupWindowManager.getCurrentPopup();
+                if (!w || w.uniquePopupId != 'bx-catalog-subscribe-status-action') {
+                    return;
+                }
+                w.close();
+                w.destroy();
+            }, 3500);
+        };
+    };
+
 
 
 })(window);
