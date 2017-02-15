@@ -3291,6 +3291,10 @@ footer hr{
         margin-top: 94px;
     }
 
+    .product-item-preview.vertical .image-container .quick-order-overlay{
+        height: 245px;
+    }
+
 }
 @media (min-width: 1400px){
     .sections-carousel .fox-icon.bottom{

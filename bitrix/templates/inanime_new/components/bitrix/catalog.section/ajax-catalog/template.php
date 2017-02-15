@@ -47,6 +47,9 @@
             "ADD_ELEMENT_CHAIN" => "N",
             "PROPERTY_CODE" => array(),
             "OFFERS_LIMIT" => "0",
+            "OFFERS_PROPERTY_CODE" => array( "COLOR_REF","SIZE_GLK","ARTNUMBER", "SIZES_SHOES", "SIZES_CLOTHES", "MORE_PHOTO" ),
+            'OFFER_TREE_PROPS' => array("COLOR_REF","SIZE_GLK",""),
+
             "PRICE_CODE" => array("BASE","PROF"),
             "USE_PRICE_COUNT" => "N",
             "SHOW_PRICE_COUNT" => "1",

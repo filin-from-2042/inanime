@@ -4,6 +4,7 @@ if (!defined('B_PROLOG_INCLUDED') || (B_PROLOG_INCLUDED !== true)) {
     die();
 }
 ?>
+<?/*?>
 <!--<div class="pagenavigation row">-->
 <!--    --><?//
 //    $arAvailableSort = array(
@@ -33,3 +34,5 @@ if (!defined('B_PROLOG_INCLUDED') || (B_PROLOG_INCLUDED !== true)) {
 <!--    </div>-->
 <!--</div>-->
 <!--<hr>-->
+
+<?*/?>
