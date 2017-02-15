@@ -1056,16 +1056,16 @@ class CBitrixBasketComponent extends CBitrixComponent
 					if ($arPost['coupon'] != '')
 					{
                         // купон, полученный с 404, активируется только 1 раз и  если пользователь зарегистрировался не более 7ми дней назад
-//                        if($arPost['coupon']=='SL-G1U7R-TSTZM8W')
-//                        {
-//                            $rsUser = CUser::GetByID($USER->GetID());
-//                            $arUser = $rsUser->Fetch();
-//                            if($USER->IsAuthorized() && ((strtotime("now")-strtotime($arUser["DATE_REGISTER"]))/86400<=125) && !$arUser['UF_404_COUPON_USED'])
-//                            {
-//                                $arRes['VALID_COUPON'] = DiscountCouponsManager::add($arPost['coupon']);
-//                            }
-//                        }
-//                        else
+                        if($arPost['coupon']=='SL-G1U7R-TSTZM8W')
+                        {
+                            $rsUser = CUser::GetByID($USER->GetID());
+                            $arUser = $rsUser->Fetch();
+                            if($USER->IsAuthorized() && ((strtotime("now")-strtotime($arUser["DATE_REGISTER"]))/86400<=125) && !$arUser['UF_404_COUPON_USED'])
+                            {
+                                $arRes['VALID_COUPON'] = DiscountCouponsManager::add($arPost['coupon']);
+                            }
+                        }
+                        else
                             $arRes['VALID_COUPON'] = DiscountCouponsManager::add($arPost['coupon']);
 					}
 					else
