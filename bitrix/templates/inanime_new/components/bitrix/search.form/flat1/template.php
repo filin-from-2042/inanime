@@ -22,6 +22,7 @@ $this->setFrameMode(true);?>
                         "VALUE" => "",
                         "INPUT_SIZE" => 15,
                         "DROPDOWN_SIZE" => 10,
+                        'TABLET'=>(array_key_exists('TABLET',$arParams) && $arParams['TABLET']=='Y')?'Y':'N'
                     ),
                     $component, array("HIDE_ICONS" => "Y")
         );?><?else:?>

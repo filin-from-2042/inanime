@@ -5,7 +5,8 @@ function inanime_new() {
             cc_count: elements_count, // ���������� �����������
             cc_position: 0, // ������� ����� �����
             carouselEl: document.getElementById(element_id),
-            cc_height: document.getElementById(element_id).querySelector('img').height,
+//            cc_height: document.getElementById(element_id).querySelector('div.img-wrap').height,
+            cc_height: $('#'+element_id).find('div.img-wrap').first().height(),
             paddingBottom: parseInt($(document.getElementById(element_id).querySelector('li')).css('paddingBottom'))
         }
         inanime_new[element_id] = carouselData;

@@ -3010,6 +3010,155 @@ footer hr{
     .section-catalog .product-item-preview.vertical .image-container{
         height: 200px;
     }
+
+
+    .search-input-container .search-input{
+        padding: 6px 12px 6px 7px;
+    }
+    .search-input-container .search-input~i.fa-search {
+        top: 4px;
+        left: 76px;
+        font-size: 14px;
+    }
+    header .text-btn.blue-btn {
+        min-width: 82px;
+    }
+    header .text-btn.yellow-btn.link_profile{
+        padding: 4px 16px;
+    }
+    header .cart-container .btn.image-btn{
+        padding: 13px 12px 15px;
+    }
+    header .cart-container .text-container{
+        width: 125px;
+    }
+    header .visible-sm .basket-top-container{
+        padding-right: 10px;
+    }
+    .content .main-carousel{
+        padding-top: 18px;
+    }
+    .content .main-carousel .general-banner-column{
+        padding-right: 15px;
+        padding-left: 22px;
+    }
+    .content .main-carousel .custom-carousel-column{
+        padding-left: 0;
+    }
+    .content .main-carousel .custom-carousel-column .carousel-custom{
+        height: 225px;
+    }
+    .content .main-carousel .custom-carousel-column .carousel-custom li{
+        padding: 0 0 10px 0;
+    }
+    .content .main-carousel .custom-carousel-column .carousel-custom li .img-wrap {
+        height: 111px;
+        overflow: hidden;
+    }
+    .content .main-carousel .custom-carousel-column .carousel-custom li img{
+        height: auto;
+        width: 100%;
+    }
+    .content .main-carousel .custom-carousel-column .carousel-custom li .text {
+        max-height: 66px;
+        overflow: hidden;
+        padding-top: 1px;
+        line-height: 20px;
+    }
+    .content .row.articles-links {
+        margin-top: 20px;
+        padding-left: 8px;
+    }
+    .content .sections-carousel .carousel-container{
+        padding-left: 7px;
+    }
+    .sections-carousel .column{
+        padding-left: 0;
+    }
+    .carousel-products.vertical ul li{
+        /*padding-right: 30px;*/
+    }
+    .product-item-preview.horizontal .icons-container{
+        left:-16px;
+    }
+    .carousel-products ul li{
+        padding-right: 17px;
+    }
+    .sections-carousel .column .first-vertical-carousel-column{
+        padding-left: 7px;
+    }
+    .sections-carousel .column .second-vertical-carousel-column{
+        padding-left: 6px;
+    }
+    .short-products-carousel .product-item-preview.vertical .image-container,
+    .short-products-carousel .product-item-preview.vertical .image-container .quick-order-overlay {
+        height: 192px;
+    }
+    .short-products-carousel .product-item-preview .week-good-icon-container {
+        top: 162px;
+    }
+    .short-products-carousel .product-item-preview .data-container {
+        padding: 1px 10px 6px;
+    }
+    .short-products-carousel .product-item-preview.vertical .title-container {
+        font-size: 12px;
+    }
+    .product-item-preview .price-container .price {
+        color: #fc9a00;
+    }
+    .product-item-preview.vertical .price-container .price.old {
+        color: #1a2228;
+    }
+    .short-products-carousel  .product-item-preview.vertical  .bx_item_detail_rating {
+         margin-bottom: 0px;
+    }
+    .short-products-carousel .product-item-preview .price-container .price {
+        font-size: 18px;
+    }
+    .short-products-carousel ul li {
+        /*padding-right: 13px;*/
+    }
+    .splitted-btn.bx-catalog-subscribe-button span.text-btn {
+        width: 113px;
+        padding: 10px 28px 9px 23px;
+    }
+    nav#top-navigation-bar > .container{
+        width: auto;
+        margin: 0;
+        padding: 0;
+    }
+    nav.navigation ul.first-level > li.dropdown {
+         position: relative;
+    }
+    .news-list .grey-container{
+        height: 218px;
+    }
+    .content .row.articles-links.tablet{
+        padding: 0 20px;
+        text-align: center;
+        margin-top: 20px;
+        font-size: 12px;
+        margin-left: 17px;
+
+    }
+    .content .row.articles-links.tablet .article-container{
+        margin-right: 13px;
+    }
+    .content .row.articles-links.tablet .article-container.opened{
+        width: 240px;
+    }
+    .content .row.articles-links.tablet .article-container.opened .table-wrap {
+        display: table;
+        height: 75px;
+        margin-left: 85px;
+    }
+    .sections-carousel .fox-icon.top {
+        top: 60px;
+    }
+    nav.navigation ul.second-level > li.dropdown:hover div.third-level-container {
+        height: 100%;
+    }
+
 }
 /* (desktops, 992px and up) */
 @media (min-width: 992px) {

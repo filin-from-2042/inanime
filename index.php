@@ -71,10 +71,12 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
                         $nameText = (strlen($slide["NAME"]) > 43) ? substr($slide["NAME"], 0, 40) . '...' : $slide["NAME"];
                         ?>
                         <li>
-                            <? if ($slide["file"]["src"]) { ?>
-                                <img src="<?= $slide["file"]["src"]; ?>">
-                            <? } ?>
-                            <a href="<?= $slide["DETAIL_PAGE_URL"]; ?>" class="text"><?=($previewText)?htmlspecialchars($previewText):htmlspecialchars($nameText)?></a>
+                            <div class="img-wrap">
+                                <? if ($slide["file"]["src"]) { ?>
+                                    <img src="<?= $slide["file"]["src"]; ?>">
+                                <? } ?>
+                                <a href="<?= $slide["DETAIL_PAGE_URL"]; ?>" class="text"><?=($previewText)?htmlspecialchars($previewText):htmlspecialchars($nameText)?></a>
+                            </div>
                         </li>
                     <? } ?>
                     </ul>
@@ -98,7 +100,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
         false,
         Array('HIDE_ICONS' => 'Y')
     );?>
-    <hr>
+    <hr class="hidden-sm">
 </div>
 <div class="container">
 <div class="row sections-carousel">
@@ -358,7 +360,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
         </div>
     </div>
     <div class="col-xs-24 col-sm-24 col-md-18 col-md-offset-3 col-lg-offset-0 col-lg-6 column vertical-column">
-        <div class="col-xs-24 col-sm-12 col-md-12 col-lg-24">
+        <div class="col-xs-24 col-sm-12 col-md-12 col-lg-24 first-vertical-carousel-column">
             <div class="carousel-container ">
                 <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog.section", 
@@ -485,7 +487,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
 );?>
             </div>
         </div>
-        <div class="col-xs-24 col-sm-12 col-md-12 col-lg-24">
+        <div class="col-xs-24 col-sm-12 col-md-12 col-lg-24 second-vertical-carousel-column">
             <div class="carousel-container">
                 <?$APPLICATION->IncludeComponent(
 	"bitrix:catalog.section", 

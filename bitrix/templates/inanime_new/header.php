@@ -212,7 +212,8 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                                         "COMPONENT_TEMPLATE" => "flat1",
                                         "USE_SUGGEST" => "Y",
                                         "COMPOSITE_FRAME_MODE" => "A",
-                                        "COMPOSITE_FRAME_TYPE" => "AUTO"
+                                        "COMPOSITE_FRAME_TYPE" => "AUTO",
+                                        'TABLET'=>'Y'
                                     ),
                                     false
                                 );?>
@@ -220,7 +221,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                             </div>
                         </div>
                     </div>
-                    <div class="col-sm-13">
+                    <div class="col-sm-13 basket-top-container">
                         <?$APPLICATION->IncludeComponent("bitrix:sale.basket.basket.line", "inanime-template", Array(
                                 "PATH_TO_BASKET" => SITE_DIR."personal/cart/",	// Страница корзины
                                 "PATH_TO_PERSONAL" => SITE_DIR."personal/",	// Страница персонального раздела

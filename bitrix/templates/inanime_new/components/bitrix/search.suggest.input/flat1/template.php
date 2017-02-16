@@ -34,7 +34,7 @@ CJSCore::Init(array("ajax"));
 	id="<?echo $arResult["ID"]?>"
 	value="<?echo $arParams["VALUE"]?>"
 	class="search-suggest form-control search-input"
-    placeholder="<?=GetMessage("BSF_T_SEARCH_FORM");?>"
+    placeholder="<?=(array_key_exists('TABLET',$arParams) && $arParams['TABLET']=='Y'?'Поиск': 'Поиск по каталогу' )?>"
 	type="text"
 	autocomplete="off"
 />
