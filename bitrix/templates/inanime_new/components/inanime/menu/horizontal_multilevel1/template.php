@@ -194,5 +194,40 @@
                                 </div>
                             </div>
         </div>
+        <div class="hide-char-overlay"></div>
+        <script>
+            $(document).ready(function () {
+                if(window.innerWidth <= 1230)
+                {
+                    $('nav .hide-char-overlay').click(function(event){
+                        event.stopPropagation();
+                        $('nav ul li').removeClass('tablet-opened');
+                        $('nav li').css('z-index','0');
+                        $(this).hide();
+                    });
+                    $('nav ul a').click(function(event){
+                        event.preventDefault();
+                        var $this = $(this);
+                        if($this.closest('li').hasClass('tablet-opened') || !$this.closest('li').hasClass('dropdown')) location.href = $this.attr('href');
+                        else
+                        {
+                            // если ссыка из 1го уровня, тогда удалить класс из всей иерархии
+                            // если из второго, то только из этого уровня
+                            if($this.closest('ul').hasClass('first-level'))
+                            {
+                                $('nav ul li').removeClass('tablet-opened');
+                            }
+                            else if($this.closest('ul').hasClass('second-level'))
+                            {
+                                $('nav ul.second-level li').removeClass('tablet-opened');
+                            }
+                            $this.closest('nav').find('li').css('z-index','112').closest('nav').find('.hide-char-overlay').show();
+                            $this.closest('li').addClass('tablet-opened');
+                        }
+                    });
+                }
+
+            });
+        </script>
     </nav>
 <?endif?>

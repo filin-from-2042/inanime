@@ -87,6 +87,7 @@ nav.navigation ul.first-level > li.dropdown > i.visible-md.vsible-lg{
 }
 nav.navigation ul.first-level > li.dropdown:hover > ul.second-level,
 nav.navigation ul.first-level > li.dropdown.open> ul.second-level,
+nav.navigation ul.first-level > li.dropdown.tablet-opened > ul.second-level,
 nav.navigation .third-level-container > ul{
     display: block;
     margin: 0;
@@ -252,7 +253,9 @@ nav.navigation .third-level-container li{
         margin-top:8px;
     }
     nav.navigation ul.second-level > li.dropdown:hover >div.third-level-container,
-    nav.navigation ul.second-level > li.dropdown:hover >div.third-level-container>div.third-level-container{
+    nav.navigation ul.second-level > li.dropdown:hover >div.third-level-container>div.third-level-container,
+    nav.navigation ul.second-level > li.dropdown.tablet-opened >div.third-level-container,
+    nav.navigation ul.second-level > li.dropdown.tablet-opened >div.third-level-container>div.third-level-container{
         display: block;
         position:absolute;
         margin: 0;
