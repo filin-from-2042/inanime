@@ -816,9 +816,18 @@ $arDataButtons = CIBlock::GetPanelButtons(
                                     <textarea name="mail-text" placeholder="Текс сообщения"  class="form-control email-textarea" value=""></textarea>
                                 </div>
                             </div>
+                            <?
+                            if (!$USER->IsAuthorized())
+                            {
+                            ?>
+                            <div class="status-container">
+                                <div class="success">Ответ на Ваш вопрос можно будет выслан Вам на почту</div>
+                            </div>
+                            <?}else{?>
                             <div class="status-container">
                                 <div class="success">Ответ на Ваш вопрос можно будет прочитать в личном кабинете</div>
                             </div>
+                            <?}?>
                             <div class="button-container">
                                 <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="send-button" value="Отправить">
                                     <span>Отправить</span>
