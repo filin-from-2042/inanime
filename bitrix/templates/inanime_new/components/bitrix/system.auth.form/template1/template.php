@@ -84,14 +84,14 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
         </div>
         <script type="text/javascript">
             $(document).on('ready', function(){
-                $('#login-area .registration-social').click(function(){ $("#autorization-modal").modal('hide');});
+                $('.registration-social .bx-authform-social-icon').click(function(){$("#autorization-modal").modal('hide');});
 
-                $('#login-area .autorization-btn').click(function(){
+                $('.login-area .autorization-btn').click(function(){
                     $("#autorization-modal").modal('hide');
                     $("#registration-modal").modal('show');
                 });
 
-                $('.login-area .reset-link').click(function(){
+                $('#login-area .reset-link').click(function(){
                     $("#autorization-modal").modal('hide');
                     $("#password-reset-modal").modal('show');
                 });

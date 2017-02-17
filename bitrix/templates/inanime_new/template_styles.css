@@ -647,7 +647,8 @@ span.rub:before{
 /******************************* POPUP ************************************/
 .ia-modal  .modal-dialog {
     width: 470px;
-    margin: 372px auto;
+    /*margin: 372px auto;*/
+    margin: 250px auto;
 }
 .ia-modal .modal-header h4{
     text-transform:uppercase;
@@ -3445,6 +3446,7 @@ nav .hide-char-overlay{
     .product-item-preview.vertical .image-container .quick-order-overlay{
         height: 245px;
     }
+
 
 }
 @media (min-width: 1400px){

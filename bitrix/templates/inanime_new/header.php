@@ -333,7 +333,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                     <?$APPLICATION->IncludeComponent( "bitrix:system.auth.forgotpasswd",
                         "template1",
 //                        "",
-                        Array()
+                        Array('USE_CAPTCHA'=>'N')
                     );?>
                 </div>
             </div>
