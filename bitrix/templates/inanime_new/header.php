@@ -71,6 +71,22 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                         }else{
                             if(CModule::IncludeModule("sale"))
                             {
+                                $countryID=1;
+                                $db_varsCountry = CSaleLocation::GetList(
+                                    array(
+                                        "SORT" => "ASC",
+                                        "COUNTRY_NAME_LANG" => "ASC",
+                                        "CITY_NAME_LANG" => "ASC"
+                                    ),
+                                    array("LID" => LANGUAGE_ID),
+                                    false,
+                                    false,
+                                    array()
+                                );
+                                if ($varsCountry = $db_varsCountry->GetNext()){
+                                    $countryID=$varsCountry['COUNTRY_ID'];
+                                }
+
                                 $cityObj = new CCity();
                                 $arThisCity = $cityObj ->GetFullInfo();
 
@@ -80,7 +96,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                                         "COUNTRY_NAME_LANG" => "ASC",
                                         "CITY_NAME_LANG" => "ASC"
                                     ),
-                                    array("CITY_NAME" => $arThisCity['CITY_NAME']['VALUE'], "LID" => LANGUAGE_ID, 'COUNTRY_ID'=>19),
+                                    array("CITY_NAME" => $arThisCity['CITY_NAME']['VALUE'], "LID" => LANGUAGE_ID, 'COUNTRY_ID'=>$countryID),
                                     false,
                                     false,
                                     array()

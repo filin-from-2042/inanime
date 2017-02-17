@@ -295,7 +295,6 @@ if(typeof BX.Sale.component.location.selector.search == 'undefined' && typeof BX
 		},
         clearSelected: function(){
             //this.setValue('');
-            console.log(this);
             $scope = $(this.ctrls.scope);
             if($scope.hasClass('header-location'))
             {
