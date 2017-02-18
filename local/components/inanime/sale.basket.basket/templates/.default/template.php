@@ -66,19 +66,19 @@ $arUrls = array(
                                 <div class="nav-tabs-container">
                                     <div class="fox-icon bottom visible-md visible-lg"></div>
                                     <ul class="nav nav-tabs" role="tablist">
-                                        <li role="presentation" class="active"><a href="#my-basket" aria-controls="my-basket" role="tab" data-toggle="tab">Моя корзина</a></li>
-                                        <li role="presentation"><a href="#put-aside" aria-controls="put-aside" role="tab" data-toggle="tab">Отложенные товары</a></li>
-                                        <li role="presentation"><a href="#not-available" aria-controls="not-available" role="tab" data-toggle="tab">Нет в наличии</a></li>
+                                        <li role="presentation" <?=($_GET['tab']=='my-basket' || $_GET['tab']=='') ? ' class="active"' : '' ?>><a href="#my-basket" aria-controls="my-basket" role="tab" data-toggle="tab">Моя корзина</a></li>
+                                        <li role="presentation" <?=($_GET['tab']=='put-aside') ? ' class="active"' : '' ?>><a href="#put-aside" aria-controls="put-aside" role="tab" data-toggle="tab">Отложенные товары</a></li>
+                                        <li role="presentation" <?=($_GET['tab']=='not-available') ? ' class="active"' : '' ?>><a href="#not-available" aria-controls="not-available" role="tab" data-toggle="tab">Нет в наличии</a></li>
                                     </ul>
                                 </div>
                                 <div class="tab-content">
-                                    <div role="tabpanel" class="tab-pane active" id="my-basket">
+                                    <div role="tabpanel" class="tab-pane <?=($_GET['tab']=='my-basket' || $_GET['tab']=='') ? ' active' : '' ?>" id="my-basket">
                                         <?include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items.php");?>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane" id="put-aside">
+                                    <div role="tabpanel" class="tab-pane <?=($_GET['tab']=='put-aside') ? ' active' : '' ?>" id="put-aside">
                                         <?include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_delay.php");?>
                                     </div>
-                                    <div role="tabpanel" class="tab-pane" id="not-available">
+                                    <div role="tabpanel" class="tab-pane <?=($_GET['tab']=='not-available') ? ' active' : '' ?>" id="not-available">
                                         <div class="container">
                                         <?$APPLICATION->IncludeComponent(
                                             "bitrix:catalog.product.subscribe.list",
