@@ -132,7 +132,7 @@ if (!empty($arResult["MESSAGES"])):
                             ?>
                         </td>
                     </tr>
-                    <tr class="reviews-actions" style="display:none">
+                    <tr class="reviews-actions">
                         <td>
                             <?
                             if ($arResult["SHOW_POST_FORM"] == "Y")

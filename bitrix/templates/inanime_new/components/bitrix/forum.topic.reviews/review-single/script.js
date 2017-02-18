@@ -675,7 +675,8 @@
 
 	window.fTextToNode = function(text)
 	{
-		var tmpdiv = BX.create('div');
+        if($(text).hasClass('reviews-post-table')) var tmpdiv = BX.create('div',{props: {className: "comment-main grey-container"}});
+        else var tmpdiv = BX.create('div');
 		tmpdiv.innerHTML = text;
 		if (tmpdiv.childNodes.length > 0)
 			return tmpdiv;
