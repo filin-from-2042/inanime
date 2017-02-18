@@ -31,7 +31,15 @@ $APPLICATION->SetTitle("Активация дисконтной карты");
                 </div>
 
                 <div class="col-xs-24 col-sm-16 col-md-18 col-lg-18 fields-column">
+                <?
+                if (!$USER->IsAuthorized())
+                {
+                    $APPLICATION->AuthForm('Для просмотра дисконтных карт необходимо авторизоваться.', false, false, 'N', false);
+                }
+                else
+                {?>
                     <?$APPLICATION->IncludeComponent("inanime:user.card", "", array(), false, array('HIDE_ICONS'=>'Y')); ?>
+                <?}?>
                 </div>
             </div>
             <hr class="general-content-bottom-line">
