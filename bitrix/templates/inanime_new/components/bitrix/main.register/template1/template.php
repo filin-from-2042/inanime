@@ -58,13 +58,14 @@ elseif($arResult["USE_EMAIL_CONFIRMATION"] === "Y"):
     endif;
     ?>
     <input type="hidden" name="typeAction" value="registration" />
-
+<?/*?>
     <div class="icon-input-container">
         <div class="icon-input-wrap">
             <input type="text" name="REGISTER[LOGIN]" value="" placeholder="Имя" class="form-control username-input">
             <i class="fa fa-user" aria-hidden="true"></i>
         </div>
     </div>
+<?*/?>
     <div class="icon-input-container">
         <div class="icon-input-wrap">
             <input type="text" name="REGISTER[EMAIL]" value="" placeholder="Электронная почта" class="form-control email-input">
@@ -176,9 +177,12 @@ elseif($arResult["USE_EMAIL_CONFIRMATION"] === "Y"):
                 };
                 $.each($('input', $this), function(){
                     if ($(this).attr('name').length) {
-                        $form.post[$(this).attr('name')] = $(this).val();
+                       $form.post[$(this).attr('name')] = $(this).val();
                     }
                 });
+                //в логин пишем почту
+                $form.post['REGISTER[LOGIN]'] = $form.post['REGISTER[EMAIL]'];
+
                 BX.showWait();
                 $.post($form.action, $form.post, function(data){
                     $('input', $this).removeAttr('disabled');
