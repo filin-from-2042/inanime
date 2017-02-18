@@ -321,9 +321,21 @@ function inanime_new() {
                 delay:(delay) ? 'Y' : 'N'
             },
             //dataType: 'json',
-            success: function(data){
+            success: function(data){console.log(1);
                 $('header .content-container.cart-container').contents().remove();
                 $('header .content-container.cart-container').append($(data).find('.content-container.cart-container').contents());
+                // обновление корзины для мобильных
+                if(parseInt($(data).find('.products-count').text())>0)
+                {
+                    var cartContents = $('.mobile-link-button-cart').contents();
+                    $('.mobile-link-button-cart')
+                        .replaceWith($('<a class="btn btn-default ia-btn yellow-btn image-btn mobile-link-button-cart" href="/personal/cart" role="button"></a>').append(cartContents));
+
+                    var favoriteContents = $('.mobile-link-button-favorite').contents();
+                    $('.mobile-link-button-favorite')
+                        .replaceWith($('<a class="btn btn-default ia-btn blue-btn image-btn mobile-link-button-favorite" href="/personal/cart" role="button"></a>').append(favoriteContents));
+
+                }
                 $('#item-added-modal').modal();
             },
             error: function( xhr, textStatus ) {
