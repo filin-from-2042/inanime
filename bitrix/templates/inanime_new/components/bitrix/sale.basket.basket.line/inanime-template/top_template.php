@@ -30,21 +30,21 @@
     <span class="hidden products-count"><?=$arResult['NUM_PRODUCTS']?></span>
     <div class="content-container cart-container hidden-xs">
         <?
-            if(intVal($arResult['NUM_PRODUCTS'])>0){
-        ?>
-        <a class="btn btn-default ia-btn yellow-btn image-btn" href="/personal/cart" role="button"><span class="icon cart-icon"></span></a>
-        <?}else{?>
-                <span class="btn btn-default ia-btn yellow-btn image-btn"  role="button"><span class="icon cart-icon"></span></span>
-        <?}?>
-        <div class="text-container">
-            <span>
-                <span><?=$arResult['NUM_PRODUCTS'].' '.$arResult['PRODUCT(S)']?></span><i class="fa fa-long-arrow-right" aria-hidden="true"></i><span class="yellow-text"><?=$arResult['TOTAL_PRICE']?></span>
-            </span>
-        </div>
-        <?
         if(intVal($arResult['NUM_PRODUCTS'])>0){
         ?>
-        <a class="btn btn-default ia-btn blue-btn image-btn" href="/personal/cart" role="button"><span class="icon favorite-icon"></span></a>
+            <a class="btn btn-default ia-btn yellow-btn image-btn" href="/personal/cart" role="button"><span class="icon cart-icon"></span></a>
+        <?}else{?>
+            <span class="btn btn-default ia-btn yellow-btn image-btn"  role="button"><span class="icon cart-icon"></span></span>
+        <?}?>
+            <div class="text-container">
+                <span>
+                    <span><?=$arResult['NUM_PRODUCTS'].' '.$arResult['PRODUCT(S)']?></span><i class="fa fa-long-arrow-right" aria-hidden="true"></i><span class="yellow-text"><?=$arResult['TOTAL_PRICE']?></span>
+                </span>
+            </div>
+            <?
+        if(intVal($arResult['NUM_PRODUCTS'])>0){
+        ?>
+            <a class="btn btn-default ia-btn blue-btn image-btn" href="/personal/cart?tab=put-aside" role="button"><span class="icon favorite-icon"></span></a>
         <?}else{?>
 
             <span class="btn btn-default ia-btn blue-btn image-btn" role="button"><span class="icon favorite-icon"></span></span>

@@ -277,7 +277,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                 {
                 ?>
                     <a class="btn btn-default ia-btn yellow-btn image-btn mobile-link-button-cart" href="/personal/cart" role="button"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" class="img-commerce"></a>
-                    <a class="btn btn-default ia-btn blue-btn image-btn mobile-link-button-favorite" href="/personal/cart" role="button"><img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" class="img-favorite"></span></a>
+                    <a class="btn btn-default ia-btn blue-btn image-btn mobile-link-button-favorite" href="/personal/cart?tab=put-aside" role="button"><img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" class="img-favorite"></span></a>
                 <?}else{?>
                     <span class="btn btn-default ia-btn yellow-btn image-btn mobile-link-button-cart" role="button"><img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>" class="img-commerce"></span>
                     <span class="btn btn-default ia-btn blue-btn image-btn mobile-link-button-favorite"  role="button"><img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" class="img-favorite"></span>

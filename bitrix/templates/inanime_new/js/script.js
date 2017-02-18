@@ -333,7 +333,7 @@ function inanime_new() {
 
                     var favoriteContents = $('.mobile-link-button-favorite').contents();
                     $('.mobile-link-button-favorite')
-                        .replaceWith($('<a class="btn btn-default ia-btn blue-btn image-btn mobile-link-button-favorite" href="/personal/cart" role="button"></a>').append(favoriteContents));
+                        .replaceWith($('<a class="btn btn-default ia-btn blue-btn image-btn mobile-link-button-favorite" href="/personal/cart?tab=put-aside" role="button"></a>').append(favoriteContents));
 
                 }
                 $('#item-added-modal').modal();
