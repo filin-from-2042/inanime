@@ -541,7 +541,7 @@ BX.Iblock.SmartFilter = (function()
 		if (newMinPrice != this.minPrice)
 			this.minInput.value = newMinPrice;
 		else
-			this.minInput.value = "";
+			this.minInput.value = this.minPrice;
 //		smartFilter.keyup(this.minInput);
         inanime_new.changeViewHandler();
 	};
@@ -554,7 +554,7 @@ BX.Iblock.SmartFilter = (function()
 		if (newMaxPrice != this.maxPrice)
 			this.maxInput.value = newMaxPrice;
 		else
-			this.maxInput.value = "";
+			this.maxInput.value = this.maxPrice;
 //		smartFilter.keyup(this.maxInput);
         inanime_new.changeViewHandler();
 	};
