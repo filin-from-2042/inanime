@@ -176,23 +176,32 @@ function inanime_new() {
                 $('.items-section .items-container').append($('<div id="sonic-loader-container" style="text-align: center;display:block;"></div>').append(this.sonicLoader.canvas));
                 this.sonicLoader.play();
             }
-        }).done(function(data){
+        }).done(function(data){console.log(1);
             $('#sonic-loader-container').remove();
             window.scrollLoadMaxPages = $(data).find('#maxPages').text();
-            var parsedData = $(data).find('.product-item-preview');
-            // манипуляции с классом new для добавления lazyload новым элементам
-            parsedData.find('img.lazy').addClass('new');
-            if(withReplace) $(".items-section .items-container .product-item-preview").remove();
-            if(pageNumber> 1)
+            if(parseInt(window.scrollLoadMaxPages)>0)
             {
+                var parsedData = $(data).find('.product-item-preview');
+                // манипуляции с классом new для добавления lazyload новым элементам
+                parsedData.find('img.lazy').addClass('new');
+                if(withReplace) $(".items-section .items-container .product-item-preview").remove();
+                if(pageNumber> 1)
+                {
+                    $(".items-section .items-container").append('<span class="catalog-page-delimiter" style=" display:block;" >' +
+                        '<hr><span style="text-align: center; color:#ccc;display:block;padding:5px">Страница '+pageNumber+'</span></span>');
+                }
+
+                $(".items-section .items-container").append(parsedData);
+
+    //            $(".items-section .items-container .product-item-preview img.lazy.new").lazyload({effect : "fadeIn"});
+                $(".items-section .items-container .product-item-preview img.lazy.new").removeClass('new');
+            }else{
+                if(withReplace) $(".items-section .items-container .product-item-preview").remove();
+
                 $(".items-section .items-container").append('<span class="catalog-page-delimiter" style=" display:block;" >' +
-                    '<hr><span style="text-align: center; color:#ccc;display:block;padding:5px">Страница '+pageNumber+'</span></span>');
+                    '<span style="text-align: center; color:#ccc;display:block;padding:5px">По вашему запросу ничего не найдено. Попробуйте изменить данные.</span></span>');
+
             }
-
-            $(".items-section .items-container").append(parsedData);
-
-//            $(".items-section .items-container .product-item-preview img.lazy.new").lazyload({effect : "fadeIn"});
-            $(".items-section .items-container .product-item-preview img.lazy.new").removeClass('new');
             window.inanime_new.inProgress = false;
         });
     };
