@@ -3071,7 +3071,8 @@ nav .hide-char-overlay{
         height: auto;
         width: 100%;
     }
-    .content .main-carousel .custom-carousel-column .carousel-custom li .text {
+    .content .main-carousel .custom-carousel-column .carousel-custom li .text ,
+    .main-carousel.catalog .custom-carousel-column .carousel-custom li .text {
         max-height: 66px;
         overflow: hidden;
         padding-top: 1px;
