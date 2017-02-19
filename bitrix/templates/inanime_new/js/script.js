@@ -176,7 +176,7 @@ function inanime_new() {
                 $('.items-section .items-container').append($('<div id="sonic-loader-container" style="text-align: center;display:block;"></div>').append(this.sonicLoader.canvas));
                 this.sonicLoader.play();
             }
-        }).done(function(data){console.log(1);
+        }).done(function(data){
             $('#sonic-loader-container').remove();
             window.scrollLoadMaxPages = $(data).find('#maxPages').text();
             if(parseInt(window.scrollLoadMaxPages)>0)
@@ -321,7 +321,7 @@ function inanime_new() {
                 delay:(delay) ? 'Y' : 'N'
             },
             //dataType: 'json',
-            success: function(data){console.log(1);
+            success: function(data){
                 $('header .content-container.cart-container').contents().remove();
                 $('header .content-container.cart-container').append($(data).find('.content-container.cart-container').contents());
                 // обновление корзины для мобильных

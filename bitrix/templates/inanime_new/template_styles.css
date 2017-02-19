@@ -1868,6 +1868,7 @@ nav .hide-char-overlay{
     border:2px solid;
     padding: 5px 11px;
     font-size: 13px;
+    margin-right: 5px;
 }
 .section-catalog .type-buttons .type-btn[aria-pressed="true"]{
     background-color:#ccc;
@@ -1886,6 +1887,13 @@ nav .hide-char-overlay{
 }
 .section-catalog .product-item-preview.vertical .week-good-icon-container {
     top: 215px;
+}
+.section-catalog .sort-container .divider{
+    font-size: 32px;
+    vertical-align: top;
+    line-height: 27px;
+    color:#ebebeb;
+    padding: 0 5px;
 }
 
 /********************* SECTION DESCRIPTION *******************************/
@@ -3010,10 +3018,11 @@ nav .hide-char-overlay{
     }
 
     .section-catalog .product-item-preview.vertical .image-container{
-        height: 200px;
+        /*height: 200px;*/
+        height: 160px;
     }
 
-
+    /*********************************  FIXES **************************/
     .search-input-container .search-input{
         padding: 6px 12px 6px 7px;
     }
@@ -3161,6 +3170,27 @@ nav .hide-char-overlay{
     nav.navigation ul.second-level > li.dropdown:hover div.third-level-container {
         height: 100%;
     }
+
+    .section-catalog {
+        padding-top: 17px;
+    }
+    .select-container .btn {
+        height: 32px;
+        padding-top: 5px;
+    }
+    .section-catalog .product-item-preview:nth-of-type(3n+2){
+        margin: 0 14px 25px;
+    }
+    .section-catalog .items-section{
+        padding-left: 8px;
+    }
+    .section-catalog hr{
+        margin-bottom: 32px;
+        margin-top: 23px;
+        border-top: 2px solid #ebebeb;
+        margin-right: 9px;
+    }
+
 
 }
 /* (desktops, 992px and up) */

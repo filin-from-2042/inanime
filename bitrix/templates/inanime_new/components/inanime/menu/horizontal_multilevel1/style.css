@@ -49,7 +49,9 @@ nav.navigation a:hover > i{
 nav.navigation ul.first-level > li:hover > a,
 nav.navigation ul.first-level > li:hover > i,
 nav.navigation ul.first-level > li.open > a,
-nav.navigation ul.first-level > li.open > i{
+nav.navigation ul.first-level > li.open > i,
+nav.navigation ul.first-level > li.tablet-opened  > a,
+nav.navigation ul.first-level > li.tablet-opened  > i{
     color: #333;
 }
 nav.navigation ul.first-level > li> i{
@@ -121,7 +123,8 @@ nav.navigation ul.second-level > li > i{
 	color:#fff;
 } */
 nav.navigation ul.second-level > li:hover > a,
-nav.navigation ul.second-level > li > a:hover
+nav.navigation ul.second-level > li.tablet-opened > a,
+nav.navigation ul.second-level > li > a:hover,
 nav.navigation ul.second-level > li:hover > a:hover{
     border-radius: 5px 0px 0px 5px;
 }
@@ -283,6 +286,7 @@ nav.navigation .third-level-container li{
         padding-left: 10px;
     }
     nav.navigation ul.first-level > li.dropdown:hover > ul.second-level,
+    nav.navigation ul.first-level > li.dropdown.tablet-opened > ul.second-level,
     nav.navigation ul.first-level > li.dropdown.open > ul.second-level{
         width:auto;
         top:initial;
