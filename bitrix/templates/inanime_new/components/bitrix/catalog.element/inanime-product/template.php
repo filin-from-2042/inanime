@@ -151,7 +151,7 @@ $arDataButtons = CIBlock::GetPanelButtons(
     array("SECTION_BUTTONS"=>false, "SESSID"=>false)
 );
 ?>
-<div class="container">
+<div class="container product-breadcrumbs">
     <?$APPLICATION->IncludeComponent(
 	"bitrix:breadcrumb", 
 	"product-chain",
@@ -160,7 +160,7 @@ $arDataButtons = CIBlock::GetPanelButtons(
 		"PATH" => "",
 		"SITE_ID" => "s2",
 		"COMPONENT_TEMPLATE" => "catalog-chain",
-		"COMPOSITE_FRAME_MODE" => "A",
+		"COMPOSITE_FRAME_MODE" => "N",
 		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
 	false
@@ -261,7 +261,7 @@ $arDataButtons = CIBlock::GetPanelButtons(
             </div>
             <div class="col-xs-24 col-sm-14 col-md-14 col-lg-14">
                 <div class="row">
-                    <div class="col-xs-24 col-sm-22 col-md-18 col-lg-18 data-column">
+                    <div class="col-xs-24 col-sm-24 col-md-18 col-lg-18 data-column">
                         <div class="art-container">
                             <?if($arResult["PROPERTIES"]["ARTNUMBER1"]["VALUE"]){?>
                                 <span class="art">арт.<?=$arResult["PROPERTIES"]["ARTNUMBER1"]["VALUE"]?></span>
@@ -270,7 +270,7 @@ $arDataButtons = CIBlock::GetPanelButtons(
                             <span class="avalable <?=(!$canBuy)?'hidden':''?>">В наличие</span>
                             <span class="notavalable <?=($canBuy)?'hidden':''?>">Нет в наличии</span>
 
-                            <div class="hidden-xs hidden-md  hidden-lg">
+                            <div class="hidden-xs hidden-md  hidden-lg socials-buttons-sm-container">
                                 <?$APPLICATION->IncludeFile(
                                     $APPLICATION->GetTemplatePath("include_areas/socials-buttons.php"),
                                     Array(),
