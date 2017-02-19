@@ -1,4 +1,3 @@
-
 <?
 
 use Bitrix\Catalog;
@@ -8,8 +7,7 @@ $arButtons = CIBlock::GetPanelButtons(
     0,
     array("SECTION_BUTTONS"=>false, "SESSID"=>false)
 );
-?>
-<?
+?><?
 //var_dump($arResult['EDIT_LINK']);
 $orientation = "vertical";
 if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $orientation='horizontal';

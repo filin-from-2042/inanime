@@ -950,3 +950,36 @@ span.bx_filter_input_checkbox.ia-checkbox{
         width: 165px;
     }
 }
+
+
+@media (min-width: 760px) and (max-width:992px) {
+    .bx_filter .bx_filter_button_box, .bx_filter .bx_filter_parameters_box {
+        display: inline-block;
+        width: 49%;
+        vertical-align: top;
+        height: 90px;
+    }
+    .bx_filter_parameters_box_container_block.left,
+    .bx_filter_parameters_box_container_block.right{
+        /*display: none;*/
+        margin-top: -68px;
+    }
+    .bx_filter .bx_filter_parameters_box_container .bx_filter_parameters_box_container_block.right{
+        float: right;
+    }
+    .bx_filter .bx_filter_parameters_box_container .bx_filter_input_container input{
+        width: 49px;
+        height: 26px;
+    }
+    .bx_filter .bx_filter_button_box,
+    .bx_filter .bx_filter_parameters_box {
+        margin-bottom: 0px;
+    }
+    .bx_filter .bx_filter_input_checkbox.ia-checkbox {
+        padding-top: 35px;
+    }
+    .hidden-xs.col-sm-24.col-md-6.col-lg-6.with-filter-smart-filter-column {
+        margin-bottom: 40px;
+        padding-right: 25px;
+    }
+}
