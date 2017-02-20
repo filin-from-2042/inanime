@@ -93,7 +93,7 @@ if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
             );
             $availableSizes[$offer["PROPERTIES"]["SIZE_GLK"]["VALUE"]][] = (empty($offer["PROPERTIES"]["COLOR_REF"]["VALUE"])||$offer["PROPERTIES"]["COLOR_REF"]["VALUE"]=='') ? 'not-set' : $offer["PROPERTIES"]["COLOR_REF"]["VALUE"];
 
-        $photoGalleryData[$offer["ID"]] = $offerPhotos;
+        if($offerPhotos) $photoGalleryData[$offer["ID"]] = $offerPhotos;
         /*foreach($offerPhotos as $offerPhoto)
         {
             $photoGalleryData[$offer["ID"]][] = $offerPhoto;
@@ -185,7 +185,8 @@ $arDataButtons = CIBlock::GetPanelButtons(
                             $showGallery = false;
                             if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
                             {
-                                   if($activeOfferID==$galleryID) $showGallery = true;
+                                // либо показывать галерею активного предложения, либо галерею товара
+                               if($activeOfferID==$galleryID || $arResult['ID']==$galleryID) $showGallery = true;
                             }
                             else
                             {
