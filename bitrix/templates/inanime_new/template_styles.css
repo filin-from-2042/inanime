@@ -3111,9 +3111,6 @@ nav .hide-char-overlay{
     .short-products-carousel .product-item-preview .week-good-icon-container {
         top: 162px;
     }
-    .short-products-carousel .product-item-preview .data-container {
-        padding: 1px 10px 6px;
-    }
     .short-products-carousel .product-item-preview.vertical .title-container {
         font-size: 12px;
     }
@@ -3169,7 +3166,8 @@ nav .hide-char-overlay{
     .sections-carousel .fox-icon.top {
         top: 60px;
     }
-    nav.navigation ul.second-level > li.dropdown:hover div.third-level-container {
+    nav.navigation ul.second-level > li.dropdown:hover div.third-level-container ,
+    nav.navigation ul.second-level > li.dropdown.tablet-opened div.third-level-container {
         height: 100%;
     }
 
@@ -3194,6 +3192,12 @@ nav .hide-char-overlay{
     }
     .product-item-preview .icons-container {
         top: 20px;
+    }
+    .product-item-preview.vertical .title-container {
+        padding: 0;
+    }
+    .short-products-carousel .product-item-preview .data-container {
+        padding: 13px 10px 6px;
     }
 
 }
