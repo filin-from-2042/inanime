@@ -3048,27 +3048,34 @@ nav .hide-char-overlay{
     header .visible-sm .basket-top-container{
         padding-right: 10px;
     }
-    .content .main-carousel{
+    .content .main-carousel,
+    .main-carousel.catalog{
         padding-top: 18px;
     }
-    .content .main-carousel .general-banner-column{
+    .content .main-carousel .general-banner-column,
+    .main-carousel.catalog .general-banner-column{
         padding-right: 15px;
         padding-left: 22px;
     }
-    .content .main-carousel .custom-carousel-column{
+    .content .main-carousel .custom-carousel-column,
+    .main-carousel.catalog .custom-carousel-column{
         padding-left: 0;
     }
-    .content .main-carousel .custom-carousel-column .carousel-custom{
+    .content .main-carousel .custom-carousel-column .carousel-custom,
+    .main-carousel.catalog .custom-carousel-column .carousel-custom{
         height: 225px;
     }
-    .content .main-carousel .custom-carousel-column .carousel-custom li{
+    .content .main-carousel .custom-carousel-column .carousel-custom li,
+    .main-carousel.catalog .custom-carousel-column .carousel-custom li{
         padding: 0 0 10px 0;
     }
-    .content .main-carousel .custom-carousel-column .carousel-custom li .img-wrap {
+    .content .main-carousel .custom-carousel-column .carousel-custom li .img-wrap ,
+    .main-carousel.catalog .custom-carousel-column .carousel-custom li .img-wrap {
         height: 111px;
         overflow: hidden;
     }
-    .content .main-carousel .custom-carousel-column .carousel-custom li img{
+    .content .main-carousel .custom-carousel-column .carousel-custom li img,
+    .main-carousel.catalog .custom-carousel-column .carousel-custom li img{
         height: auto;
         width: 100%;
     }
