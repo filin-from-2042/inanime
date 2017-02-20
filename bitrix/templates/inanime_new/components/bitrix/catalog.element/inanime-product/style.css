@@ -588,16 +588,50 @@
         float: right;
         margin-right: 8px;
     }
-    .ia-btn-group button.quick-order,
-    .ia-btn-group button.in-cart {
+    .product-card .ia-btn-group button.quick-order,
+    .product-card .ia-btn-group button.in-cart {
         height: 43px;
     }
-    .ia-btn-group button.in-cart {
+    .product-card .ia-btn-group button.in-cart {
         width:145px;
         font-size: 14px;
     }
-    .ia-btn-group button.quick-order {
+    .product-card .ia-btn-group button.quick-order {
         width: 46px;
+    }
+    .row.product-tabs{
+        margin-left: 9px;
+        margin-right: 9px;
+        margin-top: 20px;
+        padding-bottom: 48px;
+    }
+    .preview-photo-carousel ul li {
+        width: 65px;
+    }
+    .preview-photo-carousel ul li:hover .photo-container,
+    .preview-photo-carousel ul li.active .photo-container {
+        padding: 2px 3px;
+    }
+    .photo-carousel-container .nav-container{
+        position: relative;
+    }
+    .photo-carousel-container .prev.button {
+        left: -1px;
+    }
+    .photo-carousel-container .next.button {
+        right: 2px;
+    }
+    .photo-carousel-container .prev.button,
+    .photo-carousel-container .next.button{
+        font-size: 12px;
+        margin-top: -41px;
+    }
+    .row.product-info{
+        margin-left: -7px;
+    }
+    .product-card .description-container.gray-text{
+        margin-left: 8px;
+        margin-right: 8px;
     }
 }
 
