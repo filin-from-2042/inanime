@@ -3192,7 +3192,9 @@ nav .hide-char-overlay{
         border-top: 2px solid #ebebeb;
         margin-right: 9px;
     }
-
+    .product-item-preview .icons-container {
+        top: 20px;
+    }
 
 }
 /* (desktops, 992px and up) */

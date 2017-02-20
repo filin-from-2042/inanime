@@ -639,6 +639,9 @@
     .product-card .discount-container .discount-text {
         top: -7px;
     }
+    .product-info .photo-big-container .img-wrap .icons-container {
+        top: 20px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1230px){
