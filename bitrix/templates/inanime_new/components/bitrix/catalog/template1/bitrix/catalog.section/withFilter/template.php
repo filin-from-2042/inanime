@@ -166,7 +166,8 @@ $this->setFrameMode(true);
                             "RATE_FIRS"=>"Y",
                             "LAZY_LOAD"=>'N'
                         ),
-                        false
+//                        false
+                        $component
                     );?><?/*?>
 <div class="product-item-preview vertical" id="<?=$this->GetEditAreaId($arElement['ID']);?>">
                         <div class="image-container">
