@@ -383,6 +383,34 @@ text-align: left;
     #my-basket .actions-container .basket-action-column {
         padding-left:0;
     }
+
+    /****************** FIXES **********************/
+    .ia-basket .bx-breadcrumb {
+        margin: 29px 0 10px;
+    }
+    .ia-basket h1 {
+        margin-bottom: 33px;
+    }
+    #my-basket .table-header {
+        margin-left: 6px;
+        margin-right: 13px;
+    }
+    #my-basket .table-content-container{
+        margin: 16px 13px 0 7px;
+    }
+    #my-basket .my-basket-tab-container {
+        padding-top: 43px;
+    }
+    .ia-basket hr.general-content-bottom-line {
+        margin-top: 62px;
+        margin-bottom: 2px;
+    }
+    #my-basket .basket-action-column .action-button-container {
+        padding-right: 13px;
+    }
+    #my-basket .basket-action-column .action-button-container .clear-btn {
+        margin-right: 9px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1230px){
