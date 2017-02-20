@@ -633,6 +633,12 @@
         margin-left: 8px;
         margin-right: 8px;
     }
+    .product-info .photo-big-container .icons-container .additional-icon {
+        margin-top: -31px;
+    }
+    .product-card .discount-container .discount-text {
+        top: -7px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1230px){

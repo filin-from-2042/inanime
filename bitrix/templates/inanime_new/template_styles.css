@@ -2634,7 +2634,8 @@ nav .hide-char-overlay{
     }
     .discount-container .discount-text {
         right: 28px;
-        top: 0px;
+        /*top: 0px;*/
+        top: -7px;
         font-size: 12px;
     }
 
@@ -2793,7 +2794,7 @@ nav .hide-char-overlay{
         height: 168px;
     }
     .product-item-preview .icons-container .additional-icon{
-        /*margin-top: -30px;*/
+        margin-top: -31px;
     }
     .product-item-preview .splitted-btn.in-cart span.text-btn {
         font-size: 11px;
