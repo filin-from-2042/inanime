@@ -151,6 +151,7 @@ $arDataButtons = CIBlock::GetPanelButtons(
     array("SECTION_BUTTONS"=>false, "SESSID"=>false)
 );
 ?>
+<?/*?>
 <div class="container product-breadcrumbs">
     <?$APPLICATION->IncludeComponent(
 	"bitrix:breadcrumb", 
@@ -160,13 +161,14 @@ $arDataButtons = CIBlock::GetPanelButtons(
 		"PATH" => "",
 		"SITE_ID" => "s2",
 		"COMPONENT_TEMPLATE" => "catalog-chain",
-		"COMPOSITE_FRAME_MODE" => "N",
+		"COMPOSITE_FRAME_MODE" => "Y",
 		"COMPOSITE_FRAME_TYPE" => "AUTO"
 	),
-	false
+    $component
 );
     ?>
 </div>
+<?*/?>
 <div class="product-card">
     <div class="container">
         <div class="row product-info" id="<?=$strMainID;?>">

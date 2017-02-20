@@ -1,5 +1,21 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();?>
 
+<div class="container product-breadcrumbs">
+    <?$APPLICATION->IncludeComponent(
+        "bitrix:breadcrumb",
+        "product-chain",
+        array(
+            "START_FROM" => "0",
+            "PATH" => "",
+            "SITE_ID" => "s2",
+            "COMPONENT_TEMPLATE" => "catalog-chain",
+            "COMPOSITE_FRAME_MODE" => "Y",
+            "COMPOSITE_FRAME_TYPE" => "AUTO"
+        ),
+        $component
+    );
+    ?>
+</div>
 <?$ElementID = $APPLICATION->IncludeComponent(
 	"bitrix:catalog.element",
 	"inanime-product",
