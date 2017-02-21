@@ -379,6 +379,19 @@ else
                             <?include($_SERVER["DOCUMENT_ROOT"] . $templateFolder . "/paysystem.php");?>
 
                         </div>
+                        <script>
+                            $(document).ready(function(){
+                                $('body').on('click', '.shipping-column .ia-radio-button,.shipping-column .radio-button-container .button-title', function(){
+                                    if ($(this).hasClass('ia-radio-button')) var radioButton = $(this);
+                                    else var radioButton = $(this).closest('.radio-button-container').find('.ia-radio-button');
+                                    radioButton.closest('.radio-container').find('input.ia-radio-value').val(radioButton.find('span.value.hidden').text());
+                                    radioButton.closest('.radio-container').find('.ia-radio-button').removeClass('active');
+                                    radioButton.addClass('active');
+
+                                    submitForm();
+                                });
+                            });
+                        </script>
                     </div>
                     <div class="row order-comment-row">
                         <div class="col-md-offset-3 col-lg-offset-3 col-sm-24 col-md-21 col-lg-19">

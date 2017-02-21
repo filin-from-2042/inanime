@@ -11,44 +11,63 @@ if (!empty($arResult["DELIVERY"])) {
 
 <div class="radio-container">
     <?
-    $activeDelivery = 0;
+    $activeDeliveryValue = 0;
+    $activeDeliveryFieldName = current($arResult["DELIVERY"])['FIELD_NAME'];
     foreach ($arResult["DELIVERY"] as $delivery_id => $arDelivery)
     {
-        if(($arDelivery["CHECKED"] == "Y")) $activeDelivery = $arDelivery['ID'];
-        ?>
-        <div class="radio-button-container">
-            <div class="ia-radio-button small<?=($arDelivery["CHECKED"] == "Y")?' active':''?>">
-                <span class="value hidden"><?= $arDelivery["ID"] ?></span>
-                <div class="radio-dot"></div>
+       // echo '<pre>';var_dump($arDelivery);echo '</pre>';
+        if($delivery_id !== 0 && intval($delivery_id) <= 0)
+        {
+            foreach ($arDelivery["PROFILES"] as $profile_id => $arProfile)
+            {
+                if(($arProfile["CHECKED"] == "Y")){
+                 $activeDeliveryFieldName = htmlspecialcharsbx($arProfile["FIELD_NAME"]);
+                 $activeDeliveryValue = $delivery_id . ":" . $profile_id;
+                }
+            ?>
+                <div class="radio-button-container">
+
+                    <div class="ia-radio-button small<?=($arProfile["CHECKED"] == "Y")?' active':''?>">
+                        <span class="value hidden"><?=  $delivery_id . ":" . $profile_id;  ?></span>
+                        <div class="radio-dot"></div>
+                    </div>
+                    <div class="button-title">
+                        <?if (count($arDelivery["LOGOTIP"]) > 0):?>
+                            <img src="<?=CFile::ResizeImageGet($arDelivery['LOGOTIP']['ID'],array("width" => "41", "height" => "28"), BX_RESIZE_IMAGE_PROPORTIONAL, true)["src"]?>" class="shipping-icon">
+                        <?endif;?>
+                        <?= htmlspecialcharsbx($arDelivery["TITLE"]) . " (" . htmlspecialcharsbx($arProfile["TITLE"]) . ")"; ?>
+                    </div>
+                </div>
+            <?}
+        }
+        else
+        {
+            if(($arDelivery["CHECKED"] == "Y")){
+                $activeDeliveryValue = $arDelivery['ID'];
+            }
+            ?>
+            <div class="radio-button-container">
+                <div class="ia-radio-button small<?=($arDelivery["CHECKED"] == "Y")?' active':''?>">
+                    <span class="value hidden"><?= $arDelivery["ID"] ?></span>
+                    <div class="radio-dot"></div>
+                </div>
+                <div class="button-title">
+                    <?if($arDelivery['LOGOTIP'] && $arDelivery['LOGOTIP']['SRC']):?>
+                    <img src="<?=$arDelivery['LOGOTIP']['SRC']?>" class="shipping-icon">
+                    <?endif;?>
+                    <?= ($arDelivery["NAME"])?$arDelivery["NAME"]:$arDelivery["TITLE"]  ?>
+                    <?if(intval($arDelivery["PRICE"])>0):?>
+                    <span class="shipping-money">+<?= $arDelivery["PRICE_FORMATED"]; ?></span>
+                    <?endif;?>
+                </div>
             </div>
-            <div class="button-title">
-                <?if($arDelivery['LOGOTIP'] && $arDelivery['LOGOTIP']['SRC']):?>
-                <img src="<?=$arDelivery['LOGOTIP']['SRC']?>" class="shipping-icon">
-                <?endif;?>
-                <?= $arDelivery["NAME"] ?>
-                <?if(intval($arDelivery["PRICE"])>0):?>
-                <span class="shipping-money">+<?= $arDelivery["PRICE_FORMATED"]; ?></span>
-                <?endif;?>
-            </div>
-        </div>
-    <?}reset($arResult["DELIVERY"]);
+        <?}
+        }
+    reset($arResult["DELIVERY"]);
     ?>
-    <input type="hidden" name="<?=current($arResult["DELIVERY"])['FIELD_NAME']?>" class="ia-radio-value" <?=($activeDelivery)?'value="'.$activeDelivery.'"':''?>>
+    <input type="hidden" name="<?=$activeDeliveryFieldName?>" class="ia-radio-value" <?=($activeDeliveryValue)?'value="'.$activeDeliveryValue.'"':''?>>
 </div>
-<script>
-    $(document).ready(function(){
-        $('body').on('click', '.shipping-column .ia-radio-button,.shipping-column .radio-button-container .button-title', function(){
 
-            if ($(this).hasClass('ia-radio-button')) var radioButton = $(this);
-            else var radioButton = $(this).closest('.radio-button-container').find('.ia-radio-button');
-            radioButton.closest('.radio-container').find('input.ia-radio-value').val(radioButton.find('span.value.hidden').text());
-            radioButton.closest('.radio-container').find('.ia-radio-button').removeClass('active');
-            radioButton.addClass('active');
-
-            submitForm();
-        });
-    });
-</script>
 <?
 }
 ?>

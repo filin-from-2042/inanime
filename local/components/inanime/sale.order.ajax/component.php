@@ -1077,7 +1077,9 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
             if($USER->IsAuthorized())
             {
                 $currentProfileID = $arResult['USER_HELPFULL_VALUES']['CURRENT_PROFILE_ID'];
-                $arUserResult["DELIVERY_LOCATION"] = $arResult['USER_PROFILES'][$currentProfileID]['PROPS']['LOCATION'];
+                // если нет профилей, то так же из сессии
+                if($arResult['USER_PROFILES']) $arUserResult["DELIVERY_LOCATION"] = $arResult['USER_PROFILES'][$currentProfileID]['PROPS']['LOCATION'];
+                else $arUserResult["DELIVERY_LOCATION"] =$_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID'];
             }
             else{
                 $arUserResult["DELIVERY_LOCATION"] =$_SESSION['USER_VALUES']['CURRENT_LOCATION_DATA']['ID'];
