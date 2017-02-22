@@ -102,5 +102,5 @@
             "RATE_FIRS"=>"Y",
             "LAZY_LOAD"=>$arParams["LAZY_LOAD"]
         ),
-        false
+        $component
     );?><?endforeach?>

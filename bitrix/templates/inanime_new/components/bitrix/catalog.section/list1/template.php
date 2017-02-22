@@ -126,7 +126,7 @@ $carouselID = 'carousel-custom-horizontal-'.$arResult["ID"];
                         "LAZY_LOAD"=>'N',
                         "HIDE_BUTTONS"=>"Y"
                     ),
-                    false
+                $component
                 );?>
                 <?/*?>
                 <div class="product-item-preview vertical">

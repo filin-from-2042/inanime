@@ -129,7 +129,7 @@ $itemCounter = 0;
                         "HIDE_BUTTONS"=>"Y",
                         "HORIZONTAL"=>"Y"
                     ),
-                    false
+                $component
                 );?>
 
             <?/*?>
