@@ -6,6 +6,8 @@ if (!CModule::IncludeModule("sale")) {
     return;
 }
 
+$arParams["ALLOW_AUTO_REGISTER"] = ($_SESSION["USER_VALUES"]["order"]["ALLOW_AUTO_REGISTER"])?$_SESSION["USER_VALUES"]["order"]["ALLOW_AUTO_REGISTER"]:"N";
+
 // не пускать если нет товаров в корзине
 $arCheckBasketItems = array();
 $dbBasketItems = CSaleBasket::GetList(
@@ -1509,7 +1511,10 @@ if ($USER->IsAuthorized() || $arParams["ALLOW_AUTO_REGISTER"] == "Y") {
             if ($prop["CODE"] == "LOCATION")
                 $currentLocation = array("KEY" => $prop_key, "CODE" => $prop["CODE"], "VALUE" => $prop["VALUE"]);
         if ($currentLocation && (int)$arUserResult["ORDER_PROP"][$currentLocation["KEY"]]<=0)
-            $arUserResult["ORDER_PROP"][$currentLocation["KEY"]] = $currentLocation["VALUE"];
+        {
+//            $arUserResult["ORDER_PROP"][$currentLocation["KEY"]] = $currentLocation["VALUE"];
+            $arUserResult["ORDER_PROP"][$currentLocation["KEY"]] = $arUserResult["DELIVERY_LOCATION"];
+        }
 
         
         $arOrderDat = CSaleOrder::DoCalculateOrder(
