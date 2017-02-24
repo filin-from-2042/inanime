@@ -195,6 +195,9 @@ body{
  .ia-top-breadcrumb-title-container{
      margin-top: 40px;
  }
+ .section-header{
+     margin-top: 40px;
+ }
 /* INPUTS */
 input.form-control,
 textarea.form-control{
@@ -2610,6 +2613,9 @@ nav .hide-char-overlay{
     .ia-btn-group .quick-order{
         width:35px;
     }
+    .section-header{
+        margin-top: 20px;
+    }
 
     /************************** ADDITIONAL ICONS (BESTSELLER, RECOMMENDED, NEW) ***********************/
     .additional-icon.new {
@@ -2949,7 +2955,7 @@ nav .hide-char-overlay{
 
     .section-personal-header.answers-questions{
         margin-top: 20px;
-        margin-left: 100px;
+        margin-left: 50px;
     }
     .section-personal-header.answers-questions h1{
         margin-bottom:  15px;
