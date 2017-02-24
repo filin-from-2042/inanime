@@ -472,6 +472,63 @@
     .order-drawing-up-complete .button-container {
         margin-top: 27px;
     }
+    /************************************* FIXES ***********************************************/
+    .order-drawing-up.auth-forms .input-container .form-control {
+        width: 100%;
+    }
+    .order-drawing-up.auth-forms .radio-tabs-container .inputWrap #captcha {
+        width: 240px;
+    }
+    .order-drawing-up.auth-forms .radio-tab-control-wrap > div.row{
+        margin-left: 0;
+        margin-right: 0;
+        margin: 0;
+    }
+    .order-drawing-up.auth-forms .button-container button[type="submit"] {
+        font-size: 12px;
+        padding: 10px 15px;
+    }
+    .order-drawing-up .order-drawing-up-header {
+        margin-bottom: 45px;
+    }
+    .order-drawing-up .address-column {
+        padding-left: 10px;
+    }
+    .order-drawing-up .fio-column{
+        padding-left: 23px;
+    }
+    .order-drawing-up .fio-column .form-control {
+        width: 340px;
+    }
+    .order-drawing-up .address-container input.street-input,
+    .order-drawing-up .address-container input.phone-input{
+        width: 340px;
+    }
+    .order-drawing-up .address-container .street-data-fields .input-container {
+        margin-bottom: 23px;
+    }
+    .order-drawing-up .address-container input.house-number-input,
+    .order-drawing-up .address-container input.apartment-input,
+    .order-drawing-up .address-container input.zip-input {
+        width: 107px;
+    }
+    .order-drawing-up .order-comment-container .order-comment-textarea {
+        width: 98%;
+    }
+    .order-drawing-up h2 {
+        padding-left: 23px;
+    }
+    .order-drawing-up .shipping-column {
+        padding-left: 23px;
+    }
+
+    .order-drawing-up .order-comment-row {
+        padding-left: 10px;
+    }
+
+    .order-drawing-up-complete .order-drawing-up-header {
+         margin-top: 0px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1230px){
