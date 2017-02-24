@@ -1,6 +1,6 @@
 /*************************************** ***********************/
 .news-list-content {
-    padding-top: 18px;
+    padding-top: 40px;
 }
 .news-list-content .select-container.tag .btn,
 .news-list-content .select-container.tag .dropdown-menu {
@@ -18,4 +18,10 @@
 }
 .news-list-content .select-container.dropdown.order .btn > span.text > .glyphicon{
     vertical-align: middle;
+}
+
+@media (min-width: 760px) and (max-width:992px) {
+    .news-list-content {
+        padding-top: 20px;
+    }
 }
