@@ -12,6 +12,16 @@
 /** @var CBitrixComponent $component */
 $this->setFrameMode(true);
 ?>
+<div class="container ia-news-single">
+<?$APPLICATION->IncludeComponent(
+    "bitrix:breadcrumb",
+    "catalog-chain",
+    Array(
+        "START_FROM" => "0",
+        "PATH" => "",
+        "SITE_ID" => SITE_ID
+    )
+);?>
     <?$ElementID = $APPLICATION->IncludeComponent(
         "bitrix:news.detail",
         "article-single",
@@ -65,6 +75,7 @@ $this->setFrameMode(true);
         ),
         $component
     );?>
+</div>
 <?/*?>
 <div class="container">
     <?if($arParams["USE_RATING"]=="Y" && $ElementID):?>

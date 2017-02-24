@@ -18,6 +18,7 @@
 }
 .ia-news-single .text-container {
     color:#79828b;
+    text-align: justify;
 }
 .ia-news-single .text-container img{
      border-radius:10px;
@@ -51,8 +52,8 @@
 /* Tablet */
 @media (min-width: 760px) and (max-width:992px) {
     /*********************** NEWS SINGLE ***************************/
-    .ia-news-single {
-        padding: 20px 15px 0;
+    .ia-news-single.container {
+        padding: 20px 28px 0;
     }
     .ia-news-single .title-container h1 {
         width: 420px;
