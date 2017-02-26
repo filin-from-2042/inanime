@@ -262,7 +262,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                 </div>
             </div>
             <!-- mobile -->
-            <div class="col-xs-12 hidden-sm hidden-md hidden-lg">
+            <div class="col-xs-12 hidden-sm hidden-md hidden-lg mobile-buttons-column">
                 <?
                 $cntBasketItems = CSaleBasket::GetList(
                     array(),

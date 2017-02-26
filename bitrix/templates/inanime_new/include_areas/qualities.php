@@ -28,7 +28,7 @@
         </a>
     </div>
 </div>
-<div class="row articles-links hidden-md hidden-lg tablet">
+<div class="row articles-links hidden-md hidden-lg mobile">
         <a class="article-container grey-container discounts" href="/articles/56063/">
             <div class="table-wrap">
                 <span class="text">Постоянным клиентам скидки до 40%</span>
@@ -51,17 +51,19 @@
         </a>
     <script>
         $(document).ready(function(){
-            $('.row.articles-links.tablet .article-container').click(function(event)
-            {
-                event.preventDefault();
-                var $this = $(this);
-                if($this.hasClass('opened')) location.href = $this.attr('href');
-                else
+            if(window.innerWidth > 760 && window.innerWidth <= 1230){
+                $('.row.articles-links.mobile .article-container').click(function(event)
                 {
-                    $('.row.articles-links.tablet .article-container').removeClass('opened');
-                    $this.addClass('opened');
-                }
-            });
+                    event.preventDefault();
+                    var $this = $(this);
+                    if($this.hasClass('opened')) location.href = $this.attr('href');
+                    else
+                    {
+                        $('.row.articles-links.tablet .article-container').removeClass('opened');
+                        $this.addClass('opened');
+                    }
+                });
+            }
         });
     </script>
 </div>

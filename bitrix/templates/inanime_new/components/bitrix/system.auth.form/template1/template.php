@@ -58,11 +58,12 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
         </div>
     </form>
         <div class="row registration-social">
-            <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 registration-column">
+            <div class="col-xs-10 col-sm-12 col-md-12 col-lg-12 registration-column">
                 <div class="autorization-btn-container login-area" >
                     <span class="autorization-btn brown-dotted-text">Регистрация</span>
                 </div>
             </div>
+            <div class="col-xs-14 col-sm-12 col-md-12 col-lg-12 social-column">
             <?if($arResult["AUTH_SERVICES"]):?>
                 <?
                 $APPLICATION->IncludeComponent("bitrix:socserv.auth.form", "flat1",
@@ -75,6 +76,7 @@ if ($arResult['SHOW_ERRORS'] == 'Y' && $arResult['ERROR'])
                 );
                 ?>
             <?endif?>
+            </div>
 
         </div>
         <div class="button-container">

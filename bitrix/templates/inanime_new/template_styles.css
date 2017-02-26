@@ -2585,6 +2585,59 @@ nav .hide-char-overlay{
         display: none;
     }
 
+    /******************************* FIXES ********************************************/
+    .content .main-carousel .general-banner-column{
+        padding: 0;
+    }
+    .content .row.articles-links.mobile{
+        text-align: center;
+    }
+    .content .row.articles-links .article-container{
+        margin-right: 6px;
+        border-radius: 10px;
+    }
+    .content .sections-carousel .column.first-section{
+        padding: 0;
+    }
+    header .mobile-buttons-column{
+        text-align: right;
+        padding-left: 8px;
+    }
+    .content .discount-container .discount-text {
+        right: 0;
+        top: -5px;
+        left: 38px;
+        font-size: 11px;
+        text-align: left;
+    }
+    .content .sections-carousel .vertical-column{
+        margin-left: -15px;
+    }
+    .content .sections-carousel .vertical-column .carousel-container{
+        margin-bottom: 5px;
+    }
+    .content .product-item-preview.horizontal .icons-container {
+        left: -16px;
+    }
+    .carousel-products .title-container .title {
+        font-size: 17px;
+        line-height: 35px;
+    }
+    .carousel-products .title-container {
+        padding: 4px 15px 4px 15px;
+        width: 98%;
+    }
+    .carousel-products .title-container .button i {
+        font-size: 15px;
+    }
+    .carousel-products .title-container .button i {
+        font-size: 15px;
+    }
+    nav.navigation .visible-xs .contacts > span{
+        display: inline;
+    }
+
+
 }
 
 /* Tablet */
