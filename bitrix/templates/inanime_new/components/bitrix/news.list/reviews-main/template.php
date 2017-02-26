@@ -53,7 +53,7 @@ $arEnding = Array(
             <div class="review-title">
                 <?echo $arItem["NAME"]?>
             </div>
-            <div class="review-anonce">
+            <div class="review-anonce hidden-xs">
                 <?echo $arItem["PREVIEW_TEXT"];?>
             </div>
         </a>

@@ -1511,10 +1511,12 @@ nav .hide-char-overlay{
     font-weight:bold;
     font-size: 21px;
     letter-spacing: 1.1px;
+    color: #fc9a00;
 }
 .product-item-preview .price-container .price.old{
     text-decoration:line-through;
-    color:#000;
+    /*color:#000;*/
+    color: #1a2228;
 }
 .product-item-preview .title-container {
     font-size: 14px;
@@ -2611,7 +2613,11 @@ nav .hide-char-overlay{
         text-align: left;
     }
     .content .sections-carousel .vertical-column{
-        margin-left: -15px;
+        /*margin-left: -15px;*/
+        margin-left: 0px;
+    }
+    .content .sections-carousel .vertical-column .first-vertical-carousel-column{
+        padding: 0;
     }
     .content .sections-carousel .vertical-column .carousel-container{
         margin-bottom: 5px;
@@ -2625,7 +2631,7 @@ nav .hide-char-overlay{
     }
     .carousel-products .title-container {
         padding: 4px 15px 4px 15px;
-        width: 98%;
+        /*width: 98%;*/
     }
     .carousel-products .title-container .button i {
         font-size: 15px;
@@ -2634,9 +2640,35 @@ nav .hide-char-overlay{
         font-size: 15px;
     }
     nav.navigation .visible-xs .contacts > span{
-        display: inline;
+        /*display: inline;*/
+    }
+    .review-container .review-info {
+        margin-bottom: 23px;
+    }
+    .reviews-list .review-container {
+        margin-bottom: 10px;
+    }
+    .product-item-preview.vertical .title-container,
+    .product-item-preview.horizontal .title-container{
+        height: 60px;
+        overflow: hidden;
     }
 
+    .sections-carousel .carousel-container{
+        text-align: center;
+    }
+    .sections-carousel .carousel-container .carousel-products{
+        display: inline-block;
+    }
+    .product-item-preview.horizontal {
+        margin-right: 12px;
+    }
+    .carousel-products ul li {
+        padding-right: 14px;
+    }
+    .content  .carousel-products.vertical ul li {
+        padding-right: 0;
+    }
 
 }
 

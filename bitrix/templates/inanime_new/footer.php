@@ -62,10 +62,12 @@
                                 );?>
                             </p>
                         </div>
-                        <div class="social-container visible-xs-block">
-                            <a href="https://www.facebook.com" class="social-link facebook"></a>
-                            <a href="https://www.twitter.com" class="social-link twitter"></a>
-                            <a href="https://vimeo.com" class="social-link vimeo"></a>
+                        <div class="visible-xs-block">
+                            <?$APPLICATION->IncludeFile(
+                                $APPLICATION->GetTemplatePath("include_areas/socials-buttons.php"),
+                                Array(),
+                                Array("MODE"=>"html")
+                            );?>
                         </div>
                     </div>
                     <div class="hidden-xs col-sm-10 col-md-6 col-lg-6 join">

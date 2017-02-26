@@ -100,7 +100,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
         false,
         Array('HIDE_ICONS' => 'Y')
     );?>
-    <hr class="hidden-sm">
+    <hr class="hidden-sm hidden-xs">
 </div>
 <div class="container">
 <div class="row sections-carousel">

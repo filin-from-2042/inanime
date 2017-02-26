@@ -108,12 +108,12 @@ elseif($arResult["USE_EMAIL_CONFIRMATION"] === "Y"):
     ?>
 
     <div class="row autorization-social">
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 autorization-column">
+        <div class="col-xs-11 col-sm-12 col-md-12 col-lg-12 autorization-column">
             <div class="autorization-btn-container">
                 <span class="autorization-btn brown-dotted-text" >Авторизация</span>
             </div>
         </div>
-        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 social-column">
+        <div class="col-xs-13 col-sm-12 col-md-12 col-lg-12 social-column">
             <div class="social-container">
                 <?
                 if(!$USER->IsAuthorized() && CModule::IncludeModule("socialservices"))
