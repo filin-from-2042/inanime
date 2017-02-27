@@ -2616,7 +2616,8 @@ nav .hide-char-overlay{
         /*margin-left: -15px;*/
         margin-left: 0px;
     }
-    .content .sections-carousel .vertical-column .first-vertical-carousel-column{
+    .content .sections-carousel .vertical-column .first-vertical-carousel-column,
+    .content .sections-carousel .vertical-column .second-vertical-carousel-column{
         padding: 0;
     }
     .content .sections-carousel .vertical-column .carousel-container{
@@ -2631,7 +2632,8 @@ nav .hide-char-overlay{
     }
     .carousel-products .title-container {
         padding: 4px 15px 4px 15px;
-        /*width: 98%;*/
+        width: 99%;
+        display: inline-block;
     }
     .carousel-products .title-container .button i {
         font-size: 15px;
@@ -2661,10 +2663,11 @@ nav .hide-char-overlay{
         display: inline-block;
     }
     .product-item-preview.horizontal {
-        margin-right: 12px;
+        /*margin-right: 12px;*/
+        margin-right:20px;
     }
     .carousel-products ul li {
-        padding-right: 14px;
+        /*padding-right: 14px;*/
     }
     .content  .carousel-products.vertical ul li {
         padding-right: 0;
