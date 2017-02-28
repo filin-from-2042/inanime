@@ -253,7 +253,7 @@ else
                                             {
                                                 $locationProp = $arResult['USER_HELPFULL_VALUES']['LOCATION_PROP'];
                                                 $GLOBALS["APPLICATION"]->IncludeComponent(
-                                                    "bitrix:sale.ajax.locations", "popup", array(
+                                                    "inanime:sale.ajax.locations", "popup", array(
                                                         "AJAX_CALL" => "N",
                                                         "COUNTRY_INPUT_NAME" => "COUNTRY",
                                                         "REGION_INPUT_NAME" => "REGION",
@@ -319,7 +319,7 @@ else
                                             {
                                                 $locationProp = $arResult['USER_HELPFULL_VALUES']['LOCATION_PROP'];
                                                 $GLOBALS["APPLICATION"]->IncludeComponent(
-                                                    "bitrix:sale.ajax.locations", "popup", array(
+                                                    "inanime:sale.ajax.locations", "popup", array(
                                                         "AJAX_CALL" => "N",
                                                         "COUNTRY_INPUT_NAME" => "COUNTRY",
                                                         "REGION_INPUT_NAME" => "REGION",
