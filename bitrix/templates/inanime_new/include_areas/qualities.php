@@ -59,7 +59,7 @@
                     if($this.hasClass('opened')) location.href = $this.attr('href');
                     else
                     {
-                        $('.row.articles-links.tablet .article-container').removeClass('opened');
+                        $('.row.articles-links.mobile .article-container').removeClass('opened');
                         $this.addClass('opened');
                     }
                 });
