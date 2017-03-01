@@ -362,15 +362,7 @@ if ($normalCount > 0):
 else:
     ?>
     <div id="basket_items_list">
-        <table>
-            <tbody>
-            <tr>
-                <td style="text-align:center">
-                    <div class=""><?=GetMessage("SALE_NO_ITEMS");?></div>
-                </td>
-            </tr>
-            </tbody>
-        </table>
+        <div style="text-align:center;padding: 20px;"><?=GetMessage("SALE_NO_ITEMS");?></div>
     </div>
 <?
 endif;

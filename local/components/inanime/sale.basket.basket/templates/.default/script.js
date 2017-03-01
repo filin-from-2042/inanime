@@ -45,6 +45,7 @@ InAnimeBasket.prototype.delayButtonAction = function(event, that)
                 url: that.delayActions[elementID],
                 success: function(data){
                     newCartData = data;
+                    location.href = '/personal/cart?tab=put-aside';
                 },
                 error: function( xhr, textStatus ) {
                     alert( [ xhr.status, textStatus ] );
