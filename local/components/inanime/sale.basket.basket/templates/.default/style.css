@@ -411,6 +411,10 @@ text-align: left;
     #my-basket .basket-action-column .action-button-container .clear-btn {
         margin-right: 9px;
     }
+    .ia-basket .tab-pane{
+        min-height: 410px;
+        /*padding: 0 15px;*/
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1230px){
