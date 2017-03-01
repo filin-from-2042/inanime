@@ -22,7 +22,7 @@
         }
     };
 
-    window.InAnimePreviewCatalogElement.prototype.inCartClick = function(element)
+    window.InAnimePreviewCatalogElement.prototype.inCartClick = function(element, callbackFunc)
     {
         var $button = $(element);
         var price = parseFloat($button.closest('.product-item-preview').find('.price.current').text().replace(' ',''));
@@ -44,7 +44,7 @@
         }
         else
         {
-            inanime_new.addToCart(parseInt($button.find('.hidden.value').text()), 1,price,false);
+            inanime_new.addToCart(parseInt($button.find('.hidden.value').text()), 1,price,false, false, callbackFunc);
         }
     };
 

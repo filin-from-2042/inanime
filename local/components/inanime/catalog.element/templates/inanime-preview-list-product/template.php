@@ -8,7 +8,7 @@ $arButtons = CIBlock::GetPanelButtons(
     array("SECTION_BUTTONS"=>false, "SESSID"=>false)
 );
 ?><?
-//var_dump($arResult['EDIT_LINK']);
+//var_dump($arParams['INCART_CALLBACK']);
 $orientation = "vertical";
 if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $orientation='horizontal';
 ?><div class="product-item-preview <?=$orientation?> product-item-preview-<?=$arResult['ID']?>" id="<?=$this->GetEditAreaId($arResult['ID']);?>">
@@ -420,7 +420,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                                             <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                         </button>
                                         <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
-                                                onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this);InAnimePreviewCatalogElement<?=$arResult['ID'];?>.deleteSubscribe(false,'/personal/cart?tab=my-basket')"">
+                                                onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this<?=(array_key_exists('INCART_CALLBACK',$arParams))?','.$arParams['INCART_CALLBACK']:''?>);InAnimePreviewCatalogElement<?=$arResult['ID'];?>.deleteSubscribe(false,'/personal/cart?tab=my-basket')"">
                                             <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
                                             В корзину
                                         </button>
@@ -440,7 +440,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                                         <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                     </button>
                                     <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
-                                            onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
+                                            onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this<?=(array_key_exists('INCART_CALLBACK',$arParams))?','.$arParams['INCART_CALLBACK']:''?>)">
                                         <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
                                         В корзину
                                     </button>
@@ -469,7 +469,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                                         <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                     </button>
                                     <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
-                                            onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this);InAnimePreviewCatalogElement<?=$arResult['ID'];?>.deleteSubscribe(false,'/personal/cart?tab=my-basket');">
+                                            onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this<?=(array_key_exists('INCART_CALLBACK',$arParams))?','.$arParams['INCART_CALLBACK']:''?>);InAnimePreviewCatalogElement<?=$arResult['ID'];?>.deleteSubscribe(false,'/personal/cart?tab=my-basket');">
                                         <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
                                         В корзину
                                     </button>
@@ -491,7 +491,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                                         <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                     </button>
                                     <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
-                                            onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this);"">
+                                            onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this<?=(array_key_exists('INCART_CALLBACK',$arParams))?','.$arParams['INCART_CALLBACK']:''?>);"">
                                         <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
                                         В корзину
                                     </button>
@@ -545,7 +545,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                                         <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                     </button>
                                     <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
-                                            onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this);InAnimePreviewCatalogElement<?=$arResult['ID'];?>.deleteSubscribe(false,'/personal/cart?tab=my-basket')">
+                                            onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this<?=(array_key_exists('INCART_CALLBACK',$arParams))?','.$arParams['INCART_CALLBACK']:''?>);InAnimePreviewCatalogElement<?=$arResult['ID'];?>.deleteSubscribe(false,'/personal/cart?tab=my-basket')">
                                         <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
                                         В корзину
                                     </button>
@@ -565,7 +565,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                                     <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                 </button>
                                 <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
-                                        onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
+                                        onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this<?=(array_key_exists('INCART_CALLBACK',$arParams))?','.$arParams['INCART_CALLBACK']:''?>)">
                                     <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
                                     В корзину
                                 </button>
@@ -594,7 +594,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                                     <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                 </button>
                                 <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
-                                        onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this);InAnimePreviewCatalogElement<?=$arResult['ID'];?>.deleteSubscribe(false,'/personal/cart?tab=my-basket')">
+                                        onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this<?=(array_key_exists('INCART_CALLBACK',$arParams))?','.$arParams['INCART_CALLBACK']:''?>);InAnimePreviewCatalogElement<?=$arResult['ID'];?>.deleteSubscribe(false,'/personal/cart?tab=my-basket')">
                                     <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
                                     В корзину
                                 </button>
@@ -616,7 +616,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                                     <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                 </button>
                                 <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
-                                        onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this)">
+                                        onclick="InAnimePreviewCatalogElement<?=$arResult['ID'];?>.inCartClick(this<?=(array_key_exists('INCART_CALLBACK',$arParams))?','.$arParams['INCART_CALLBACK']:''?>)">
                                     <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
                                     В корзину
                                 </button>

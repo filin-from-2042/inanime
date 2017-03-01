@@ -307,7 +307,7 @@ function inanime_new() {
         },  500);
     };
 
-    this.addToCart=function(productID, quantity, productName, price, delay=false )
+    this.addToCart=function(productID, quantity, productName, price, delay=false, callbackFunc )
     {
         $.ajax({
             type: "POST",
@@ -336,7 +336,8 @@ function inanime_new() {
                         .replaceWith($('<a class="btn btn-default ia-btn blue-btn image-btn mobile-link-button-favorite" href="/personal/cart?tab=put-aside" role="button"></a>').append(favoriteContents));
 
                 }
-                $('#item-added-modal').modal();
+                if(callbackFunc)  callbackFunc();
+                else $('#item-added-modal').modal();
             },
             error: function( xhr, textStatus ) {
                 alert( [ xhr.status, textStatus ] );

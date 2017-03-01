@@ -113,7 +113,8 @@
             "SHOW_404" => "N",
             "MESSAGE_404" => "",
             "COMPOSITE_FRAME_MODE" => "A",
-            "COMPOSITE_FRAME_TYPE" => "AUTO"
+            "COMPOSITE_FRAME_TYPE" => "AUTO",
+            "INCART_CALLBACK" => "function(){location.href='/personal/cart/'}"
         ),
         false
     );?>
