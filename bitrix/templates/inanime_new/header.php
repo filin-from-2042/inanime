@@ -382,7 +382,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
                 <i class="fa fa-times" aria-hidden="true"></i>
               </span>
                     </button>
-                    <div class="modal-title" style="color:rgb(99,186,196);text-align: center;font-size:15px"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Товар добавлен в корзину</div>
+                    <div class="modal-title" style="color:rgb(99,186,196);text-align: center;font-size:15px"><i class="fa fa-check" aria-hidden="true"></i>&nbsp;Товар успешно добавлен</div>
                 </div>
                 <div class="modal-body">
                 </div>
