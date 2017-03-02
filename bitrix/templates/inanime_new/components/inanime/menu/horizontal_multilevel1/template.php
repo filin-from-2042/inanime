@@ -211,18 +211,43 @@
                         if($this.closest('li').hasClass('tablet-opened') || !$this.closest('li').hasClass('dropdown')) location.href = $this.attr('href');
                         else
                         {
-                            // если ссыка из 1го уровня, тогда удалить класс из всей иерархии
-                            // если из второго, то только из этого уровня
-                            if($this.closest('ul').hasClass('first-level'))
+
+                            if(window.innerWidth < 760)
                             {
-                                $('nav ul li').removeClass('tablet-opened');
+                                // для телефонов 3ий уровень недоступен
+                                // если ссыка из 1го уровня, тогда удалить класс из всей иерархии
+                                // если из второго, то только из этого уровня
+                                if($this.closest('ul').hasClass('first-level'))
+                                {
+                                    $('nav ul li').removeClass('tablet-opened');
+                                }
+                                else if($this.closest('ul').hasClass('second-level'))
+                                {
+                                    if(window.innerWidth < 760)
+                                    {
+                                        location.href = $this.attr('href');
+                                        return ;
+                                    }
+                                    $('nav ul.second-level li').removeClass('tablet-opened');
+                                }
+                                $this.closest('nav').find(' ul.second-level li').css('z-index','112').closest('nav').find('.hide-char-overlay').show();
+                                $this.closest('li').addClass('tablet-opened');
+
+                            }else{
+                                // для планшетов
+                                // если ссыка из 1го уровня, тогда удалить класс из всей иерархии
+                                // если из второго, то только из этого уровня
+                                if($this.closest('ul').hasClass('first-level'))
+                                {
+                                    $('nav ul li').removeClass('tablet-opened');
+                                }
+                                else if($this.closest('ul').hasClass('second-level'))
+                                {
+                                    $('nav ul.second-level li').removeClass('tablet-opened');
+                                }
+                                $this.closest('nav').find('li').css('z-index','112').closest('nav').find('.hide-char-overlay').show();
+                                $this.closest('li').addClass('tablet-opened');
                             }
-                            else if($this.closest('ul').hasClass('second-level'))
-                            {
-                                $('nav ul.second-level li').removeClass('tablet-opened');
-                            }
-                            $this.closest('nav').find('li').css('z-index','112').closest('nav').find('.hide-char-overlay').show();
-                            $this.closest('li').addClass('tablet-opened');
                         }
                     });
                 }
