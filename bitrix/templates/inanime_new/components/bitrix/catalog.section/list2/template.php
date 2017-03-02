@@ -24,10 +24,7 @@ $itemCounter = 0;
     </div>
 
     <ul>
-        <?foreach($arResult["ITEMS"] as $arElement):?>
-            <?if($itemCounter==0):?><li><?endif?>
-
-                <?$APPLICATION->IncludeComponent(
+        <?foreach($arResult["ITEMS"] as $arElement):?><?if($itemCounter==0):?><li><?endif?> <?$APPLICATION->IncludeComponent(
                     "inanime:catalog.element",
                     "inanime-preview-list-product",
                     Array(
@@ -130,9 +127,7 @@ $itemCounter = 0;
                         "HORIZONTAL"=>"Y"
                     ),
                 $component
-                );?>
-
-            <?/*?>
+                );?><?/*?>
                 <div class="product-item-preview horizontal">
                     <div class="image-container">
                         <img src="<?=$arElement["PREVIEW_PICTURE"]["SRC"]?>" />
@@ -178,8 +173,7 @@ $itemCounter = 0;
                         </div>
                     </div>
                 </div>
-            <?*/?>
-            <?if($itemCounter == 1){
+            <?*/?><?if($itemCounter == 1){
                 $itemCounter=0;
                 echo '</li>';
             }else{

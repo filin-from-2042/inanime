@@ -2625,6 +2625,7 @@ nav .hide-char-overlay{
     }
     .content .product-item-preview.horizontal .icons-container {
         left: -16px;
+        top:8px;
     }
     .carousel-products .title-container .title {
         font-size: 17px;
@@ -2664,10 +2665,10 @@ nav .hide-char-overlay{
     }
     .product-item-preview.horizontal {
         /*margin-right: 12px;*/
-        margin-right:20px;
+        margin-right:17px;
     }
     .carousel-products ul li {
-        /*padding-right: 14px;*/
+        padding-right: 17px;
     }
     .content  .carousel-products.vertical ul li {
         padding-right: 0;
