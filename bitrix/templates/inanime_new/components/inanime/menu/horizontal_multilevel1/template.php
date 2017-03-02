@@ -202,7 +202,7 @@
                     $('nav .hide-char-overlay').click(function(event){
                         event.stopPropagation();
                         $('nav ul li').removeClass('tablet-opened');
-                        $('nav li').css('z-index','0');
+                        $('nav li').css('z-index','initial');
                         $(this).hide();
                     });
                     $('nav ul a').click(function(event){
