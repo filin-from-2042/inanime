@@ -9,6 +9,7 @@
 }
 .ia-news-list .pagination-container{
     text-align: right;
+    padding: 0 10px;
 }
 .ia-news-list .list-container .news-single-container,
 .ia-news-list .news-single-wrap{

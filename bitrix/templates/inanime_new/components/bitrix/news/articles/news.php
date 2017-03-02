@@ -76,7 +76,7 @@
         $component
     );?>
 
-    <div class="row main-carousel catalog">
+    <div class="row main-carousel catalog hidden-sm hidden-xs">
         <div class="col-xs-24 col-sm-18 col-md-18 col-lg-18 general-banner-column">
             <?if (IsModuleInstalled("advertising")):?>
                 <? $APPLICATION->IncludeComponent(

@@ -175,8 +175,8 @@ $arJSParams['elementsPerPage'] = $arParams["NEWS_COUNT"];
     });
 </script>
 
-        <div class="row main-carousel">
-            <div class="col-xs-24 col-sm-18 col-md-18 col-lg-18">
+        <div class="row main-carousel catalog hidden-sm hidden-xs">
+            <div class="col-xs-24 col-sm-18 col-md-18 col-lg-18 general-banner-column">
                 <?if (IsModuleInstalled("advertising")):?>
                     <? $APPLICATION->IncludeComponent(
                         "bitrix:advertising.banner",
@@ -205,7 +205,7 @@ $arJSParams['elementsPerPage'] = $arParams["NEWS_COUNT"];
                     );?>
                 <?endif?>
             </div>
-            <div class="col-sm-6 col-md-6 col-lg-6">
+            <div class="col-sm-6 col-md-6 col-lg-6 custom-carousel-column">
                 <script>
                     $(document).ready(function(){
                         inanime_new.init_custom_vertical_carousel('carousel-custom-vertical',2);
@@ -223,7 +223,7 @@ $arJSParams['elementsPerPage'] = $arParams["NEWS_COUNT"];
                 while ($ob = $res->GetNextElement()) {
                     $arFields = $ob->GetFields();
 
-                    $arFields["file"] = CFile::ResizeImageGet(($arFields["PROPERTY_MAIN_SLIDER_PHOTO_VALUE"])?$arFields["PROPERTY_MAIN_SLIDER_PHOTO_VALUE"] : (($arFields["DETAIL_PICTURE"]) ? $arFields["DETAIL_PICTURE"] : $arFields["PREVIEW_PICTURE"]), array('width' => '1800', 'height' => '1000'), BX_RESIZE_IMAGE_PROPORTIONAL, true);
+                    $arFields["file"] = CFile::ResizeImageGet(($arFields["PROPERTY_MAIN_SLIDER_PHOTO_VALUE"])?$arFields["PROPERTY_MAIN_SLIDER_PHOTO_VALUE"] : (($arFields["PREVIEW_PICTURE"]) ? $arFields["PREVIEW_PICTURE"] :$arFields["DETAIL_PICTURE"] ), array('width' => '1800', 'height' => '1000'), BX_RESIZE_IMAGE_PROPORTIONAL, true);
 
                     $arSlides[] = $arFields;
                 }

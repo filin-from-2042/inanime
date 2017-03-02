@@ -3312,6 +3312,22 @@ nav .hide-char-overlay{
     .product-tabs .nav-tabs > li > a {
         font-size: 14px;
     }
+
+    .contacts-data {
+        padding-right: 0;
+    }
+    .contacts-data .row{
+        padding-left: 15px;
+    }
+    .contacts-data .addresses-list-container {
+        padding: 0 15px;
+    }
+    .contacts-data .column {
+        padding-left: 0;
+    }
+    .contacts-data hr.general-content-bottom-line {
+        margin: 35px 15px 0;
+    }
 }
 /* (desktops, 992px and up) */
 @media (min-width: 992px) {

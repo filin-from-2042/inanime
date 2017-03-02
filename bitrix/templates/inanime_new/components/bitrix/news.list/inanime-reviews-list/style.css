@@ -98,6 +98,9 @@
     .ia-reviews-list.reviews-list  .review-container .review-info{
         margin-bottom: 10px;
     }
+    .ia-reviews-list.reviews-list .top-pager-container{
+        padding-left: 7px;
+    }
 }
 
 @media (min-width: 992px) and (max-width: 1230px){
