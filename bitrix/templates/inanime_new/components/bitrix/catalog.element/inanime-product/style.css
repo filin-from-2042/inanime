@@ -499,6 +499,37 @@
     }
 
 
+    /******************* fixes *************************************/
+    .product-info .counter-button-container .buttons-container{
+        display: block;
+    }
+    .product-info .price-container .price,
+    .product-info .price-container .discount{
+        text-align: center;
+    }
+    .product-info .price-container span.price:first-child {
+         padding-left: 0px;
+    }
+    .product-tabs {
+        margin-bottom: 35px;
+    }
+
+    .short-list-carousel-row .short-products-carousel .button.next,
+    .short-list-carousel-row .short-products-carousel .button.prev {
+        display: block;
+    }
+    .product-info .splitted-btn span.text-btn {
+        width: 140px;
+        height: 30px;
+    }
+    .product-info .properties-container {
+        text-align: center;
+    }
+    .product-info .ia-counter-container {
+         margin-left: 0px;
+    }
+
+
 }
 /* Tablet */
 @media (min-width: 760px) and (max-width:992px) {
