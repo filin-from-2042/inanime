@@ -142,10 +142,12 @@
                             $nameText = (strlen($slide["NAME"]) > 43) ? substr($slide["NAME"], 0, 40) . '...' : $slide["NAME"];
                             ?>
                             <li>
+                                <div class="img-wrap">
                                 <? if ($slide["file"]["src"]) { ?>
                                     <img src="<?= $slide["file"]["src"]; ?>">
                                 <? } ?>
                                 <a href="<?= $slide["DETAIL_PAGE_URL"]; ?>" class="text"><?=($previewText)?htmlspecialchars($previewText):htmlspecialchars($nameText)?></a>
+                                </div>
                             </li>
                         <? } ?>
                     </ul>
