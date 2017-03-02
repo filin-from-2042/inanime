@@ -289,10 +289,16 @@ nav.navigation .third-level-container li{
     nav.navigation ul.first-level > li.dropdown.tablet-opened > ul.second-level,
     nav.navigation ul.first-level > li.dropdown.open > ul.second-level{
         width:auto;
+        /*width:100%;*/
         top:initial;
         margin-top:55px;
         padding: 15px 0 22px;
         border:none;
+    }
+
+    /****************** fixes **************************/
+    nav.navigation .third-level-container > ul > li > a {
+        padding: 3px 5px 3px 28px;
     }
 }
 @media (min-width: 992px) {
