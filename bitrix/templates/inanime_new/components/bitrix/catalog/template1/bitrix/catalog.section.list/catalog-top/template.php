@@ -1,5 +1,8 @@
 <?if(!defined("B_PROLOG_INCLUDED") || B_PROLOG_INCLUDED!==true)die();
 ?>
+<?
+if(count($arResult["SECTIONS"]) > 0)
+{?>
     <ul class="catalog-top-hierarhy clearfix">
 
         <?
@@ -11,3 +14,4 @@
         }
         ?>
     </ul>
+<?}?>

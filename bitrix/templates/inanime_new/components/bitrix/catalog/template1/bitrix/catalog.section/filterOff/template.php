@@ -35,7 +35,7 @@ $this->setFrameMode(true);
             </button>
             <?=$strList?>
         </div>
-        <span class="divider">|</span>
+        <span class="divider hidden-xs">|</span>
         <div class="type-buttons mnn">
             <button type="button" class="btn btn-primary type-btn topsale" data-toggle="button" onclick="inanime_new.changeViewHandler()"><?= GetMessage('CATALOG_BTN_TOPSALE');?></button>
             <button type="button" class="btn btn-primary type-btn discount" data-toggle="button" onclick="inanime_new.changeViewHandler()"><?= GetMessage('CATALOG_BTN_DISCOUNT');?></button>
