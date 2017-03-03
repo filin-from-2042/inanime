@@ -34,6 +34,7 @@ if(array_key_exists('filterOn',$_REQUEST) && trim($_REQUEST['filterOn']))
                 if($arProductDiscounts["PRODUCT_ID"]) $IDs[]=$arProductDiscounts["PRODUCT_ID"];
             }
             $filterTitle= 'Товары недели';
+            $APPLICATION->SetTitle($filterTitle);
         };break;
     }
     $arrFilter['ID'] = $IDs;

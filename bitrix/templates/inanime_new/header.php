@@ -411,5 +411,7 @@ IncludeTemplateLangFile($_SERVER["DOCUMENT_ROOT"]."/bitrix/templates/".SITE_TEMP
 	),
 	false
 );?>
-
+<div class="container visible-xs">
+    <hr class="mobile-top-nav-line">
+</div>
 <div class="content">

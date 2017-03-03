@@ -20,6 +20,16 @@
     vertical-align: middle;
 }
 
+@media (max-width:760px) {
+    .news-list-content .select-container.dropdown.tag .btn > span.text {
+        width: 104px;
+    }
+    .news-list-content .select-container.tag .btn,
+    .news-list-content .select-container.tag .dropdown-menu {
+         min-width: 135px;
+    }
+}
+
 @media (min-width: 760px) and (max-width:992px) {
     .news-list-content {
         padding-top: 20px;

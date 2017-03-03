@@ -353,6 +353,11 @@ hr.general-content-bottom-line{
     margin-top: 40px;
     margin-left: -3px;
 }
+hr.mobile-top-nav-line{
+    border-top: 2px solid #eee;
+    margin-top: 8px;
+    margin-bottom: 11px;
+}
 /************* CUSTOM ICONS ***************/
 i.ai-icon-bs {
     font-family: 'Glyphicons Halflings';
@@ -2722,7 +2727,8 @@ nav .hide-char-overlay{
         margin: 0 7px;
     }
     .section-catalog .items-container,
-    .sections-catalog .products-list-container > div{
+    .sections-catalog .products-list-container > div,
+    .ia-search-page .product-list-container .product-list-wrap{
         text-align: center;
     }
     .section-catalog .with-filter-items-column{
@@ -2745,7 +2751,14 @@ nav .hide-char-overlay{
     .product-item-preview .week-good-icon .time-left {
         padding: 0px;
     }
+    .news-list-content{
+        padding-top: 0;
+    }
 
+    .ia-page-title{
+        margin-bottom: 0;
+        font-size: 23px;
+    }
 
 }
 

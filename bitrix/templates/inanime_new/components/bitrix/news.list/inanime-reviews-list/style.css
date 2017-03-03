@@ -56,6 +56,7 @@
 @media (max-width: 760px) {
     .ia-reviews-list.reviews-list{
         text-align: center;
+        padding: 10px 0 0;
     }
     .ia-reviews-list.reviews-list .review-anonce{
         display: none;
@@ -67,10 +68,10 @@
         float:none;
     }
     .ia-reviews-list.reviews-list .tag-list-container .dropdown-wrap{
-        display: block;
+        /*display: block;*/
     }
     .ia-reviews-list.reviews-list .top-pager-container {
-        min-height: 90px;
+        /*min-height: 90px;*/
     }
     .ia-reviews-list.reviews-list .pagination-container{
         text-align: center;
@@ -79,15 +80,22 @@
         margin-top: -30px;
         margin-left: 16px;
     }
-    .ia-reviews-list.reviews-list .review-container .review-title {
+    .ia-reviews-list.reviews-list .review-container{
         text-align: left;
+        margin-bottom: 10px;
+    }
+    .ia-reviews-list.reviews-list .review-container:nth-child(odd),
+    .ia-reviews-list.reviews-list .review-container{
+        margin-right: 10px;
     }
     .ia-reviews-list.reviews-list  .review-container .review-info{
          margin-bottom: 23px;
      }
-    .ia-reviews-list.reviews-list .review-container {
-        margin-bottom: 10px;
+    .ia-reviews-list.reviews-list .reviews-list-container {
+        max-height: inherit;
     }
+
+
 }
  /*Tablet */
 @media (min-width: 760px) and (max-width:992px) {
