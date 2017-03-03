@@ -137,7 +137,7 @@ if ($normalCount > 0):
                                         <div class="ia-counter-container">
                                             <div class="increase button"><i class="fa fa-chevron-right" aria-hidden="true"></i></div>
                                             <div class="decrease button"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
-                                            <input type="text" class="counter-value" value="1"/>
+                                            <input type="text" class="counter-value" value="<?=$arItem["QUANTITY"]?>"/>
                                         </div>
                                     </div>
                                 </div>
