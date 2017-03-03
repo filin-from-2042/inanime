@@ -2682,9 +2682,7 @@ nav .hide-char-overlay{
         top: 52px;
     }
 
-    .section-catalog {
-        padding-top: 20px;
-    }
+
     .section-catalog  .bx-breadcrumb {
         margin: 10px 0 5px;
     }
@@ -2758,6 +2756,15 @@ nav .hide-char-overlay{
     .ia-page-title{
         margin-bottom: 0;
         font-size: 23px;
+    }
+    .contacts-data .section-personal-header {
+        margin-top: 0;
+    }
+    .section-header {
+        margin-top: 0;
+    }
+    .section-catalog {
+        padding-top: 0;
     }
 
 }
