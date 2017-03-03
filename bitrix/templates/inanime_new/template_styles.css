@@ -2710,7 +2710,8 @@ nav .hide-char-overlay{
         width: 117px;
         font-size: 10px;
     }
-    .section-catalog .product-item-preview.vertical .week-good-icon-container {
+    .section-catalog .product-item-preview.vertical .week-good-icon-container ,
+    .product-item-preview.vertical .week-good-icon-container {
         top: 76px;
         display: inline-block;
     }
@@ -2737,6 +2738,12 @@ nav .hide-char-overlay{
     .product-info .photo-big-container,
     .preview-photo-carousel ul li .photo-container{
         width: auto;
+    }
+    .ia-modal  .modal-dialog{
+        margin-top: 60px;
+    }
+    .product-item-preview .week-good-icon .time-left {
+        padding: 0px;
     }
 
 
