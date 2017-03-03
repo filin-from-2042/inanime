@@ -529,6 +529,42 @@
          margin-left: 0px;
     }
 
+    .product-info .additional-icon {
+        width: 105px;
+        height: 48px;
+    }
+    .product-info .photo-big-container .icons-container .additional-icon {
+        margin-top: -18px;
+    }
+    .content .product-info .discount-container .discount-text {
+        top: 7px;
+        left: auto;
+        right: 6px;
+    }
+    .product-info .photo-big-container .img-wrap .icons-container {
+        width: 105px;
+    }
+    .product-info .photo-carousel-container .button {
+        margin-top: -56px;
+    }
+    .product-info .photo-carousel-container .next.button {
+        right: -11px;
+    }
+    .product-info .photo-carousel-container .prev.button {
+        left: -11px;
+    }
+    .product-info .photo-carousel-container .nav-container{
+        display: inline-block;
+        width: 100%;
+    }
+    .product-info .photo-carousel-container{
+        display: inline-block;
+        position: relative;
+    }
+    .product-info .general-container.photo-container{
+        text-align: center;
+    }
+
 
 }
 /* Tablet */

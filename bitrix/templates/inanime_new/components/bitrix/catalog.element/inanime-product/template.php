@@ -342,15 +342,34 @@ $arDataButtons = CIBlock::GetPanelButtons(
                                     <div class="general-container photo-container" id="photo_gallery_xs_<?=$galleryID?>"  <?=($showGallery)?'':'style="display:none;"'?>>
                                         <div class="photo-big-container">
                                             <div class="img-wrap">
-                                                <?if($isNew):?>
-                                                    <div class="additional-icon new"></div>
-                                                <?endif?>
-                                                <?if($isBestseller):?>
-                                                    <div class="additional-icon bestseller"></div>
-                                                <?endif?>
-                                                <?if($isRecommended):?>
-                                                    <div class="additional-icon recommended"></div>
-                                                <?endif?>
+                                                <div class="icons-container">
+                                                    <?if($isNew):?>
+                                                        <div class="additional-icon new"></div>
+                                                    <?endif?>
+                                                    <?if($isBestseller):?>
+                                                        <div class="additional-icon bestseller"></div>
+                                                    <?endif?>
+                                                    <?if($isRecommended):?>
+                                                        <div class="additional-icon recommended"></div>
+                                                    <?endif?>
+                                                    <?
+                                                    $discountPercentData = 0 ;
+                                                    if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS'])){
+                                                        $currGalleryPrices = $offersData[$galleryID]['price'];
+                                                        if(isset($currGalleryPrices[2])) $discountPercentData = $currGalleryPrices[2];
+                                                    }
+                                                    else
+                                                        $discountPercentData = $arResult["PRICES"]['BASE']['DISCOUNT_DIFF_PERCENT'];
+                                                    if($discountPercentData)
+                                                    {?>
+                                                        <div class="discount-container">
+                                                            <div class="additional-icon  discount"></div>
+                                                            <div class="discount-text">Скидка <?=$discountPercentData;?> %</div>
+                                                        </div>
+                                                    <?}
+                                                    ?>
+
+                                                </div>
                                                 <img src="<?=$galleryPhoto[0];?>" class="photo-big">
                                             </div>
                                         </div>
