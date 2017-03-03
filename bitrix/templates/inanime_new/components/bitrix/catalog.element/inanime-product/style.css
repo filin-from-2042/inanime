@@ -564,6 +564,9 @@
     .product-info .general-container.photo-container{
         text-align: center;
     }
+    .product-tabs .nav-tabs > li > a {
+        background-color: white;
+    }
 
 
 }
