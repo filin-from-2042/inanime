@@ -341,7 +341,7 @@
         width: 60px;
     }
     .order-drawing-up .address-container .street-data-fields .input-container.apartment-container {
-        display: none;
+        /*display: none;*/
     }
     .order-drawing-up .radio-row h3, .order-drawing-up .discounts-coupon-row h3 {
         font-size: 17px;
@@ -389,6 +389,37 @@
     }
     .order-drawing-up-complete .general-message {
         font-size: 17px;
+    }
+
+
+    /********************************** FIXES ************************************************/
+    .order-drawing-up .address-container .input-container {
+        margin-right: 0px;
+    }
+    .order-drawing-up .street-data-fields .input-container {
+        margin-right: 1px;
+    }
+    .order-drawing-up .street-data-fields .phone-field-wrap{
+        display: inline-block;
+    }
+    .order-drawing-up .address-container input.zip-input{
+        width: 125px;
+    }
+    .order-drawing-up-complete .contacts-text{
+        display: inline-block;
+        width: 85%;
+    }
+    .order-drawing-up-complete .order-drawing-up-header {
+         margin-top: 0px;
+    }
+    .visible-xs hr.mobile-top-nav-line {
+        margin-bottom: 0px;
+    }
+    .order-drawing-up-complete .message-container {
+        margin-top: 35px;
+    }
+    .order-drawing-up-complete .contacts-text {
+        margin-top: 15px;
     }
 
 }

@@ -4,6 +4,11 @@ $APPLICATION->SetPageProperty("description", "Мы предлагаем широ
 $APPLICATION->SetPageProperty("keywords", "аниме одежда, аниме берелоки, кулоны");
 $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксессуаров\"");
 ?>
+<style>
+    hr.mobile-top-nav-line{
+        display: none;
+    }
+</style>
 <div class="container">
     <div class="row main-carousel">
         <div class="col-xs-24 col-sm-18 col-md-18 col-lg-18 general-banner-column">

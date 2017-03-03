@@ -298,7 +298,7 @@ else
                                             <div class="input-container">
                                                 <input type="text" name="<?=$arFields['ZIP']["FIELD_NAME"]?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['ZIP']['VALUE'] : $arResult['USER_PROFILES'][$currentUserProfileID]['PROPS']['ZIP_CODE'] ?>" placeholder="Индекс" class="form-control zip-input">
                                             </div>
-                                            <div>
+                                            <div class="phone-field-wrap">
                                                 <div class="input-container">
                                                     <input type="text" name="<?=$arFields['PHONE']['FIELD_NAME']?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['PHONE']['VALUE'] :$arResult['USER_PROFILES'][$currentUserProfileID]['PROPS']['PHONE']?>" placeholder="Телефон" class="form-control phone-input">
                                                 </div>
@@ -360,7 +360,7 @@ else
                                                                 ?>"
                                                        placeholder="Индекс" class="form-control zip-input">
                                             </div>
-                                            <div>
+                                            <div class="phone-field-wrap">
                                                 <div class="input-container">
                                                     <input type="text" name="<?=$arFields['PHONE']['FIELD_NAME']?>" value="<?=($_POST["is_ajax_post"] == "Y") ? $arFields['PHONE']['VALUE'] : ''?>" placeholder="Телефон" class="form-control phone-input">
                                                 </div>
