@@ -1,4 +1,3 @@
-
 <?foreach($arResult["ITEMS"] as $arElement):?><?$APPLICATION->IncludeComponent(
         "inanime:catalog.element",
         "inanime-preview-list-product",
