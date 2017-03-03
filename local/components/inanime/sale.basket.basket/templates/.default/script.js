@@ -10,9 +10,23 @@ InAnimeBasket = function (params)
     $('.table-action-column .action-button-container button.remove-action').click(function(event){that.deleteButtonAction(event, that)});
     $(document).ready(function ()
     {
+        // апдейтить нужно оба контрола для десктопа и телефона, поэтому весь этот гемор
         $('.ia-counter-container .button').click(function()
         {
-            inanime_new.counterButtonClick(this);
+            var $btn = $(this);
+            if($btn.hasClass('increase'))
+            {
+                $(this).closest('.table-content-container').find('.ia-counter-container .button.increase').each(function(){
+                    inanime_new.counterButtonClick(this);
+                });
+            }
+            else if ($btn.hasClass('decrease'))
+            {
+                $(this).closest('.table-content-container').find('.ia-counter-container .button.decrease').each(function(){
+                    inanime_new.counterButtonClick(this);
+                });
+
+            }
             that.recalcBasketAjax({})
         });
     });

@@ -2766,6 +2766,9 @@ nav .hide-char-overlay{
     .section-catalog {
         padding-top: 0;
     }
+    .ia-basket .tab-pane {
+        min-height: 530px;
+    }
 
 }
 
