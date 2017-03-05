@@ -2769,6 +2769,9 @@ nav .hide-char-overlay{
     .ia-basket .tab-pane {
         min-height: 530px;
     }
+    .section-personal-header {
+        margin-top: 0;
+    }
 
 }
 
