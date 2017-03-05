@@ -28,6 +28,9 @@ else
     }
     ?>
 
+    <?if($onlyCurrent){?>
+    <h2>Мои последние заказы</h2>
+    <?}?>
     <div class="bottom-pager-container">
         <div class="pager-container hidden-xs">
             <?=$arResult["NAV_STRING"]?>
