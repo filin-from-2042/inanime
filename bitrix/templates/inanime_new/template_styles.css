@@ -2772,6 +2772,10 @@ nav .hide-char-overlay{
     .section-personal-header {
         margin-top: 0;
     }
+    .ia-top-breadcrumb-title-container {
+        margin-top: 0px;
+        margin-bottom: 40px;
+    }
 
 }
 
