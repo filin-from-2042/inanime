@@ -422,6 +422,11 @@
         margin-top: 15px;
     }
 
+    .order-drawing-up .order-drawing-up-header,
+    .order-drawing-up-complete .order-drawing-up-header {
+         margin-top: 0px;
+    }
+
 }
 /* Tablet */
 @media (min-width: 760px) and (max-width:992px) {
