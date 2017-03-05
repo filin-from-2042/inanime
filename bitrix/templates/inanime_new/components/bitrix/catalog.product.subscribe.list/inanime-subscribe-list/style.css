@@ -77,6 +77,11 @@
     .bx_item_list_you_looked_horizontal.col3 .bx_catalog_item:nth-child(3n+1),
     .bx_item_list_you_looked_horizontal.col4 .bx_catalog_item:nth-child(3n+1),
     .bx_item_list_you_looked_horizontal.col5 .bx_catalog_item:nth-child(3n+1){clear:both}
+
+    #not-available .product-item-preview .splitted-btn.in-cart span.text-btn {
+        font-size: 12px;
+    }
+
 }
 @media (max-width:580px){
     .bx-touch .bx_item_list_you_looked_horizontal.col1 .bx_catalog_item{padding:1px 26px;margin:0 0 0 30px ;width:100%}

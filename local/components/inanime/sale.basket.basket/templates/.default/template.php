@@ -79,7 +79,6 @@ $arUrls = array(
                                         <?include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/basket_items_delay.php");?>
                                     </div>
                                     <div role="tabpanel" class="tab-pane <?=($_GET['tab']=='not-available') ? ' active' : '' ?>" id="not-available">
-                                        <div class="container">
                                         <?$APPLICATION->IncludeComponent(
                                             "bitrix:catalog.product.subscribe.list",
                                             "inanime-subscribe-list",
@@ -90,7 +89,6 @@ $arUrls = array(
                                                 "LINE_ELEMENT_COUNT" => "3"
                                             )
                                         );?>
-                                        </div>
                                     </div>
                                 </div>
 
