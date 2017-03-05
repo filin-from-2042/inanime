@@ -2776,6 +2776,9 @@ nav .hide-char-overlay{
         margin-top: 0px;
         margin-bottom: 40px;
     }
+    nav.navigation ul a{
+        width: 100%;
+    }
 
 }
 
