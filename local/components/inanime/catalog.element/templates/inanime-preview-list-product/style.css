@@ -88,21 +88,46 @@
 .ia-modal.quick-order-modal .photo-big {
     max-width:282px;
     max-height:242px;
+    border-radius: 10px;
 }
 .ia-modal.quick-order-modal .preview-photo-carousel {
     margin-top: 10px;
+    display: inline-block;
+}
+.ia-modal.quick-order-modal .photo-carousel-container{
+    text-align: center;
 }
 .ia-modal.quick-order-modal .photo-carousel-container img {
     max-width: 68px;
     max-height: 58px;
 }
+.ia-modal.quick-order-modal .preview-photo-carousel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 999999px;
+}
 .ia-modal.quick-order-modal .preview-photo-carousel ul li {
     width: 78px;
     height: 68px;
     padding-right: 10px;
+    float: left;
+}
+
+.ia-modal.quick-order-modal .preview-photo-carousel ul li .photo-container {
+    width: 100%;
+    display: inline-block;
+    height: 100%;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
 }
 .ia-modal.quick-order-modal .photo-carousel-container .button {
     margin-top: -58px;
+    color: #68422e;
+    cursor: pointer;
+    position: absolute;
+    font-size: 21px;
 }
 .ia-modal.quick-order-modal .photo-carousel-container .prev.button {
     left: 20px;
@@ -128,6 +153,7 @@
 }
 .ia-modal.quick-order-modal .product-info .rate-container {
     height: 36px;
+    display: inline-block;
 }
 .ia-modal.quick-order-modal .product-info .price-container .price.old {
     font-size: 18px;
@@ -171,8 +197,26 @@
     margin-left: 8px;
     letter-spacing: 3px;
 }
-.ia-modal.quick-order-modal .product-info .counter-button-container {
+.ia-modal.quick-order-modal .counter-button-container {
     margin-top: 8px;
+}
+.ia-modal.quick-order-modal .icons-container {
+    left: 10px;
+    top: 18px;
+}
+.ia-modal.quick-order-modal .icons-container .additional-icon {
+    margin-top: -30px;
+}
+.ia-modal.quick-order-modal .discount-container{
+    color: #333;
+}
+.ia-modal.quick-order-modal .photo-container img {
+    border-radius: 10px;
+}
+.ia-modal.quick-order-modal .preview-photo-carousel ul li:hover .photo-container,
+.ia-modal.quick-order-modal .preview-photo-carousel ul li.active .photo-container {
+    padding: 4px;
+    border: 1px solid rgb(235,235,235);
 }
 
 @media (max-width: 760px) {

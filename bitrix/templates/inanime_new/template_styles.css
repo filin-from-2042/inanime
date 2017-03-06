@@ -386,31 +386,48 @@ span.rub:before{
     background-repeat:no-repeat;
     z-index: 100;
 }
+.additional-icon.new.tablet {
+    background-image:url(images/product-icon-new-tablet.png);
+}
 .additional-icon.bestseller{
     background-image:url(images/product-icon-bestseller-desktop.png);
     background-repeat:no-repeat;
     z-index: 99;
+}
+.additional-icon.bestseller.tablet{
+    background-image:url(images/product-icon-bestseller-tablet.png);
 }
 .additional-icon.recommended{
     background-image:url(images/product-icon-recommended-desktop.png);
     background-repeat:no-repeat;
     z-index: 98;
 }
+.additional-icon.recommended.tablet{
+    background-image:url(images/product-icon-recommended-tablet.png);
+}
 .additional-icon.discount{
     background-image:url(images/product-icon-discount-desktop.png);
     background-repeat:no-repeat;
     z-index: 97;
+}
+.additional-icon.discount.tablet{
+    background-image:url(images/product-icon-discount-tablet.png);
 }
 .discount-container{
     position: relative;
 }
 .discount-container .discount-text{
     position: absolute;
-    right: 6px;
+    /*right: 12px;*/
+    left:52px;
     top: 8px;
     z-index: 98;
 }
-
+.discount-container .discount-text.tablet{
+    left: 41px;
+    top: -6px;
+    font-size: 12px;
+}
 .fox-icon.bottom{
     background: url(images/sections-new-fox-bottom.png) no-repeat;
     width: 122px;
@@ -2613,7 +2630,7 @@ nav .hide-char-overlay{
     .content .discount-container .discount-text {
         right: 0;
         top: -5px;
-        left: 38px;
+        left: 41px;
         font-size: 11px;
         text-align: left;
     }
@@ -2834,7 +2851,7 @@ nav .hide-char-overlay{
         z-index: 97;
     }
     .discount-container .discount-text {
-        right: 28px;
+        right: 32px;
         /*top: 0px;*/
         top: -7px;
         font-size: 12px;

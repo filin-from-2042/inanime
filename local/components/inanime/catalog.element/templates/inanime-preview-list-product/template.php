@@ -77,6 +77,15 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
         <?
             $qoModalID = 'quick-order-modal'.$arResult['ID'];
             $photoGalleryData = array();
+/*
+            $isRecommended = (bool)$arResult["PROPERTIES"]["IS_RECOMMEND"]["VALUE"];
+            if($arElement["DATE_ACTIVE_FROM"]){
+                if(((strtotime("now")-strtotime($arElement["DATE_ACTIVE_FROM"]))/86400) <= 14){
+                    $isNew = true;
+                }
+            }
+            $isBestseller = (bool)$arResult["PROPERTIES"]["IS_BESTSELLER"]["VALUE"];
+*/
             $arJSParams = array();
             if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
             {
@@ -127,7 +136,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                     }
                     // цена в итоге преобразования массива в строку должна получиться в формате "текущаяЦена-стараяЦена-процентСкидки-суммаСкидки"
                     // если скидки нет, то будет выглядеть "текущаяЦена", т.е. массив с одним элементом
-                    $prices=array();
+                    $prices=array();var_dump($offer["MIN_PRICE"]["VALUE"].'='.$offer["MIN_PRICE"]["DISCOUNT_VALUE"]);
                     if($offer["MIN_PRICE"]["VALUE"]!=$offer["MIN_PRICE"]["DISCOUNT_VALUE"])
                     {
                         $prices[]=$offer["MIN_PRICE"]["VALUE"];
@@ -148,27 +157,28 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                     );
                     $availableSizes[$offer["PROPERTIES"]["SIZE_GLK"]["VALUE"]][] = (empty($offer["PROPERTIES"]["COLOR_REF"]["VALUE"])||$offer["PROPERTIES"]["COLOR_REF"]["VALUE"]=='') ? 'not-set' : $offer["PROPERTIES"]["COLOR_REF"]["VALUE"];
 
-                    foreach($offerPhotos as $offerPhoto)
+                    if($offerPhotos) $photoGalleryData[$offer["ID"]] = $offerPhotos;
+                    /*foreach($offerPhotos as $offerPhoto)
                     {
                         $photoGalleryData[$offer["ID"]][] = $offerPhoto;
-                    }
+                    }*/
                 }
 
                 if(empty($photoGalleryData))
                 {
+                    if($arResult['MORE_PHOTO'])
+                    {
+                        foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
+                        {
+                            $photoGalleryData[$arResult['ID']][] = $arOnePhoto['SRC'];
+                        }
+                    }
+
                     if($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"])
                     {
                         foreach($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"] as $photoID)
                         {
                             $photoGalleryData[$arResult['ID']][] = CFile::GetFileArray($photoID)['SRC'];
-                        }
-                    }
-
-                    if(empty($photoGalleryData))
-                    {
-                        foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
-                        {
-                            $photoGalleryData[$arResult['ID']][] = $arOnePhoto['SRC'];
                         }
                     }
                 }
@@ -284,11 +294,11 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
             if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
             {?>
                 <div class="price">
-                    <?
+                    <?//var_dump($offersData);var_dump($activeOfferID);
                     $currOfferPrice = $offersData[$activeOfferID]["price"];
                     $oldPrice;
                     $currentPrice;
-                    if(isset($currOfferPrice[1]) && (floatVal($currOfferPrice[1]) > floatVal($currOfferPrice[0])))
+                    if(isset($currOfferPrice[1]) && (floatVal($currOfferPrice[1]) < floatVal($currOfferPrice[0])))
                     {
                         $oldPrice=$currOfferPrice[0];
                         $currentPrice=$currOfferPrice[1];
@@ -297,10 +307,10 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                     if ($arParams['SHOW_OLD_PRICE'] == 'Y')
                     {
                         if($oldPrice){?>
-                            <span class="price old"><?=$oldPrice?> ₽</span>
+                            <span class="price old"><?=$oldPrice?><span class="rub"></span></span>
                         <?}?>
                     <?}?>
-                    <span class="price current yellow-text"><?=$currentPrice;?> ₽</span>
+                    <span class="price current yellow-text"><?=$currentPrice;?><span class="rub"></span></span>
                 </div>
             <?}else{
                 foreach($arResult["PRICES"] as $code=>$arPrice):?>
@@ -416,7 +426,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                             <?if($canBuy){?>
                                 <div class="button-wrap in-cart">
                                     <div class="btn-group ia-btn-group" role="group">
-                                        <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" >
+                                        <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" onclick="$('#<?=$qoModalID?>').modal()" >
                                             <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                         </button>
                                         <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
@@ -436,7 +446,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                             <?// для обычных страниц?>
                             <div class="button-wrap in-cart" <?=(!$canBuy)?'style="display:none"':''?>>
                                 <div class="btn-group ia-btn-group" role="group">
-                                    <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" >
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" onclick="$('#<?=$qoModalID?>').modal()" >
                                         <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                     </button>
                                     <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
@@ -465,7 +475,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                         <?if(array_key_exists('SUBSCRIBED',$arParams) && $arParams['SUBSCRIBED']=='Y'){?>
                             <?if($arResult["CAN_BUY"]){?>
                                 <div class="btn-group ia-btn-group" role="group">
-                                    <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" onclick="$('#<?=$qoModalID?>').modal()">
                                         <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                     </button>
                                     <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
@@ -487,7 +497,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                             <?// для обычных страниц?>
                             <?if($arResult["CAN_BUY"]){?>
                                 <div class="btn-group ia-btn-group" role="group">
-                                    <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" onclick="$('#<?=$qoModalID?>').modal()">
                                         <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                     </button>
                                     <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
@@ -541,7 +551,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                         <?if($canBuy){?>
                             <div class="button-wrap in-cart">
                                 <div class="btn-group ia-btn-group" role="group">
-                                    <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" >
+                                    <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" onclick="$('#<?=$qoModalID?>').modal()">
                                         <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                     </button>
                                     <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
@@ -561,7 +571,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                     <?// для обычных страниц?>
                         <div class="button-wrap in-cart" <?=(!$canBuy)?'style="display:none"':''?>>
                             <div class="btn-group ia-btn-group" role="group">
-                                <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" >
+                                <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" onclick="$('#<?=$qoModalID?>').modal()" >
                                     <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                 </button>
                                 <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
@@ -590,7 +600,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                     <?if(array_key_exists('SUBSCRIBED',$arParams) && $arParams['SUBSCRIBED']=='Y'){?>
                         <?if($arResult["CAN_BUY"]){?>
                             <div class="btn-group ia-btn-group" role="group">
-                                <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
+                                <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" onclick="$('#<?=$qoModalID?>').modal()">
                                     <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                 </button>
                                 <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
@@ -612,7 +622,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                         <?// для обычных страниц?>
                         <?if($arResult["CAN_BUY"]){?>
                             <div class="btn-group ia-btn-group" role="group">
-                                <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs">
+                                <button type="button" class="btn btn-default ia-btn yellow-btn quick-order hidden-xs" onclick="$('#<?=$qoModalID?>').modal()">
                                     <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
                                 </button>
                                 <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
@@ -674,7 +684,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
     </div>
     <?
     //БЫСТРЫЙ ЗАКАЗ
-    //include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/quick-order-modal.php");
+    include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/quick-order-modal.php");
 
     $arJSParams['productID'] = $arResult['ID'];
     $arJSParams['sizesData'] = $sizesData;

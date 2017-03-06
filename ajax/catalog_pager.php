@@ -323,6 +323,7 @@ $APPLICATION->IncludeComponent(
 		"PRICE_CODE" => json_decode($_REQUEST["price_code"]),
 		"USE_PRICE_COUNT" => "N",
 		"SHOW_PRICE_COUNT" => "1",
+        "SHOW_OLD_PRICE" => "Y",
 		"PRICE_VAT_INCLUDE" => "Y",
 		"BASKET_URL" => "/personal/basket.php",
 		"ACTION_VARIABLE" => "action",

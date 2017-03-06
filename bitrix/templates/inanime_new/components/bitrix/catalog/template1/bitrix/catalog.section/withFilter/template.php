@@ -151,6 +151,7 @@ $this->setFrameMode(true);
                             "MESSAGE_404" => "",
                             "COMPOSITE_FRAME_MODE" => "A",
                             "COMPOSITE_FRAME_TYPE" => "AUTO",
+                            "SHOW_OLD_PRICE" => "Y",
 
                             "OFFERS_CART_PROPERTIES" => array("COLOR_REF"),
                             "OFFERS_FIELD_CODE" => $arParams["DETAIL_OFFERS_FIELD_CODE"],
