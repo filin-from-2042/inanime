@@ -152,9 +152,10 @@ $this->setFrameMode(true);
                             "COMPOSITE_FRAME_MODE" => "A",
                             "COMPOSITE_FRAME_TYPE" => "AUTO",
                             "SHOW_OLD_PRICE" => "Y",
+                            "SHOW_DISCOUNT_PERCENT" => "Y",
 
                             "OFFERS_CART_PROPERTIES" => array("COLOR_REF"),
-                            "OFFERS_FIELD_CODE" => $arParams["DETAIL_OFFERS_FIELD_CODE"],
+                            "OFFERS_FIELD_CODE" => array('NAME'),
                             "OFFERS_PROPERTY_CODE" => array( "COLOR_REF","SIZE_GLK","ARTNUMBER", "SIZES_SHOES", "SIZES_CLOTHES", "MORE_PHOTO" ),
                             "OFFERS_SORT_FIELD" => $arParams["OFFERS_SORT_FIELD"],
                             "OFFERS_SORT_ORDER" => $arParams["OFFERS_SORT_ORDER"],

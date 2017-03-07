@@ -8,7 +8,7 @@
             "ADD_DETAIL_TO_SLIDER" => "N",
             "DISPLAY_PREVIEW_TEXT_MODE" => "E",
             "PRODUCT_SUBSCRIPTION" => "N",
-            "SHOW_DISCOUNT_PERCENT" => "N",
+            "SHOW_DISCOUNT_PERCENT" => "Y",
             "SHOW_OLD_PRICE" => "Y",
             "SHOW_MAX_QUANTITY" => "N",
             "ADD_TO_BASKET_ACTION" => array("BUY"),
@@ -48,6 +48,7 @@
             "OFFERS_LIMIT" => "0",
             "OFFERS_PROPERTY_CODE" => array( "COLOR_REF","SIZE_GLK","ARTNUMBER", "SIZES_SHOES", "SIZES_CLOTHES", "MORE_PHOTO" ),
             'OFFER_TREE_PROPS' => array("COLOR_REF","SIZE_GLK",""),
+            'OFFERS_FIELD_CODE' => array('NAME'),
 
             "PRICE_CODE" => array("BASE","PROF"),
             "USE_PRICE_COUNT" => "N",

@@ -143,6 +143,18 @@ $this->setFrameMode(true);
                     "MESSAGE_404" => "",
                     "COMPOSITE_FRAME_MODE" => "A",
                     "COMPOSITE_FRAME_TYPE" => "AUTO",
+
+                    "OFFERS_CART_PROPERTIES" => array("COLOR_REF"),
+                    "OFFERS_FIELD_CODE" => array('NAME'),
+                    "OFFERS_PROPERTY_CODE" => array( "COLOR_REF","SIZE_GLK","ARTNUMBER", "SIZES_SHOES", "SIZES_CLOTHES", "MORE_PHOTO" ),
+                    "OFFERS_SORT_FIELD" => $arParams["OFFERS_SORT_FIELD"],
+                    "OFFERS_SORT_ORDER" => $arParams["OFFERS_SORT_ORDER"],
+                    "OFFERS_SORT_FIELD2" => $arParams["OFFERS_SORT_FIELD2"],
+                    "OFFERS_SORT_ORDER2" => $arParams["OFFERS_SORT_ORDER2"],
+
+                    'OFFER_ADD_PICT_PROP' => $arParams['OFFER_ADD_PICT_PROP'],
+                    'OFFER_TREE_PROPS' => array("COLOR_REF","SIZE_GLK",""),
+
                     "RATE_FIRS"=>"Y",
                     "LAZY_LOAD"=>'N'
                 ),

@@ -144,6 +144,7 @@
     line-height: 25px;
     letter-spacing:normal;
     margin-top: 5px;
+    padding-left: 0;
 }
 .ia-modal.quick-order-modal .product-info .art-container span {
     font-size: 12px;
@@ -162,6 +163,7 @@
 .ia-modal.quick-order-modal .product-info .price-container .price {
     font-size: 29px;
     display:inline-block;
+    padding-left: 0;
 }
 .ia-modal.quick-order-modal .product-info .price-container .price.yellow-text {
     color: rgb(252,154,0);
@@ -218,7 +220,13 @@
     padding: 4px;
     border: 1px solid rgb(235,235,235);
 }
-
+.ia-modal.quick-order-modal .price-column,
+.ia-modal.quick-order-modal .properties-column{
+    padding: 0;
+}
+.ia-modal.quick-order-modal .price-column{
+    padding-left: 15px;
+}
 @media (max-width: 760px) {
     .product-item-preview.vertical .quick-order-overlay .offers-data-container{
         margin-top: 0px;

@@ -136,7 +136,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                     }
                     // цена в итоге преобразования массива в строку должна получиться в формате "текущаяЦена-стараяЦена-процентСкидки-суммаСкидки"
                     // если скидки нет, то будет выглядеть "текущаяЦена", т.е. массив с одним элементом
-                    $prices=array();var_dump($offer["MIN_PRICE"]["VALUE"].'='.$offer["MIN_PRICE"]["DISCOUNT_VALUE"]);
+                    $prices=array();
                     if($offer["MIN_PRICE"]["VALUE"]!=$offer["MIN_PRICE"]["DISCOUNT_VALUE"])
                     {
                         $prices[]=$offer["MIN_PRICE"]["VALUE"];
@@ -149,6 +149,7 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                         $prices[]=$offer["MIN_PRICE"]["VALUE"];
                     }
                     $offersData[$offer["ID"]] = array(
+                        'title'=>$offer['NAME'],
                         'color'=>(empty($offer["PROPERTIES"]["COLOR_REF"]["VALUE"])||$offer["PROPERTIES"]["COLOR_REF"]["VALUE"]=='') ? 'not-set' : $offer["PROPERTIES"]["COLOR_REF"]["VALUE"],
                         'price'=>$prices,
                         'size'=>$offer["PROPERTIES"]["SIZE_GLK"]["VALUE"],
@@ -158,10 +159,6 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                     $availableSizes[$offer["PROPERTIES"]["SIZE_GLK"]["VALUE"]][] = (empty($offer["PROPERTIES"]["COLOR_REF"]["VALUE"])||$offer["PROPERTIES"]["COLOR_REF"]["VALUE"]=='') ? 'not-set' : $offer["PROPERTIES"]["COLOR_REF"]["VALUE"];
 
                     if($offerPhotos) $photoGalleryData[$offer["ID"]] = $offerPhotos;
-                    /*foreach($offerPhotos as $offerPhoto)
-                    {
-                        $photoGalleryData[$offer["ID"]][] = $offerPhoto;
-                    }*/
                 }
 
                 if(empty($photoGalleryData))

@@ -204,50 +204,134 @@
                             </div>
                             <div class="price-container">
 
+                                <?
+                                // цена для подсчета итога
+                                $currItemPrice = 0;
+                                ?>
+
                                 <?if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
                                 {?>
-                                    <div class="price">
-                                        <?
-                                        $currOfferPrice = $offersData[$activeOfferID]["price"];
-                                        $oldPrice;
-                                        $currentPrice;
-                                        if(isset($currOfferPrice[1]) && (floatVal($currOfferPrice[1]) < floatVal($currOfferPrice[0])))
-                                        {
-                                            $oldPrice=$currOfferPrice[0];
-                                            $currentPrice=$currOfferPrice[1];
-                                        } else $currentPrice = $currOfferPrice[0];
+                                    <div class="row">
+                                        <div class="col-lg-14 price-column">
+                                            <div class="price">
+                                                <?
+                                                $currOfferPrice = $offersData[$activeOfferID]["price"];
+                                                $oldPrice;
+                                                $currentPrice;
+                                                if(isset($currOfferPrice[1]) && (floatVal($currOfferPrice[1]) < floatVal($currOfferPrice[0])))
+                                                {
+                                                    $oldPrice=$currOfferPrice[0];
+                                                    $currentPrice=$currOfferPrice[1];
+                                                } else $currentPrice = $currOfferPrice[0];
 
-                                        if ($arParams['SHOW_OLD_PRICE'] == 'Y')
-                                        {
-                                            if($oldPrice){?>
-                                                <span class="price old"><?=$oldPrice?> <span class="rub"></span></span>
+                                                if ($arParams['SHOW_OLD_PRICE'] == 'Y')
+                                                {
+                                                    if($oldPrice){?>
+                                                        <span class="price old"><?=$oldPrice?> <span class="rub"></span></span>
+                                                    <?}?>
+                                                <?}?>
+                                                <span class="price yellow-text"><? echo $currentPrice; ?> <span class="rub"></span></span>
+                                            </div>
+                                            <?if('Y' == $arParams['SHOW_DISCOUNT_PERCENT']){?>
+                                                <div class="discount">
+                                                    <?
+                                                    if (0 < $currOfferPrice[3])
+                                                    {
+                                                        ?>
+                                                        <span class="discount-amount">Экономия <? echo $currOfferPrice[2]; ?>% -<?=$currOfferPrice[3]?> <span class="rub"></span></span>
+                                                    <?
+                                                    }
+                                                    ?>
+                                                </div>
                                             <?}?>
+                                        </div>
+                                        <div class="col-lg-10 properties-column">
+                                        <?if(!empty($arResult['OFFERS_PROP'])){?>
+                                            <div class="properties-container">
+
+                                                <div class="size-container radio-container">
+                                                    <input type="hidden" name="size-radio" class="ia-radio-value" />
+                                                    <?
+                                                    // заполнение данных по размерам из данных по предложениям
+                                                    /* массив с данными по предложениям, распределнных по существующим цветам
+                                                    'размер'=>array(
+                                                                'id предложения'=> array(
+                                                                                        'color'=>'purple',
+                                                                                        'price'=>$prices,
+                                                                                        'size'=>'xl',
+                                                                                        'photo'=>array(),
+                                                                                        'can_buy'=>true
+                                                                                        )
+                                                                )
+                                                    )
+                                                    */
+                                                    $sizesData = array();
+                                                    $JSStartColorData = array();
+                                                    foreach ($availableSizes as $sizeName=>$sizeColors)
+                                                    {
+                                                        foreach($offersData as $offerID=>$offerData )
+                                                        {
+                                                            if($offerData['size']!=$sizeName) continue;
+
+                                                            $currOfferColor = $offerData['color'];
+                                                            // из данных размера вытаскиваем и сохраняем данные для первоначально выбраного цвета
+                                                            if($offersData[$activeOfferID]['size']==$sizeName)
+                                                                $JSStartColorData[$currOfferColor] = array('price'=>$offerData['price'], 'id'=>$offerID, 'can_buy'=>$offerData['can_buy']);
+                                                            $sizesData[$sizeName][$offerID] = $offerData;
+                                                        }?>
+                                                        <?if(array_key_exists($sizeName,$sizesData)){?>
+                                                        <div class="size-radio ia-radio-button <?= $offersData[$activeOfferID]['size']==$sizeName ? 'active' : ''?>">
+                                                            <span class="value hidden"><?= $sizeName?></span>
+                                                            <span><?= $sizeName;?></span>
+                                                        </div>
+                                                    <?}?>
+                                                    <?}?>
+                                                </div>
+
+                                                <div class="color-container radio-container" >
+                                                    <input type="hidden" name="color-radio" class="ia-radio-value" />
+                                                    <?
+                                                    foreach($availableColors as $colorName => $colorSRC)
+                                                    {
+                                                        $showColor = true;
+                                                        $currSize = $offersData[$activeOfferID]["size"];
+                                                        $currColor = $offersData[$activeOfferID]["color"];
+                                                        $showColor = in_array($colorName,$availableSizes[$currSize]) && $colorName!='not-set';
+
+                                                        ?>
+                                                        <div class="image-radio ia-radio-button <?= $currColor==$colorName ? 'active' : ''?>" <?=!$showColor?'style="display:none;"':''?>>
+                                                            <span class="value hidden"><?= $colorName;?></span>
+                                                            <img src="<?=$colorSRC;?>" />
+                                                        </div>
+                                                    <?}?>
+                                                </div>
+                                                <script>
+                                                    $(document).ready(function(){
+                                                        //$('.ia-radio-button,.radio-button-container .button-title').click(inanime_new.radioClick);
+                                                        /*$('.color-container .ia-radio-button,.color-container.radio-button-container .button-title').click(
+                                                         //function(event){InAnimeCatalogElement<?=$strMainID;?>.colorClick(event)}
+                                                         );
+                                                         $('.size-container .ia-radio-button,.size-container.radio-button-container .button-title').click(
+                                                         // function(event){InAnimeCatalogElement<?=$strMainID;?>.sizeClick(event)}
+                                                         );*/
+                                                    });
+                                                </script>
+                                            </div>
                                         <?}?>
-                                        <span class="price yellow-text"><? echo $currentPrice; ?> <span class="rub"></span></span>
+                                        </div>
+                                        <?$currItemPrice = $currentPrice;?>
                                     </div>
-                                    <?if('Y' == $arParams['SHOW_DISCOUNT_PERCENT']){?>
-                                    <div class="discount">
-                                        <?
-                                        if (0 < $currOfferPrice[3])
-                                        {
-                                            ?>
-                                            <span class="discount-amount">Экономия <? echo $currOfferPrice[2]; ?>% -<?=$currOfferPrice[3]?> <span class="rub"></span></span>
-                                        <?
-                                        }
-                                        ?>
-                                    </div>
-                                <?}
-                                }else{?>
+                                <?}else{?>
                                     <div class="price">
                                         <?
                                         $minPrice = (isset($arResult['RATIO_PRICE']) ? $arResult['RATIO_PRICE'] : $arResult['MIN_PRICE']);
                                         if ($arParams['SHOW_OLD_PRICE'] == 'Y')
                                         {
                                             if(0 < $minPrice['DISCOUNT_DIFF']){?>
-                                                <span class="price old"><?=$minPrice['VALUE']?> <span class="rub"></span></span>
+                                                <span class="price old"><?=$minPrice['PRINT_VALUE']?></span>
                                             <?}?>
                                         <?}?>
-                                        <span class="price yellow-text"><? echo $minPrice['DISCOUNT_VALUE']; ?><span class="rub"></span></span>
+                                        <span class="price yellow-text"><? echo $minPrice['PRINT_DISCOUNT_VALUE']; ?></span>
                                     </div>
                                     <div class="discount">
                                         <?
@@ -262,84 +346,9 @@
                                         }
                                         ?>
                                     </div>
-                                <?}?>
-
-
-                                <?if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']) && !empty($arResult['OFFERS_PROP']))
-                                {
-                                    ?>
-                                    <div class="properties-container">
-
-                                        <div class="size-container radio-container">
-                                            <input type="hidden" name="size-radio" class="ia-radio-value" />
-                                            <?
-                                            // заполнение данных по размерам из данных по предложениям
-                                            /* массив с данными по предложениям, распределнных по существующим цветам
-                                            'размер'=>array(
-                                                        'id предложения'=> array(
-                                                                                'color'=>'purple',
-                                                                                'price'=>$prices,
-                                                                                'size'=>'xl',
-                                                                                'photo'=>array(),
-                                                                                'can_buy'=>true
-                                                                                )
-                                                        )
-                                            )
-                                            */
-                                            $sizesData = array();
-                                            $JSStartColorData = array();
-                                            foreach ($availableSizes as $sizeName=>$sizeColors)
-                                            {
-                                                foreach($offersData as $offerID=>$offerData )
-                                                {
-                                                    if($offerData['size']!=$sizeName) continue;
-
-                                                    $currOfferColor = $offerData['color'];
-                                                    // из данных размера вытаскиваем и сохраняем данные для первоначально выбраного цвета
-                                                    if($offersData[$activeOfferID]['size']==$sizeName)
-                                                        $JSStartColorData[$currOfferColor] = array('price'=>$offerData['price'], 'id'=>$offerID, 'can_buy'=>$offerData['can_buy']);
-                                                    $sizesData[$sizeName][$offerID] = $offerData;
-                                                }?>
-                                                <?if(array_key_exists($sizeName,$sizesData)){?>
-                                                <div class="size-radio ia-radio-button <?= $offersData[$activeOfferID]['size']==$sizeName ? 'active' : ''?>">
-                                                    <span class="value hidden"><?= $sizeName?></span>
-                                                    <span><?= $sizeName;?></span>
-                                                </div>
-                                            <?}?>
-                                            <?}?>
-                                        </div>
-
-                                        <div class="color-container radio-container" >
-                                            <input type="hidden" name="color-radio" class="ia-radio-value" />
-                                            <?
-                                            foreach($availableColors as $colorName => $colorSRC)
-                                            {
-                                                $showColor = true;
-                                                $currSize = $offersData[$activeOfferID]["size"];
-                                                $currColor = $offersData[$activeOfferID]["color"];
-                                                $showColor = in_array($colorName,$availableSizes[$currSize]) && $colorName!='not-set';
-
-                                                ?>
-                                                <div class="image-radio ia-radio-button <?= $currColor==$colorName ? 'active' : ''?>" <?=!$showColor?'style="display:none;"':''?>>
-                                                    <span class="value hidden"><?= $colorName;?></span>
-                                                    <img src="<?=$colorSRC;?>" />
-                                                </div>
-                                            <?}?>
-                                        </div>
-                                        <script>
-                                            $(document).ready(function(){
-                                               /* $('.ia-radio-button,.radio-button-container .button-title').click(inanime_new.radioClick);
-                                                $('.color-container .ia-radio-button,.color-container.radio-button-container .button-title').click(
-                                                    //function(event){InAnimeCatalogElement<?=$strMainID;?>.colorClick(event)}
-                                                );
-                                                $('.size-container .ia-radio-button,.size-container.radio-button-container .button-title').click(
-                                                   // function(event){InAnimeCatalogElement<?=$strMainID;?>.sizeClick(event)}
-                                                );*/
-                                            });
-                                        </script>
-                                    </div>
-                                <?}?>
-
+                                <?
+                                    $currItemPrice = $minPrice['DISCOUNT_VALUE'];
+                                }?>
 
                             </div>
                             <div class="counter-button-container">
@@ -350,7 +359,7 @@
                                 </div>
                                 <span class="gray-text count-text">шт.</span>
                                 <span class="total-text">Итого:</span>
-                                <span class="total-value">660 <span class="rub"></span></span>
+                                <span class="total-value"><?=$currItemPrice?> <span class="rub"></span></span>
                             </div>
                         </div>
                         <!-- MOBILE ONLY -->
