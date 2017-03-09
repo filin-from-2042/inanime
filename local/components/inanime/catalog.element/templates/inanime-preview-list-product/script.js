@@ -126,6 +126,70 @@
         }
 
     };
+
+    window.InAnimePreviewCatalogElement.prototype.QOcolorClick = function(event)
+    {
+        var colorButton = event.delegateTarget;
+        var $colorButton = $(colorButton);
+        var color = $colorButton.find('.value.hidden').text();
+        var $QOModalContainer =  $colorButton.closest('.quick-order-modal');
+        var colorData = this.currentColorConfig[color];
+        var priceContainer = $QOModalContainer.find('.price-container');
+        var priceOld = priceContainer.find('.price.old');
+        var priceNew = priceContainer.find('.price.current');
+        var discountContainer = priceContainer.find('.discount');
+
+        if(colorData.price.length>1){
+            priceOld.text(colorData.price[0]+' ₽').show();
+            priceNew.text(colorData.price[1]+' ₽');
+            discountContainer.find('.discount-amount').text('Экономия '+colorData.price[2]+'% -'+colorData.price[3]+' ₽');
+            discountContainer.show();
+        }else{
+            priceOld.hide();
+            priceNew.text(colorData.price[0]+' ₽');
+            discountContainer.hide();
+        }
+
+        $QOModalContainer.find('.title-container').css('display','none');
+        $QOModalContainer.find('.title-container#title-container-'+colorData.id).css('display','block');
+/*
+        if(colorData.can_buy)
+        {
+            $QOModalContainer.find('.avalable').removeClass('hidden');
+            $QOModalContainer.find('.notavalable').addClass('hidden');
+        }
+        else
+        {
+            $QOModalContainer.find('.avalable').addClass('hidden');
+            $QOModalContainer.find('.notavalable').removeClass('hidden');
+        }
+*/
+        // обновляем цену в итоге
+        var itemPrice = parseInt($QOModalContainer.find('.price.yellow-text').text().replace(' ',''));
+        var counterValue = parseInt($QOModalContainer.find('.ia-counter-container .counter-value').val());
+        $QOModalContainer.find('.total-value').empty().append((itemPrice*counterValue).toString()+'<span class="rub"></span>');
+
+        $QOModalContainer.find('.product_id_value').val(colorData.id);
+        /*$QOModalContainer.find('button.in-cart span.value, button.in-favorite span.value').each(function()
+        {
+            $(this).text(colorData.id);
+        });*/
+        //$QOModalContainer.find('.buttons-container .button-wrap.subscribe button').attr('data-item',colorData.id);
+       /*
+        if(colorData.can_buy)
+        {
+            $QOModalContainer.find('.buttons-container .button-wrap.in-cart').show();
+            $QOModalContainer.find('.buttons-container .button-wrap.subscribe').hide();
+        }
+        else
+        {
+            $QOModalContainer.find('.buttons-container .button-wrap.in-cart').hide();
+            $QOModalContainer.find('.buttons-container .button-wrap.subscribe').show();
+        }
+        */
+
+    };
+
     // удаление подписки на товар для страницы подписки
     window.InAnimePreviewCatalogElement.prototype.deleteSubscribe = function(bShowMessage, nextLocation)
     {
@@ -229,6 +293,58 @@
             }, 3500);
         };
     };
+
+    window.InAnimePreviewCatalogElement.prototype.QOSubmit = function(event)
+    {
+        event.preventDefault();
+        var $form = $(event.delegateTarget);
+        var statusContainer = $form.find('.status-container');
+        var productID = parseInt($form.find('.product_id_value').val());
+        var itemsCount = parseInt($form.find('.ia-counter-container .counter-value').val());
+        var currPrice = parseInt($form.find('.price-container .price.yellow-text').text().replace(' ',''));
+        var nameField = $form.find('.username-input');
+        var phoneField = $form.find('.phone-input');
+        var emailField = $form.find('.email-input');
+        var nameFieldVal = $form.find('.username-input').val();
+        var phoneFieldVal = $form.find('.phone-input').val();
+        var emailFieldVal = $form.find('.email-input').val();
+
+        if(!nameFieldVal || !phoneFieldVal || !emailFieldVal){
+            var errorText = '';
+            if(!nameFieldVal) errorText += 'Не заполнено поле '+nameField.attr('placeholder')+'!<br>';
+            if(!phoneFieldVal) errorText += 'Не заполнено поле '+phoneField.attr('placeholder')+'!<br>';
+            if(!emailFieldVal) errorText += 'Не заполнено поле '+emailField.attr('placeholder')+'!<br>';
+            statusContainer.find('.success').hide();
+            statusContainer.find('.error').empty().append(errorText).show();
+            statusContainer.show();
+            return;
+        }
+
+        $.ajax({
+            type: "POST",
+            url: this.ajaxURL,
+            data: {
+                action:'quickOrder',
+                productID: productID,
+                nameField : nameFieldVal,
+                phoneField: phoneFieldVal,
+                emailFiled: emailFieldVal,
+                sessid:BX.bitrix_sessid()
+            },
+            //dataType: 'json',
+            success: function(data){
+                statusContainer.find('.error').hide();
+                statusContainer.find('.success').empty().append('Заказ успешно оформлен!').show();
+                statusContainer.show();
+            },
+            error: function( xhr, textStatus ) {
+//                alert( [ xhr.status, textStatus ] );
+                statusContainer.find('.success').hide();
+                statusContainer.find('.error').empty().append(textStatus).show();
+                statusContainer.show();
+            }
+        });
+    }
 
 
 

@@ -11,7 +11,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form>
+                <form class="quick-order-modal-form">
                     <div class="row">
                         <div class="hidden-xs hidden-sm col-md-9 col-lg-9 order-input-fields">
                             <h4 class="modal-title">Оформить заказ</h4>
@@ -35,7 +35,7 @@
                             </div>
                             <div class="row button-container">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cancel-btn-container">
-                                    <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="send-button" value="Отменить">
+                                    <button class="btn btn-default ia-btn text-btn blue-btn" type="button" name="cancel-button" value="Отменить">
                                         <span>Отменить</span>
                                     </button>
                                 </div>
@@ -49,6 +49,8 @@
                         <div class="hidden-md hidden-lg">
                             <h4 class="modal-title">Оформить заказ</h4>
                         </div>
+
+                        <input type="hidden" name="product_id" value="<?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?>" class="product_id_value">
 
                         <div class="col-sm-12 col-md-7 col-lg-7 photo-column">
                             <?
@@ -105,11 +107,9 @@
                                                     {
                                                         foreach($galleryPhoto as $key=>$photoSRC)
                                                         {?>
-                                                            <li<?=($key==0)?' class="active"':''?>>
-                                                                <div class="photo-container">
+                                                            <li<?=($key==0)?' class="active"':''?>><div class="photo-container">
                                                                     <img src="<?=$photoSRC?>">
-                                                                </div>
-                                                            </li>
+                                                                </div></li>
                                                         <?
                                                         }
                                                     }
@@ -142,13 +142,15 @@
                         </div>
 
                         <div class="col-sm-12 col-md-8 col-lg-8 product-info">
+
                             <div class="art-container">
                                 <?if($arResult["PROPERTIES"]["ARTNUMBER1"]["VALUE"]){?>
                                     <span class="art">арт.<?=$arResult["PROPERTIES"]["ARTNUMBER1"]["VALUE"]?></span>
                                 <?}?>
+                                <?/*?>
                                 <span class="avalable <?=(!$canBuy)?'hidden':''?>">В наличие</span>
                                 <span class="notavalable <?=($canBuy)?'hidden':''?>">Нет в наличии</span>
-
+                                <?*/?>
                             </div>
                             <?
                             if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
@@ -331,7 +333,7 @@
                                                 <span class="price old"><?=$minPrice['PRINT_VALUE']?></span>
                                             <?}?>
                                         <?}?>
-                                        <span class="price yellow-text"><? echo $minPrice['PRINT_DISCOUNT_VALUE']; ?></span>
+                                        <span class="price yellow-text"><? echo $minPrice['DISCOUNT_VALUE']; ?></span>
                                     </div>
                                     <div class="discount">
                                         <?
@@ -384,7 +386,7 @@
                             </div>
                             <div class="row button-container">
                                 <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 cancel-btn-container">
-                                    <button class="btn btn-default ia-btn text-btn blue-btn" type="submit" name="send-button" value="Отменить">
+                                    <button class="btn btn-default ia-btn text-btn blue-btn" type="button" name="cancel-button" value="Отменить">
                                         <span>Отменить</span>
                                     </button>
                                 </div>
@@ -396,6 +398,12 @@
                             </div>
                         </div>
 
+                    </div>
+                    <div class="row status-container">
+                        <div class="hidden-xs hidden-sm col-md-9 col-lg-9 order-input-fields">
+                            <div class="success "></div>
+                            <div class="error"></div>
+                        </div>
                     </div>
                 </form>
             </div>

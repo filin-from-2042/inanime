@@ -229,12 +229,13 @@ if(CModule::IncludeModule("iblock") && CModule::IncludeModule("catalog"))
 <script>
     // счетчики кол-ва в модальных окнах
     $(document).ready(function(){
-        $('.quick-order-modal .ia-counter-container .button').click(function(){
+        $('body').on('click','.quick-order-modal .ia-counter-container .button',function(){
+//        $('.quick-order-modal .ia-counter-container .button').click(function(){
             inanime_new.counterButtonClick(this);
             var $this = $(this);
-            var counterValue = $this.closest('.ia-counter-container').find('.counter-value').val();
+            var counterValue = parseInt($this.closest('.ia-counter-container').find('.counter-value').val());
             var $totalElement = $this.closest('.quick-order-modal').find('.total-value');
-            var itemPrice = parseInt($this.closest('.quick-order-modal').find('.price.yellow-text').text());
+            var itemPrice = parseInt($this.closest('.quick-order-modal').find('.price.yellow-text').text().replace(' ',''));
             $totalElement.empty().append((itemPrice*counterValue).toString()+'<span class="rub"></span>');
         });
     });

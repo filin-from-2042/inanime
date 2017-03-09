@@ -708,13 +708,17 @@ span.rub:before{
     text-align:center;
     display:none;
 }
-.ia-modal .modal-content .status-container .success {
+.ia-modal .modal-content .status-container .success ,
+.ia-modal .modal-content .status-container .error {
     color:rgb(99,186,196);
     width:250px;
     display:inline-block;
     font-size: 13px;
     letter-spacing: 0.5px;
 }
+.ia-modal .modal-content .status-container .error {
+     color:red;
+ }
 .ia-modal .button-container {
     text-align:center;
     margin-top: 28px;
@@ -995,7 +999,7 @@ span.rub:before{
     width: 999999px;
     padding-top: 25px;
 }
-.short-products-carousel .button{
+.short-products-carousel .title-container .button{
     background-color: #3baeda;
     cursor: pointer;
     /*position: absolute;*/
@@ -1007,27 +1011,27 @@ span.rub:before{
     height: 32px;
     border-radius: 7px;
 }
-.short-products-carousel .button.next,
-.short-products-carousel .button.prev{
+.short-products-carousel .title-container .button.next,
+.short-products-carousel .title-container .button.prev{
     margin-left: 3px;
 }
-.short-products-carousel .button:hover{
+.short-products-carousel .title-container .button:hover{
     background-color: #f5ad5b;
 }
-.short-products-carousel .button i{
+.short-products-carousel .title-container .button i{
     color:#fff;
     font-size: 11px;
     vertical-align: middle;
 }
-.short-products-carousel .button.show-all{
+.short-products-carousel .title-container .button.show-all{
     color: #fff;
     font-size: 13px;
     width: auto;
     /*padding: 5px 12px;*/
     line-height: 20px;
 }
-.short-products-carousel .button.show-all a,
-.short-products-carousel .button.show-all a:hover{
+.short-products-carousel .title-container .button.show-all a,
+.short-products-carousel .title-container .button.show-all a:hover{
     color: #fff;
     text-decoration: none;
     display: inline-block;
@@ -2601,8 +2605,8 @@ nav .hide-char-overlay{
     .short-products-carousel .product-item-preview.vertical .image-container .quick-order-overlay{
         height: 100px;
     }
-    .short-products-carousel .button.next,
-    .short-products-carousel .button.prev{
+    .short-products-carousel .title-container .button.next,
+    .short-products-carousel .title-container .button.prev{
          display: none;
      }
     .product-item-preview .week-good-icon-container{

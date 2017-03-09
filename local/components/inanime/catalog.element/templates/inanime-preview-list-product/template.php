@@ -86,7 +86,9 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
             }
             $isBestseller = (bool)$arResult["PROPERTIES"]["IS_BESTSELLER"]["VALUE"];
 */
-            $arJSParams = array();
+            //$arJSParams = array();
+
+            $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
             if (isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
             {
                 // массив соответсвия 'цвет'=>'путь к изображению'
@@ -270,14 +272,25 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                                 $('.product-item-preview-<?=$arResult['ID']?> .ia-radio-button, .product-item-preview-<?=$arResult['ID']?> .radio-button-container .button-title')
                                     .click(inanime_new.radioClick);
 
-                                $('.product-item-preview-<?=$arResult['ID']?> .color-container .ia-radio-button,.product-item-preview-<?=$arResult['ID']?> .color-container.radio-button-container .button-title')
+                                $('.product-item-preview-<?=$arResult['ID']?> .color-container .ia-radio-button,'+
+                                  '.product-item-preview-<?=$arResult['ID']?> .color-container.radio-button-container .button-title')
                                     .click(
-                                    function(event){InAnimePreviewCatalogElement<?=$arResult['ID'];?>.colorClick(event)}
+                                            function(event){InAnimePreviewCatalogElement<?=$arResult['ID'];?>.colorClick(event)}
+                                        );
+
+                                $('.product-item-preview-<?=$arResult['ID']?> .quick-order-modal .color-container .ia-radio-button,'+
+                                  '.product-item-preview-<?=$arResult['ID']?> .quick-order-modal .color-container.radio-button-container .button-title')
+                                    .click(
+                                    function(event){InAnimePreviewCatalogElement<?=$arResult['ID'];?>.QOcolorClick(event)}
                                 );
 
-                                $('.product-item-preview-<?=$arResult['ID']?> .size-container .ia-radio-button,.size-container.radio-button-container .button-title').click(
+                                $('.product-item-preview-<?=$arResult['ID']?> .size-container .ia-radio-button,'+
+                                    '.size-container.radio-button-container .button-title,'+
+                                    '.product-item-preview-<?=$arResult['ID']?> .quick-order-modal .size-container .ia-radio-button'
+                                ).click(
                                     function(event){InAnimePreviewCatalogElement<?=$arResult['ID'];?>.sizeClick(event)}
                                 );
+
                             });
                         </script>
                     </div>
@@ -689,5 +702,9 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
     ?>
     <script>
         var InAnimePreviewCatalogElement<?=$arResult['ID'];?> = new window.InAnimePreviewCatalogElement(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
+        $(document).ready(function()
+        {
+            $('.product-item-preview-<?=$arResult['ID']?> .quick-order-modal-form').submit(function(event){InAnimePreviewCatalogElement<?=$arResult['ID'];?>.QOSubmit(event)});
+        });
     </script>
 </div>
