@@ -300,6 +300,7 @@
         var $form = $(event.delegateTarget);
         var statusContainer = $form.find('.status-container');
         var productID = parseInt($form.find('.product_id_value').val());
+        var quantity = parseInt($form.find('.counter-value').val());
         var itemsCount = parseInt($form.find('.ia-counter-container .counter-value').val());
         var currPrice = parseInt($form.find('.price-container .price.yellow-text').text().replace(' ',''));
         var nameField = $form.find('.username-input');
@@ -326,6 +327,7 @@
             data: {
                 action:'quickOrder',
                 productID: productID,
+                quantity: quantity,
                 nameField : nameFieldVal,
                 phoneField: phoneFieldVal,
                 emailFiled: emailFieldVal,

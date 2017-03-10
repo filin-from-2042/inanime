@@ -329,11 +329,11 @@
                                         $minPrice = (isset($arResult['RATIO_PRICE']) ? $arResult['RATIO_PRICE'] : $arResult['MIN_PRICE']);
                                         if ($arParams['SHOW_OLD_PRICE'] == 'Y')
                                         {
-                                            if(0 < $minPrice['DISCOUNT_DIFF']){?>
+                                            if(0 < floatval($minPrice['DISCOUNT_DIFF'])){?>
                                                 <span class="price old"><?=$minPrice['PRINT_VALUE']?></span>
                                             <?}?>
                                         <?}?>
-                                        <span class="price yellow-text"><? echo $minPrice['DISCOUNT_VALUE']; ?></span>
+                                        <span class="price yellow-text"><? echo $minPrice['DISCOUNT_VALUE']; ?><span class="rub"></span></span>
                                     </div>
                                     <div class="discount">
                                         <?
@@ -359,6 +359,18 @@
                                     <div class="decrease button"><i class="fa fa-chevron-left" aria-hidden="true"></i></div>
                                     <input type="text" class="counter-value" value="1"/>
                                 </div>
+                                <script>
+                                    $(document).ready(function(){
+                                        $('#<?=$qoModalID?> .ia-counter-container .button').click(function(){
+                                            inanime_new.counterButtonClick(this);
+                                            var $this = $(this);
+                                            var counterValue = parseInt($this.closest('.ia-counter-container').find('.counter-value').val());
+                                            var $totalElement = $this.closest('.quick-order-modal').find('.total-value');
+                                            var itemPrice = parseInt($this.closest('.quick-order-modal').find('.price.yellow-text').text().replace(' ',''));
+                                            $totalElement.empty().append((itemPrice*counterValue).toString()+'<span class="rub"></span>');
+                                        });
+                                    });
+                                </script>
                                 <span class="gray-text count-text">шт.</span>
                                 <span class="total-text">Итого:</span>
                                 <span class="total-value"><?=$currItemPrice?> <span class="rub"></span></span>

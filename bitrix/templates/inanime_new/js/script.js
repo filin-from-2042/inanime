@@ -44,30 +44,28 @@ function inanime_new() {
         {
             cc_count: elements_count,
             cc_position: 0,
-            carouselEl: document.getElementById(element_id),
-//            TODO: refactor only jquery
-            cc_width: $(document.getElementById(element_id).querySelector('li')).width(),
-            paddingRight: parseInt($(document.getElementById(element_id).querySelector('li')).css('paddingRight'))
+            cc_width: $('#'+element_id+' > ul > li').width(),
+            paddingRight: parseInt($('#'+element_id+' > ul > li').css('paddingRight'))
         };
 
         inanime_new[element_id] = carouselData;
         $('#'+element_id).css('width',(carouselData.cc_width+carouselData.paddingRight)*elements_count );
-        carouselData.carouselEl.querySelector('.prev').onclick = function () {
+        $('#'+element_id+' > .title-container > .prev').click(function () {
             var prevPosition = inanime_new[element_id].cc_position;
             var width = inanime_new[element_id].cc_width;
             var paddingRight = inanime_new[element_id].paddingRight;
             var count = inanime_new[element_id].cc_count;
 
             inanime_new[element_id].cc_position = Math.min(prevPosition + (width + paddingRight) * count, 0);
-            $('#' + element_id + ' ul').animate(
+            $('#' + element_id + ' > ul').animate(
                 {
                     marginLeft: inanime_new[element_id].cc_position + 'px'
                 }
             );
-        };
+        });
 
-        carouselData.carouselEl.querySelector('.next').onclick = function () {
-            var listElems = inanime_new[element_id].carouselEl.querySelectorAll('li');
+        $('#'+element_id+' > .title-container > .next').click(function () {
+            var listElems = $('#'+element_id+' > ul > li');
             var prevPosition = inanime_new[element_id].cc_position;
             var width = inanime_new[element_id].cc_width;
             var paddingRight = inanime_new[element_id].paddingRight;
@@ -79,9 +77,9 @@ function inanime_new() {
                     marginLeft: inanime_new[element_id].cc_position + 'px'
                 }
             );
-        };
+        });
     };
-    // инициализация карусели дял карточки товара
+    // инициализация карусели для карточки товара
     this.init_product_horizontal_carousel = function(element_id, elements_count)
     {
         var carouselData =

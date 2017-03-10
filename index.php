@@ -685,7 +685,7 @@ $APPLICATION->SetTitle("Интернет-магазин \"АНИМЕ аксес�
                                                     "DISPLAY_PREVIEW_TEXT_MODE" => "E",
                                                     "PRODUCT_SUBSCRIPTION" => "N",
                                                     "SHOW_DISCOUNT_PERCENT" => "N",
-                                                    "SHOW_OLD_PRICE" => "N",
+                                                    "SHOW_OLD_PRICE" => "Y",
                                                     "SHOW_MAX_QUANTITY" => "N",
                                                     "ADD_TO_BASKET_ACTION" => array("BUY"),
                                                     "SHOW_CLOSE_POPUP" => "N",
