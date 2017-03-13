@@ -62,7 +62,8 @@
 }
 .ia-modal.quick-order-modal .order-input-fields{
     padding-left: 38px;
-    border-right: 1px solid #eee;
+    border-right: 2px solid #eee;
+    padding-top: 11px;
 }
 .ia-modal.quick-order-modal .icon-input-container i.ia-phone-icon {
     top: 13%;
@@ -161,6 +162,7 @@
 .ia-modal.quick-order-modal .product-info .price-container .price.old {
     font-size: 18px;
     margin-right: 0px;
+    vertical-align: middle;
 }
 .ia-modal.quick-order-modal .product-info .price-container .price {
     font-size: 29px;
