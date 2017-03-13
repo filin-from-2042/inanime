@@ -152,42 +152,12 @@
 
         $QOModalContainer.find('.title-container').css('display','none');
         $QOModalContainer.find('.title-container#title-container-'+colorData.id).css('display','block');
-/*
-        if(colorData.can_buy)
-        {
-            $QOModalContainer.find('.avalable').removeClass('hidden');
-            $QOModalContainer.find('.notavalable').addClass('hidden');
-        }
-        else
-        {
-            $QOModalContainer.find('.avalable').addClass('hidden');
-            $QOModalContainer.find('.notavalable').removeClass('hidden');
-        }
-*/
         // обновляем цену в итоге
         var itemPrice = parseInt($QOModalContainer.find('.price.yellow-text').text().replace(' ',''));
         var counterValue = parseInt($QOModalContainer.find('.ia-counter-container .counter-value').val());
         $QOModalContainer.find('.total-value').empty().append((itemPrice*counterValue).toString()+'<span class="rub"></span>');
 
         $QOModalContainer.find('.product_id_value').val(colorData.id);
-        /*$QOModalContainer.find('button.in-cart span.value, button.in-favorite span.value').each(function()
-        {
-            $(this).text(colorData.id);
-        });*/
-        //$QOModalContainer.find('.buttons-container .button-wrap.subscribe button').attr('data-item',colorData.id);
-       /*
-        if(colorData.can_buy)
-        {
-            $QOModalContainer.find('.buttons-container .button-wrap.in-cart').show();
-            $QOModalContainer.find('.buttons-container .button-wrap.subscribe').hide();
-        }
-        else
-        {
-            $QOModalContainer.find('.buttons-container .button-wrap.in-cart').hide();
-            $QOModalContainer.find('.buttons-container .button-wrap.subscribe').show();
-        }
-        */
-
     };
 
     // удаление подписки на товар для страницы подписки

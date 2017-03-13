@@ -90,7 +90,7 @@
                             {
                                 foreach($photoGalleryData as $galleryID=>$galleryPhoto)
                                 {
-                                    $carouselID = 'preview-photo-carousel_'.$galleryID;
+                                    $carouselID = 'qo-preview-photo-carousel_'.$galleryID;
                                     $showGallery = false;
                                     if(isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))
                                     {

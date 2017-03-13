@@ -285,8 +285,9 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
                                 );
 
                                 $('.product-item-preview-<?=$arResult['ID']?> .size-container .ia-radio-button,'+
-                                    '.size-container.radio-button-container .button-title,'+
-                                    '.product-item-preview-<?=$arResult['ID']?> .quick-order-modal .size-container .ia-radio-button'
+                                    '.product-item-preview-<?=$arResult['ID']?> .size-container.radio-button-container .button-title,'+
+                                    '.product-item-preview-<?=$arResult['ID']?> .quick-order-modal .size-container .ia-radio-button,'+
+                                    '.product-item-preview-<?=$arResult['ID']?> .quick-order-modal .size-container.radio-button-container .button-title'
                                 ).click(
                                     function(event){InAnimePreviewCatalogElement<?=$arResult['ID'];?>.sizeClick(event)}
                                 );
