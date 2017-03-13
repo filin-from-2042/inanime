@@ -16,13 +16,13 @@ InAnimeBasket = function (params)
             var $btn = $(this);
             if($btn.hasClass('increase'))
             {
-                $(this).closest('.table-content-container').find('.ia-counter-container .button.increase').each(function(){
+                $(this).closest('.content-row').find('.ia-counter-container .button.increase').each(function(){
                     inanime_new.counterButtonClick(this);
                 });
             }
             else if ($btn.hasClass('decrease'))
             {
-                $(this).closest('.table-content-container').find('.ia-counter-container .button.decrease').each(function(){
+                $(this).closest('.content-row').find('.ia-counter-container .button.decrease').each(function(){
                     inanime_new.counterButtonClick(this);
                 });
 
