@@ -142,6 +142,8 @@ else
         }
     }
 }
+
+$qoModalID = 'quick-order-modal'.$arResult['ID'];
 $arJSParams = array('ajaxURL'=>$templateFolder.'/ajax.php');
 // данные для админских кнопок битрикса
 $arDataButtons = CIBlock::GetPanelButtons(
@@ -533,12 +535,20 @@ $arDataButtons = CIBlock::GetPanelButtons(
                             </div>
                             <script>
                                 $(document).ready(function(){
-                                    $('.ia-radio-button,.radio-button-container .button-title').click(inanime_new.radioClick);
-                                    $('.color-container .ia-radio-button,.color-container.radio-button-container .button-title').click(
+                                    $('.ia-radio-button, .radio-button-container .button-title').click(inanime_new.radioClick);
+                                    $('.product-card .color-container .ia-radio-button, .product-card .color-container.radio-button-container .button-title').click(
                                         function(event){InAnimeCatalogElement<?=$strMainID;?>.colorClick(event)}
                                     );
-                                    $('.size-container .ia-radio-button,.size-container.radio-button-container .button-title').click(
+                                    $('.product-card .size-container .ia-radio-button,' +
+                                    '.product-card .size-container.radio-button-container .button-title,'+
+                                    '#<?=$qoModalID?> .size-container .ia-radio-button,'+
+                                    '#<?=$qoModalID?> .size-container.radio-button-container .button-title').click(
                                         function(event){InAnimeCatalogElement<?=$strMainID;?>.sizeClick(event)}
+                                    );
+                                    $('#<?=$qoModalID?> .color-container .ia-radio-button,'+
+                                        '#<?=$qoModalID?> .color-container.radio-button-container .button-title')
+                                    .click(
+                                        function(event){InAnimeCatalogElement<?=$strMainID;?>.QOcolorClick(event)}
                                     );
                                 });
                             </script>
@@ -554,43 +564,43 @@ $arDataButtons = CIBlock::GetPanelButtons(
                             <span class="gray-text count-text">шт.</span>
                             <div class="buttons-container">
 
-                                    <div class="button-wrap in-cart" <?=(!$canBuy)?'style="display:none"':''?>>
-                                        <div class="btn-group ia-btn-group" role="group">
-                                            <button type="button" class="btn btn-default ia-btn yellow-btn quick-order" >
-                                                <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
-                                            </button>
-                                            <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
-                                                    onclick="inanime_new.addToCart(
-                                                        parseInt($(this).find('.hidden.value').text())
-                                                        ,parseInt($('.ia-counter-container input.counter-value').val())
-                                                        ,'<?=$arResult["NAME"]?>'
-                                                        ,parseInt($('.price-container .price.yellow-text').text())
-                                                        ,false)">
-                                                <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
-                                                В корзину
-                                            </button>
-                                        </div>
+                                <div class="button-wrap in-cart" <?=(!$canBuy)?'style="display:none"':''?>>
+                                    <div class="btn-group ia-btn-group" role="group">
+                                        <button type="button" class="btn btn-default ia-btn yellow-btn quick-order" onclick="$('#<?=$qoModalID?>').modal()">
+                                            <img src="<?=SITE_TEMPLATE_PATH."/images/commerce.png"?>"/>
+                                        </button>
+                                        <button type="button" class="btn btn-default ia-btn yellow-btn in-cart"
+                                                onclick="inanime_new.addToCart(
+                                                    parseInt($(this).find('.hidden.value').text())
+                                                    ,parseInt($('.product-card .ia-counter-container input.counter-value').val())
+                                                    ,'<?=$arResult["NAME"]?>'
+                                                    ,parseInt($('.product-card .price-container .price.yellow-text').text())
+                                                    ,false)">
+                                            <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
+                                            В корзину
+                                        </button>
                                     </div>
+                                </div>
 
-                                    <div class="button-wrap subscribe" <?=($canBuy)?'style="display:none"':''?>>
-                                        <?$APPLICATION->IncludeComponent(
-                                            "bitrix:catalog.product.subscribe",
-                                            "inanime-subscribe",
-                                            Array(
-                                                "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
-                                                "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
-                                                "CACHE_TIME" => $arParams["CACHE_TIME"],
-                                                "CACHE_TYPE" => $arParams["CACHE_TYPE"],
-                                                "PRODUCT_ID" => (isset($arResult['OFFERS']) && !empty($arResult['OFFERS'])) ? $activeOfferID : $arResult['ID']
-                                            )
-                                        );?>
-                                    </div>
+                                <div class="button-wrap subscribe" <?=($canBuy)?'style="display:none"':''?>>
+                                    <?$APPLICATION->IncludeComponent(
+                                        "bitrix:catalog.product.subscribe",
+                                        "inanime-subscribe",
+                                        Array(
+                                            "BUTTON_CLASS" => "btn btn-default ia-btn yellow-btn splitted-btn in-cart",
+                                            "BUTTON_ID" => $arResult['ID']."-in-cart-btn",
+                                            "CACHE_TIME" => $arParams["CACHE_TIME"],
+                                            "CACHE_TYPE" => $arParams["CACHE_TYPE"],
+                                            "PRODUCT_ID" => (isset($arResult['OFFERS']) && !empty($arResult['OFFERS'])) ? $activeOfferID : $arResult['ID']
+                                        )
+                                    );?>
+                                </div>
 
                                 <button type="button" class="btn btn-default ia-btn blue-btn image-btn in-favorite hidden-sm hidden-xs"
                                     onclick="inanime_new.addToCart(parseInt($(this).find('.hidden.value').text())
-                                        ,parseInt($('.ia-counter-container input.counter-value').val())
+                                        ,parseInt($('.product-card .ia-counter-container input.counter-value').val())
                                         ,'<?=$arResult["NAME"]?>'
-                                        ,parseInt($('.price-container .price.yellow-text').text())
+                                        ,parseInt($('.product-card .price-container .price.yellow-text').text())
                                         ,true)">
                                     <span class="hidden value"><?=((isset($arResult['OFFERS']) && !empty($arResult['OFFERS']))?$activeOfferID:$arResult['ID'])?></span>
                                     <img src="<?=SITE_TEMPLATE_PATH."/images/favorite.png"?>" />
@@ -600,7 +610,7 @@ $arDataButtons = CIBlock::GetPanelButtons(
                         <script>
                             $(document).ready(function ()
                             {
-                                $('.ia-counter-container .button').click(function(){inanime_new.counterButtonClick(this)});
+                                $('.product-card .ia-counter-container .button').click(function(){inanime_new.counterButtonClick(this)});
                             });
                         </script>
                     </div>
@@ -915,6 +925,9 @@ $arDataButtons = CIBlock::GetPanelButtons(
     </div>
 </div>
 <?
+//БЫСТРЫЙ ЗАКАЗ
+include($_SERVER["DOCUMENT_ROOT"].$templateFolder."/quick-order-modal.php");
+
 $arJSParams['productID'] = $arResult['ID'];
 $arJSParams['sizesData'] = $sizesData;
 $arJSParams['startColorData'] = $JSStartColorData;
@@ -922,7 +935,7 @@ $arJSParams['startColorData'] = $JSStartColorData;
 <script>
     var InAnimeCatalogElement<?=$strMainID;?> = new window.InAnimeCatalogElement(<? echo CUtil::PhpToJSObject($arJSParams, false, true);?>);
     $(document).ready(function(){
-        $('.general-container.photo-container .photo-big-container img').click(function(){
+        $('.product-card .general-container.photo-container .photo-big-container img').click(function(){
             var galleryID = $(this).closest('.general-container.photo-container').attr('id');
             InAnimeCatalogElement<?=$strMainID;?>.popupGalleryID = galleryID;
             $('#photo-lightbox-modal .photo-container img').attr('src',$(this).attr('src'));
@@ -944,7 +957,7 @@ $arJSParams['startColorData'] = $JSStartColorData;
                 button.closest('.modal-body').find('.photo-container img').attr('src',newSRC);
         });
 
-        $('.general-container.photo-container .photo-container img').click(function(){
+        $('.product-card .general-container.photo-container .photo-container img').click(function(){
             var $this = $(this);
             var newSRC = $this.attr('src');
             $this.closest('.general-container.photo-container').find('li.active').removeClass('active');
@@ -963,12 +976,14 @@ $arJSParams['startColorData'] = $JSStartColorData;
             modal.find('input,textarea').val('');
         });
 
-        $('.product-info .discount .found-cheaper').click(function(){
+        $('.product-card .discount .found-cheaper').click(function(){
             $('#found-cheaper-popup').modal();
         });
         $('#found-cheaper-popup button[name="send-button"]').click(function(event){
             event.preventDefault();
             InAnimeCatalogElement<?=$strMainID;?>.sendCheaper(event);
         });
+
+        $('#<?=$qoModalID?> .quick-order-modal-form').submit(function(event){InAnimeCatalogElement<?=$strMainID;?>.QOSubmit(event)});
     });
 </script>

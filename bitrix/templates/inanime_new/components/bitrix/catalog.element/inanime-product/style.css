@@ -361,6 +361,211 @@
 }
 
 
+/******************** MODAL QUICK ORDER ************************/
+.ia-modal.ia-modal.quick-order-modal .modal-body {
+    position: relative;
+    padding: 15px 15px 57px;
+}
+.ia-modal.quick-order-modal .modal-dialog {
+    width: 1150px;
+}
+.ia-modal.quick-order-modal h4{
+    text-transform:uppercase;
+    text-align:center;
+    font-weight: bold;
+    font-size: 21px;
+    letter-spacing: 1px;
+    color:#000;
+    margin-bottom: 34px;
+}
+.ia-modal.quick-order-modal .modal-header {
+    padding-top: 48px;
+}
+.ia-modal.quick-order-modal .order-input-fields{
+    padding-left: 38px;
+    border-right: 1px solid #eee;
+}
+.ia-modal.quick-order-modal .icon-input-container i.ia-phone-icon {
+    top: 13%;
+}
+.ia-modal.quick-order-modal .button-container {
+    margin-top: 40px;
+    padding-bottom: 0px;
+}
+.ia-modal.quick-order-modal .cancel-btn-container{
+    text-align: right;
+    padding-right: 5px;
+}
+.ia-modal.quick-order-modal .cancel-btn-container button{
+    background-color: #bdbec5;
+}
+.ia-modal.quick-order-modal .execute-btn-container{
+    text-align: left;
+    padding-left: 5px;
+}
+.ia-modal.quick-order-modal .photo-big-container {
+    text-align:center;
+    height: initial;
+    width: initial;
+}
+.ia-modal.quick-order-modal .photo-big {
+    max-width:282px;
+    max-height:242px;
+    border-radius: 10px;
+}
+.ia-modal.quick-order-modal .preview-photo-carousel {
+    margin-top: 10px;
+    display: inline-block;
+}
+.ia-modal.quick-order-modal .photo-carousel-container{
+    text-align: center;
+    padding: 0;
+}
+.ia-modal.quick-order-modal .photo-carousel-container img {
+    max-width: 68px;
+    max-height: 58px;
+}
+.ia-modal.quick-order-modal .preview-photo-carousel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    width: 999999px;
+}
+.ia-modal.quick-order-modal .preview-photo-carousel ul li {
+    /*width: 78px;*/
+    width: 88px;
+    height: 68px;
+    padding-right: 10px;
+    float: left;
+}
+
+.ia-modal.quick-order-modal .preview-photo-carousel ul li .photo-container {
+    width: 100%;
+    display: inline-block;
+    height: 100%;
+    padding: 5px;
+    border-radius: 10px;
+    cursor: pointer;
+}
+.ia-modal.quick-order-modal .photo-carousel-container .button {
+    margin-top: -54px;
+    color: #68422e;
+    cursor: pointer;
+    position: absolute;
+    font-size: 21px;
+}
+.ia-modal.quick-order-modal .photo-carousel-container .prev.button {
+    left: 17px;
+}
+.ia-modal.quick-order-modal .photo-carousel-container .next.button {
+    right: 27px;
+}
+.ia-modal.quick-order-modal .product-info {
+    margin-top: 0px;
+    text-align: left;
+}
+.ia-modal.quick-order-modal .product-info .title-container {
+    color:#000;
+    font-size: 19px;
+    line-height: 25px;
+    letter-spacing:normal;
+    margin-top: 5px;
+    padding-left: 0;
+}
+.ia-modal.quick-order-modal .product-info .art-container span {
+    font-size: 12px;
+}
+.ia-modal.quick-order-modal .product-info .description-container {
+    margin-top: 0px;
+}
+.ia-modal.quick-order-modal .product-info .rate-container {
+    height: 36px;
+    display: inline-block;
+}
+.ia-modal.quick-order-modal .product-info .price-container .price.old {
+    font-size: 18px;
+    margin-right: 0px;
+}
+.ia-modal.quick-order-modal .product-info .price-container .price {
+    font-size: 29px;
+    display:inline-block;
+    padding-left: 0;
+}
+.ia-modal.quick-order-modal .product-info .price-container .price.yellow-text {
+    color: rgb(252,154,0);
+}
+.ia-modal.quick-order-modal .product-info .price-container {
+    margin-top: 15px;
+}
+.ia-modal.quick-order-modal .product-info .discount .discount-amount {
+    font-size: 13px;
+}
+
+.ia-modal.quick-order-modal .product-info .color-container {
+    margin-left: 37px;
+}
+.ia-modal.quick-order-modal .product-info .color-container .ia-radio-button {
+    margin-right: 7px;
+}
+.ia-modal.quick-order-modal .product-info .color-container, .product-info .size-container {
+    display: inline-block;
+}
+.ia-modal.quick-order-modal .product-info .properties-container .ia-radio-button {
+    margin-right: 4px;
+}
+.ia-modal.quick-order-modal .product-info .counter-button-container .total-text {
+    font-size: 17px;
+    margin-left: 26px;
+    letter-spacing: 1px;
+}
+.ia-modal.quick-order-modal .product-info .counter-button-container .total-value{
+    color: rgb(252,154,0);
+    font-size: 33px;
+    font-weight: bold;
+    margin-left: 8px;
+    letter-spacing: 3px;
+}
+.ia-modal.quick-order-modal .counter-button-container {
+    margin-top: 8px;
+}
+.ia-modal.quick-order-modal .icons-container {
+    left: 10px;
+    top: 18px;
+}
+.ia-modal.quick-order-modal .icons-container .additional-icon {
+    margin-top: -30px;
+}
+.ia-modal.quick-order-modal .discount-container{
+    color: #333;
+}
+.ia-modal.quick-order-modal .photo-container img {
+    border-radius: 10px;
+}
+.ia-modal.quick-order-modal .preview-photo-carousel ul li:hover .photo-container,
+.ia-modal.quick-order-modal .preview-photo-carousel ul li.active .photo-container {
+    padding: 4px 2px;
+    border: 1px solid rgb(235,235,235);
+}
+.ia-modal.quick-order-modal .price-column,
+.ia-modal.quick-order-modal .properties-column{
+    padding: 0;
+}
+.ia-modal.quick-order-modal .price-column{
+    padding-left: 15px;
+}
+.ia-modal.quick-order-modal .status-container{
+    padding-top: 30px;
+}
+.ia-modal.quick-order-modal  .icons-container {
+    width: 131px;
+    position: absolute;
+    top: 8px;
+    left: -17px;
+}
+
+
+
+
 /* Mobile */
 @media (max-width: 760px) {
     /*****************PRODUCT INFO **********************/
