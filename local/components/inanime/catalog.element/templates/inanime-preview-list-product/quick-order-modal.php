@@ -14,22 +14,54 @@
                 <form class="quick-order-modal-form">
                     <div class="row">
                         <div class="hidden-xs hidden-sm col-md-9 col-lg-9 order-input-fields">
-                            <h4 class="modal-title">Оформить заказ</h4>
-                            <div class="icon-input-container">
+                            <h4 class="modal-title">Оформить заказ</h4><?
+                            // значения полей для залошиненного из личных данных
+                            $nameInputValue = '';
+                            $phoneInputValue = '';
+                            $emailInputValue = '';
+                            global $USER;
+                            if($USER->IsAuthorized())
+                            {
+                                $nameInputValue = $USER->GetFirstName();
+                                $emailInputValue = $USER->GetEmail();
+
+                                $rsUser = CUser::GetList(($by="ID"), ($order="desc"), array("ID"=>$USER->GetID()),array("SELECT"=>array("UF_CUSTOMER_PROFILE")));
+                                $userData = $rsUser->Fetch();
+                                // текущий активный профиль пользователя
+                                $currentProfileID = intval($userData['UF_CUSTOMER_PROFILE']);
+
+                                $profiles = CSaleOrderUserProps::GetList(
+                                    array("DATE_UPDATE" => "DESC"),
+                                    array("ID"=>$currentProfileID,"USER_ID" => $USER->GetID())
+                                );
+
+                                if($profiles->SelectedRowsCount()>0)
+                                {
+                                    while ($profile = $profiles->Fetch())
+                                    {
+                                        $profileVals = CSaleOrderUserPropsValue::GetList(array("ID" => "ASC"), Array("USER_PROPS_ID"=>$profile['ID']));
+                                        while ($profileVal = $profileVals->Fetch())
+                                        {
+                                            if($profileVal['PROP_CODE']=='PHONE') $phoneInputValue  = $profileVal['VALUE'];
+                                        }
+                                    }
+                                }
+                            }
+                        ?><div class="icon-input-container">
                                 <div class="icon-input-wrap">
-                                    <input type="text" name="username" value="" placeholder="Имя" class="form-control username-input">
+                                    <input type="text" name="username" value="<?=$nameInputValue?>" placeholder="Имя" class="form-control username-input">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div class="icon-input-container">
                                 <div class="icon-input-wrap">
-                                    <input type="text" name="phone" value="" placeholder="Телефон" class="form-control phone-input">
+                                    <input type="text" name="phone" value="<?=$phoneInputValue?>" placeholder="Телефон" class="form-control phone-input">
                                     <i class="ai-icon-bs ia-phone-icon" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div class="icon-input-container">
                                 <div class="icon-input-wrap">
-                                    <input type="text" name="email" value="" placeholder="Электронная почта" class="form-control email-input">
+                                    <input type="text" name="email" value="<?=$emailInputValue?>" placeholder="Электронная почта" class="form-control email-input">
                                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
                                 </div>
                             </div>
@@ -380,19 +412,19 @@
                         <div class="col-sm-24 hidden-md hidden-lg order-input-fields">
                             <div class="icon-input-container">
                                 <div class="icon-input-wrap">
-                                    <input type="text" name="username" value="" placeholder="Имя" class="form-control username-input">
+                                    <input type="text" name="username" value="<?=$nameInputValue?>" placeholder="Имя" class="form-control username-input">
                                     <i class="fa fa-user" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div class="icon-input-container">
                                 <div class="icon-input-wrap">
-                                    <input type="text" name="phone" value="" placeholder="Телефон" class="form-control phone-input">
+                                    <input type="text" name="phone" value="<?=$phoneInputValue?>" placeholder="Телефон" class="form-control phone-input">
                                     <i class="ai-icon-bs ia-phone-icon" aria-hidden="true"></i>
                                 </div>
                             </div>
                             <div class="icon-input-container">
                                 <div class="icon-input-wrap">
-                                    <input type="text" name="email" value="" placeholder="Электронная почта" class="form-control email-input">
+                                    <input type="text" name="email" value="<?=$emailInputValue?>" placeholder="Электронная почта" class="form-control email-input">
                                     <i class="fa fa-envelope-o" aria-hidden="true"></i>
                                 </div>
                             </div>

@@ -333,14 +333,12 @@
                 emailFiled: emailFieldVal,
                 sessid:BX.bitrix_sessid()
             },
-            //dataType: 'json',
             success: function(data){
                 statusContainer.find('.error').hide();
                 statusContainer.find('.success').empty().append('Заказ успешно оформлен!').show();
                 statusContainer.show();
             },
             error: function( xhr, textStatus ) {
-//                alert( [ xhr.status, textStatus ] );
                 statusContainer.find('.success').hide();
                 statusContainer.find('.error').empty().append(textStatus).show();
                 statusContainer.show();
