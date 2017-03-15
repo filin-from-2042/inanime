@@ -2804,6 +2804,9 @@ nav .hide-char-overlay{
     .sections-carousel .vertical-column .carousel-products.vertical{
         width: 312px;
     }
+    .short-products-carousel{
+        width: 308px;
+    }
 
 }
 
@@ -3462,6 +3465,9 @@ nav .hide-char-overlay{
     .sections-carousel .vertical-column .carousel-products.vertical{
         width: 358px;
     }
+    .short-products-carousel{
+        width: 711px;
+    }
 }
 /* (desktops, 992px and up) */
 @media (min-width: 992px) {
@@ -3605,6 +3611,9 @@ nav .hide-char-overlay{
     }
     .sections-carousel .vertical-column .carousel-products.vertical{
       width: 299px;
+    }
+    .short-products-carousel{
+        width: 1216px;
     }
 
     .short-products-carousel .product-item-preview.vertical .image-container {
