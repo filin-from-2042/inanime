@@ -85,6 +85,8 @@
 }
 .ia-modal.quick-order-modal .photo-big-container {
     text-align:center;
+    min-width:282px;
+    min-height:242px;
 }
 .ia-modal.quick-order-modal .photo-big {
     max-width:282px;

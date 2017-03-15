@@ -189,19 +189,20 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
             {
                 $arJSParams['hasOffers'] = false;
                 $canBuy = $arResult['CAN_BUY'];
+
+                if($arResult['MORE_PHOTO'])
+                {
+                    foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
+                    {
+                        $photoGalleryData[$arResult['ID']][] = $arOnePhoto['SRC'];
+                    }
+                }
+
                 if($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"])
                 {
                     foreach($arResult["PROPERTIES"]["MORE_PHOTO2"]["VALUE"] as $photoID)
                     {
                         $photoGalleryData[$arResult['ID']][] = CFile::GetFileArray($photoID)['SRC'];
-                    }
-                }
-
-                if(empty($photoGalleryData))
-                {
-                    foreach ($arResult['MORE_PHOTO'] as &$arOnePhoto)
-                    {
-                        $photoGalleryData[$arResult['ID']][] = $arOnePhoto['SRC'];
                     }
                 }
             }

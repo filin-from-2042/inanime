@@ -156,7 +156,7 @@
                                                 $(document).ready(function () {
                                                     inanime_new.init_product_horizontal_carousel('<?=$carouselID?>', 3);
 
-                                                    $('#<?=$carouselID?> .general-container.photo-container .photo-container img').click(function(){
+                                                    $('#<?=$carouselID?> .photo-container img').click(function(){
                                                         var $this = $(this);
                                                         var newSRC = $this.attr('src');
                                                         $this.closest('.general-container.photo-container').find('li.active').removeClass('active');

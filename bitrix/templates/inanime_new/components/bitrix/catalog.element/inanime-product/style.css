@@ -408,6 +408,8 @@
     text-align:center;
     height: initial;
     width: initial;
+    min-width:282px;
+    min-height:242px;
 }
 .ia-modal.quick-order-modal .photo-big {
     max-width:282px;
