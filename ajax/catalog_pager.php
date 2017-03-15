@@ -218,12 +218,11 @@ foreach($filterData as $field)
                     ));
                     $rsData = new CDBResult($rsData, $sTableID);
 
-                    $arrSizes = array();
+                    $arrSize = '';
                     while($arRes = $rsData->Fetch()){
-                        $arrSizes[]=$arRes['UF_XML_ID'];
+                        $arrSize=$arRes['UF_XML_ID'];
                     }
-
-                    if($arrSizes) $arrColorsSizesSubFields['PROPERTY_SIZE_GLK']=$arrSizes;
+                    if($arrSize) $arrColorsSizesSubFields['PROPERTY_SIZE_GLK'][]=$arrSize;
                 }
             }
         }
