@@ -53,7 +53,8 @@ if(array_key_exists('HORIZONTAL',$arParams) && $arParams['HORIZONTAL']=='Y') $or
         {
             foreach($arDiscounts as $arDiscount)
             {
-                if(intVal($arDiscount['ID'])>=19 && intVal($arDiscount['ID'])<=28)
+                $pattern = '/\s*(Товар\s*недели)\s*/';
+                if(preg_match($pattern, $arDiscount['NAME']) > 0)
                 {
                     if(!empty($discountData) && floatVal($discountData['VALUE'])>=floatVal($arDiscount['VALUE'])) continue;
                     else $discountData = $arDiscount;
