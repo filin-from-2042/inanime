@@ -2632,7 +2632,7 @@ nav .hide-char-overlay{
         padding-left: 8px;
     }
     .content .discount-container .discount-text {
-        right: 0;
+        right: initial;
         top: -5px;
         left: 41px;
         font-size: 11px;
@@ -2862,8 +2862,8 @@ nav .hide-char-overlay{
         z-index: 97;
     }
     .discount-container .discount-text {
-        right: 0px;
-        left:42px;
+        right: initial;
+        left:39px;
         /*top: 0px;*/
         top: -7px;
         font-size: 12px;
