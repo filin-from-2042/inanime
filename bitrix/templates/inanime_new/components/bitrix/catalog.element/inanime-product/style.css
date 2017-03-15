@@ -100,6 +100,41 @@
     cursor: zoom-in;
     border:1px solid #ccc;
 }
+
+
+
+.product-info .photo-big-container .week-good-icon-container{
+    display: inline-block;
+    position:absolute;
+    bottom: 0px;
+    left:0;
+    right: 0;
+    text-align: center;
+}
+.product-info .photo-big-container .week-good-icon-container .week-good-icon{
+    color:#fff;
+    background-color: #9eb847;
+    display: inline-block;
+    width: 170px;
+    text-align: left;
+}
+.product-info .photo-big-container .week-good-icon {
+    display: none;
+}
+.product-info .photo-big-container .week-good-icon span{
+    display: inline-block;
+}
+.product-info .photo-big-container .week-good-icon .icon-title{
+    border-right: 1px solid #abc25a;
+    padding: 5px 6px 5px 6px;
+}
+.product-info .photo-big-container .week-good-icon .time-left{
+    padding: 5px 2px 5px;
+}
+
+
+
+
 .product-info .data-column{
     padding-left: 45px;
     margin-top: 5px;

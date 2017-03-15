@@ -226,6 +226,35 @@ $arDataButtons = CIBlock::GetPanelButtons(
                                             ?>
 
                                         </div>
+                                        <?
+                                        $arDiscounts = CCatalogDiscount::GetDiscountByProduct(intVal($arResult['ID']));
+                                        $discountData = array();
+                                        if(count($arDiscounts)>0)
+                                        {
+                                            foreach($arDiscounts as $arDiscount)
+                                            {
+                                                $pattern = '/\s*(Товар\s*недели)\s*/';
+                                                if(preg_match($pattern, $arDiscount['NAME']) > 0)
+                                                {
+                                                    if(!empty($discountData) && floatVal($discountData['VALUE'])>=floatVal($arDiscount['VALUE'])) continue;
+                                                    else $discountData = $arDiscount;
+                                                }
+                                            }
+                                        }
+                                        if($discountData)
+                                        {
+                                            $difference = strtotime($discountData["ACTIVE_TO"]) - strtotime("now");
+                                            $daysLeft = intVal($difference/86400);
+                                            $hoursLeft = intVal(($difference%86400)/3600);
+                                            ?>
+                                            <div class="week-good-icon-container">
+                                                <div class="week-good-icon">
+                                                    <span class="icon-title">Товар недели</span>
+                                                    <span class="time-left"><?=$daysLeft?> д. <?=$hoursLeft?> ч.</span>
+                                                </div>
+                                            </div>
+                                        <?}?>
+
                                         <img src="<?=$galleryPhoto[0];?>" class="photo-big">
                                     </div>
                                 </div>
