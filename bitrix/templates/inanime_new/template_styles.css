@@ -2862,7 +2862,8 @@ nav .hide-char-overlay{
         z-index: 97;
     }
     .discount-container .discount-text {
-        right: 32px;
+        right: 0px;
+        left:42px;
         /*top: 0px;*/
         top: -7px;
         font-size: 12px;
@@ -3487,6 +3488,13 @@ nav .hide-char-overlay{
     }
 
 }
+
+@media (max-width: 1230px){
+    span.rub:before{
+        content: ' Р';
+    }
+}
+
 @media (min-width: 992px) and (max-width: 1230px){
     input.form-control.search-input{
         width: 257px;
