@@ -115,7 +115,7 @@ if(CModule::IncludeModule("iblock") && CModule::IncludeModule("catalog"))
     $arProducts = array();
     while ($ob = $res->GetNextElement())
         $arProducts[] = $ob->GetFields();
-
+    shuffle($arProducts);
     $carouselID = 'short-list-carousel-'.$ElementID;
     if(count($arProducts)>0){
         ?>
