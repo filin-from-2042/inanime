@@ -426,10 +426,10 @@ $arDataButtons = CIBlock::GetPanelButtons(
                                     if ($arParams['SHOW_OLD_PRICE'] == 'Y')
                                     {
                                         if($oldPrice){?>
-                                        <span class="price old"><?=$oldPrice?> ₽</span>
+                                        <span class="price old"><?=$oldPrice?><span class="rub"></span></span>
                                         <?}?>
                                     <?}?>
-                                    <span class="price yellow-text"><? echo $currentPrice; ?> ₽</span>
+                                    <span class="price yellow-text"><? echo $currentPrice; ?><span class="rub"></span></span>
                                 </div>
                                 <?if('Y' == $arParams['SHOW_DISCOUNT_PERCENT']){?>
                                     <div class="discount">
@@ -451,10 +451,10 @@ $arDataButtons = CIBlock::GetPanelButtons(
                                         if ($arParams['SHOW_OLD_PRICE'] == 'Y')
                                         {
                                             if(0 < $minPrice['DISCOUNT_DIFF']){?>
-                                                <span class="price old"><?=$minPrice['VALUE']?> ₽</span>
+                                                <span class="price old"><?=$minPrice['VALUE']?><span class="rub"></span></span>
                                             <?}?>
                                         <?}?>
-                                        <span class="price yellow-text"><? echo $minPrice['DISCOUNT_VALUE']; ?> <span class="rub"></span></span>
+                                        <span class="price yellow-text"><? echo $minPrice['DISCOUNT_VALUE']; ?><span class="rub"></span></span>
                                     </div>
                                     <div class="discount">
                                         <?

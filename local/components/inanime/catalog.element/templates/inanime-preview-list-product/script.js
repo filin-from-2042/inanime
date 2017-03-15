@@ -102,11 +102,11 @@
         var priceNew = priceContainer.find('.price.current');
 
         if(colorData.price.length>1){
-            priceOld.text(colorData.price[0]+' ₽').show();
-            priceNew.text(colorData.price[1]+' ₽');
+            priceOld.text(colorData.price[0]).append('<span class="rub"></span>').show();
+            priceNew.text(colorData.price[1]).append('<span class="rub"></span>');
         }else{
             priceOld.hide();
-            priceNew.text(colorData.price[0]+' ₽');
+            priceNew.text(colorData.price[0]).append('<span class="rub"></span>');
         }
 
         $previewProductContainer.find('button.in-cart span.value, button.in-favorite span.value').each(function()
@@ -140,13 +140,13 @@
         var discountContainer = priceContainer.find('.discount');
 
         if(colorData.price.length>1){
-            priceOld.text(colorData.price[0]+' ₽').show();
-            priceNew.text(colorData.price[1]+' ₽');
-            discountContainer.find('.discount-amount').text('Экономия '+colorData.price[2]+'% -'+colorData.price[3]+' ₽');
+            priceOld.text(colorData.price[0]).append('<span class="rub"></span>').show();
+            priceNew.text(colorData.price[1]).append('<span class="rub"></span>');
+            discountContainer.find('.discount-amount').text('Экономия '+colorData.price[2]+'% -'+colorData.price[3]).append('<span class="rub"></span>');
             discountContainer.show();
         }else{
             priceOld.hide();
-            priceNew.text(colorData.price[0]+' ₽');
+            priceNew.text(colorData.price[0]).append('<span class="rub"></span>');
             discountContainer.hide();
         }
 
