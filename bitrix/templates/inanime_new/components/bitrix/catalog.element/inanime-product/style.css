@@ -43,7 +43,8 @@
     left: -5px;
 }
 .photo-carousel-container img {
-    max-width: 110px;
+    /*max-width: 110px;*/
+    max-width:95px;
     /*max-height: 95px;*/
     max-height: 85px;
 }
