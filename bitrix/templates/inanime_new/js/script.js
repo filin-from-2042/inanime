@@ -72,7 +72,7 @@ function inanime_new() {
             var count = inanime_new[element_id].cc_count;
 
             inanime_new[element_id].cc_position = Math.max(prevPosition - (width + paddingRight) * count, -(width + paddingRight) * (listElems.length - count));
-            $('#' + element_id + ' ul').animate(
+            $('#' + element_id + ' > ul').animate(
                 {
                     marginLeft: inanime_new[element_id].cc_position + 'px'
                 }
